@@ -18,6 +18,8 @@ Discovery now presents one question with five horizontally scrollable image card
 
 Search controls use compact rows and an expandable budget control. Saved clinics are in a dedicated native dialog opened from the header or mobile heart tab, rather than a homepage section. A fixed right-side LINE button opens the configured official account; until configured, it explains the preview status and links to inquiry preparation. It does not send a message automatically.
 
+The top campaign is a three-slide carousel: brand portrait, return-home care, and planned benefits. Visitors switch using native touch scrolling, arrows, dots or arrow keys on the focused track. There is no autoplay. Inactive slides are inert and hidden from assistive technology. The standalone benefits section has been removed; detailed aftercare information remains available below.
+
 ## Included
 
 - Responsive desktop/mobile homepage, clinic search, concern/region/budget filters and empty states.

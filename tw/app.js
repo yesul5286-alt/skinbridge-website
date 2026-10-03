@@ -80,3 +80,20 @@ $('#line-contact').addEventListener('click',()=>{
  openDialog('<h2 id="dialog-title">LINE 諮詢</h2><p>目前 LINE 帳號尚未接入。沒有資料送出，也沒有成立預約。</p><p>可以先整理想了解的院所與日期。</p><div class="dialog-actions"><button class="primary" data-go-plan>整理諮詢內容 ↗</button></div>');
 });
 if(location.hash==='#saved')openSaved();
+
+// No autoplay: visitors control the campaign with swipe, keyboard or buttons.
+const heroTrack=$('#hero-track'),heroSlides=$$('.hero-slide');
+let heroIndex=0,heroFrame=0;
+function syncHero(){
+ heroIndex=Math.max(0,Math.min(heroSlides.length-1,Math.round(heroTrack.scrollLeft/heroTrack.clientWidth)));
+ heroSlides.forEach((slide,i)=>{slide.inert=i!==heroIndex;slide.setAttribute('aria-hidden',String(i!==heroIndex));});
+ $$('[data-hero-slide]').forEach((b,i)=>b.setAttribute('aria-pressed',String(i===heroIndex)));
+ $('#hero-counter').textContent=`0${heroIndex+1} / 03`;
+}
+function moveHero(index){const next=(index+heroSlides.length)%heroSlides.length;heroTrack.scrollTo({left:next*heroTrack.clientWidth,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});}
+heroTrack.addEventListener('scroll',()=>{cancelAnimationFrame(heroFrame);heroFrame=requestAnimationFrame(syncHero);},{passive:true});
+heroTrack.addEventListener('keydown',event=>{if(event.target!==heroTrack)return;if(event.key==='ArrowRight'||event.key==='ArrowLeft'){event.preventDefault();moveHero(heroIndex+(event.key==='ArrowRight'?1:-1));}});
+$$('[data-hero-step]').forEach(b=>b.addEventListener('click',()=>moveHero(heroIndex+Number(b.dataset.heroStep))));
+$$('[data-hero-slide]').forEach(b=>b.addEventListener('click',()=>moveHero(Number(b.dataset.heroSlide))));
+new ResizeObserver(()=>{heroTrack.scrollTo({left:heroIndex*heroTrack.clientWidth,behavior:'instant'});syncHero();}).observe(heroTrack);
+syncHero();
