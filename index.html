@@ -321,6 +321,7 @@ SKINBRIDGE 是在韩国依法登记的外国患者招揽服务机构，
 
 <script>
 function setLanguage(lang){
+  if(lang === 'tw'){ window.location.href = 'tw/'; return; }
   document.querySelectorAll('.lang-page').forEach(function(page){
     page.classList.remove('active');
   });
@@ -336,3 +337,4 @@ function setLanguage(lang){
 
 </body>
 </html>
+

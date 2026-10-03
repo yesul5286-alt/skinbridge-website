@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="探索韓國皮膚科，收藏院所、比較服務，整理妳的赴韓諮詢計畫。">
+  <meta name="theme-color" content="#fffaf7">
+  <title>skinbridge · 妳的首爾，慢慢變美</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">跳至主要內容</a>
+  <div class="preview-note">體驗版 · 院所、價格與圖片皆為示例，尚未開放實際預約</div>
+  <header class="header">
+    <a class="logo" href="#home" aria-label="skinbridge 首頁">skinbridge<span>SEOUL, WITH YOU</span></a>
+    <nav class="desktop-nav" aria-label="主要導覽">
+      <a href="#clinics">探索院所</a><a href="#guide">赴韓指南</a><a href="#support">回台支持</a><a href="#saved">我的收藏 <span class="saved-count">0</span></a>
+    </nav>
+    <a href="#plan" class="outline header-plan">我的計畫 <span aria-hidden="true">↗</span></a>
+    <button class="menu-toggle icon-button" aria-label="開啟選單" aria-expanded="false" aria-controls="mobile-menu">☰</button>
+  </header>
+  <nav id="mobile-menu" class="mobile-menu" aria-label="手機選單" hidden><a href="#clinics">探索院所</a><a href="#guide">赴韓指南</a><a href="#support">回台支持</a><a href="../">한국어 / 简体中文</a></nav>
+  <main id="main" tabindex="-1">
+    <section id="home" class="hero" aria-labelledby="hero-title">
+      <img class="hero-photo" src="assets/hero.webp" alt="柔和日光下的女性形象照，AI 生成示意" width="1536" height="1024" fetchpriority="high">
+      <div class="hero-copy"><p class="eyebrow">A LITTLE CARE. A NEW JOURNEY.</p><h1 id="hero-title">妳的首爾，<br>慢慢變美。</h1><p class="hero-sub">探索韓國皮膚科，<br class="mobile-only">從喜歡的開始。</p><a class="primary" href="#clinics">找到適合我的院所 <span aria-hidden="true">↗</span></a><a class="hero-guide" href="#guide">第一次赴韓？陪妳從這裡開始</a></div>
+      <span class="hero-caption">Your Seoul, your pace.</span>
+    </section>
+    <section id="clinics" class="section clinics" aria-labelledby="clinic-title">
+      <div class="section-heading"><div><p class="eyebrow">FIND YOUR PLACE</p><h2 id="clinic-title">先看看，收藏喜歡的</h2></div><button class="text-button" id="filter-toggle" aria-expanded="false" aria-controls="filters">篩選條件 <span aria-hidden="true">＋</span></button></div>
+      <form id="search-form" role="search"><div class="search-row"><label class="search-input"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="搜尋院所、地區或療程" aria-label="搜尋院所、地區或療程"></label><button class="primary" type="submit">搜尋</button></div>
+        <div id="filters" class="filters" hidden>
+          <label>想了解的項目<select id="concern"><option value="">全部項目</option><option>保濕管理</option><option>毛孔</option><option>斑點</option><option>緊緻</option></select></label>
+          <label>地區<select id="area"><option value="">所有地區</option><option>江南</option><option>弘大</option><option>新沙</option></select></label>
+          <label>示例預算（韓元）<select id="budget"><option value="">不限</option><option value="110000">₩110,000 以下</option><option value="130000">₩130,000 以下</option><option value="160000">₩160,000 以下</option></select></label>
+          <button class="text-button" type="reset">清除條件</button>
+        </div>
+      </form>
+      <div class="results-line"><p id="result-count" role="status"></p><span>示例資料 · 非實際院所報價</span></div>
+      <div id="clinic-grid" class="clinic-grid"></div>
+    </section>
+    <section id="guide" class="section guide" aria-labelledby="guide-title"><div class="section-heading"><div><p class="eyebrow">BEFORE YOU GO</p><h2 id="guide-title">第一次，也可以從容開始</h2></div><p class="section-aside">把疑問弄清楚，再做決定。</p></div><div class="guide-grid">
+      <button class="guide-card" data-article="first"><span class="guide-number">01</span><h3>第一次赴韓，<br>怎麼開始？</h3><p>從需求整理，到諮詢與預約。</p><span aria-hidden="true">↗</span></button>
+      <button class="guide-card" data-article="price"><span class="guide-number">02</span><h3>比較價格前，<br>先看這些。</h3><p>產品、用量與費用包含什麼？</p><span aria-hidden="true">↗</span></button>
+      <button class="guide-card" data-article="return"><span class="guide-number">03</span><h3>回台之後，<br>找誰協助？</h3><p>先了解聯繫方式與服務範圍。</p><span aria-hidden="true">↗</span></button>
+    </div></section>
+    <section id="saved" class="section" aria-labelledby="saved-title"><div class="section-heading"><div><p class="eyebrow">YOUR LITTLE COLLECTION</p><h2 id="saved-title">留給心動的選擇</h2></div><a class="text-button" href="#plan">整理我的計畫 ↗</a></div><p class="muted">收藏保存在這台裝置的瀏覽器中，不需登入。</p><div id="saved-grid" class="clinic-grid"></div></section>
+    <section id="support" class="support section" aria-labelledby="support-title"><div><p class="eyebrow">AFTER SEOUL</p><h2 id="support-title">回台之後，<br>也有清楚的下一步。</h2><p>預約前，先確認韓國院所的聯繫方式、<br>回覆時間與後續就醫安排。</p><button class="text-button" data-article="return">了解聯繫流程 ↗</button></div><div class="support-details"><details open><summary>韓國院所聯繫</summary><p>正式預約前將確認院所聯絡窗口與服務時間。醫療判斷與處置由醫師負責；本體驗版尚未提供實際醫療支援。</p></details><details><summary>台灣在地合作</summary><p>合作方案規劃中。院所、服務內容、適用条件與費用確認後才會公開。皮膚管理體驗不取代醫療診治。</p></details><details><summary>預約專屬禮遇</summary><p>目前沒有已啟用的體驗券或折扣。未來將清楚列出合作店家、有效期限、適用條件與額外費用。</p></details></div></section>
+    <section id="plan" class="section plan" aria-labelledby="plan-title"><div class="section-heading"><div><p class="eyebrow">MADE A LITTLE EASIER</p><h2 id="plan-title">把喜歡的，變成計畫</h2></div></div><div class="plan-layout"><div><p class="plan-intro">選好想了解的院所和日期，<br>把問題一起帶進諮詢。</p><div id="plan-clinics"></div><a href="#clinics" class="text-button">再看看其他院所 ↗</a></div><form id="plan-form"><label>想諮詢的院所<select id="plan-clinic" required><option value="">請選擇院所</option></select></label><div class="form-row"><label>預計赴韓日期<input id="visit-date" type="date" required></label><label>想了解的項目<select id="plan-treatment"><option>保濕管理</option><option>毛孔</option><option>斑點</option><option>緊緻</option><option>想先了解</option></select></label></div><p class="muted small">這裡只整理諮詢內容，不會送出或成立預約。請勿輸入病歷、照片或其他敏感資料。</p><button class="primary wide" type="submit">整理諮詢內容 <span aria-hidden="true">↗</span></button></form></div></section>
+  </main>
+  <footer><div class="footer-top"><a class="logo" href="#home">skinbridge</a><p>在妳的步調裡，遇見新的自己。</p><a href="../">한국어 / 简体中文 ↗</a></div><div class="footer-bottom"><p>SKINBRIDGE 스킨브릿지 · 代表：이예슬<br>事業者登錄號：509-06-53933<br>제주특별자치도 제주시 중앙로26길 25, 102동 3층 303호</p><p><a href="tel:+821089015286">+82-10-8901-5286</a><br><button class="text-button" data-article="privacy">隱私與資料使用</button><br>© 2026 SKINBRIDGE</p></div><p class="small muted">體驗版：院所、價格、服務皆為示例；人物與室內圖片為 AI 生成，非實際病患或合作院所。</p></footer>
+  <nav class="bottom-nav" aria-label="快捷導覽"><a href="#clinics"><span aria-hidden="true">⌕</span>探索</a><a href="#saved"><span aria-hidden="true">♡</span>收藏 <b class="saved-count">0</b></a><a href="#plan"><span aria-hidden="true">▤</span>我的計畫</a></nav>
+  <div id="compare-bar" class="compare-bar" hidden><span id="compare-count"></span><button id="compare-open" class="primary">開始比較</button><button id="compare-clear" class="text-button">清除</button></div>
+  <dialog id="dialog" aria-labelledby="dialog-title"><div class="dialog-top"><p class="eyebrow">SKINBRIDGE</p><button id="dialog-close" class="icon-button" aria-label="關閉視窗">×</button></div><div id="dialog-content"></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
