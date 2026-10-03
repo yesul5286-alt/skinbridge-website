@@ -13,7 +13,7 @@ const currency = n => '₩' + n.toLocaleString('en-US');
 const esc = value => String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 function readState(){try { const raw=JSON.parse(localStorage.getItem('skinbridge.tw.v1') || '{}');return raw && typeof raw==='object' ? raw : {}; } catch {return {};}}
 
-const FLOW_OFFERINGS={selena:['clarity','texture','firmness','first'],'springday-sinchon':['first'],a:['hydration','texture','first'],b:['hydration','clarity','first'],c:['hydration','firmness','first']};
+const FLOW_OFFERINGS={tunes:['first','firmness','texture','hydration'],selena:['clarity','texture','firmness','first'],'springday-sinchon':['first'],a:['hydration','texture','first'],b:['hydration','clarity','first'],c:['hydration','firmness','first']};
 const FLOW_LABELS={hydration:'保濕管理',texture:'毛孔療程諮詢',clarity:'皮秒雷射諮詢',firmness:'緊緻療程諮詢',first:'初次肌膚諮詢'};
 function selectedProcedureKey(){const route=new URLSearchParams(location.search).get('procedure');if(FLOW_LABELS[route])return route;const query=$('#search')?.value.trim().toLowerCase()||'';if(/皮秒|pico|피코/.test(query))return 'clarity';return ({'保濕管理':'hydration','毛孔':'texture','斑點':'clarity','緊緻':'firmness'})[$('#concern')?.value]||'first';}
 function flowUrl(view,pid='first',clinic=''){const params=new URLSearchParams({view,procedure:pid});if(clinic)params.set('clinic',clinic);return '?'+params.toString();}

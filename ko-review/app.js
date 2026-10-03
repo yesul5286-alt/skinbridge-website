@@ -13,7 +13,7 @@ const currency = n => '₩' + n.toLocaleString('en-US');
 const esc = value => String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 function readState(){try { const raw=JSON.parse(localStorage.getItem('skinbridge.ko-review.v1') || '{}');return raw && typeof raw==='object' ? raw : {}; } catch {return {};}}
 
-const FLOW_OFFERINGS={selena:['clarity','texture','firmness','first'],'springday-sinchon':['first'],a:['hydration','texture','first'],b:['hydration','clarity','first'],c:['hydration','firmness','first']};
+const FLOW_OFFERINGS={tunes:['first','firmness','texture','hydration'],selena:['clarity','texture','firmness','first'],'springday-sinchon':['first'],a:['hydration','texture','first'],b:['hydration','clarity','first'],c:['hydration','firmness','first']};
 const FLOW_LABELS={hydration:'보습관리',texture:'모공 시술 알아보기',clarity:'피코레이저 알아보기',firmness:'리프팅 알아보기',first:'첫 피부 상담'};
 function selectedProcedureKey(){const route=new URLSearchParams(location.search).get('procedure');if(FLOW_LABELS[route])return route;const query=$('#search')?.value.trim().toLowerCase()||'';if(/皮秒|pico|피코/.test(query))return 'clarity';return ({'보습관리':'hydration','모공':'texture','잡티':'clarity','탄력':'firmness'})[$('#concern')?.value]||'first';}
 function flowUrl(view,pid='first',clinic=''){const params=new URLSearchParams({view,procedure:pid});if(clinic)params.set('clinic',clinic);return '?'+params.toString();}

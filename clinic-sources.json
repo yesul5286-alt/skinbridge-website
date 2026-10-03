@@ -69,5 +69,48 @@
       "specific offered device models",
       "partnership status"
     ]
+  },
+  "tunes": {
+    "sources": [
+      {
+        "file": "Salon de Dr.Tunes Clinic CHN.pdf",
+        "pages": {
+          "director": 2,
+          "lounge": 6,
+          "equipment": 10,
+          "contactAndHours": 17
+        }
+      },
+      {
+        "file": "250430 Salon de Dr.Tunes Clinic Price List.pdf",
+        "pages": 5,
+        "tax": "VAT excluded",
+        "date": "250430 filename only; effective/expiry dates not stated",
+        "previewOptions": 28,
+        "completeOriginal": "tw/assets/tunes-price-list.pdf"
+      },
+      {
+        "url": "https://medicaltour.gangnam.go.kr/medical/clinic/view.do?cid=408&lang=ko&medical_seq=867&mid=403-408&pgno=4",
+        "confirms": [
+          "address",
+          "phone",
+          "email",
+          "hours",
+          "Korean English Chinese consultation"
+        ]
+      }
+    ],
+    "pending": [
+      "current price validity",
+      "interpretation schedule and charges",
+      "aftercare service contacts and response hours",
+      "cancellation policy",
+      "partnership status"
+    ],
+    "excluded": [
+      "celebrity endorsements",
+      "guaranteed outcomes",
+      "unverified current pricing"
+    ]
   }
 }
