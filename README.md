@@ -16,6 +16,8 @@ Edit Taiwan source files first, then run `python build-review.py` to regenerate 
 
 Discovery now presents one question with five horizontally scrollable image cards. Each opens an introduction and consultation questions, then links to matching demo clinics. Treatment and region chips remain visible and filter results immediately. Photos retain bounded proportions on mobile and desktop.
 
+Search controls use compact rows and an expandable budget control. Saved clinics are in a dedicated native dialog opened from the header or mobile heart tab, rather than a homepage section. A fixed right-side LINE button opens the configured official account; until configured, it explains the preview status and links to inquiry preparation. It does not send a message automatically.
+
 ## Included
 
 - Responsive desktop/mobile homepage, clinic search, concern/region/budget filters and empty states.
