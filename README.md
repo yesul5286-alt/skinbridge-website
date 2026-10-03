@@ -22,6 +22,10 @@ The top campaign is a three-slide carousel: brand portrait, return-home care, an
 
 ## Included
 
+- Shareable query-string routes: `?view=procedure&procedure=clarity`, `?view=clinic&procedure=clarity&clinic=b`, and `?view=consultation&procedure=clarity&clinic=b`. Refresh and browser Back work without server rewrites. Language links preserve the selected route.
+- Procedure context carries into clinic cards, detail and inquiry summaries. Only hydration has a demo price; other services show quotation after consultation. Clinic offerings are explicitly fictional mappings, not verified availability. Search includes procedure names and pico aliases.
+- Consultation accepts an undecided date or a validated future date and an optional question. It generates a copyable summary, never submits a booking or medical information. The official LINE link is displayed only after configuration.
+
 - Responsive desktop/mobile homepage, clinic search, concern/region/budget filters and empty states.
 - Clinic details, 2–3-clinic comparison, saved clinics and trip-date planning.
 - Local-browser persistence with a clear-data control.
