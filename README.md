@@ -8,6 +8,14 @@ Run `python -m http.server 8765 --bind 127.0.0.1` from this directory and open `
 
 No build step, external libraries or third-party font requests are required.
 
+## Korean owner review
+
+Open `/ko-review/` to review the same layout, filters, details and inquiry flow in Korean. The top language links switch between this review and `/tw/`. Saved items and plans are separate in each language preview.
+
+Edit Taiwan source files first, then run `python build-review.py` to regenerate the Korean review using `review-ko.tsv`. Shared CSS and image assets remain in `tw/`. The Korean files are generated; do not edit them directly. The build script is needed only when updating translations, not to serve the site.
+
+Discovery now presents one question with five horizontally scrollable image cards. Each opens an introduction and consultation questions, then links to matching demo clinics. Treatment and region chips remain visible and filter results immediately. Photos retain bounded proportions on mobile and desktop.
+
 ## Included
 
 - Responsive desktop/mobile homepage, clinic search, concern/region/budget filters and empty states.

@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="한국 피부과를 둘러보고, 비교하고, 나만의 상담 계획을 만들어 보세요.">
+  <meta name="theme-color" content="#fffaf7">
+  <title>skinbridge · 나의 속도로 만나는 서울</title>
+  <link rel="icon" href="../tw/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../tw/styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">본문으로 이동</a>
+  <div class="review-language"><a href="../ko-review/">한국어로 검토하기</a><span> / </span><a href="../tw/" lang="zh-TW">繁體中文</a></div><div class="preview-note">한국어 검토판 · 병원·가격·사진은 예시이며 실제 예약은 아직 연결되지 않았어요</div>
+  <header class="header">
+    <a class="logo" href="#home" aria-label="skinbridge 홈">skinbridge<span>SEOUL, WITH YOU</span></a>
+    <nav class="desktop-nav" aria-label="주 메뉴">
+      <a href="#clinics">병원 둘러보기</a><a href="#guide">한국 방문 가이드</a><a href="#support">귀국 후 케어</a><a href="#saved">내가 찜한 병원 <span class="saved-count">0</span></a>
+    </nav>
+    <a href="#plan" class="outline header-plan">나의 상담 계획 <span aria-hidden="true">↗</span></a>
+    <button class="menu-toggle icon-button" aria-label="메뉴 열기" aria-expanded="false" aria-controls="mobile-menu">☰</button>
+  </header>
+  <nav id="mobile-menu" class="mobile-menu" aria-label="모바일 메뉴" hidden><a href="#clinics">병원 둘러보기</a><a href="#guide">한국 방문 가이드</a><a href="#support">귀국 후 케어</a><a href="../">한국어 / 중국어</a></nav>
+  <main id="main" tabindex="-1">
+    <section id="home" class="hero" aria-labelledby="hero-title">
+      <img class="hero-photo" src="../tw/assets/hero.webp" alt="부드러운 햇빛 속 여성의 AI 생성 이미지" width="1536" height="1024" fetchpriority="high">
+      <div class="hero-copy"><p class="eyebrow">A LITTLE CARE. A NEW JOURNEY.</p><h1 id="hero-title">나를 위한 서울,<br>나의 속도로.</h1><p class="hero-sub">한국 피부과 탐색,<br class="mobile-only">마음이 가는 곳부터.</p><a class="primary" href="#clinics">나에게 맞는 병원 찾기 <span aria-hidden="true">↗</span></a><a class="hero-guide" href="#guide">한국 피부과가 처음이라면? 여기서 시작해요</a></div>
+      <span class="hero-caption">Your Seoul, your pace.</span>
+    </section>
+    <section class="section discovery" id="discover" aria-labelledby="discover-title">
+      <div class="section-heading"><div><p class="eyebrow">YOUR NEXT LITTLE INTEREST</p><h2 id="discover-title">요즘, 어떤 시술이 궁금하세요?</h2><p class="theme-sub">눈길 가는 사진부터, 가볍게 알아보세요.</p></div><div class="rail-controls"><button type="button" data-scroll="-1" aria-label="이전 사진">←</button><button type="button" data-scroll="1" aria-label="다음 사진">→</button></div></div>
+      <div class="procedure-rail" id="procedure-rail" tabindex="0" aria-label="시술 알아보기, 좌우로 넘겨보세요">
+        <button class="procedure-card" data-procedure="hydration"><span class="procedure-photo"><img src="../tw/assets/care.webp" alt="보습관리 콘셉트 이미지" width="1536" height="1024" loading="lazy"><span>SOFT & DEWY</span></span><span class="procedure-copy"><small>건조함 · 스킨케어</small><strong>보습관리</strong><span>피부에 촉촉함을 더하고 싶다면? <b>↗</b></span></span></button>
+        <button class="procedure-card" data-procedure="texture"><span class="procedure-photo"><img src="../tw/assets/hero.webp" class="face-crop" alt="자연스러운 피부 콘셉트 이미지" width="1536" height="1024" loading="lazy"><span>SKIN TEXTURE</span></span><span class="procedure-copy"><small>모공 · 피부결</small><strong>모공 시술 알아보기</strong><span>가까이 볼수록 신경 쓰이는 피부결 <b>↗</b></span></span></button>
+        <button class="procedure-card" data-procedure="clarity"><span class="procedure-photo"><img src="../tw/assets/serum.webp" alt="일상 스킨케어 콘셉트 이미지" width="1536" height="1024" loading="lazy"><span>A LITTLE CLARITY</span></span><span class="procedure-copy"><small>잡티 · 피부톤</small><strong>피코레이저 알아보기</strong><span>어떤 시술인지 먼저 알아볼까요? <b>↗</b></span></span></button>
+        <button class="procedure-card" data-procedure="firmness"><span class="procedure-photo"><img src="../tw/assets/hero.webp" class="profile-crop" alt="얼굴 윤곽 콘셉트 이미지" width="1536" height="1024" loading="lazy"><span>YOUR OWN LINES</span></span><span class="procedure-copy"><small>윤곽 · 탄력</small><strong>리프팅 알아보기</strong><span>종류가 많은데, 무엇이 다를까요? <b>↗</b></span></span></button>
+        <button class="procedure-card" data-procedure="first"><span class="procedure-photo"><img src="../tw/assets/clinic.webp" alt="편안한 병원 공간 콘셉트 이미지" width="1536" height="1024" loading="lazy"><span>YOUR FIRST VISIT</span></span><span class="procedure-copy"><small>처음이라면 · 천천히</small><strong>첫 피부 상담</strong><span>아직 고르지 못했어도 괜찮아요 <b>↗</b></span></span></button>
+      </div><p class="theme-footnote">옆으로 넘겨보세요 · 사진은 AI 분위기 예시이며 실제 시술 결과가 아니에요.</p>
+    </section>
+    <section id="clinics" class="section clinics" aria-labelledby="clinic-title">
+      <div class="section-heading"><div><p class="eyebrow">FIND YOUR PLACE</p><h2 id="clinic-title">마음에 드는 병원을 찾아보세요</h2></div><button class="text-button" id="filter-toggle" hidden aria-expanded="true" aria-controls="filters">검색 조건 <span aria-hidden="true">＋</span></button></div>
+      <form id="search-form" role="search"><div class="search-row"><label class="search-input"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="병원, 지역 또는 시술 검색" aria-label="병원, 지역 또는 시술 검색"></label><button class="primary" type="submit">검색</button></div>
+        <div id="filters" class="filters">
+          <fieldset class="chip-field"><legend>궁금한 시술</legend><div class="filter-chips"><button type="button" class="filter-chip" data-filter="concern" data-value="" aria-pressed="true">전체 시술</button><button type="button" class="filter-chip" data-filter="concern" data-value="보습관리" aria-pressed="false">보습관리</button><button type="button" class="filter-chip" data-filter="concern" data-value="모공" aria-pressed="false">모공</button><button type="button" class="filter-chip" data-filter="concern" data-value="잡티" aria-pressed="false">잡티</button><button type="button" class="filter-chip" data-filter="concern" data-value="탄력" aria-pressed="false">탄력</button></div><select id="concern" hidden aria-label="궁금한 시술"><option value="">전체 시술</option><option value="보습관리">보습관리</option><option value="모공">모공</option><option value="잡티">잡티</option><option value="탄력">탄력</option></select></fieldset>
+          <fieldset class="chip-field"><legend>지역</legend><div class="filter-chips"><button type="button" class="filter-chip" data-filter="area" data-value="" aria-pressed="true">전체 지역</button><button type="button" class="filter-chip" data-filter="area" data-value="강남" aria-pressed="false">강남</button><button type="button" class="filter-chip" data-filter="area" data-value="홍대" aria-pressed="false">홍대</button><button type="button" class="filter-chip" data-filter="area" data-value="신사" aria-pressed="false">신사</button></div><select id="area" hidden aria-label="지역"><option value="">전체 지역</option><option value="강남">강남</option><option value="홍대">홍대</option><option value="신사">신사</option></select></fieldset>
+          <label>예시 예산 (원)<select id="budget"><option value="">제한 없음</option><option value="110000">₩110,000 이하</option><option value="130000">₩130,000 이하</option><option value="160000">₩160,000 이하</option></select></label>
+          <button class="text-button" type="reset">조건 초기화</button>
+        </div>
+      </form>
+      <div class="results-line"><p id="result-count" role="status"></p><span>예시 데이터 · 실제 병원 견적이 아니에요</span></div>
+      <div id="clinic-grid" class="clinic-grid"></div>
+    </section>
+    <section class="section neighborhood" aria-labelledby="neighborhood-title"><div class="section-heading"><div><p class="eyebrow">AROUND YOUR SEOUL</p><h2 id="neighborhood-title">숙소 근처, 어떤 병원이 있을까요?</h2><p class="theme-sub">서울 여행 동선에 맞춰 찾아보세요.</p></div></div><div class="area-links"><button data-area="강남"><span>01 / GANGNAM</span><strong>강남</strong><span>이 지역 둘러보기 ↗</span></button><button data-area="홍대"><span>02 / HONGDAE</span><strong>홍대</strong><span>이 지역 둘러보기 ↗</span></button><button data-area="신사"><span>03 / SINSA</span><strong>신사</strong><span>이 지역 둘러보기 ↗</span></button></div></section>
+    <section class="section stories" aria-labelledby="stories-title"><div class="section-heading"><div><p class="eyebrow">BEYOND THE STARS</p><h2 id="stories-title">후기만으로는 궁금증이 남는다면?</h2><p class="theme-sub">가격, 소통, 귀국 후 연락 방법까지 알아보세요.</p></div></div><div class="story-layout"><div class="story-photo"><img src="../tw/assets/clinic.webp" loading="lazy" alt="병원 공간 콘셉트 이미지, 실제 방문 후기가 아니에요" width="1536" height="1024"><span>VISIT NOTES · 실제 후기 준비 중</span></div><div class="story-prompts"><button data-article="price"><span>01</span><div><h3>처음 안내받은 금액과 같을까요?</h3><p>후기와 함께 전체 비용과 포함 항목도 확인해요.</p></div><b aria-hidden="true">↗</b></button><button data-article="first"><span>02</span><div><h3>처음 가는데, 소통은 괜찮을까요?</h3><p>중국어 지원이 어디까지 가능한지 확인해요.</p></div><b aria-hidden="true">↗</b></button><button data-article="return"><span>03</span><div><h3>대만에 돌아가면 누구에게 연락하죠?</h3><p>귀국 후 연락 방법과 지원 범위를 알아보세요.</p></div><b aria-hidden="true">↗</b></button><p class="theme-footnote">지금은 안내 콘텐츠이며 실제 후기는 동의와 사실 확인 후 추가할 예정이에요.</p></div></div></section>
+    <section class="section perks" aria-labelledby="perks-title"><div class="section-heading"><div><p class="eyebrow">A LITTLE EXTRA</p><h2 id="perks-title">서울 여행에 작은 기대를 더해요</h2><p class="theme-sub">예약 혜택을 한곳에서 확인해 보세요.</p></div></div><div class="perk-grid"><button class="perk-card" data-article="perks"><span class="perk-status">기획 중</span><h3>한국에서 시작한 관리,<br>대만에서도 이어지는 기대.</h3><p>대만 제휴 매장 체험과 혜택</p><span class="tile-link">준비 중인 혜택 보기 ↗</span></button><button class="perk-card second" data-article="perks"><span class="perk-status">준비 중</span><h3>예약하기 전에,<br>나에게 주어지는 혜택을 확인해요.</h3><p>기간 · 포함 내용 · 이용 조건</p><span class="tile-link">어떤 정보가 제공되나요? ↗</span></button></div></section>
+    <section id="guide" class="section guide" aria-labelledby="guide-title"><div class="section-heading"><div><p class="eyebrow">BEFORE YOU GO</p><h2 id="guide-title">처음이어도 차근차근 시작해요</h2></div><p class="section-aside">궁금증을 풀고 결정하세요.</p></div><div class="guide-grid">
+      <button class="guide-card" data-article="first"><span class="guide-number">01</span><h3>첫 한국 피부과 방문,<br>어떻게 시작할까요?</h3><p>관심 시술 정리부터 상담과 예약까지.</p><span aria-hidden="true">↗</span></button>
+      <button class="guide-card" data-article="price"><span class="guide-number">02</span><h3>가격 비교 전에,<br>이것부터 확인해요.</h3><p>제품, 용량, 가격에 포함된 것은?</p><span aria-hidden="true">↗</span></button>
+      <button class="guide-card" data-article="return"><span class="guide-number">03</span><h3>대만에 돌아가서도,<br>누구에게 연락할까요?</h3><p>연락 방법과 지원 범위를 미리 알아봐요.</p><span aria-hidden="true">↗</span></button>
+    </div></section>
+    <section id="saved" class="section" aria-labelledby="saved-title"><div class="section-heading"><div><p class="eyebrow">YOUR LITTLE COLLECTION</p><h2 id="saved-title">마음에 드는 곳을 담아두세요</h2></div><a class="text-button" href="#plan">내 상담 계획 만들기 ↗</a></div><p class="muted">찜한 병원은 이 브라우저에 저장돼요. 로그인은 필요 없어요.</p><div id="saved-grid" class="clinic-grid"></div></section>
+    <section id="support" class="support section" aria-labelledby="support-title"><div><p class="eyebrow">AFTER SEOUL</p><h2 id="support-title">대만에 돌아가서도,<br>다음 단계를 알 수 있도록.</h2><p>예약 전에 한국 병원의 연락처와<br>응답 시간, 후속 진료 절차를 확인해요.</p><button class="text-button" data-article="return">연락 절차 알아보기 ↗</button></div><div class="support-details"><details open><summary>한국 병원 연락</summary><p>실제 예약 전에 병원 연락 창구와 운영 시간을 확인할 예정이에요. 진료 판단과 처치는 의사가 담당하며 검토판에서는 실제 의료 지원을 제공하지 않아요.</p></details><details><summary>대만 현지 제휴</summary><p>제휴안을 준비 중이에요. 제휴처, 내용, 조건, 비용을 확인한 뒤 공개할 예정이며 피부관리 체험은 의료 진료를 대신하지 않아요.</p></details><details><summary>예약 고객 혜택</summary><p>현재 발급되는 체험권이나 할인은 없어요. 제휴처, 유효기간, 이용 조건, 추가 비용을 정리해 공개할 예정이에요.</p></details></div></section>
+    <section id="plan" class="section plan" aria-labelledby="plan-title"><div class="section-heading"><div><p class="eyebrow">MADE A LITTLE EASIER</p><h2 id="plan-title">마음에 든 곳, 상담 계획으로</h2></div></div><div class="plan-layout"><div><p class="plan-intro">궁금한 병원과 방문 날짜를 고르고,<br>질문을 모아 상담을 준비해요.</p><div id="plan-clinics"></div><a href="#clinics" class="text-button">다른 병원도 둘러보기 ↗</a></div><form id="plan-form"><label>상담하고 싶은 병원<select id="plan-clinic" required><option value="">병원을 선택해 주세요</option></select></label><div class="form-row"><label>한국 방문 예정일<input id="visit-date" type="date" required></label><label>궁금한 시술<select id="plan-treatment"><option>보습관리</option><option>모공</option><option>잡티</option><option>탄력</option><option>아직 고민 중</option></select></label></div><p class="muted small">상담 내용을 정리하는 기능이에요. 실제 전송·예약은 되지 않으며 병력이나 사진 등 민감한 정보는 입력하지 마세요.</p><button class="primary wide" type="submit">상담 내용 정리하기 <span aria-hidden="true">↗</span></button></form></div></section>
+  </main>
+  <footer><div class="footer-top"><a class="logo" href="#home">skinbridge</a><p>나의 속도로 만나는 새로운 나.</p><a href="../">한국어 / 중국어 ↗</a></div><div class="footer-bottom"><p>SKINBRIDGE 스킨브릿지 · 대표：이예슬<br>사업자등록번호：509-06-53933<br>제주특별자치도 제주시 중앙로26길 25, 102동 3층 303호</p><p><a href="tel:+821089015286">+82-10-8901-5286</a><br><button class="text-button" data-article="privacy">개인정보와 저장 안내</button><br>© 2026 SKINBRIDGE</p></div><p class="small muted">검토판: 병원·가격·서비스는 예시입니다. 인물과 실내 사진은 AI 생성 이미지이며 실제 환자나 제휴 병원이 아닙니다.</p></footer>
+  <nav class="bottom-nav" aria-label="빠른 메뉴"><a href="#clinics"><span aria-hidden="true">⌕</span>탐색</a><a href="#saved"><span aria-hidden="true">♡</span>찜 <b class="saved-count">0</b></a><a href="#plan"><span aria-hidden="true">▤</span>나의 상담 계획</a></nav>
+  <div id="compare-bar" class="compare-bar" hidden><span id="compare-count"></span><button id="compare-open" class="primary">비교 시작</button><button id="compare-clear" class="text-button">지우기</button></div>
+  <dialog id="dialog" aria-labelledby="dialog-title"><div class="dialog-top"><p class="eyebrow">SKINBRIDGE</p><button id="dialog-close" class="icon-button" aria-label="창 닫기">×</button></div><div id="dialog-content"></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
