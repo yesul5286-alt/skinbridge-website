@@ -9,12 +9,13 @@
   <title>skinbridge · 妳的首爾，慢慢變美</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
+  <script src="real-clinics.js" defer></script>
   <script src="app.js" defer></script>
   <script src="flow.js" defer></script>
 </head>
 <body>
   <a class="skip" href="#main">跳至主要內容</a>
-  <div class="review-language"><a href="../ko-review/">한국어로 검토하기</a><span> / </span><a href="../tw/" lang="zh-TW">繁體中文</a></div><div class="preview-note">體驗版 · 院所、價格與圖片皆為示例，尚未開放實際預約</div>
+  <div class="review-language"><a href="../ko-review/">한국어로 검토하기</a><span> / </span><a href="../tw/" lang="zh-TW">繁體中文</a></div><div class="preview-note">體驗版 · 含實際院所資料與示例，尚未開放實際預約</div>
   <header class="header">
     <a class="logo" href="#home" aria-label="skinbridge 首頁">skinbridge<span>SEOUL, WITH YOU</span></a>
     <nav class="desktop-nav" aria-label="主要導覽">
@@ -58,12 +59,12 @@
       <form id="search-form" role="search"><div class="search-row"><label class="search-input"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="搜尋院所、地區或療程" aria-label="搜尋院所、地區或療程"></label><button class="primary" type="submit">搜尋</button></div>
         <div id="filters" class="filters">
           <fieldset class="chip-field"><legend>想了解的項目</legend><div class="filter-chips"><button type="button" class="filter-chip" data-filter="concern" data-value="" aria-pressed="true">全部項目</button><button type="button" class="filter-chip" data-filter="concern" data-value="保濕管理" aria-pressed="false">保濕管理</button><button type="button" class="filter-chip" data-filter="concern" data-value="毛孔" aria-pressed="false">毛孔</button><button type="button" class="filter-chip" data-filter="concern" data-value="斑點" aria-pressed="false">斑點</button><button type="button" class="filter-chip" data-filter="concern" data-value="緊緻" aria-pressed="false">緊緻</button></div><select id="concern" hidden aria-label="想了解的項目"><option value="">全部項目</option><option value="保濕管理">保濕管理</option><option value="毛孔">毛孔</option><option value="斑點">斑點</option><option value="緊緻">緊緻</option></select></fieldset>
-          <fieldset class="chip-field"><legend>地區</legend><div class="filter-chips"><button type="button" class="filter-chip" data-filter="area" data-value="" aria-pressed="true">所有地區</button><button type="button" class="filter-chip" data-filter="area" data-value="江南" aria-pressed="false">江南</button><button type="button" class="filter-chip" data-filter="area" data-value="弘大" aria-pressed="false">弘大</button><button type="button" class="filter-chip" data-filter="area" data-value="新沙" aria-pressed="false">新沙</button></div><select id="area" hidden aria-label="地區"><option value="">所有地區</option><option value="江南">江南</option><option value="弘大">弘大</option><option value="新沙">新沙</option></select></fieldset>
+          <fieldset class="chip-field"><legend>地區</legend><div class="filter-chips"><button type="button" class="filter-chip" data-filter="area" data-value="" aria-pressed="true">所有地區</button><button type="button" class="filter-chip" data-filter="area" data-value="江南" aria-pressed="false">江南</button><button type="button" class="filter-chip" data-filter="area" data-value="弘大" aria-pressed="false">弘大</button><button type="button" class="filter-chip" data-filter="area" data-value="新沙" aria-pressed="false">新沙</button><button type="button" class="filter-chip" data-filter="area" data-value="新村" aria-pressed="false">新村</button></div><select id="area" hidden aria-label="地區"><option value="">所有地區</option><option value="江南">江南</option><option value="弘大">弘大</option><option value="新沙">新沙</option><option value="新村">新村</option></select></fieldset>
           <details class="budget-options"><summary>預算 <span id="budget-status"></span></summary><label>示例預算（韓元）<select id="budget"><option value="">不限</option><option value="110000">₩110,000 以下</option><option value="130000">₩130,000 以下</option><option value="160000">₩160,000 以下</option></select></label></details>
           <button class="text-button" type="reset">清除條件</button>
         </div>
       </form>
-      <div class="results-line"><p id="result-count" role="status"></p><span>示例資料 · 非實際院所報價</span></div>
+      <div class="results-line"><p id="result-count" role="status"></p><span>實際院所與示例分別標示</span></div>
       <div id="clinic-grid" class="clinic-grid"></div>
     </section>
     <section class="section neighborhood" aria-labelledby="neighborhood-title"><div class="section-heading"><div><p class="eyebrow">AROUND YOUR SEOUL</p><h2 id="neighborhood-title">住在這附近，去哪裡諮詢？</h2><p class="theme-sub">讓院所探索，順著妳的首爾行程。</p></div></div><div class="area-links"><button data-area="江南"><span>01 / GANGNAM</span><strong>江南</strong><span>探索這一區 ↗</span></button><button data-area="弘大"><span>02 / HONGDAE</span><strong>弘大</strong><span>探索這一區 ↗</span></button><button data-area="新沙"><span>03 / SINSA</span><strong>新沙</strong><span>探索這一區 ↗</span></button></div></section>
@@ -78,7 +79,7 @@
     <section id="plan" class="section plan" aria-labelledby="plan-title"><div class="section-heading"><div><p class="eyebrow">MADE A LITTLE EASIER</p><h2 id="plan-title">把喜歡的，變成計畫</h2></div></div><div class="plan-layout"><div><p class="plan-intro">選好想了解的院所和日期，<br>把問題一起帶進諮詢。</p><div id="plan-clinics"></div><a href="#clinics" class="text-button">再看看其他院所 ↗</a></div><a class="primary" href="?view=consultation&amp;procedure=first">整理諮詢內容 ↗</a><form id="plan-form" hidden><label>想諮詢的院所<select id="plan-clinic" required><option value="">請選擇院所</option></select></label><div class="form-row"><label>預計赴韓日期<input id="visit-date" type="date"></label><label>想了解的項目<select id="plan-treatment"><option>保濕管理</option><option>毛孔</option><option>斑點</option><option>緊緻</option><option>想先了解</option></select></label></div><p class="muted small">這裡只整理諮詢內容，不會送出或成立預約。請勿輸入病歷、照片或其他敏感資料。</p><button class="primary wide" type="submit">整理諮詢內容 <span aria-hidden="true">↗</span></button></form></div></section>
     <section id="flow-page" class="section flow-page" hidden></section>
   </main>
-  <footer><div class="footer-top"><a class="logo" href="#home">skinbridge</a><p>在妳的步調裡，遇見新的自己。</p><a href="../">한국어 / 简体中文 ↗</a></div><div class="footer-bottom"><p>SKINBRIDGE 스킨브릿지 · 代表：이예슬<br>事業者登錄號：509-06-53933<br>제주특별자치도 제주시 중앙로26길 25, 102동 3층 303호</p><p><a href="tel:+821089015286">+82-10-8901-5286</a><br><button class="text-button" data-article="privacy">隱私與資料使用</button><br>© 2026 SKINBRIDGE</p></div><p class="small muted">體驗版：院所、價格、服務皆為示例；人物與室內圖片為 AI 生成，非實際病患或合作院所。</p></footer>
+  <footer><div class="footer-top"><a class="logo" href="#home">skinbridge</a><p>在妳的步調裡，遇見新的自己。</p><a href="../">한국어 / 简体中文 ↗</a></div><div class="footer-bottom"><p>SKINBRIDGE 스킨브릿지 · 代表：이예슬<br>事業者登錄號：509-06-53933<br>제주특별자치도 제주시 중앙로26길 25, 102동 3층 303호</p><p><a href="tel:+821089015286">+82-10-8901-5286</a><br><button class="text-button" data-article="privacy">隱私與資料使用</button><br>© 2026 SKINBRIDGE</p></div><p class="small muted">實際院所資料標明來源；範例院所與 AI 圖片僅供體驗。合作、活動適用與預約均需確認。</p></footer>
   <nav class="bottom-nav" aria-label="快捷導覽"><a href="#clinics"><span aria-hidden="true">⌕</span>探索</a><a href="#saved" data-open-saved><span aria-hidden="true">♡</span>收藏 <b class="saved-count">0</b></a><a href="#plan"><span aria-hidden="true">▤</span>我的計畫</a></nav>
   <button class="line-float" id="line-contact" aria-label="LINE 諮詢"><strong>LINE</strong><span>諮詢</span></button>
   <div id="compare-bar" class="compare-bar" hidden><span id="compare-count"></span><button id="compare-open" class="primary">開始比較</button><button id="compare-clear" class="text-button">清除</button></div>

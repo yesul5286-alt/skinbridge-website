@@ -47,3 +47,7 @@ The page stores only saved IDs, a date, and selected clinic/treatment in `localS
 ## Assets
 
 The hero and clinic photographs were generated with the built-in ImageGen tool for this preview. The final generation briefs were a cream/blush skincare campaign portrait with right-aligned subject and a fictional sunlit Korean clinic interior; neither depicts actual patients or partners. Full prompts are in `ASSET-PROMPTS.md`.
+
+## Source-backed clinic preview (2026-10-04)
+
+`tw/real-clinics.js` supplies bilingual Selena Hongdae and Springday Sinchon profiles. Public sources and user-provided materials are tracked in `clinic-sources.json`. Inclusion does not imply partnership. Selena has 22 transcribed event rows from two equivalent artwork variants; no year is printed and VAT is excluded. Offers retain their conditions in inquiry summaries. Original patient and celebrity photos are not republished. Real clinics use labeled photo placeholders; fictional A/B/C remain identified examples. Real prices are not included in the sample hydration budget filter.

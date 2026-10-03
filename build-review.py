@@ -7,9 +7,10 @@ translations = dict(pairs)
 pattern = re.compile('|'.join(re.escape(key) for key in sorted(translations, key=len, reverse=True)))
 out = root/'ko-review'
 out.mkdir(exist_ok=True)
-for name in ['index.html', 'app.js', 'flow.js']:
+for name in ['index.html', 'app.js', 'flow.js', 'real-clinics.js']:
     text = (root/'tw'/name).read_text(encoding='utf-8-sig')
-    text = pattern.sub(lambda match: translations[match.group()], text)
+    if name != 'real-clinics.js':
+        text = pattern.sub(lambda match: translations[match.group()], text)
     text = text.replace('src="assets/', 'src="../tw/assets/').replace('href="styles.css"', 'href="../tw/styles.css"').replace('href="favicon.svg"', 'href="../tw/favicon.svg"')
     text = text.replace('lang="zh-TW"', 'lang="ko"', 1).replace('skinbridge.tw.v1', 'skinbridge.ko-review.v1')
     (out/name).write_text(text, encoding='utf-8')
