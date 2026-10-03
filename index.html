@@ -1,1 +1,337 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SKINBRIDGE | Korea Medical Tourism</title>
+<meta name="description" content="SKINBRIDGE provides international patient support and global medical marketing services in Korea.">
 
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:Arial,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+  color:#222;
+  line-height:1.7;
+  background:#fff;
+}
+header{
+  height:72px;
+  padding:0 8%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-bottom:1px solid #eee;
+  background:#fff;
+}
+.logo{
+  font-size:20px;
+  font-weight:700;
+  letter-spacing:4px;
+}
+.language button{
+  border:0;
+  background:none;
+  cursor:pointer;
+  margin-left:14px;
+  color:#777;
+}
+.language button:hover{color:#111}
+
+.hero{
+  min-height:620px;
+  display:flex;
+  align-items:center;
+  padding:80px 10%;
+  background:linear-gradient(135deg,#f5f1eb,#fff);
+}
+.hero-inner{max-width:850px}
+.eyebrow{
+  color:#9b8061;
+  letter-spacing:3px;
+  font-size:12px;
+  margin-bottom:20px;
+}
+.hero h1{
+  font-size:60px;
+  line-height:1.12;
+  font-weight:500;
+  margin-bottom:25px;
+}
+.hero p{
+  max-width:680px;
+  color:#666;
+  font-size:18px;
+}
+
+section{padding:90px 10%}
+.label{
+  color:#9b8061;
+  letter-spacing:3px;
+  font-size:12px;
+  margin-bottom:15px;
+}
+h2{
+  font-size:34px;
+  font-weight:500;
+  margin-bottom:25px;
+}
+.about-text{
+  max-width:850px;
+  font-size:17px;
+  color:#555;
+}
+
+.services{background:#faf9f7}
+.cards{
+  margin-top:35px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+.card{
+  padding:32px 25px;
+  background:#fff;
+  border:1px solid #eee;
+}
+.card h3{font-size:17px;margin-bottom:12px}
+.card p{font-size:14px;color:#666}
+
+.contact{text-align:center}
+.contact h2{margin-bottom:15px}
+.contact p{color:#666}
+
+.business{
+  background:#242424;
+  color:#fff;
+  padding:55px 10%;
+}
+.business h3{margin-bottom:20px}
+.business p{
+  color:#ccc;
+  font-size:13px;
+  margin:5px 0;
+}
+
+footer{
+  padding:25px;
+  background:#191919;
+  color:#777;
+  text-align:center;
+  font-size:12px;
+}
+
+.lang-page{display:none}
+.lang-page.active{display:block}
+
+@media(max-width:800px){
+  header{
+    height:auto;
+    padding:18px 6%;
+    flex-direction:column;
+    gap:10px;
+  }
+  .hero{
+    min-height:500px;
+    padding:60px 7%;
+  }
+  .hero h1{font-size:40px}
+  section{padding:65px 7%}
+  .cards{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo">SKINBRIDGE</div>
+  <div class="language">
+    <button onclick="setLanguage('ko')">한국어</button>
+    <button onclick="setLanguage('tw')">繁體中文</button>
+    <button onclick="setLanguage('cn')">简体中文</button>
+  </div>
+</header>
+
+<!-- KOREAN -->
+<div id="ko" class="lang-page active">
+
+<section class="hero">
+<div class="hero-inner">
+<div class="eyebrow">KOREA MEDICAL TOURISM</div>
+<h1>Connecting Korea<br>with the World.</h1>
+<p>
+스킨브릿지는 해외 고객과 대한민국 의료기관을 연결하고,
+외국인 환자의 한국 의료서비스 이용을 지원합니다.
+</p>
+</div>
+</section>
+
+<section>
+<div class="label">ABOUT US</div>
+<h2>SKINBRIDGE</h2>
+<p class="about-text">
+스킨브릿지는 대한민국에 등록된 외국인환자 유치 사업자로,
+해외 고객을 위한 의료기관 상담, 예약 및 방문 지원 서비스를 제공합니다.
+또한 한국 의료기관의 해외 고객 대상 글로벌 마케팅을 지원합니다.
+</p>
+</section>
+
+<section class="services">
+<div class="label">SERVICES</div>
+<h2>What We Do</h2>
+
+<div class="cards">
+<div class="card">
+<h3>의료 상담 지원</h3>
+<p>고객의 요청에 따른 한국 의료기관 및 의료서비스 상담을 지원합니다.</p>
+</div>
+
+<div class="card">
+<h3>예약 지원</h3>
+<p>해외 고객과 한국 의료기관 간 상담 및 예약 과정을 지원합니다.</p>
+</div>
+
+<div class="card">
+<h3>방문 지원</h3>
+<p>외국인 고객이 한국 의료기관을 보다 편리하게 이용할 수 있도록 지원합니다.</p>
+</div>
+
+<div class="card">
+<h3>Global Marketing</h3>
+<p>한국 의료기관의 해외 시장 대상 콘텐츠 및 마케팅 업무를 지원합니다.</p>
+</div>
+</div>
+</section>
+
+<section class="contact">
+<div class="label">CONTACT</div>
+<h2>Contact SKINBRIDGE</h2>
+<p>International Client & Business Inquiry</p>
+<p>Tel. 010-8901-5286</p>
+</section>
+
+</div>
+
+<!-- TRADITIONAL CHINESE -->
+<div id="tw" class="lang-page">
+
+<section class="hero">
+<div class="hero-inner">
+<div class="eyebrow">KOREA MEDICAL TOURISM</div>
+<h1>Connecting Korea<br>with the World.</h1>
+<p>
+SKINBRIDGE 致力於連結海外顧客與韓國醫療機構，
+協助海外顧客更便利地使用韓國醫療服務。
+</p>
+</div>
+</section>
+
+<section>
+<div class="label">ABOUT US</div>
+<h2>SKINBRIDGE</h2>
+<p class="about-text">
+SKINBRIDGE 為韓國合法登記之外國患者招攬服務業者，
+提供海外顧客韓國醫療機構諮詢、預約及訪韓相關支援服務，
+並協助韓國醫療機構進行海外市場行銷。
+</p>
+</section>
+
+<section class="services">
+<div class="label">SERVICES</div>
+<h2>Our Services</h2>
+
+<div class="cards">
+<div class="card"><h3>醫療諮詢支援</h3><p>協助海外顧客了解韓國醫療機構及相關醫療服務。</p></div>
+<div class="card"><h3>預約支援</h3><p>協助海外顧客與韓國醫療機構進行諮詢及預約。</p></div>
+<div class="card"><h3>訪韓支援</h3><p>協助海外顧客更便利地使用韓國醫療服務。</p></div>
+<div class="card"><h3>海外行銷</h3><p>協助韓國醫療機構進行海外市場內容及行銷業務。</p></div>
+</div>
+</section>
+
+<section class="contact">
+<div class="label">CONTACT</div>
+<h2>聯絡 SKINBRIDGE</h2>
+<p>海外顧客及商務合作諮詢</p>
+<p>Tel. +82-10-8901-5286</p>
+</section>
+
+</div>
+
+<!-- SIMPLIFIED CHINESE -->
+<div id="cn" class="lang-page">
+
+<section class="hero">
+<div class="hero-inner">
+<div class="eyebrow">KOREA MEDICAL TOURISM</div>
+<h1>Connecting Korea<br>with the World.</h1>
+<p>
+SKINBRIDGE 致力于连接海外客户与韩国医疗机构，
+为海外客户使用韩国医疗服务提供便利支持。
+</p>
+</div>
+</section>
+
+<section>
+<div class="label">ABOUT US</div>
+<h2>SKINBRIDGE</h2>
+<p class="about-text">
+SKINBRIDGE 是在韩国依法登记的外国患者招揽服务机构，
+为海外客户提供韩国医疗机构咨询、预约及访韩相关支持服务，
+同时协助韩国医疗机构开展海外市场营销。
+</p>
+</section>
+
+<section class="services">
+<div class="label">SERVICES</div>
+<h2>Our Services</h2>
+
+<div class="cards">
+<div class="card"><h3>医疗咨询支持</h3><p>协助海外客户了解韩国医疗机构及相关医疗服务。</p></div>
+<div class="card"><h3>预约支持</h3><p>协助海外客户与韩国医疗机构进行咨询及预约。</p></div>
+<div class="card"><h3>访韩支持</h3><p>协助海外客户更加便利地使用韩国医疗服务。</p></div>
+<div class="card"><h3>海外营销</h3><p>协助韩国医疗机构开展海外市场内容及营销业务。</p></div>
+</div>
+</section>
+
+<section class="contact">
+<div class="label">CONTACT</div>
+<h2>联系 SKINBRIDGE</h2>
+<p>海外客户及商务合作咨询</p>
+<p>Tel. +82-10-8901-5286</p>
+</section>
+
+</div>
+
+<!-- BUSINESS INFORMATION -->
+<div class="business">
+<h3>SKINBRIDGE Business Information</h3>
+
+<p>상호 / Business Name: 스킨브릿지 (SKINBRIDGE)</p>
+<p>대표자 / Representative: 이예슬</p>
+<p>사업자등록번호 / Business Registration No.: 509-06-53933</p>
+<p>주소 / Address: 제주특별자치도 제주시 중앙로26길 25, 102동 3층 303호</p>
+<p>Tel: +82-10-8901-5286</p>
+</div>
+
+<footer>
+© 2026 SKINBRIDGE. All Rights Reserved.
+</footer>
+
+<script>
+function setLanguage(lang){
+  document.querySelectorAll('.lang-page').forEach(function(page){
+    page.classList.remove('active');
+  });
+
+  document.getElementById(lang).classList.add('active');
+  document.documentElement.lang =
+    lang === 'ko' ? 'ko' :
+    lang === 'tw' ? 'zh-TW' : 'zh-CN';
+
+  window.scrollTo(0,0);
+}
+</script>
+
+</body>
+</html>
