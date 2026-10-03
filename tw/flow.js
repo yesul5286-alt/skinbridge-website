@@ -6,7 +6,7 @@ const routeProcedure=FLOW_LABELS[routeParams.get('procedure')]?routeParams.get('
 const routeClinic=CLINICS.find(c=>c.id===routeParams.get('clinic'));
 function selectedOffer(){const n=routeParams.get('offer');return n!==null&&/^\d+$/.test(n)?clinicOfferList(routeClinic)[Number(n)]||null:null;}
 const flowPage=$('#flow-page');
-const flowImages={hydration:'care.webp',texture:'hero.webp',clarity:'serum.webp',firmness:'hero.webp',first:'clinic.webp'};
+const flowImages={hydration:'model-01-dewy.webp',texture:'model-01-dewy.webp',clarity:'model-10-dewy.webp',firmness:'model-10-dewy.webp',first:'clinic.webp'};
 const flowHome=()=>location.pathname;
 function flowHeading(step,title,backHref,backLabel){return `<a class="flow-back" href="${backHref}">← ${backLabel}</a><p class="eyebrow">${step}</p><h1 tabindex="-1" id="flow-title">${title}</h1>`;}
 function routeCards(pid){return CLINICS.filter(c=>FLOW_OFFERINGS[c.id].includes(pid)).map(c=>clinicCard(c,pid)).join('');}
