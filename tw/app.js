@@ -70,7 +70,7 @@ document.addEventListener('click',event=>{
  const filter=event.target.closest('[data-filter]');
  if(filter){$('#'+filter.dataset.filter).value=filter.dataset.value;renderClinics();return;}
  const arrow=event.target.closest('[data-scroll]');
- if(arrow){const rail=$('#procedure-rail');rail.scrollBy({left:Number(arrow.dataset.scroll)*(rail.querySelector('.procedure-card').offsetWidth+20),behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});return;}
+ if(arrow){const rail=$('#procedure-rail');rail.scrollBy({left:Number(arrow.dataset.scroll)*(rail.querySelector('.procedure-card').offsetWidth+parseFloat(getComputedStyle(rail).columnGap)),behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});return;}
  const card=event.target.closest('[data-procedure]');
  if(card)navigateFlow('procedure',card.dataset.procedure);
 });
