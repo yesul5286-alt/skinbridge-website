@@ -1,338 +1,324 @@
-<!DOCTYPE html>
-<html lang="ko">
+<!doctype html>
+<html lang="zh-Hant">
 <head>
-<meta charset="UTF-8">
-<meta name="facebook-domain-verification" content="96omr41tsp3l8rxk3xe71ohbo2sxjz" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SKINBRIDGE | Korea Medical Tourism</title>
-<meta name="description" content="SKINBRIDGE provides international patient support and global medical marketing services in Korea.">
-
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{
-  font-family:Arial,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
-  color:#222;
-  line-height:1.7;
-  background:#fff;
-}
-header{
-  height:72px;
-  padding:0 8%;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  border-bottom:1px solid #eee;
-  background:#fff;
-}
-.logo{
-  font-size:20px;
-  font-weight:700;
-  letter-spacing:4px;
-}
-.language button{
-  border:0;
-  background:none;
-  cursor:pointer;
-  margin-left:14px;
-  color:#777;
-}
-.language button:hover{color:#111}
-
-.hero{
-  min-height:620px;
-  display:flex;
-  align-items:center;
-  padding:80px 10%;
-  background:linear-gradient(135deg,#f5f1eb,#fff);
-}
-.hero-inner{max-width:850px}
-.eyebrow{
-  color:#9b8061;
-  letter-spacing:3px;
-  font-size:12px;
-  margin-bottom:20px;
-}
-.hero h1{
-  font-size:60px;
-  line-height:1.12;
-  font-weight:500;
-  margin-bottom:25px;
-}
-.hero p{
-  max-width:680px;
-  color:#666;
-  font-size:18px;
-}
-
-section{padding:90px 10%}
-.label{
-  color:#9b8061;
-  letter-spacing:3px;
-  font-size:12px;
-  margin-bottom:15px;
-}
-h2{
-  font-size:34px;
-  font-weight:500;
-  margin-bottom:25px;
-}
-.about-text{
-  max-width:850px;
-  font-size:17px;
-  color:#555;
-}
-
-.services{background:#faf9f7}
-.cards{
-  margin-top:35px;
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:18px;
-}
-.card{
-  padding:32px 25px;
-  background:#fff;
-  border:1px solid #eee;
-}
-.card h3{font-size:17px;margin-bottom:12px}
-.card p{font-size:14px;color:#666}
-
-.contact{text-align:center}
-.contact h2{margin-bottom:15px}
-.contact p{color:#666}
-
-.business{
-  background:#242424;
-  color:#fff;
-  padding:55px 10%;
-}
-.business h3{margin-bottom:20px}
-.business p{
-  color:#ccc;
-  font-size:13px;
-  margin:5px 0;
-}
-
-footer{
-  padding:25px;
-  background:#191919;
-  color:#777;
-  text-align:center;
-  font-size:12px;
-}
-
-.lang-page{display:none}
-.lang-page.active{display:block}
-
-@media(max-width:800px){
-  header{
-    height:auto;
-    padding:18px 6%;
-    flex-direction:column;
-    gap:10px;
-  }
-  .hero{
-    min-height:500px;
-    padding:60px 7%;
-  }
-  .hero h1{font-size:40px}
-  section{padding:65px 7%}
-  .cards{grid-template-columns:1fr}
-}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <title>SELENA Clinic 弘大｜中文諮詢</title>
+  <meta name="description" content="SELENA Clinic 弘大。中文諮詢、療程價格與預約時間可事先確認。">
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
+<header class="header">
+  <a class="logo-link" href="#home" aria-label="SELENA Clinic home">
+    <img src="assets/logo.png" alt="SELENA CLINIC">
+  </a>
 
-<header>
-  <div class="logo">SKINBRIDGE</div>
-  <div class="language">
-    <button onclick="setLanguage('ko')">한국어</button>
-    <button onclick="setLanguage('tw')">繁體中文</button>
-    <button onclick="setLanguage('cn')">简体中文</button>
-  </div>
+  <nav class="desktop-nav" aria-label="Main navigation">
+    <a href="#home">首頁</a>
+    <a href="#why">為什麼選擇 SELENA</a>
+    <a href="#treatments">熱門療程</a>
+    <a href="#prices">價格資訊</a>
+    <a href="#doctor">醫療團隊</a>
+    <a href="#clinic">診所環境</a>
+    <a href="#location">交通方式</a>
+    <a href="#faq">常見問題</a>
+  </nav>
+
+  <a class="header-line js-line" href="https://lin.ee/pjUu4a4" target="_blank" rel="noopener">
+    <span>LINE</span> 中文諮詢
+  </a>
 </header>
 
-<!-- KOREAN -->
-<div id="ko" class="lang-page active">
+<main>
+<section class="hero" id="home">
+  <div class="hero-copy">
+    <p class="eyebrow">SEOUL · HONGDAE</p>
+    <h1>第一次來韓國<br>做醫美？</h1>
+    <p class="hero-sub">先確認療程、價格與可預約時間</p>
 
-<section class="hero">
-<div class="hero-inner">
-<div class="eyebrow">KOREA MEDICAL TOURISM</div>
-<h1>Connecting Korea<br>with the World.</h1>
-<p>
-스킨브릿지는 해외 고객과 대한민국 의료기관을 연결하고,
-외국인 환자의 한국 의료서비스 이용을 지원합니다.
-</p>
-</div>
+    <div class="hero-chips">
+      <span>中文諮詢</span>
+      <span>價格透明</span>
+      <span>預約時間確認</span>
+      <span>弘大入口站附近</span>
+    </div>
+
+    <a class="line-button js-line" href="https://lin.ee/pjUu4a4" target="_blank" rel="noopener">
+      <b>LINE</b>
+      <span>免費諮詢</span>
+      <i>→</i>
+    </a>
+    <p class="fine">可先詢問療程、劑量、費用與預約時段。</p>
+  </div>
+
+  <div class="hero-visual">
+    <img src="assets/rejuran.webp" alt="麗珠蘭 Healer 2cc 療程資訊">
+  </div>
 </section>
 
-<section>
-<div class="label">ABOUT US</div>
-<h2>SKINBRIDGE</h2>
-<p class="about-text">
-스킨브릿지는 대한민국에 등록된 외국인환자 유치 사업자로,
-해외 고객을 위한 의료기관 상담, 예약 및 방문 지원 서비스를 제공합니다.
-또한 한국 의료기관의 해외 고객 대상 글로벌 마케팅을 지원합니다.
-</p>
+<section class="benefit-band" id="why">
+  <div class="benefit-grid">
+    <article>
+      <div class="icon">◇</div>
+      <strong>中文諮詢</strong>
+      <span>可先用中文詢問療程</span>
+    </article>
+    <article>
+      <div class="icon">▤</div>
+      <strong>價格透明</strong>
+      <span>費用可於預約前確認</span>
+    </article>
+    <article>
+      <div class="icon">□</div>
+      <strong>彈性預約時間</strong>
+      <span>先確認日期與時段</span>
+    </article>
+    <article>
+      <div class="icon">⌖</div>
+      <strong>弘大位置</strong>
+      <span>8號出口附近，旅程好安排</span>
+    </article>
+  </div>
+  <figure class="band-photo">
+    <img src="assets/clinic-lobby.webp" alt="SELENA Clinic 候診空間">
+  </figure>
 </section>
 
-<section class="services">
-<div class="label">SERVICES</div>
-<h2>What We Do</h2>
+<section class="section treatments" id="treatments">
+  <div class="section-title">
+    <p>POPULAR TREATMENTS</p>
+    <h2>熱門療程</h2>
+  </div>
 
-<div class="cards">
-<div class="card">
-<h3>의료 상담 지원</h3>
-<p>고객의 요청에 따른 한국 의료기관 및 의료서비스 상담을 지원합니다.</p>
-</div>
+  <div class="treatment-row">
+    <article class="treatment-card">
+      <div class="treatment-img poster"><img src="assets/rejuran.webp" alt="麗珠蘭療程資訊"></div>
+      <h3>麗珠蘭 REJURAN</h3>
+      <p>依部位與需求選擇不同系列</p>
+      <strong>Healer 2cc · 207,900 韓元 含稅</strong>
+      <a href="#rejuran-prices">查看價格 →</a>
+    </article>
 
-<div class="card">
-<h3>예약 지원</h3>
-<p>해외 고객과 한국 의료기관 간 상담 및 예약 과정을 지원합니다.</p>
-</div>
+    <article class="treatment-card">
+      <div class="treatment-img poster top-crop"><img src="assets/juvelook.webp" alt="喬雅露 Juvelook Skin 療程資訊"></div>
+      <h3>喬雅露 Juvelook</h3>
+      <p>Skin 2cc</p>
+      <strong>110,000 韓元 含稅</strong>
+      <a class="js-line" href="https://lin.ee/pjUu4a4" target="_blank" rel="noopener">LINE 詢問 →</a>
+    </article>
 
-<div class="card">
-<h3>방문 지원</h3>
-<p>외국인 고객이 한국 의료기관을 보다 편리하게 이용할 수 있도록 지원합니다.</p>
-</div>
+    <article class="treatment-card">
+      <div class="treatment-img"><img src="assets/clinic-treatment.webp" alt="SELENA Clinic 療程空間"></div>
+      <h3>Potenza</h3>
+      <p>毛孔・膚質管理</p>
+      <strong>全臉 1次 · 141,900 韓元 含稅</strong>
+      <a href="#potenza-prices">查看價格 →</a>
+    </article>
 
-<div class="card">
-<h3>Global Marketing</h3>
-<p>한국 의료기관의 해외 시장 대상 콘텐츠 및 마케팅 업무를 지원합니다.</p>
-</div>
-</div>
+    <article class="treatment-card">
+      <div class="treatment-img"><img src="assets/doctor-consult.webp" alt="SELENA Clinic 諮詢空間"></div>
+      <h3>拉提療程</h3>
+      <p>依部位、發數與需求確認</p>
+      <strong>LINE 詢價</strong>
+      <a class="js-line" href="https://lin.ee/pjUu4a4" target="_blank" rel="noopener">療程諮詢 →</a>
+    </article>
+
+    <article class="treatment-card">
+      <div class="treatment-img"><img src="assets/clinic-reception.webp" alt="SELENA Clinic 室內空間"></div>
+      <h3>填充・輪廓</h3>
+      <p>部位與產品先諮詢確認</p>
+      <strong>預約前確認</strong>
+      <a class="js-line" href="https://lin.ee/pjUu4a4" target="_blank" rel="noopener">LINE 詢問 →</a>
+    </article>
+
+    <article class="treatment-card">
+      <div class="treatment-img"><img src="assets/clinic-wash.webp" alt="SELENA Clinic 準備空間"></div>
+      <h3>其他肌膚療程</h3>
+      <p>先說明想改善的問題</p>
+      <strong>中文諮詢</strong>
+      <a class="js-line" href="https://lin.ee/pjUu4a4" target="_blank" rel="noopener">詢問療程 →</a>
+    </article>
+  </div>
 </section>
 
-<section class="contact">
-<div class="label">CONTACT</div>
-<h2>Contact SKINBRIDGE</h2>
-<p>International Client & Business Inquiry</p>
-<p>Tel. 010-8901-5286</p>
+<section class="price-section" id="prices">
+  <div class="price-intro">
+    <p class="eyebrow">PRICE GUIDE</p>
+    <h2>價格先看清楚，<br>再決定要不要預約。</h2>
+    <p>廣告與預約諮詢使用含稅價格顯示。實際適用療程、劑量與當日活動請於預約前再次確認。</p>
+    <div class="price-points">
+      <span>療程名稱</span><span>cc / 發數</span><span>含稅價格</span><span>預約時段</span>
+    </div>
+    <a class="ghost-button js-line" href="https://lin.ee/pjUu4a4" target="_blank" rel="noopener">LINE 確認價格 →</a>
+  </div>
+
+  <div class="price-panels">
+    <section class="price-panel" id="rejuran-prices">
+      <div class="price-panel-head">
+        <div><small>REJURAN</small><h3>麗珠蘭系列</h3></div>
+        <span>含稅</span>
+      </div>
+      <div class="price-list">
+        <div><b>Healer</b><span>2cc</span><strong>207,900 韓元</strong></div>
+        <div><b>Eye</b><span>1cc</span><strong>108,900 韓元</strong></div>
+        <div><b>HB PLUS</b><span>1cc</span><strong>174,900 韓元</strong></div>
+        <div><b>S</b><span>1cc</span><strong>174,900 韓元</strong></div>
+        <div><b>Lipjuran</b><span>1cc</span><strong>231,000 韓元</strong></div>
+      </div>
+      <p class="panel-note">不同系列的適用部位與目的不同，請先諮詢後確認。</p>
+    </section>
+
+    <section class="price-panel" id="potenza-prices">
+      <div class="price-panel-head">
+        <div><small>POTENZA</small><h3>Potenza 價格</h3></div>
+        <span>含稅</span>
+      </div>
+      <div class="price-list">
+        <div><b>多功能探頭 · 全臉</b><span>1次</span><strong>141,900 韓元</strong></div>
+        <div><b>多功能探頭 · 全臉</b><span>3次</span><strong>383,900 韓元</strong></div>
+        <div><b>多功能探頭 · 全臉</b><span>5次</span><strong>493,900 韓元</strong></div>
+        <div><b>Agnes · 全臉</b><span>1次</span><strong>440,000 韓元</strong></div>
+        <div><b>Agnes</b><span>1部位</span><strong>220,000 韓元</strong></div>
+      </div>
+      <details class="more-prices">
+        <summary>查看 DDR / DIA 價格</summary>
+        <div class="price-list compact">
+          <div><b>DDR</b><span>500發</span><strong>220,000 韓元</strong></div>
+          <div><b>DDR</b><span>1,000發</span><strong>385,000 韓元</strong></div>
+          <div><b>DIA</b><span>500發</span><strong>330,000 韓元</strong></div>
+          <div><b>DIA</b><span>1,000發</span><strong>594,000 韓元</strong></div>
+          <div><b>DDR + DIA</b><span>1,000發</span><strong>759,000 韓元</strong></div>
+        </div>
+      </details>
+    </section>
+
+    <section class="price-panel clean-panel">
+      <div class="price-panel-head">
+        <div><small>OTHER POPULAR</small><h3>其他熱門療程</h3></div>
+        <span>含稅 / 諮詢</span>
+      </div>
+      <div class="price-list">
+        <div><b>Juvelook Skin</b><span>2cc</span><strong>110,000 韓元</strong></div>
+        <div><b>拉提療程</b><span>發數 / 部位</span><strong>LINE 確認</strong></div>
+        <div><b>填充・輪廓</b><span>產品 / 部位</span><strong>LINE 確認</strong></div>
+      </div>
+      <p class="panel-note">不建議只看最低價決定療程，請同時確認產品、劑量、發數及實際施作內容。</p>
+    </section>
+  </div>
 </section>
 
-</div>
+<section class="doctor-section" id="doctor">
+  <div class="doctor-copy">
+    <p class="eyebrow">OUR MEDICAL TEAM</p>
+    <h2>不是流行什麼，<br>就一定要做什麼。</h2><p class="philosophy-line">先看膚況，再決定療程。</p>
+    <p class="doctor-lead">第一次來韓國做醫美，也可以先從「想改善什麼」開始。到院後再與醫療人員確認實際療程。</p>
+    <a class="ghost-button js-line" href="https://lin.ee/pjUu4a4" target="_blank" rel="noopener">先用 LINE 諮詢 →</a>
+  </div>
 
-<!-- TRADITIONAL CHINESE -->
-<div id="tw" class="lang-page">
+  <figure class="doctor-photo">
+    <img src="assets/doctor-main.webp" alt="SELENA Clinic 醫療人員">
+  </figure>
 
-<section class="hero">
-<div class="hero-inner">
-<div class="eyebrow">KOREA MEDICAL TOURISM</div>
-<h1>Connecting Korea<br>with the World.</h1>
-<p>
-SKINBRIDGE 致力於連結海外顧客與韓國醫療機構，
-協助海外顧客更便利地使用韓國醫療服務。
-</p>
-</div>
+  <div class="doctor-note">
+    <blockquote>「先確認需求，再討論適合的療程。」</blockquote>
+    <ul>
+      <li>療程與費用可事先確認</li>
+      <li>到院後再與醫療人員確認</li>
+      <li>中文 LINE 諮詢</li>
+      <li>返台後可透過 LINE 留言詢問</li>
+    </ul>
+    <figure class="consult-photo">
+      <img src="assets/doctor-consult.webp" alt="SELENA Clinic 諮詢情境">
+    </figure>
+  </div>
 </section>
 
-<section>
-<div class="label">ABOUT US</div>
-<h2>SKINBRIDGE</h2>
-<p class="about-text">
-SKINBRIDGE 為韓國合法登記之外國患者招攬服務業者，
-提供海外顧客韓國醫療機構諮詢、預約及訪韓相關支援服務，
-並協助韓國醫療機構進行海外市場行銷。
-</p>
+<section class="clinic-section" id="clinic">
+  <div class="section-title">
+    <p>CLINIC SPACE</p>
+    <h2>診所環境</h2>
+  </div>
+
+  <div class="gallery">
+    <figure class="wide"><img src="assets/clinic-waiting.webp" alt="SELENA Clinic 候診空間"></figure>
+    <figure><img src="assets/clinic-treatment.webp" alt="SELENA Clinic 療程空間"></figure>
+    <figure><img src="assets/clinic-hall.webp" alt="SELENA Clinic 室內走廊"></figure>
+  </div>
 </section>
 
-<section class="services">
-<div class="label">SERVICES</div>
-<h2>Our Services</h2>
+<section class="info-section" id="location">
+  <div class="info-copy">
+    <p class="eyebrow">CLINIC INFORMATION</p>
+    <h2>診所資訊</h2>
 
-<div class="cards">
-<div class="card"><h3>醫療諮詢支援</h3><p>協助海外顧客了解韓國醫療機構及相關醫療服務。</p></div>
-<div class="card"><h3>預約支援</h3><p>協助海外顧客與韓國醫療機構進行諮詢及預約。</p></div>
-<div class="card"><h3>訪韓支援</h3><p>協助海外顧客更便利地使用韓國醫療服務。</p></div>
-<div class="card"><h3>海外行銷</h3><p>協助韓國醫療機構進行海外市場內容及行銷業務。</p></div>
-</div>
+    <div class="info-item">
+      <span>地址</span>
+      <strong>首爾麻浦區楊花路 162，9樓</strong>
+      <p>弘大入口站 8 號出口附近</p>
+      <button type="button" data-copy="서울 마포구 양화로 162 9층">複製韓文地址</button>
+    </div>
+
+    <div class="info-item">
+      <span>看診時間</span>
+      <strong>平日 10:00–20:00</strong>
+      <p>最後受理 19:00</p>
+      <strong>週末及國定假日 10:00–18:00</strong>
+      <p>最後受理 17:00 · 無午休 · 春節／中秋節當日休診</p>
+    </div>
+  </div>
+
+  <div class="mini-gallery">
+    <img src="assets/clinic-reception.webp" alt="SELENA Clinic 接待空間">
+    <img src="assets/clinic-waiting.webp" alt="SELENA Clinic 候診空間">
+    <img src="assets/clinic-hall.webp" alt="SELENA Clinic 室內空間">
+  </div>
+
+  <div class="map-wrap" aria-label="SELENA Clinic map">
+    <iframe
+      title="SELENA Clinic 弘大 地圖"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      src="https://www.google.com/maps?q=%EC%84%9C%EC%9A%B8%20%EB%A7%88%ED%8F%AC%EA%B5%AC%20%EC%96%91%ED%99%94%EB%A1%9C%20162&output=embed">
+    </iframe>
+  </div>
 </section>
 
-<section class="contact">
-<div class="label">CONTACT</div>
-<h2>聯絡 SKINBRIDGE</h2>
-<p>海外顧客及商務合作諮詢</p>
-<p>Tel. +82-10-8901-5286</p>
+<section class="faq-section" id="faq">
+  <div class="section-title">
+    <p>FAQ</p>
+    <h2>常見問題</h2>
+  </div>
+  <div class="faq-list">
+    <details><summary>可以用中文諮詢嗎？</summary><p>可以先透過 LINE 使用中文詢問療程、價格與可預約時段。</p></details>
+    <details><summary>價格可以先確認嗎？</summary><p>可以。建議在預約前先確認療程名稱、劑量、費用與是否有其他加購項目。</p></details>
+    <details><summary>第一次做醫美，不知道要選什麼怎麼辦？</summary><p>先告訴我們想改善的問題，到院後再依實際狀況由醫療人員說明適合的選項。</p></details>
+    <details><summary>回台灣後還可以詢問嗎？</summary><p>可透過 LINE 留言詢問。若需要實際診察或緊急處置，請依醫療機構指示處理。</p></details>
+  </div>
 </section>
 
-</div>
-
-<!-- SIMPLIFIED CHINESE -->
-<div id="cn" class="lang-page">
-
-<section class="hero">
-<div class="hero-inner">
-<div class="eyebrow">KOREA MEDICAL TOURISM</div>
-<h1>Connecting Korea<br>with the World.</h1>
-<p>
-SKINBRIDGE 致力于连接海外客户与韩国医疗机构，
-为海外客户使用韩国医疗服务提供便利支持。
-</p>
-</div>
+<section class="bottom-cta">
+  <div class="cta-photo"><img src="assets/doctor-consult.webp" alt="SELENA Clinic 諮詢"></div>
+  <div class="cta-copy"><span>現在就透過 LINE 諮詢</span><strong>確認療程、價格與預約時間</strong></div>
+  <a class="line-button js-line" href="https://lin.ee/pjUu4a4" target="_blank" rel="noopener"><b>LINE</b><span>免費諮詢</span><i>→</i></a>
 </section>
+</main>
 
-<section>
-<div class="label">ABOUT US</div>
-<h2>SKINBRIDGE</h2>
-<p class="about-text">
-SKINBRIDGE 是在韩国依法登记的外国患者招揽服务机构，
-为海外客户提供韩国医疗机构咨询、预约及访韩相关支持服务，
-同时协助韩国医疗机构开展海外市场营销。
-</p>
-</section>
-
-<section class="services">
-<div class="label">SERVICES</div>
-<h2>Our Services</h2>
-
-<div class="cards">
-<div class="card"><h3>医疗咨询支持</h3><p>协助海外客户了解韩国医疗机构及相关医疗服务。</p></div>
-<div class="card"><h3>预约支持</h3><p>协助海外客户与韩国医疗机构进行咨询及预约。</p></div>
-<div class="card"><h3>访韩支持</h3><p>协助海外客户更加便利地使用韩国医疗服务。</p></div>
-<div class="card"><h3>海外营销</h3><p>协助韩国医疗机构开展海外市场内容及营销业务。</p></div>
-</div>
-</section>
-
-<section class="contact">
-<div class="label">CONTACT</div>
-<h2>联系 SKINBRIDGE</h2>
-<p>海外客户及商务合作咨询</p>
-<p>Tel. +82-10-8901-5286</p>
-</section>
-
-</div>
-
-<!-- BUSINESS INFORMATION -->
-<div class="business">
-<h3>SKINBRIDGE Business Information</h3>
-
-<p>상호 / Business Name: 스킨브릿지 (SKINBRIDGE)</p>
-<p>대표자 / Representative: 이예슬</p>
-<p>사업자등록번호 / Business Registration No.: 509-06-53933</p>
-<p>주소 / Address: 제주특별자치도 제주시 중앙로26길 25, 102동 3층 303호</p>
-<p>Tel: +82-10-8901-5286</p>
-</div>
-
-<footer>
-© 2026 SKINBRIDGE. All Rights Reserved.
+<footer class="footer">
+  <div class="footer-brand">
+    <img src="assets/logo.png" alt="SELENA CLINIC">
+  </div>
+  <div>
+    <strong>SELENA CLINIC</strong>
+    <span>Taiwan marketing & reservation support by Skinbridge Korea</span>
+  </div>
+  <p>醫療相關最終判斷與療程決定由醫療機構之醫療人員進行。</p>
 </footer>
 
-<script>
-function setLanguage(lang){
-  document.querySelectorAll('.lang-page').forEach(function(page){
-    page.classList.remove('active');
-  });
+<div class="mobile-line">
+  <a class="js-line" href="https://lin.ee/pjUu4a4" target="_blank" rel="noopener"><b>LINE</b> 中文免費諮詢</a>
+</div>
 
-  document.getElementById(lang).classList.add('active');
-  document.documentElement.lang =
-    lang === 'ko' ? 'ko' :
-    lang === 'tw' ? 'zh-TW' : 'zh-CN';
-
-  window.scrollTo(0,0);
-}
-</script>
-
+<script src="script.js"></script>
 </body>
 </html>
