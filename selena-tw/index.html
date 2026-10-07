@@ -1,90 +1,324 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SELENA Clinic 弘大｜中文諮詢</title>
-<meta name="description" content="SELENA Clinic 弘大。可先透過 LINE 確認療程、價格與可預約時間。">
-<link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <title>SELENA Clinic 弘大｜中文諮詢</title>
+  <meta name="description" content="SELENA Clinic 弘大。中文諮詢、療程價格與預約時間可事先確認。">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="site-header">
-  <a class="brand" href="#top"><span>SELENA CLINIC</span><small>HONGDAE · SEOUL</small></a>
-  <a class="line-mini js-line" href="https://lin.ee/pjUu4a4" target="_blank" rel="noopener">LINE 中文諮詢</a>
+<header class="header">
+  <a class="logo-link" href="#home" aria-label="SELENA Clinic home">
+    <img src="assets/logo.png" alt="SELENA CLINIC">
+  </a>
+
+  <nav class="desktop-nav" aria-label="Main navigation">
+    <a href="#home">首頁</a>
+    <a href="#why">為什麼選擇 SELENA</a>
+    <a href="#treatments">熱門療程</a>
+    <a href="#prices">價格資訊</a>
+    <a href="#doctor">醫療團隊</a>
+    <a href="#clinic">診所環境</a>
+    <a href="#location">交通方式</a>
+    <a href="#faq">常見問題</a>
+  </nav>
+
+  <a class="header-line js-line" href="https://lin.ee/pjUu4a4" target="_blank" rel="noopener">
+    <span>LINE</span> 中文諮詢
+  </a>
 </header>
 
-<main id="top">
-<section class="hero section">
+<main>
+<section class="hero" id="home">
   <div class="hero-copy">
     <p class="eyebrow">SEOUL · HONGDAE</p>
-    <h1>第一次來韓國做醫美？</h1>
-    <p class="hero-lead">先確認療程、價格與可預約時間，再決定適合自己的安排。</p>
-    <div class="badges"><span>中文諮詢</span><span>價格可事先確認</span><span>弘大入口站 8 號出口附近</span></div>
-    <a class="btn line js-line" href="https://lin.ee/pjUu4a4" target="_blank" rel="noopener"><b>LINE</b> 免費諮詢 <i>→</i></a>
-    <p class="micro">可先詢問療程、劑量、費用與可預約時間。</p>
+    <h1>第一次來韓國<br>做醫美？</h1>
+    <p class="hero-sub">先確認療程、價格與可預約時間</p>
+
+    <div class="hero-chips">
+      <span>中文諮詢</span>
+      <span>價格透明</span>
+      <span>預約時間確認</span>
+      <span>弘大入口站附近</span>
+    </div>
+
+    <a class="line-button js-line" href="https://lin.ee/pjUu4a4" target="_blank" rel="noopener">
+      <b>LINE</b>
+      <span>免費諮詢</span>
+      <i>→</i>
+    </a>
+    <p class="fine">可先詢問療程、劑量、費用與預約時段。</p>
   </div>
-  <div class="hero-media"><img src="assets/rejuran-hero.png" alt="麗珠蘭 Healer 2cc 促銷資訊"></div>
-</section>
 
-<section class="trust">
-  <div><strong>中文諮詢</strong><span>預約前可先詢問</span></div>
-  <div><strong>價格透明</strong><span>費用可事先確認</span></div>
-  <div><strong>彈性預約</strong><span>確認日期與時段</span></div>
-  <div><strong>弘大位置</strong><span>旅程中也好安排</span></div>
-</section>
-
-<section class="section" id="treatments">
-  <div class="head"><div><p class="eyebrow">POPULAR TREATMENTS</p><h2>熱門療程</h2></div>
-  <p>先看代表價格，再透過 LINE 確認當日適合的療程與費用。</p></div>
-  <div class="grid4">
-    <article class="card featured"><small>SKIN BOOSTER · 含稅</small><h3>麗珠蘭 Healer</h3><p class="dose">2cc</p><p class="price">207,900<span>韓元</span></p><p>預約前可先確認種類、容量與費用。</p><a class="js-line" href="https://lin.ee/pjUu4a4" target="_blank" rel="noopener">LINE 詢問 →</a></article>
-    <article class="card"><small>SKIN BOOSTER · 含稅</small><h3>喬雅露 Juvelook Skin</h3><p class="dose">2cc</p><p class="price">110,000<span>韓元</span></p><p>劑量與療程內容請於諮詢時確認。</p><a class="js-line" href="https://lin.ee/pjUu4a4" target="_blank" rel="noopener">LINE 詢問 →</a></article>
-    <article class="card"><small>PORE · TEXTURE · 含稅</small><h3>Potenza 多功能探頭</h3><p class="dose">全臉 · 1次</p><p class="price">141,900<span>韓元</span></p><p>實際適用探頭與療程依現場諮詢確認。</p><a class="js-line" href="https://lin.ee/pjUu4a4" target="_blank" rel="noopener">LINE 詢問 →</a></article>
-    <article class="card"><small>LIFTING</small><h3>拉提療程</h3><p class="dose">依需求與膚況確認</p><p class="price smallprice">LINE<span>詢價</span></p><p>先確認想改善的部位，再討論療程選擇。</p><a class="js-line" href="https://lin.ee/pjUu4a4" target="_blank" rel="noopener">LINE 詢問 →</a></article>
-  </div>
-  <p class="notice">※ 價格與活動內容可能調整，最終以預約／到院諮詢時確認內容為準。</p>
-</section>
-
-<section class="section philosophy">
-  <p class="eyebrow">CONSULTATION FIRST</p>
-  <h2>不是流行什麼，<br>就一定要做什麼。</h2>
-  <p>先確認想改善的問題，再依實際狀況與醫療人員諮詢後決定療程。不需要一次決定所有項目。</p>
-  <a class="btn outline js-line" href="https://lin.ee/pjUu4a4" target="_blank" rel="noopener">詢問適合我的療程 →</a>
-</section>
-
-<section class="section">
-  <div class="head"><div><p class="eyebrow">HOW TO BOOK</p><h2>第一次預約也很簡單</h2></div></div>
-  <div class="grid3 steps">
-    <article><span>01</span><h3>LINE 諮詢</h3><p>告訴我們預計來韓日期、想改善的問題或有興趣的療程。</p></article>
-    <article><span>02</span><h3>確認價格與時間</h3><p>先確認可預約時段、療程與預估費用。</p></article>
-    <article><span>03</span><h3>到院諮詢</h3><p>實際療程與醫療相關判斷由院所醫療人員於諮詢後確認。</p></article>
+  <div class="hero-visual">
+    <img src="assets/rejuran.webp" alt="麗珠蘭 Healer 2cc 療程資訊">
   </div>
 </section>
 
-<section class="section info">
-  <div class="head"><div><p class="eyebrow">CLINIC INFORMATION</p><h2>SELENA Clinic 弘大</h2></div></div>
-  <div class="grid2">
-    <article class="info-card"><small>地址</small><h3>首爾麻浦區楊花路 162，9樓</h3><p>弘大入口站 8 號出口附近</p><button data-copy="서울 마포구 양화로 162 9층">複製韓文地址</button></article>
-    <article class="info-card"><small>看診時間</small><h3>平日 10:00–20:00</h3><p>最後受理 19:00</p><h3>週末及國定假日 10:00–18:00</h3><p>最後受理 17:00 · 無午休</p></article>
+<section class="benefit-band" id="why">
+  <div class="benefit-grid">
+    <article>
+      <div class="icon">◇</div>
+      <strong>中文諮詢</strong>
+      <span>可先用中文詢問療程</span>
+    </article>
+    <article>
+      <div class="icon">▤</div>
+      <strong>價格透明</strong>
+      <span>費用可於預約前確認</span>
+    </article>
+    <article>
+      <div class="icon">□</div>
+      <strong>彈性預約時間</strong>
+      <span>先確認日期與時段</span>
+    </article>
+    <article>
+      <div class="icon">⌖</div>
+      <strong>弘大位置</strong>
+      <span>8號出口附近，旅程好安排</span>
+    </article>
+  </div>
+  <figure class="band-photo">
+    <img src="assets/clinic-lobby.webp" alt="SELENA Clinic 候診空間">
+  </figure>
+</section>
+
+<section class="section treatments" id="treatments">
+  <div class="section-title">
+    <p>POPULAR TREATMENTS</p>
+    <h2>熱門療程</h2>
+  </div>
+
+  <div class="treatment-row">
+    <article class="treatment-card">
+      <div class="treatment-img poster"><img src="assets/rejuran.webp" alt="麗珠蘭療程資訊"></div>
+      <h3>麗珠蘭 REJURAN</h3>
+      <p>依部位與需求選擇不同系列</p>
+      <strong>Healer 2cc · 207,900 韓元 含稅</strong>
+      <a href="#rejuran-prices">查看價格 →</a>
+    </article>
+
+    <article class="treatment-card">
+      <div class="treatment-img poster top-crop"><img src="assets/juvelook.webp" alt="喬雅露 Juvelook Skin 療程資訊"></div>
+      <h3>喬雅露 Juvelook</h3>
+      <p>Skin 2cc</p>
+      <strong>110,000 韓元 含稅</strong>
+      <a class="js-line" href="https://lin.ee/pjUu4a4" target="_blank" rel="noopener">LINE 詢問 →</a>
+    </article>
+
+    <article class="treatment-card">
+      <div class="treatment-img"><img src="assets/clinic-treatment.webp" alt="SELENA Clinic 療程空間"></div>
+      <h3>Potenza</h3>
+      <p>毛孔・膚質管理</p>
+      <strong>全臉 1次 · 141,900 韓元 含稅</strong>
+      <a href="#potenza-prices">查看價格 →</a>
+    </article>
+
+    <article class="treatment-card">
+      <div class="treatment-img"><img src="assets/doctor-consult.webp" alt="SELENA Clinic 諮詢空間"></div>
+      <h3>拉提療程</h3>
+      <p>依部位、發數與需求確認</p>
+      <strong>LINE 詢價</strong>
+      <a class="js-line" href="https://lin.ee/pjUu4a4" target="_blank" rel="noopener">療程諮詢 →</a>
+    </article>
+
+    <article class="treatment-card">
+      <div class="treatment-img"><img src="assets/clinic-reception.webp" alt="SELENA Clinic 室內空間"></div>
+      <h3>填充・輪廓</h3>
+      <p>部位與產品先諮詢確認</p>
+      <strong>預約前確認</strong>
+      <a class="js-line" href="https://lin.ee/pjUu4a4" target="_blank" rel="noopener">LINE 詢問 →</a>
+    </article>
+
+    <article class="treatment-card">
+      <div class="treatment-img"><img src="assets/clinic-wash.webp" alt="SELENA Clinic 準備空間"></div>
+      <h3>其他肌膚療程</h3>
+      <p>先說明想改善的問題</p>
+      <strong>中文諮詢</strong>
+      <a class="js-line" href="https://lin.ee/pjUu4a4" target="_blank" rel="noopener">詢問療程 →</a>
+    </article>
   </div>
 </section>
 
-<section class="section faq">
-  <div class="head"><div><p class="eyebrow">FAQ</p><h2>常見問題</h2></div></div>
-  <details><summary>可以用中文諮詢嗎？</summary><p>可以先透過 LINE 使用中文詢問療程、價格與預約時段。</p></details>
-  <details><summary>價格可以先確認嗎？</summary><p>可以。建議在預約前先確認療程名稱、劑量、費用與是否有其他加購項目。</p></details>
-  <details><summary>第一次做醫美，不知道要選什麼怎麼辦？</summary><p>可以先告訴我們想改善的問題，到院後再依實際狀況由醫療人員說明適合的選項。</p></details>
-  <details><summary>回台灣後還可以詢問嗎？</summary><p>可透過 LINE 留言詢問。若有緊急或需要實際診察的狀況，請依院所指示處理。</p></details>
+<section class="price-section" id="prices">
+  <div class="price-intro">
+    <p class="eyebrow">PRICE GUIDE</p>
+    <h2>價格先看清楚，<br>再決定要不要預約。</h2>
+    <p>廣告與預約諮詢使用含稅價格顯示。實際適用療程、劑量與當日活動請於預約前再次確認。</p>
+    <div class="price-points">
+      <span>療程名稱</span><span>cc / 發數</span><span>含稅價格</span><span>預約時段</span>
+    </div>
+    <a class="ghost-button js-line" href="https://lin.ee/pjUu4a4" target="_blank" rel="noopener">LINE 確認價格 →</a>
+  </div>
+
+  <div class="price-panels">
+    <section class="price-panel" id="rejuran-prices">
+      <div class="price-panel-head">
+        <div><small>REJURAN</small><h3>麗珠蘭系列</h3></div>
+        <span>含稅</span>
+      </div>
+      <div class="price-list">
+        <div><b>Healer</b><span>2cc</span><strong>207,900 韓元</strong></div>
+        <div><b>Eye</b><span>1cc</span><strong>108,900 韓元</strong></div>
+        <div><b>HB PLUS</b><span>1cc</span><strong>174,900 韓元</strong></div>
+        <div><b>S</b><span>1cc</span><strong>174,900 韓元</strong></div>
+        <div><b>Lipjuran</b><span>1cc</span><strong>231,000 韓元</strong></div>
+      </div>
+      <p class="panel-note">不同系列的適用部位與目的不同，請先諮詢後確認。</p>
+    </section>
+
+    <section class="price-panel" id="potenza-prices">
+      <div class="price-panel-head">
+        <div><small>POTENZA</small><h3>Potenza 價格</h3></div>
+        <span>含稅</span>
+      </div>
+      <div class="price-list">
+        <div><b>多功能探頭 · 全臉</b><span>1次</span><strong>141,900 韓元</strong></div>
+        <div><b>多功能探頭 · 全臉</b><span>3次</span><strong>383,900 韓元</strong></div>
+        <div><b>多功能探頭 · 全臉</b><span>5次</span><strong>493,900 韓元</strong></div>
+        <div><b>Agnes · 全臉</b><span>1次</span><strong>440,000 韓元</strong></div>
+        <div><b>Agnes</b><span>1部位</span><strong>220,000 韓元</strong></div>
+      </div>
+      <details class="more-prices">
+        <summary>查看 DDR / DIA 價格</summary>
+        <div class="price-list compact">
+          <div><b>DDR</b><span>500發</span><strong>220,000 韓元</strong></div>
+          <div><b>DDR</b><span>1,000發</span><strong>385,000 韓元</strong></div>
+          <div><b>DIA</b><span>500發</span><strong>330,000 韓元</strong></div>
+          <div><b>DIA</b><span>1,000發</span><strong>594,000 韓元</strong></div>
+          <div><b>DDR + DIA</b><span>1,000發</span><strong>759,000 韓元</strong></div>
+        </div>
+      </details>
+    </section>
+
+    <section class="price-panel clean-panel">
+      <div class="price-panel-head">
+        <div><small>OTHER POPULAR</small><h3>其他熱門療程</h3></div>
+        <span>含稅 / 諮詢</span>
+      </div>
+      <div class="price-list">
+        <div><b>Juvelook Skin</b><span>2cc</span><strong>110,000 韓元</strong></div>
+        <div><b>拉提療程</b><span>發數 / 部位</span><strong>LINE 確認</strong></div>
+        <div><b>填充・輪廓</b><span>產品 / 部位</span><strong>LINE 確認</strong></div>
+      </div>
+      <p class="panel-note">不建議只看最低價決定療程，請同時確認產品、劑量、發數及實際施作內容。</p>
+    </section>
+  </div>
 </section>
 
-<section class="section final">
-  <p class="eyebrow">READY WHEN YOU ARE</p><h2>還不確定該做哪個療程？</h2><p>先用 LINE 問就好。</p>
-  <a class="btn line js-line" href="https://lin.ee/pjUu4a4" target="_blank" rel="noopener"><b>LINE</b> 免費諮詢 <i>→</i></a>
+<section class="doctor-section" id="doctor">
+  <div class="doctor-copy">
+    <p class="eyebrow">OUR MEDICAL TEAM</p>
+    <h2>不是流行什麼，<br>就一定要做什麼。</h2><p class="philosophy-line">先看膚況，再決定療程。</p>
+    <p class="doctor-lead">第一次來韓國做醫美，也可以先從「想改善什麼」開始。到院後再與醫療人員確認實際療程。</p>
+    <a class="ghost-button js-line" href="https://lin.ee/pjUu4a4" target="_blank" rel="noopener">先用 LINE 諮詢 →</a>
+  </div>
+
+  <figure class="doctor-photo">
+    <img src="assets/doctor-main.webp" alt="SELENA Clinic 醫療人員">
+  </figure>
+
+  <div class="doctor-note">
+    <blockquote>「先確認需求，再討論適合的療程。」</blockquote>
+    <ul>
+      <li>療程與費用可事先確認</li>
+      <li>到院後再與醫療人員確認</li>
+      <li>中文 LINE 諮詢</li>
+      <li>返台後可透過 LINE 留言詢問</li>
+    </ul>
+    <figure class="consult-photo">
+      <img src="assets/doctor-consult.webp" alt="SELENA Clinic 諮詢情境">
+    </figure>
+  </div>
+</section>
+
+<section class="clinic-section" id="clinic">
+  <div class="section-title">
+    <p>CLINIC SPACE</p>
+    <h2>診所環境</h2>
+  </div>
+
+  <div class="gallery">
+    <figure class="wide"><img src="assets/clinic-waiting.webp" alt="SELENA Clinic 候診空間"></figure>
+    <figure><img src="assets/clinic-treatment.webp" alt="SELENA Clinic 療程空間"></figure>
+    <figure><img src="assets/clinic-hall.webp" alt="SELENA Clinic 室內走廊"></figure>
+  </div>
+</section>
+
+<section class="info-section" id="location">
+  <div class="info-copy">
+    <p class="eyebrow">CLINIC INFORMATION</p>
+    <h2>診所資訊</h2>
+
+    <div class="info-item">
+      <span>地址</span>
+      <strong>首爾麻浦區楊花路 162，9樓</strong>
+      <p>弘大入口站 8 號出口附近</p>
+      <button type="button" data-copy="서울 마포구 양화로 162 9층">複製韓文地址</button>
+    </div>
+
+    <div class="info-item">
+      <span>看診時間</span>
+      <strong>平日 10:00–20:00</strong>
+      <p>最後受理 19:00</p>
+      <strong>週末及國定假日 10:00–18:00</strong>
+      <p>最後受理 17:00 · 無午休 · 春節／中秋節當日休診</p>
+    </div>
+  </div>
+
+  <div class="mini-gallery">
+    <img src="assets/clinic-reception.webp" alt="SELENA Clinic 接待空間">
+    <img src="assets/clinic-waiting.webp" alt="SELENA Clinic 候診空間">
+    <img src="assets/clinic-hall.webp" alt="SELENA Clinic 室內空間">
+  </div>
+
+  <div class="map-wrap" aria-label="SELENA Clinic map">
+    <iframe
+      title="SELENA Clinic 弘大 地圖"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      src="https://www.google.com/maps?q=%EC%84%9C%EC%9A%B8%20%EB%A7%88%ED%8F%AC%EA%B5%AC%20%EC%96%91%ED%99%94%EB%A1%9C%20162&output=embed">
+    </iframe>
+  </div>
+</section>
+
+<section class="faq-section" id="faq">
+  <div class="section-title">
+    <p>FAQ</p>
+    <h2>常見問題</h2>
+  </div>
+  <div class="faq-list">
+    <details><summary>可以用中文諮詢嗎？</summary><p>可以先透過 LINE 使用中文詢問療程、價格與可預約時段。</p></details>
+    <details><summary>價格可以先確認嗎？</summary><p>可以。建議在預約前先確認療程名稱、劑量、費用與是否有其他加購項目。</p></details>
+    <details><summary>第一次做醫美，不知道要選什麼怎麼辦？</summary><p>先告訴我們想改善的問題，到院後再依實際狀況由醫療人員說明適合的選項。</p></details>
+    <details><summary>回台灣後還可以詢問嗎？</summary><p>可透過 LINE 留言詢問。若需要實際診察或緊急處置，請依醫療機構指示處理。</p></details>
+  </div>
+</section>
+
+<section class="bottom-cta">
+  <div class="cta-photo"><img src="assets/doctor-consult.webp" alt="SELENA Clinic 諮詢"></div>
+  <div class="cta-copy"><span>現在就透過 LINE 諮詢</span><strong>確認療程、價格與預約時間</strong></div>
+  <a class="line-button js-line" href="https://lin.ee/pjUu4a4" target="_blank" rel="noopener"><b>LINE</b><span>免費諮詢</span><i>→</i></a>
 </section>
 </main>
 
-<footer><div><strong>SELENA CLINIC</strong><span>Taiwan marketing & reservation support by Skinbridge Korea</span></div><p>醫療相關最終判斷與療程決定由醫療機構之醫療人員進行。</p></footer>
-<div class="sticky"><a class="js-line" href="https://lin.ee/pjUu4a4" target="_blank" rel="noopener"><b>LINE</b> 中文免費諮詢</a></div>
+<footer class="footer">
+  <div class="footer-brand">
+    <img src="assets/logo.png" alt="SELENA CLINIC">
+  </div>
+  <div>
+    <strong>SELENA CLINIC</strong>
+    <span>Taiwan marketing & reservation support by Skinbridge Korea</span>
+  </div>
+  <p>醫療相關最終判斷與療程決定由醫療機構之醫療人員進行。</p>
+</footer>
+
+<div class="mobile-line">
+  <a class="js-line" href="https://lin.ee/pjUu4a4" target="_blank" rel="noopener"><b>LINE</b> 中文免費諮詢</a>
+</div>
+
 <script src="script.js"></script>
 </body>
 </html>
