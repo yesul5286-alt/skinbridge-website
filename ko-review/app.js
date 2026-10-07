@@ -1,0 +1,110 @@
+'use strict';
+// Real profiles retain source status; a/b/c are fictional UI samples.
+const CLINICS = [...REAL_CLINICS,
+  {id:'a',name:'예시 병원 A',area:'강남',concerns:['보습관리','모공'],price:100000,language:'예약 중국어 지원 (예시)',duration:'약 60분 (예시)',inclusions:'기초 클렌징·보습관리 1회, 세금 포함 (예시)',extra:'추가 항목은 별도 견적, 사전 확인 필요 (예시)',followup:'병원 중국어 연락 창구, 운영 시간 확인 예정',position:'left'},
+  {id:'b',name:'예시 병원 B',area:'홍대',concerns:['보습관리','잡티'],price:120000,language:'현장 통역 사전 예약 (예시)',duration:'약 60분 (예시)',inclusions:'기초 클렌징·보습관리 1회, 세금 포함 (예시)',extra:'통역비 별도 여부 확인 필요 (예시)',followup:'병원 연락 창구, 언어·운영 시간 확인 예정',position:'center'},
+  {id:'c',name:'예시 병원 C',area:'신사',concerns:['보습관리','탄력'],price:150000,language:'중국어 지원 시간 확인 필요 (예시)',duration:'약 60분 (예시)',inclusions:'기초 클렌징·보습관리 1회, 세금 포함 (예시)',extra:'추가 항목은 별도 견적, 사전 확인 필요 (예시)',followup:'병원 연락 창구, 응답 시간 확인 예정',position:'right'}
+];
+// Configure only an officially confirmed https://lin.ee/... or https://line.me/... account.
+const LINE_URL = '';
+const $ = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const currency = n => '₩' + n.toLocaleString('en-US');
+const esc = value => String(value).replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+function readState(){try { const raw=JSON.parse(localStorage.getItem('skinbridge.ko-review.v1') || '{}');return raw && typeof raw==='object' ? raw : {}; } catch {return {};}}
+
+const FLOW_OFFERINGS={tunes:['first','firmness','texture','hydration'],selena:['clarity','texture','firmness','first'],'springday-sinchon':['first'],a:['hydration','texture','first'],b:['hydration','clarity','first'],c:['hydration','firmness','first']};
+const FLOW_LABELS={hydration:'보습관리',texture:'모공 시술 알아보기',clarity:'피코레이저 알아보기',firmness:'리프팅 알아보기',first:'첫 피부 상담'};
+function selectedProcedureKey(){const route=new URLSearchParams(location.search).get('procedure');if(FLOW_LABELS[route])return route;const query=$('#search')?.value.trim().toLowerCase()||'';if(/皮秒|pico|피코/.test(query))return 'clarity';return ({'보습관리':'hydration','모공':'texture','잡티':'clarity','탄력':'firmness'})[$('#concern')?.value]||'first';}
+function flowUrl(view,pid='first',clinic=''){const params=new URLSearchParams({view,procedure:pid});if(clinic)params.set('clinic',clinic);return '?'+params.toString();}
+function flowPrice(c,pid){return !c.real&&pid==='hydration'?currency(c.price)+' · 예시':'상담 후 견적';}
+function navigateFlow(view,pid,clinic=''){location.href=flowUrl(view,pid,clinic);}
+
+const initial=readState();
+const saved=new Set(Array.isArray(initial.saved)?initial.saved.filter(id=>CLINICS.some(c=>c.id===id)):[]);
+const compared=new Set();
+let returnFocus=null, toastTimer;
+function persist(){try{localStorage.setItem('skinbridge.ko-review.v1',JSON.stringify({saved:[...saved],date:$('#visit-date').value,clinic:$('#plan-clinic').value,treatment:$('#plan-treatment').value}));}catch{toast('이 브라우저에 저장할 수 없지만 현재 화면은 계속 이용할 수 있어요.');}}
+function toast(message){clearTimeout(toastTimer);$('#toast').textContent=message;$('#toast').classList.add('show');toastTimer=setTimeout(()=>$('#toast').classList.remove('show'),3200);}
+function clinicCard(c,pid=selectedProcedureKey()){if(!FLOW_OFFERINGS[c.id].includes(pid))pid='first';return `<article class="clinic-card"><div class="clinic-image"><a class="image-open" href="${flowUrl('clinic',pid,c.id)}" aria-label="보기${c.name}상세 정보">${c.real?realClinicMedia(c):`<img src="../tw/assets/clinic.webp" width="1536" height="1024" loading="lazy" style="object-position:${c.position}" alt="AI 생성 병원 공간 예시, 실제 병원이 아니에요">`}</a><span class="image-label">${c.real?L('실제 병원 자료','實際院所資料'):'예시 이미지'}</span><button class="heart" data-save="${c.id}" aria-pressed="${saved.has(c.id)}" aria-label="${saved.has(c.id)?'찜 해제':'찜'}${c.name}">${saved.has(c.id)?'♥':'♡'}</button></div><div class="clinic-meta"><p class="clinic-region">SEOUL / ${c.area}</p><a class="clinic-name" href="${flowUrl('clinic',pid,c.id)}">${c.name}</a><p class="clinic-tags">${FLOW_LABELS[pid]}</p><p class="clinic-price">${flowPrice(c,pid)}</p><p class="small muted">${c.language}</p><div class="clinic-actions"><label class="compare-check"><input type="checkbox" data-compare="${c.id}" ${compared.has(c.id)?'checked':''}>비교 담기</label><a class="text-button" href="${flowUrl('clinic',pid,c.id)}">자세히 보기 ↗</a></div></div></article>`;}
+function renderClinics(){ $('#budget-status').textContent=$('#budget').value?' · '+currency(Number($('#budget').value)):''; $$('[data-filter]').forEach(b=>b.setAttribute('aria-pressed',$('#'+b.dataset.filter).value===b.dataset.value));const query=$('#search').value.trim().toLowerCase(),area=$('#area').value,concern=$('#concern').value,budget=Number($('#budget').value)||Infinity,pid=selectedProcedureKey();const list=CLINICS.filter(c=>(!query || [c.name,c.area,...c.concerns,...FLOW_OFFERINGS[c.id].map(key=>FLOW_LABELS[key]),...(['b','selena'].includes(c.id)?['pico','피코']:[])].join(' ').toLowerCase().includes(query))&&(!area||area===c.area)&&(!concern||c.concerns.includes(concern))&&(budget===Infinity||(!c.real&&pid==='hydration'&&c.price<=budget)));$('#clinic-grid').innerHTML=list.length?list.map(c=>clinicCard(c,pid)).join(''):'<div class="empty"><p>조건에 맞는 병원이 없어요.</p><button class="text-button" data-reset>조건 지우고 다시 보기</button></div>';$('#result-count').textContent=`검색 결과 ${list.length}개 병원`;}
+
+function renderSaved(){const list=CLINICS.filter(c=>saved.has(c.id));$('#saved-grid').innerHTML=list.length?list.map(c=>clinicCard(c,FLOW_OFFERINGS[c.id].includes(selectedProcedureKey())?selectedProcedureKey():'first')).join(''):'<div class="empty"><p>마음에 드는 병원의 ♡를 눌러 담아두세요.</p><a href="#clinics">병원 둘러보기 ↗</a></div>';$$('.saved-count').forEach(el=>el.textContent=saved.size);$('#plan-clinics').innerHTML=list.length?`<div class="plan-chips">${list.map(c=>`<button class="plan-chip" data-choose="${c.id}">${c.name} · ${c.area} ↗</button>`).join('')}</div>`:'<p class="muted">찜한 병원을 선택하거나 상담 양식에서 바로 고를 수 있어요.</p>';}
+function updateComparison(){const count=compared.size;$('#compare-bar').hidden=!count;$('#compare-count').textContent=`선택 ${count} / 3곳`;$('#compare-open').disabled=count<2;$('#compare-open').textContent=count<2?'1곳 더 선택':'병원 비교';$$('[data-compare]').forEach(el=>el.checked=compared.has(el.dataset.compare));}
+function openDialog(content){returnFocus=document.activeElement;$('#dialog-content').innerHTML=content;if(!$('#dialog').open)$('#dialog').showModal();document.body.classList.add('modal-open');$('#dialog-close').focus();}
+function closeDialog(){$('#dialog').close();}
+$('#dialog').addEventListener('close',()=>{if(!$('#saved-dialog').open)document.body.classList.remove('modal-open');if(returnFocus?.isConnected)returnFocus.focus();});
+$('#dialog-close').addEventListener('click',closeDialog);
+$('#dialog').addEventListener('click',event=>{if(event.target===$('#dialog')){const r=$('#dialog').getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)closeDialog();}});
+function detail(id){navigateFlow('clinic',selectedProcedureKey(),id);}
+function compare(){const pid=selectedProcedureKey();const list=CLINICS.filter(c=>compared.has(c.id)&&FLOW_OFFERINGS[c.id].includes(pid));if(list.length<2){toast('같은 항목을 제공하는 병원을 선택해 주세요.');return;}const rows=[['지역',c=>c.area],['동일 비교 항목',()=> FLOW_LABELS[pid]],['費用',c=>flowPrice(c,pid)],['포함 항목',c=>pid==='hydration'?c.inclusions:'실제 병원 자료 확인 예정'],['추가 가능 비용',c=>c.extra],['중국어 지원',c=>c.language],['장비·제품·의사',()=> '실제 병원 자료 확인 예정'],['귀국 후 연락',c=>c.followup],['취소·환불',()=> '실제 병원 약관 확인 예정']];openDialog(`<h2 id="dialog-title">나란히 놓고 비교해 보세요</h2><p class="notice">실제 자료와 가상 예시를 구분해 보세요. 비용과 서비스 조건은 병원 확인이 필요합니다.</p><div class="comparison-wrap" tabindex="0" role="region" aria-label="병원 비교표, 좌우로 넘길 수 있어요"><table class="comparison"><thead><tr><th scope="col">비교 항목</th>${list.map(c=>`<th scope="col">${c.name}</th>`).join('')}</tr></thead><tbody>${rows.map(([label,fn])=>`<tr><th scope="row">${label}</th>${list.map(c=>`<td>${fn(c)}</td>`).join('')}</tr>`).join('')}<tr><th scope="row">다음 단계</th>${list.map(c=>`<td><button class="primary" data-choose="${c.id}">선택 ${c.id.toUpperCase()}</button></td>`).join('')}</tr></tbody></table></div><p class="small muted">휴대폰에서는 표를 옆으로 넘길 수 있어요. 실제 예약은 병원 확인이 필요합니다.</p>`);}
+const ARTICLES={first:{title:'첫 한국 피부과 방문, 어떻게 시작할까요?',body:'<ol><li>관심 시술, 예산, 한국 방문 일정을 정리해요.</li><li>의사, 시술 조건, 중국어 지원과 전체 비용을 비교해요.</li><li>상담 일정을 확인하고 의사에게 적합성 평가를 받아요.</li><li>취소·환불 조건, 여행 일정 제한, 이후 연락 방법을 확인하고 예약을 결정해요.</li></ol><p>사진이나 가격만으로 시술을 결정하지 마세요. 이 가이드는 예약 준비를 위한 정보입니다.</p>'},price:{title:'가격 비교 전에 확인해 보세요.',body:'<ul><li>이름이 같아도 제품, 장비, 용량, 시술 범위가 같은가요?</li><li>세금, 마취, 진료, 통역 비용이 포함되나요?</li><li>몇 회가 필요하며 후속 진료 비용이 있나요?</li><li>결제 통화와 환율, 결제 수수료는 어떻게 계산하나요?</li><li>교통, 숙박, 추가 방문 비용도 예산에 포함해요.</li></ul><p>검토판의 원화 금액은 예시이며 실제 견적이 아닙니다.</p>'},return:{title:'귀국 후에는 누구에게 연락할까요?',body:'<ol><li>한국 방문 전에 병원 사후관리 연락처와 운영 시간을 확인해요.</li><li>병원을 나서기 전에 관리 안내와 필요한 진료 자료를 받아요.</li><li>귀국 후 병원 안내에 따라 연락하고, 처치가 필요하면 의료기관에서 평가받아요.</li></ol><p>응급 상황이나 심한 이상이 있으면 온라인 답변을 기다리지 말고 현지 의료기관에 도움을 요청하세요.</p><h3>대만 제휴 프로그램</h3><p>아직 기획 단계로 진료 보장, 관리권, 할인은 제공되지 않습니다. 현지 진료와 비의료 피부관리는 각각 범위와 비용을 안내할 예정입니다.</p>'},privacy:{title:'개인정보와 저장 안내',body:'<p>검토판은 찜, 선택 병원, 관심 항목, 방문 날짜를 현재 브라우저에만 저장합니다. 계정 생성이나 서버 전송은 없으며 사이트 데이터를 지우면 기록이 삭제됩니다.</p><p>복사한 상담 내용은 직접 공유 여부를 결정할 수 있습니다. 병력이나 의료 사진은 제출하지 마세요. 정식 공개 전에 개인정보 안내와 이용약관을 제공할 예정입니다.</p><button class="outline" id="clear-local">이 브라우저의 찜과 계획 지우기</button>'}};
+ARTICLES.perks={title:'작은 기대를 준비하고 있어요.',body:'<p>대만 매장 체험과 예약 혜택은 준비 중이며 지금 받을 수 있는 쿠폰이나 할인은 없습니다.</p><h3>공개할 때 자세히 알려드려요</h3><ul><li>제휴 매장과 이용 가능한 장소</li><li>제공 내용과 별도 비용 여부</li><li>이용 대상, 유효기간, 예약 방법</li><li>변경·취소와 이용 제한</li></ul><p>피부관리 체험과 의료 후속 진료를 구분해 안내할 예정입니다. 예약 전에 궁금한 점을 정리해 보세요.</p>'};
+function article(id){const a=ARTICLES[id];if(a)openDialog(`<h2 id="dialog-title">${a.title}</h2>${a.body}`);}
+document.addEventListener('click',event=>{const entry=event.target.closest('[data-discover],[data-area]');if(!entry)return;$('#search').value='';$('#budget').value='';$('#concern').value=entry.dataset.discover||'';$('#area').value=entry.dataset.area||'';$('#filters').hidden=false;$('#filter-toggle').setAttribute('aria-expanded','true');$('#filter-toggle').innerHTML='검색 조건 <span aria-hidden="true">−</span>';renderClinics();if($('#dialog').open)closeDialog();location.hash='clinics';});
+function choose(id){navigateFlow('consultation',selectedProcedureKey(),id);}
+document.addEventListener('click',event=>{const detailButton=event.target.closest('[data-detail]');if(detailButton)return detail(detailButton.dataset.detail);const save=event.target.closest('[data-save]');if(save){const id=save.dataset.save;saved.has(id)?saved.delete(id):saved.add(id);persist();renderClinics();renderSaved();if($('#dialog').open){save.setAttribute('aria-pressed',saved.has(id));save.textContent=saved.has(id)?'찜 완료 ♥':'병원 찜하기 ♡';}else{const replacement=($('#saved-dialog').open?$('#saved-dialog'):document).querySelector(`[data-save="${id}"]`);replacement?.focus({preventScroll:true});}toast(saved.has(id)?'찜 목록에 담았어요':'찜을 해제했어요');return;}const choice=event.target.closest('[data-choose]');if(choice)return choose(choice.dataset.choose);const art=event.target.closest('[data-article]');if(art)return article(art.dataset.article);if(event.target.closest('[data-reset]')){$('#search-form').reset();return;}if(event.target.id==='clear-local'){saved.clear();$('#plan-form').reset();persist();renderClinics();renderSaved();toast('이 브라우저의 찜과 계획을 지웠어요');closeDialog();}});
+document.addEventListener('change',event=>{if(event.target.matches('[data-compare]')){const id=event.target.dataset.compare;if(event.target.checked&&compared.size>=3){event.target.checked=false;toast(L('최대 3곳까지 비교할 수 있어요.','最多可比較 3곳院所。'));return;}event.target.checked?compared.add(id):compared.delete(id);updateComparison();}});
+$('#compare-open').addEventListener('click',compare);$('#compare-clear').addEventListener('click',()=>{compared.clear();updateComparison();});
+$('#filter-toggle').addEventListener('click',()=>{const open=$('#filters').hidden;$('#filters').hidden=!open;$('#filter-toggle').setAttribute('aria-expanded',open);$('#filter-toggle').innerHTML=`검색 조건 <span aria-hidden="true">${open?'−':'＋'}</span>`;});
+$('#search-form').addEventListener('submit',event=>{event.preventDefault();renderClinics();});$('#search-form').addEventListener('reset',()=>setTimeout(renderClinics,0));$('#search').addEventListener('input',renderClinics);['area','concern','budget'].forEach(id=>$('#'+id).addEventListener('change',renderClinics));
+CLINICS.forEach(c=>{const opt=document.createElement('option');opt.value=c.id;opt.textContent=`${c.name} · ${c.area}`;$('#plan-clinic').append(opt);});
+const now=new Date(),today=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;$('#visit-date').min=today;
+if(typeof initial.date==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(initial.date)&&initial.date>=today)$('#visit-date').value=initial.date;
+if(CLINICS.some(c=>c.id===initial.clinic))$('#plan-clinic').value=initial.clinic;
+if([...$('#plan-treatment').options].some(o=>o.value===initial.treatment))$('#plan-treatment').value=initial.treatment;
+$('#plan-form').addEventListener('change',persist);
+$('#plan-form').addEventListener('submit',event=>{event.preventDefault();if(!$('#plan-form').reportValidity())return;const c=CLINICS.find(c=>c.id===$('#plan-clinic').value);if(!c)return;persist();const summary=`【SKINBRIDGE 검토판 · 예약 미전송】\n문의할 병원: ${c.name}（${c.area}）\n궁금한 시술：${$('#plan-treatment').value}\n한국 방문 예정일：${$('#visit-date').value||'아직 미정'}\n\n확인할 내용: 실제 비용과 포함 항목, 중국어 지원, 취소 조건, 사후관리 연락.\n상담 준비용이며 실제 예약이 아닙니다.`;openDialog(`<h2 id="dialog-title">상담 내용을 정리했어요</h2><p>내용을 복사해 두세요. 공식 LINE 연결 후 직접 열어 전송할 수 있게 됩니다.</p><textarea id="inquiry-summary" class="summary-box" readonly aria-label="상담 내용">${esc(summary)}</textarea><p class="notice">아직 LINE 계정이 연결되지 않았어요. 전송되거나 예약된 내역은 없습니다.</p><div class="dialog-actions"><button class="primary" id="copy-inquiry">상담 내용 복사</button>${LINE_URL && /^https:\/\/(lin\.ee|line\.me)\//.test(LINE_URL)?`<a class="outline" href="${esc(LINE_URL)}" target="_blank" rel="noopener">공식 LINE 열기 ↗</a>`:''}</div>`);$('#copy-inquiry').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(summary);toast('복사했어요. 상담 대화에 붙여넣을 수 있어요');}catch{$('#inquiry-summary').focus();$('#inquiry-summary').select();toast('선택된 상담 내용을 복사해 주세요');}});});
+$('.menu-toggle').addEventListener('click',()=>{const open=$('#mobile-menu').hidden;$('#mobile-menu').hidden=!open;$('.menu-toggle').setAttribute('aria-expanded',open);$('.menu-toggle').setAttribute('aria-label',open?'메뉴 닫기':'메뉴 열기');});
+$$('#mobile-menu a').forEach(a=>a.addEventListener('click',()=>{$('#mobile-menu').hidden=true;$('.menu-toggle').setAttribute('aria-expanded','false');$('.menu-toggle').setAttribute('aria-label','메뉴 열기');}));
+renderClinics();renderSaved();updateComparison();
+
+const PROCEDURES={
+ hydration:{title:'보습관리',tag:'보습관리',intro:'클렌징부터 보습과 일상 관리까지, 병원에서 어떤 내용을 제공하는지 알아보세요.',questions:['어떤 단계와 제품이 포함되고 비용은 얼마인가요?','민감한 피부라면 무엇을 먼저 확인해야 하나요?','당일 일정과 평소 관리에서 주의할 점은 무엇인가요?']},
+ texture:{title:'모공 시술 알아보기',tag:'모공',intro:'모공과 피부결 고민은 각기 달라요. 의사와 개선하고 싶은 부분을 먼저 이야기해 보세요.',questions:['병원에서는 피부 상태를 어떻게 평가하나요?','권장 시술, 횟수와 전체 비용은 어떻게 되나요?','회복 기간과 후속 관리는 어떻게 계획하나요?']},
+ clarity:{title:'피코레이저 알아보기',tag:'잡티',intro:'피코레이저가 궁금하다면 질문부터 정리하고 의사에게 적합성과 선택지를 확인해 보세요.',questions:['제 잡티 유형에는 어떤 방법이 적합한가요?','사용 장비, 시술 범위와 전체 비용은 어떻게 되나요?','위험, 회복 기간과 귀국 후 연락 방법은 무엇인가요?']},
+ firmness:{title:'리프팅 알아보기',tag:'탄력',intro:'장비와 방식에 따라 적합한 상황이 달라요. 궁금한 윤곽 고민부터 상담해 보세요.',questions:['의사는 어떤 기준으로 적합한 방식을 판단하나요?','장비, 시술 범위와 전체 비용은 어떻게 되나요?','위험과 사후관리에서 무엇을 확인해야 하나요?']},
+ first:{title:'첫 피부 상담',tag:'',intro:'시술을 정하지 못했어도 괜찮아요. 병원과 소통 방식, 상담 절차부터 비교해 보세요.',questions:['중국어 상담이나 통역 서비스가 있나요?','첫 상담 비용과 절차는 어떻게 되나요?','상담을 받고 예약 여부를 결정해도 되나요?']}
+};
+document.addEventListener('click',event=>{
+ const filter=event.target.closest('[data-filter]');
+ if(filter){$('#'+filter.dataset.filter).value=filter.dataset.value;renderClinics();return;}
+ const arrow=event.target.closest('[data-scroll]');
+ if(arrow){const rail=$('#procedure-rail');rail.scrollBy({left:Number(arrow.dataset.scroll)*(rail.querySelector('.procedure-card').offsetWidth+parseFloat(getComputedStyle(rail).columnGap)),behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});return;}
+ const card=event.target.closest('[data-procedure]');
+ if(card)navigateFlow('procedure',card.dataset.procedure);
+});
+
+let savedReturnFocus=null;
+function openSaved(){savedReturnFocus=document.activeElement;$('#saved-dialog').showModal();document.body.classList.add('modal-open');$('#saved-close').focus();}
+$('#saved-close').addEventListener('click',()=>$('#saved-dialog').close());
+$('#saved-dialog').addEventListener('close',()=>{if(!$('#dialog').open)document.body.classList.remove('modal-open');if(savedReturnFocus?.isConnected)savedReturnFocus.focus({preventScroll:true});});
+document.addEventListener('click',event=>{
+ if(event.target.closest('[data-open-saved]')){event.preventDefault();openSaved();return;}
+ if(event.target.closest('#saved-dialog a[href^="#"]'))$('#saved-dialog').close();
+ if(event.target.closest('[data-go-plan]')){closeDialog();navigateFlow('consultation',selectedProcedureKey(),new URLSearchParams(location.search).get('clinic')||'');}
+});
+$('#line-contact').addEventListener('click',()=>{
+ if(/^https:\/\/(lin\.ee|line\.me)\//.test(LINE_URL)){window.open(LINE_URL,'_blank','noopener');return;}
+ openDialog('<h2 id="dialog-title">LINE 상담</h2><p>아직 LINE 계정이 연결되지 않았어요. 전송되거나 예약된 내역은 없습니다.</p><p>관심 있는 병원과 날짜를 먼저 정리해 둘 수 있어요.</p><div class="dialog-actions"><button class="primary" data-go-plan>상담 내용 정리하기 ↗</button></div>');
+});
+if(location.hash==='#saved')openSaved();
+
+// No autoplay: visitors control the campaign with swipe, keyboard or buttons.
+const heroTrack=$('#hero-track'),heroSlides=$$('.hero-slide');
+let heroIndex=0,heroFrame=0;
+function syncHero(){
+ heroIndex=Math.max(0,Math.min(heroSlides.length-1,Math.round(heroTrack.scrollLeft/heroTrack.clientWidth)));
+ heroSlides.forEach((slide,i)=>{slide.inert=i!==heroIndex;slide.setAttribute('aria-hidden',String(i!==heroIndex));});
+ $$('[data-hero-slide]').forEach((b,i)=>b.setAttribute('aria-pressed',String(i===heroIndex)));
+ $('#hero-counter').textContent=`0${heroIndex+1} / 03`;
+}
+function moveHero(index){const next=(index+heroSlides.length)%heroSlides.length;heroTrack.scrollTo({left:next*heroTrack.clientWidth,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});}
+heroTrack.addEventListener('scroll',()=>{cancelAnimationFrame(heroFrame);heroFrame=requestAnimationFrame(syncHero);},{passive:true});
+heroTrack.addEventListener('keydown',event=>{if(event.target!==heroTrack)return;if(event.key==='ArrowRight'||event.key==='ArrowLeft'){event.preventDefault();moveHero(heroIndex+(event.key==='ArrowRight'?1:-1));}});
+$$('[data-hero-step]').forEach(b=>b.addEventListener('click',()=>moveHero(heroIndex+Number(b.dataset.heroStep))));
+$$('[data-hero-slide]').forEach(b=>b.addEventListener('click',()=>moveHero(Number(b.dataset.heroSlide))));
+new ResizeObserver(()=>{heroTrack.scrollTo({left:heroIndex*heroTrack.clientWidth,behavior:'instant'});syncHero();}).observe(heroTrack);
+syncHero();
+
+document.addEventListener('click',event=>{if(event.target.closest('a[href="#plan"]')){event.preventDefault();navigateFlow('consultation',selectedProcedureKey());}});
