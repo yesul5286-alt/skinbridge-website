@@ -13,3 +13,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Micr
 @media(max-width:420px){.hero{padding-bottom:52px}}
 .price-subtitle{font-size:17px;color:var(--category-color,#795232);margin:22px 0 6px;padding-bottom:10px;border-bottom:1px solid var(--line);font-weight:700}.price-subgroup:first-child>.price-subtitle{margin-top:4px}.price-subgroup[hidden]{display:none}
 .video-duration{position:absolute;right:10px;bottom:10px;padding:3px 7px;border-radius:4px;background:#000b;color:#fff;font-size:14px}.review-thumb .play-mark{display:grid}.review-copy span{display:block;font-size:14px}.review-thumb img{object-fit:contain}
+
+/* Fixed contact links: LINE first, then social profiles. */
+.floating-contacts{position:fixed;right:max(12px,env(safe-area-inset-right));bottom:calc(16px + env(safe-area-inset-bottom));z-index:50;display:flex;flex-direction:column;align-items:center;gap:8px}
+.floating-contacts .floating-line{position:static;width:54px;min-height:64px;border-radius:17px}
+.floating-social{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;color:#fff;border:1px solid #fff9;box-shadow:0 3px 12px #0002;text-decoration:none}
+.floating-social svg{width:23px;height:23px}.floating-social.instagram{background:linear-gradient(145deg,#7544bd,#c72e77 58%,#d87725)}.floating-social.facebook{background:#1877f2}
+.floating-social:hover{filter:brightness(.9)}.floating-contacts a:focus-visible{outline:3px solid #795232;outline-offset:3px}body:has(dialog[open]) .floating-contacts{visibility:hidden}
+@media(min-width:1440px){.floating-contacts{right:calc((100vw - 1280px)/2 - 70px)}}
+@media(max-width:600px){.floating-contacts{right:max(8px,env(safe-area-inset-right));bottom:calc(12px + env(safe-area-inset-bottom));gap:6px}}
