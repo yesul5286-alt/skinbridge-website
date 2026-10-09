@@ -112,5 +112,25 @@ def run():
   review.append(f"- {key}: ₩{int(p['price_krw']):,} / VAT extra / {p['source']} / status={p['status']}")
  review+=["","Check clinic price, offer validity, Chinese copy, medical ad review, image permissions, and live LINE route before posting."]
  (OUT/"review.md").write_text("\n".join(review),encoding="utf-8")
+ plans=["# SELENA TW — card-by-card draft creative plan","Status: Draft for clinic and medical ad review.",""]
+ captions=["# SELENA TW — draft captions (Traditional Chinese)",""]
+ for key,c in campaigns.items():
+  pp=prices[c["price_key"]]
+  won="₩"+format(int(pp["price_krw"]),",")
+  plans.append("## "+c["brand"]+" ("+won+" / VAT另計)")
+  captions.append("## "+c["brand"])
+  captions.append(c["slides"][0]["headline"].replace("\\n"," ").replace("\n"," "))
+  captions.append(c["slides"][0]["subtitle"])
+  captions.append("先確認療程、價格與可預約時間；實際適用性由醫師評估。")
+  captions.append(c["slides"][4]["headline"]+"｜"+won+"（未稅、VAT另計）")
+  captions.append("療程效果與副作用因人而異。")
+  captions.append("SELENA Clinic｜首爾弘大｜LINE 中文諮詢")
+  captions.append("")
+  for number,slide in enumerate(c["slides"],1):
+   plans.append(str(number)+". "+slide["type"]+" — "+slide["headline"].replace("\\n"," ").replace("\n"," "))
+   plans.append("   "+slide.get("subtitle",""))
+  plans.append("")
+ (OUT/"creative_plan.md").write_text("\n".join(plans),encoding="utf-8")
+ (OUT/"captions_zhTW.md").write_text("\n".join(captions),encoding="utf-8")
  print("Rendered 15 cards per format; 30 PNG draft files total. No publishing.")
 if __name__=="__main__":run()
