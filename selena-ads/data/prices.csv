@@ -1,0 +1,5 @@
+key,display_name,price_krw,vat,quantity,source,verified_at,status
+rejuran,REJURAN HEALER 2cc,189000,excluded,2cc,셀레나.pdf p14,2026-10-09,source_verified
+potenza,POTENZA 全臉多功能探頭 1次,129000,excluded,full_face_1,셀레나.pdf p19,2026-10-09,source_verified
+potenza_three,POTENZA 全臉多功能探頭 3次,349000,excluded,full_face_3,셀레나.pdf p19,2026-10-09,source_verified
+onda_ultherapy,ONDA 70kJ + 美版音波二代 300發,1494000,excluded,ONDA70kJ+UltherapyPRIME300,SELENA official image shared 2026-10-09,2026-10-09,promo_verify_period

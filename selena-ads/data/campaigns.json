@@ -1,0 +1,146 @@
+{
+  "rejuran": {
+    "label": "麗珠蘭肌膚品質",
+    "brand": "REJURAN HEALER",
+    "price_key": "rejuran",
+    "slides": [
+      {
+        "type": "cover",
+        "headline": "麗珠蘭，\n人人都需要打嗎？",
+        "subtitle": "先了解膚況，再決定療程。"
+      },
+      {
+        "type": "difference",
+        "headline": "乾燥 ≠ 細紋 ≠ 膚質粗糙",
+        "subtitle": "看起來相似，處理方式未必相同。",
+        "items": [
+          "乾燥感｜先評估保濕狀態",
+          "細紋｜確認成因與深度",
+          "膚質粗糙｜找出主要困擾"
+        ]
+      },
+      {
+        "type": "technology",
+        "headline": "REJURAN HEALER",
+        "subtitle": "麗珠蘭黑盒・2cc",
+        "items": [
+          "注射型肌膚品質管理",
+          "療程次數依醫師判斷",
+          "效果與恢復情況因人而異"
+        ]
+      },
+      {
+        "type": "trust",
+        "headline": "不是流行，\n就一定要做。",
+        "subtitle": "注射前先了解膚況、恢復期與風險。",
+        "items": [
+          "膚況與過往療程",
+          "針點、紅腫與瘀青",
+          "個別適用性評估"
+        ]
+      },
+      {
+        "type": "price",
+        "headline": "麗珠蘭黑盒・2cc",
+        "subtitle": "1次｜未稅｜VAT另計",
+        "footnote": "注射後可能有疼痛、紅腫或瘀青。"
+      }
+    ]
+  },
+  "potenza": {
+    "label": "毛孔與痘疤",
+    "brand": "POTENZA",
+    "price_key": "potenza",
+    "slides": [
+      {
+        "type": "cover",
+        "headline": "毛孔大，\n就要打黃金微針？",
+        "subtitle": "毛孔和凹洞痘疤並不相同。"
+      },
+      {
+        "type": "difference",
+        "headline": "毛孔粗大 ≠ 凹洞痘疤",
+        "subtitle": "問題不同，處理方向也可能不同。",
+        "items": [
+          "毛孔粗大｜膚質與油脂因素",
+          "凹洞痘疤｜疤痕類型與深度",
+          "發炎痘痘｜先確認皮膚狀況"
+        ]
+      },
+      {
+        "type": "technology",
+        "headline": "POTENZA 黃金微針",
+        "subtitle": "全臉多功能探頭 1次",
+        "items": [
+          "微針結合射頻能量",
+          "療程應依膚況與疤痕調整",
+          "不是每一種痘痘都適合"
+        ]
+      },
+      {
+        "type": "trust",
+        "headline": "先分清楚問題，\n再考慮療程。",
+        "subtitle": "皮膚發炎與色素變化風險需要評估。",
+        "items": [
+          "有沒有正在發炎或感染",
+          "毛孔與疤痕的主要困擾",
+          "紅腫、疼痛及色素變化"
+        ]
+      },
+      {
+        "type": "price",
+        "headline": "黃金微針・全臉1次",
+        "subtitle": "多功能探頭｜未稅｜VAT另計",
+        "footnote": "3次 ₩349,000（未稅）。療程可有紅腫、疼痛與色素變化。"
+      }
+    ]
+  },
+  "onda_ultherapy": {
+    "label": "輪廓管理",
+    "brand": "ONDA × Ultherapy PRIME",
+    "price_key": "onda_ultherapy",
+    "slides": [
+      {
+        "type": "cover",
+        "headline": "下顎線不清楚，\n真的是脂肪太多？",
+        "subtitle": "脂肪與鬆弛，是不同的問題。"
+      },
+      {
+        "type": "difference",
+        "headline": "脂肪堆積 ≠ 肌膚鬆弛",
+        "subtitle": "先辨別輪廓困擾的主要原因。",
+        "items": [
+          "脂肪堆積｜評估下巴脂肪量",
+          "肌膚鬆弛｜評估組織下垂",
+          "臉頰凹陷｜避免只追求瘦臉"
+        ]
+      },
+      {
+        "type": "technology",
+        "headline": "ONDA × 美版音波二代",
+        "subtitle": "70kJ + 300發",
+        "items": [
+          "微波與聚焦超音波",
+          "兩者作用機制不同",
+          "是否合併施作需由醫師評估"
+        ]
+      },
+      {
+        "type": "trust",
+        "headline": "兩台一起做，\n不一定更適合。",
+        "subtitle": "脂肪少、臉頰偏凹時，更要考慮臉部比例。",
+        "items": [
+          "脂肪量與鬆弛程度",
+          "臉頰凹陷與輪廓比例",
+          "疼痛、紅腫與其他風險"
+        ]
+      },
+      {
+        "type": "price",
+        "headline": "ONDA 70kJ + 美版音波二代 300發",
+        "subtitle": "組合宣傳價｜未稅｜VAT另計",
+        "footnote": "價格與活動期間需院方確認；療程效果因人而異。"
+      }
+    ]
+  }
+}
