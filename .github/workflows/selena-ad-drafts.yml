@@ -6,6 +6,7 @@ on:
       - "selena-ads/data/campaigns.json"
       - "selena-ads/price_uploads/**"
       - "selena-ads/assets/**"
+      - "selena-ads/scripts/**"
       - ".github/workflows/selena-ad-drafts.yml"
   workflow_dispatch:
 permissions:
