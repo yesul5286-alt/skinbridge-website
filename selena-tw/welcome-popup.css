@@ -1,0 +1,15 @@
+.welcome-popup{padding:0;border:1px solid #ded1bf;border-radius:16px;background:#fffaf3;color:#48382d;width:min(440px,calc(100vw - 24px));max-width:none;max-height:calc(100dvh - 24px);margin:auto;overflow:auto;box-shadow:0 20px 90px #0005}
+.welcome-popup::backdrop{background:#21180fb3}
+.welcome-popup .welcome-head{display:flex;justify-content:space-between;align-items:center;padding:0 12px 0 18px;min-height:44px;font-size:12px;letter-spacing:2px}
+.welcome-popup button{background:transparent;border:0;min-width:44px;min-height:44px;color:inherit}
+.welcome-popup .welcome-head button{font-size:28px}
+.welcome-photo{display:block;touch-action:pan-y pinch-zoom}
+.welcome-photo img{width:100%;height:auto;max-height:calc(100dvh - 212px);object-fit:contain;background:#f7f1e8}
+.welcome-controls{display:flex;align-items:center;justify-content:center;gap:30px;min-height:44px;font-size:15px;font-variant-numeric:tabular-nums}
+.welcome-controls button{font-size:28px}
+.welcome-line{display:block;margin:0 12px;padding:10px;text-align:center;border-radius:8px;background:#765444;color:white;font-size:16px;font-weight:600}
+.welcome-foot{display:flex;align-items:center;justify-content:space-between;padding:0 12px;gap:8px;font-size:14px}
+.welcome-foot label{display:flex;align-items:center;gap:8px;min-height:48px;cursor:pointer}
+.welcome-foot input{width:18px;height:18px;accent-color:#765444}
+body:has(#welcomePopup[open]){overflow:hidden}
+.welcome-popup :focus-visible{outline:3px solid #925723;outline-offset:-3px}
