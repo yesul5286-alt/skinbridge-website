@@ -1,0 +1,116 @@
+{
+  "reviewedAt": "2026-10-04",
+  "selena": {
+    "sources": [
+      {
+        "file": "[중국어]2026년 셀레나 제안서.pdf",
+        "pages": {
+          "locationAndHours": 2,
+          "languages": 10,
+          "treatments": [
+            11,
+            12,
+            13,
+            14,
+            15
+          ],
+          "address": 22
+        }
+      },
+      {
+        "url": "https://selenaskin.com/",
+        "confirms": [
+          "address",
+          "hours",
+          "receptionCutoff",
+          "holidayPolicy",
+          "representativeName",
+          "treatmentCategories"
+        ]
+      },
+      {
+        "files": [
+          "1040 940[번체]10월 할로윈_1.png",
+          "1040 940[번체]10월 할로윈_2.png"
+        ],
+        "rows": 22,
+        "samePriceContent": true,
+        "periodAsPrinted": "10.1(週四)–10.31(週六)",
+        "year": null,
+        "tax": "VAT excluded"
+      }
+    ],
+    "pending": [
+      "event year and current applicability",
+      "device variants and Korean naming",
+      "additional charges",
+      "cancellation terms",
+      "aftercare contact and response times",
+      "partnership status"
+    ],
+    "excluded": [
+      "celebrity endorsements",
+      "patient before-after images",
+      "claims of no risk",
+      "unverified treatment outcome durations"
+    ]
+  },
+  "springday-sinchon": {
+    "source": "https://sch.springdayclinic.com/for-foreigners-guide-springdayclinic-sinchon?lang=zh-cn",
+    "conflicts": {
+      "stationDistance": "User:8m; official:16m; official used",
+      "language": "Varies by staff/date, no universal interpreter guarantee"
+    },
+    "pending": [
+      "last reception 19:45/15:45 not found on official guide",
+      "Chuseok 9/24–9/26 year unspecified, omitted",
+      "prices",
+      "clinic photos",
+      "specific offered device models",
+      "partnership status"
+    ]
+  },
+  "tunes": {
+    "sources": [
+      {
+        "file": "Salon de Dr.Tunes Clinic CHN.pdf",
+        "pages": {
+          "director": 2,
+          "lounge": 6,
+          "equipment": 10,
+          "contactAndHours": 17
+        }
+      },
+      {
+        "file": "250430 Salon de Dr.Tunes Clinic Price List.pdf",
+        "pages": 5,
+        "tax": "VAT excluded",
+        "date": "250430 filename only; effective/expiry dates not stated",
+        "previewOptions": 28,
+        "completeOriginal": "tw/assets/tunes-price-list.pdf"
+      },
+      {
+        "url": "https://medicaltour.gangnam.go.kr/medical/clinic/view.do?cid=408&lang=ko&medical_seq=867&mid=403-408&pgno=4",
+        "confirms": [
+          "address",
+          "phone",
+          "email",
+          "hours",
+          "Korean English Chinese consultation"
+        ]
+      }
+    ],
+    "pending": [
+      "current price validity",
+      "interpretation schedule and charges",
+      "aftercare service contacts and response hours",
+      "cancellation policy",
+      "partnership status"
+    ],
+    "excluded": [
+      "celebrity endorsements",
+      "guaranteed outcomes",
+      "unverified current pricing"
+    ]
+  }
+}

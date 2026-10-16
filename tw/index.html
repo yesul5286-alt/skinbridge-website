@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="探索韓國皮膚科，收藏院所、比較服務，整理妳的赴韓諮詢計畫。">
+  <meta name="theme-color" content="#fffaf7">
+  <title>skinbridge · 妳的首爾，慢慢變美</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="real-clinics.js" defer></script>
+  <script src="tunes.js" defer></script>
+  <script src="app.js" defer></script>
+  <script src="flow.js" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">跳至主要內容</a>
+  <div class="review-language"><a href="../ko-review/">한국어로 검토하기</a><span> / </span><a href="../tw/" lang="zh-TW">繁體中文</a></div><div class="preview-note">體驗版 · 含實際院所資料與示例，尚未開放實際預約</div>
+  <header class="header">
+    <a class="logo" href="#home" aria-label="skinbridge 首頁">skinbridge<span>SEOUL, WITH YOU</span></a>
+    <nav class="desktop-nav" aria-label="主要導覽">
+      <a href="#clinics">探索院所</a><a href="#guide">赴韓指南</a><a href="#support">回台支持</a><a href="#saved" data-open-saved>我的收藏 <span class="saved-count">0</span></a>
+    </nav>
+    <a href="#plan" class="outline header-plan">我的計畫 <span aria-hidden="true">↗</span></a>
+    <button class="menu-toggle icon-button" aria-label="開啟選單" aria-expanded="false" aria-controls="mobile-menu">☰</button>
+  </header>
+  <nav id="mobile-menu" class="mobile-menu" aria-label="手機選單" hidden><a href="#clinics">探索院所</a><a href="#guide">赴韓指南</a><a href="#support">回台支持</a><a href="../">한국어 / 简体中文</a></nav>
+  <main id="main" tabindex="-1">
+    <section id="home" class="hero-carousel" aria-label="首頁精選" aria-roledescription="carousel">
+      <div class="hero-track" id="hero-track" tabindex="0" aria-label="左右滑動切換主題">
+    <div class="hero hero-slide" role="group" aria-label="1 / 3">
+      <img class="hero-photo" src="assets/model-04-hero.webp" alt="柔和日光下的女性形象照，AI 生成示意" width="1536" height="1024" fetchpriority="high">
+      <div class="hero-copy"><p class="eyebrow">A LITTLE CARE. A NEW JOURNEY.</p><h1 id="hero-title">妳的首爾，<br>慢慢變美。</h1><p class="hero-sub">探索韓國皮膚科，<br class="mobile-only">從喜歡的開始。</p><a class="primary" href="#clinics">找到適合我的院所 <span aria-hidden="true">↗</span></a><a class="hero-guide" href="#guide">第一次赴韓？陪妳從這裡開始</a></div>
+      <span class="hero-caption">Your Seoul, your pace.</span>
+    </div>
+        <div class="hero hero-slide hero-aftercare" role="group" aria-label="2 / 3" inert aria-hidden="true">
+          <img class="hero-photo" src="assets/clinic.webp" alt="AI 生成院所示意圖" width="1536" height="1024">
+          <div class="hero-copy"><p class="eyebrow">CARE, BEYOND SEOUL</p><h2>回到台灣，<br>下一步也清楚。</h2><p class="hero-sub">離開韓國前，<br>先把後續照護問清楚。</p><a class="primary" href="#support">了解回台後的聯繫 ↗</a><p class="hero-disclosure">聯繫流程介紹 · 實際支援服務準備中</p></div><span class="hero-caption">Care for the journey ahead.</span>
+        </div>
+        <div class="hero hero-slide hero-benefits" role="group" aria-label="3 / 3" inert aria-hidden="true">
+          <img class="hero-photo" src="assets/serum.webp" alt="日常保養概念圖片" width="1536" height="1024">
+          <div class="hero-copy"><p class="eyebrow">A LITTLE EXTRA, FOR YOU</p><h2>一趟首爾，<br>多一份小期待。</h2><p class="hero-sub">台灣合作體驗與預約禮遇，<br>正在為妳準備。</p><button class="primary" data-article="perks">看看準備中的禮遇 ↗</button><p class="hero-disclosure">規劃中 · 目前尚無可領取的優惠</p></div><span class="hero-caption">A little more to look forward to.</span>
+        </div>
+      </div>
+      <div class="hero-navigation"><button class="hero-arrow" data-hero-step="-1" aria-label="上一個主題">←</button><div class="hero-dots" aria-label="選擇首頁主題"><button data-hero-slide="0" aria-label="首頁形象" aria-pressed="true"></button><button data-hero-slide="1" aria-label="回台照護" aria-pressed="false"></button><button data-hero-slide="2" aria-label="預約禮遇" aria-pressed="false"></button></div><span id="hero-counter" aria-live="polite" aria-atomic="true">01 / 03</span><button class="hero-arrow" data-hero-step="1" aria-label="下一個主題">→</button></div>
+    </section>
+    <section class="section discovery" id="discover" aria-labelledby="discover-title">
+      <div class="section-heading"><div><p class="eyebrow">YOUR NEXT LITTLE INTEREST</p><h2 id="discover-title">最近，想多了解哪一種療程？</h2><p class="theme-sub">從一張心動的照片，開始認識。</p></div><div class="rail-controls"><button type="button" data-scroll="-1" aria-label="上一張">←</button><button type="button" data-scroll="1" aria-label="下一張">→</button></div></div>
+      <div class="procedure-rail" id="procedure-rail" tabindex="0" aria-label="療程靈感，可左右滑動">
+        <button class="procedure-card" data-procedure="hydration"><span class="procedure-photo"><img src="assets/model-01-dewy.webp" class="campaign-portrait" alt="AI 保濕形象照，非實際療程成果" width="1536" height="1024" loading="lazy"><span>SOFT & DEWY</span></span><span class="procedure-copy"><small>乾燥・保養</small><strong>保濕管理</strong><span>想給肌膚一點滋潤？ <b>↗</b></span></span></button>
+        <button class="procedure-card" data-procedure="texture"><span class="procedure-photo"><img src="assets/model-01-dewy.webp" class="campaign-portrait" alt="自然膚質概念圖片" width="1536" height="1024" loading="lazy"><span>SKIN TEXTURE</span></span><span class="procedure-copy"><small>毛孔・膚質</small><strong>毛孔療程諮詢</strong><span>近看肌膚，在意的是什麼？ <b>↗</b></span></span></button>
+        <button class="procedure-card" data-procedure="clarity"><span class="procedure-photo"><img src="assets/model-10-dewy.webp" class="campaign-portrait" alt="AI 肌膚形象照，非實際療程成果" width="1536" height="1024" loading="lazy"><span>A LITTLE CLARITY</span></span><span class="procedure-copy"><small>斑點・膚色</small><strong>皮秒雷射諮詢</strong><span>先了解，再決定適不適合。 <b>↗</b></span></span></button>
+        <button class="procedure-card" data-procedure="firmness"><span class="procedure-photo"><img src="assets/model-10-dewy.webp" class="campaign-portrait" alt="輪廓概念圖片" width="1536" height="1024" loading="lazy"><span>YOUR OWN LINES</span></span><span class="procedure-copy"><small>輪廓・緊緻</small><strong>緊緻療程諮詢</strong><span>選擇這麼多，差別在哪裡？ <b>↗</b></span></span></button>
+        <button class="procedure-card" data-procedure="first"><span class="procedure-photo"><img src="assets/clinic.webp" alt="舒適院所概念圖片" width="1536" height="1024" loading="lazy"><span>YOUR FIRST VISIT</span></span><span class="procedure-copy"><small>第一次・慢慢了解</small><strong>初次肌膚諮詢</strong><span>還沒決定，也可以先聊聊。 <b>↗</b></span></span></button>
+      </div><p class="theme-footnote">左右滑動探索 · 圖片為 AI 氛圍示意，非療效或真實體驗。</p>
+    </section>
+    <section id="clinics" class="section clinics" aria-labelledby="clinic-title">
+      <div class="section-heading"><div><p class="eyebrow">FIND YOUR PLACE</p><h2 id="clinic-title">先看看，收藏喜歡的</h2></div><button class="text-button" id="filter-toggle" hidden aria-expanded="true" aria-controls="filters">篩選條件 <span aria-hidden="true">＋</span></button></div>
+      <form id="search-form" role="search"><div class="search-row"><label class="search-input"><span aria-hidden="true">⌕</span><input id="search" type="search" placeholder="搜尋院所、地區或療程" aria-label="搜尋院所、地區或療程"></label><button class="primary" type="submit">搜尋</button></div>
+        <div id="filters" class="filters">
+          <fieldset class="chip-field"><legend>想了解的項目</legend><div class="filter-chips"><button type="button" class="filter-chip" data-filter="concern" data-value="" aria-pressed="true">全部項目</button><button type="button" class="filter-chip" data-filter="concern" data-value="保濕管理" aria-pressed="false">保濕管理</button><button type="button" class="filter-chip" data-filter="concern" data-value="毛孔" aria-pressed="false">毛孔</button><button type="button" class="filter-chip" data-filter="concern" data-value="斑點" aria-pressed="false">斑點</button><button type="button" class="filter-chip" data-filter="concern" data-value="緊緻" aria-pressed="false">緊緻</button></div><select id="concern" hidden aria-label="想了解的項目"><option value="">全部項目</option><option value="保濕管理">保濕管理</option><option value="毛孔">毛孔</option><option value="斑點">斑點</option><option value="緊緻">緊緻</option></select></fieldset>
+          <fieldset class="chip-field"><legend>地區</legend><div class="filter-chips"><button type="button" class="filter-chip" data-filter="area" data-value="" aria-pressed="true">所有地區</button><button type="button" class="filter-chip" data-filter="area" data-value="江南" aria-pressed="false">江南</button><button type="button" class="filter-chip" data-filter="area" data-value="弘大" aria-pressed="false">弘大</button><button type="button" class="filter-chip" data-filter="area" data-value="新沙" aria-pressed="false">新沙</button><button type="button" class="filter-chip" data-filter="area" data-value="新村" aria-pressed="false">新村</button><button type="button" class="filter-chip" data-filter="area" data-value="清潭" aria-pressed="false">清潭</button></div><select id="area" hidden aria-label="地區"><option value="">所有地區</option><option value="江南">江南</option><option value="弘大">弘大</option><option value="新沙">新沙</option><option value="新村">新村</option><option value="清潭">清潭</option></select></fieldset>
+          <details class="budget-options"><summary>預算 <span id="budget-status"></span></summary><label>示例預算（韓元）<select id="budget"><option value="">不限</option><option value="110000">₩110,000 以下</option><option value="130000">₩130,000 以下</option><option value="160000">₩160,000 以下</option></select></label></details>
+          <button class="text-button" type="reset">清除條件</button>
+        </div>
+      </form>
+      <div class="results-line"><p id="result-count" role="status"></p><span>實際院所與示例分別標示</span></div>
+      <div id="clinic-grid" class="clinic-grid"></div>
+    </section>
+    <section class="section neighborhood" aria-labelledby="neighborhood-title"><div class="section-heading"><div><p class="eyebrow">AROUND YOUR SEOUL</p><h2 id="neighborhood-title">住在這附近，去哪裡諮詢？</h2><p class="theme-sub">讓院所探索，順著妳的首爾行程。</p></div></div><div class="area-links"><button data-area="江南"><span>01 / GANGNAM</span><strong>江南</strong><span>探索這一區 ↗</span></button><button data-area="弘大"><span>02 / HONGDAE</span><strong>弘大</strong><span>探索這一區 ↗</span></button><button data-area="新沙"><span>03 / SINSA</span><strong>新沙</strong><span>探索這一區 ↗</span></button></div></section>
+    <section class="section stories" aria-labelledby="stories-title"><div class="section-heading"><div><p class="eyebrow">BEYOND THE STARS</p><h2 id="stories-title">好評之外，還想知道什麼？</h2><p class="theme-sub">費用、溝通、回台後的聯繫，都值得問清楚。</p></div></div><div class="story-layout"><div class="story-photo"><img src="assets/clinic.webp" loading="lazy" alt="院所空間概念圖片，非實際訪問或病患心得" width="1536" height="1024"><span>VISIT NOTES · 心得專區籌備中</span></div><div class="story-prompts"><button data-article="price"><span>01</span><div><h3>最後付的，跟一開始說的一樣嗎？</h3><p>看心得，也要看完整費用與項目条件。</p></div><b aria-hidden="true">↗</b></button><button data-article="first"><span>02</span><div><h3>第一次去，真的有人幫忙嗎？</h3><p>確認中文服務涵蓋哪些環節。</p></div><b aria-hidden="true">↗</b></button><button data-article="return"><span>03</span><div><h3>回到台灣，還能找到誰？</h3><p>先認識後續聯繫與支援範圍。</p></div><b aria-hidden="true">↗</b></button><p class="theme-footnote">目前提供閱讀指南；真實訪問心得待取得同意與核實後上線。</p></div></div></section>
+    <section id="guide" class="section guide" aria-labelledby="guide-title"><div class="section-heading"><div><p class="eyebrow">BEFORE YOU GO</p><h2 id="guide-title">第一次，也可以從容開始</h2></div><p class="section-aside">把疑問弄清楚，再做決定。</p></div><div class="guide-grid">
+      <button class="guide-card" data-article="first"><span class="guide-number">01</span><h3>第一次赴韓，<br>怎麼開始？</h3><p>從需求整理，到諮詢與預約。</p><span aria-hidden="true">↗</span></button>
+      <button class="guide-card" data-article="price"><span class="guide-number">02</span><h3>比較價格前，<br>先看這些。</h3><p>產品、用量與費用包含什麼？</p><span aria-hidden="true">↗</span></button>
+      <button class="guide-card" data-article="return"><span class="guide-number">03</span><h3>回台之後，<br>找誰協助？</h3><p>先了解聯繫方式與服務範圍。</p><span aria-hidden="true">↗</span></button>
+    </div></section>
+
+    <section id="support" class="support section" aria-labelledby="support-title"><div><p class="eyebrow">AFTER SEOUL</p><h2 id="support-title">回台之後，<br>也有清楚的下一步。</h2><p>預約前，先確認韓國院所的聯繫方式、<br>回覆時間與後續就醫安排。</p><button class="text-button" data-article="return">了解聯繫流程 ↗</button></div><div class="support-details"><details open><summary>韓國院所聯繫</summary><p>正式預約前將確認院所聯絡窗口與服務時間。醫療判斷與處置由醫師負責；本體驗版尚未提供實際醫療支援。</p></details><details><summary>台灣在地合作</summary><p>合作方案規劃中。院所、服務內容、適用条件與費用確認後才會公開。皮膚管理體驗不取代醫療診治。</p></details><details><summary>預約專屬禮遇</summary><p>目前沒有已啟用的體驗券或折扣。未來將清楚列出合作店家、有效期限、適用條件與額外費用。</p></details></div></section>
+    <section id="plan" class="section plan" aria-labelledby="plan-title"><div class="section-heading"><div><p class="eyebrow">MADE A LITTLE EASIER</p><h2 id="plan-title">把喜歡的，變成計畫</h2></div></div><div class="plan-layout"><div><p class="plan-intro">選好想了解的院所和日期，<br>把問題一起帶進諮詢。</p><div id="plan-clinics"></div><a href="#clinics" class="text-button">再看看其他院所 ↗</a></div><a class="primary" href="?view=consultation&amp;procedure=first">整理諮詢內容 ↗</a><form id="plan-form" hidden><label>想諮詢的院所<select id="plan-clinic" required><option value="">請選擇院所</option></select></label><div class="form-row"><label>預計赴韓日期<input id="visit-date" type="date"></label><label>想了解的項目<select id="plan-treatment"><option>保濕管理</option><option>毛孔</option><option>斑點</option><option>緊緻</option><option>想先了解</option></select></label></div><p class="muted small">這裡只整理諮詢內容，不會送出或成立預約。請勿輸入病歷、照片或其他敏感資料。</p><button class="primary wide" type="submit">整理諮詢內容 <span aria-hidden="true">↗</span></button></form></div></section>
+    <section id="flow-page" class="section flow-page" hidden></section>
+  </main>
+  <footer><div class="footer-top"><a class="logo" href="#home">skinbridge</a><p>在妳的步調裡，遇見新的自己。</p><a href="../">한국어 / 简体中文 ↗</a></div><div class="footer-bottom"><p>SKINBRIDGE 스킨브릿지 · 代表：이예슬<br>事業者登錄號：509-06-53933<br>제주특별자치도 제주시 중앙로26길 25, 102동 3층 303호</p><p><a href="tel:+821089015286">+82-10-8901-5286</a><br><button class="text-button" data-article="privacy">隱私與資料使用</button><br>© 2026 SKINBRIDGE</p></div><p class="small muted">實際院所資料標明來源；範例院所與 AI 圖片僅供體驗。合作、活動適用與預約均需確認。</p></footer>
+  <nav class="bottom-nav" aria-label="快捷導覽"><a href="#clinics"><span aria-hidden="true">⌕</span>探索</a><a href="#saved" data-open-saved><span aria-hidden="true">♡</span>收藏 <b class="saved-count">0</b></a><a href="#plan"><span aria-hidden="true">▤</span>我的計畫</a></nav>
+  <button class="line-float" id="line-contact" aria-label="LINE 諮詢"><strong>LINE</strong><span>諮詢</span></button>
+  <div id="compare-bar" class="compare-bar" hidden><span id="compare-count"></span><button id="compare-open" class="primary">開始比較</button><button id="compare-clear" class="text-button">清除</button></div>
+  <dialog id="dialog" aria-labelledby="dialog-title"><div class="dialog-top"><p class="eyebrow">SKINBRIDGE</p><button id="dialog-close" class="icon-button" aria-label="關閉視窗">×</button></div><div id="dialog-content"></div></dialog>
+<dialog id="saved-dialog" aria-labelledby="saved-title"><div class="saved-dialog-top"><span class="eyebrow">YOUR LITTLE COLLECTION</span><button id="saved-close" class="icon-button" aria-label="關閉收藏">×</button></div>    <section id="saved" class="section" aria-labelledby="saved-title"><div class="section-heading"><div><p class="eyebrow">YOUR LITTLE COLLECTION</p><h2 id="saved-title">留給心動的選擇</h2></div><a class="text-button" href="#plan">整理我的計畫 ↗</a></div><p class="muted">收藏保存在這台裝置的瀏覽器中，不需登入。</p><div id="saved-grid" class="clinic-grid"></div></section></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
