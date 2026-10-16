@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
 <meta name="facebook-domain-verification" content="96omr41tsp3l8rxk3xe71ohbo2sxjz" />
@@ -141,34 +141,27 @@ footer{
   .cards{grid-template-columns:1fr}
 }
 </style>
+<link rel="stylesheet" href="tw/company-reference-v2.css">
+<script src="tw/company-editorial.js" defer></script>
 </head>
 
 <body>
 
-<header>
-  <div class="logo">SKINBRIDGE</div>
-  <div class="language">
-    <button onclick="setLanguage('ko')">한국어</button>
-    <button onclick="setLanguage('tw')">繁體中文</button>
-    <button onclick="setLanguage('cn')">简体中文</button>
-  </div>
+<header class="company-header">
+<a class="logo" href="/">SKINBRIDGE<span>CONNECTING BEAUTY BEYOND BORDERS</span></a>
+<nav class="company-nav" aria-label="主要導覽"><a data-company-section="about" href="#tw-about">關於我們</a><a data-company-section="services" href="#tw-services">服務項目</a><a href="/partners/tw/">合作夥伴</a><a data-company-section="contact" href="#tw-contact">聯繫我們</a></nav>
+<div class="company-tools"><details class="language-picker"><summary aria-label="語言選擇"><span id="current-language">TW</span> <span aria-hidden="true">⌄</span></summary><div class="language-panel"><button onclick="setLanguage('tw')" lang="zh-Hant">繁體中文</button><button onclick="setLanguage('cn')" lang="zh-Hans">简体中文</button><button onclick="setLanguage('ko')" lang="ko">한국어</button><a href="/partners/tw/">B2B 合作夥伴 <span aria-hidden="true">↗</span><small>旅行社・美容業・KOL・醫療機構</small></a></div></details><a class="company-b2b" href="/partners/tw/" lang="zh-Hant">B2B 合作夥伴 <span aria-hidden="true">→</span></a><button class="company-menu" aria-label="開啟選單" aria-controls="company-mobile" aria-expanded="false">☰</button></div>
 </header>
-
+<nav id="company-mobile" class="company-mobile" hidden aria-label="手機導覽"><a data-company-section="about" href="#tw-about">關於我們</a><a data-company-section="services" href="#tw-services">服務項目</a><a data-company-section="contact" href="#tw-contact">聯繫我們</a><a href="/partners/tw/">B2B 合作夥伴 ↗</a></nav>
 <!-- KOREAN -->
-<div id="ko" class="lang-page active">
+<div id="ko" class="lang-page">
 
-<section class="hero">
-<div class="hero-inner">
-<div class="eyebrow">KOREA MEDICAL TOURISM</div>
-<h1>Connecting Korea<br>with the World.</h1>
-<p>
+<section class="hero company-visual"><img class="company-hero-photo" src="partners/assets/home-portrait-v2.webp" alt="AI 브랜드 인물 이미지, 실제 환자 아님" width="1536" height="1024" fetchpriority="high"><div class="hero-inner"><div class="eyebrow">SKINBRIDGE</div><h1>세계를 잇고,<br>더 나다운 아름다움으로.</h1><div class="hero-subtitle">KOREA MEDICAL BEAUTY PLATFORM</div><p>
 스킨브릿지는 해외 고객과 대한민국 의료기관을 연결하고,
 외국인 환자의 한국 의료서비스 이용을 지원합니다.
-</p>
-</div>
-</section>
+</p><a class="company-cta" href="#ko-about">더 알아보기<span aria-hidden="true">⟶</span></a></div><div class="company-values" aria-hidden="true"><span><b>01</b>Beauty<br>Beyond Borders</span><span><b>02</b>Connecting<br>Korean Clinics</span><span><b>03</b>Your Journey<br>Our Care</span></div><small class="hero-image-note">AI 브랜드 이미지 · 실제 환자·효과 사진 아님</small></section><a class="mobile-b2b" href="/partners/tw/"><span>B2B 파트너십<small>함께 새로운 가능성을 만듭니다</small></span><span aria-hidden="true">›</span></a>
 
-<section>
+<section id="ko-about">
 <div class="label">ABOUT US</div>
 <h2>SKINBRIDGE</h2>
 <p class="about-text">
@@ -178,7 +171,7 @@ footer{
 </p>
 </section>
 
-<section class="services">
+<section class="services" id="ko-services">
 <div class="label">SERVICES</div>
 <h2>What We Do</h2>
 
@@ -205,7 +198,7 @@ footer{
 </div>
 </section>
 
-<section class="contact">
+<section class="contact" id="ko-contact">
 <div class="label">CONTACT</div>
 <h2>Contact SKINBRIDGE</h2>
 <p>International Client & Business Inquiry</p>
@@ -215,20 +208,14 @@ footer{
 </div>
 
 <!-- TRADITIONAL CHINESE -->
-<div id="tw" class="lang-page">
+<div id="tw" class="lang-page active">
 
-<section class="hero">
-<div class="hero-inner">
-<div class="eyebrow">KOREA MEDICAL TOURISM</div>
-<h1>Connecting Korea<br>with the World.</h1>
-<p>
+<section class="hero company-visual"><img class="company-hero-photo" src="partners/assets/home-portrait-v2.webp" alt="品牌形象示意，非患者或療效照片" width="1536" height="1024" fetchpriority="high"><div class="hero-inner"><div class="eyebrow">SKINBRIDGE</div><h1>連結世界，<br>遇見更美的自己</h1><div class="hero-subtitle">KOREA MEDICAL BEAUTY PLATFORM</div><p>
 SKINBRIDGE 致力於連結海外顧客與韓國醫療機構，
 協助海外顧客更便利地使用韓國醫療服務。
-</p>
-</div>
-</section>
+</p><a class="company-cta" href="#tw-about">探索更多<span aria-hidden="true">⟶</span></a></div><div class="company-values" aria-hidden="true"><span><b>01</b>Beauty<br>Beyond Borders</span><span><b>02</b>Connecting<br>Korean Clinics</span><span><b>03</b>Your Journey<br>Our Care</span></div><small class="hero-image-note">AI 品牌形象示意 · 非療效照片</small></section><a class="mobile-b2b" href="/partners/tw/"><span>B2B 合作夥伴<small>與我們開創更多可能</small></span><span aria-hidden="true">›</span></a>
 
-<section>
+<section id="tw-about">
 <div class="label">ABOUT US</div>
 <h2>SKINBRIDGE</h2>
 <p class="about-text">
@@ -238,7 +225,7 @@ SKINBRIDGE 為韓國合法登記之外國患者招攬服務業者，
 </p>
 </section>
 
-<section class="services">
+<section class="services" id="tw-services">
 <div class="label">SERVICES</div>
 <h2>Our Services</h2>
 
@@ -250,7 +237,7 @@ SKINBRIDGE 為韓國合法登記之外國患者招攬服務業者，
 </div>
 </section>
 
-<section class="contact">
+<section class="contact" id="tw-contact">
 <div class="label">CONTACT</div>
 <h2>聯絡 SKINBRIDGE</h2>
 <p>海外顧客及商務合作諮詢</p>
@@ -262,18 +249,12 @@ SKINBRIDGE 為韓國合法登記之外國患者招攬服務業者，
 <!-- SIMPLIFIED CHINESE -->
 <div id="cn" class="lang-page">
 
-<section class="hero">
-<div class="hero-inner">
-<div class="eyebrow">KOREA MEDICAL TOURISM</div>
-<h1>Connecting Korea<br>with the World.</h1>
-<p>
+<section class="hero company-visual"><img class="company-hero-photo" src="partners/assets/home-portrait-v2.webp" alt="品牌形象示意，非患者或疗效照片" width="1536" height="1024" fetchpriority="high"><div class="hero-inner"><div class="eyebrow">SKINBRIDGE</div><h1>连接世界，<br>遇见更美的自己</h1><div class="hero-subtitle">KOREA MEDICAL BEAUTY PLATFORM</div><p>
 SKINBRIDGE 致力于连接海外客户与韩国医疗机构，
 为海外客户使用韩国医疗服务提供便利支持。
-</p>
-</div>
-</section>
+</p><a class="company-cta" href="#cn-about">探索更多<span aria-hidden="true">⟶</span></a></div><div class="company-values" aria-hidden="true"><span><b>01</b>Beauty<br>Beyond Borders</span><span><b>02</b>Connecting<br>Korean Clinics</span><span><b>03</b>Your Journey<br>Our Care</span></div><small class="hero-image-note">AI 品牌形象示意 · 非疗效照片</small></section><a class="mobile-b2b" href="/partners/tw/"><span>B2B 合作伙伴<small>与我们开创更多可能</small></span><span aria-hidden="true">›</span></a>
 
-<section>
+<section id="cn-about">
 <div class="label">ABOUT US</div>
 <h2>SKINBRIDGE</h2>
 <p class="about-text">
@@ -283,7 +264,7 @@ SKINBRIDGE 是在韩国依法登记的外国患者招揽服务机构，
 </p>
 </section>
 
-<section class="services">
+<section class="services" id="cn-services">
 <div class="label">SERVICES</div>
 <h2>Our Services</h2>
 
@@ -295,7 +276,7 @@ SKINBRIDGE 是在韩国依法登记的外国患者招揽服务机构，
 </div>
 </section>
 
-<section class="contact">
+<section class="contact" id="cn-contact">
 <div class="label">CONTACT</div>
 <h2>联系 SKINBRIDGE</h2>
 <p>海外客户及商务合作咨询</p>
@@ -321,17 +302,20 @@ SKINBRIDGE 是在韩国依法登记的外国患者招揽服务机构，
 
 <script>
 function setLanguage(lang){
-  document.querySelectorAll('.lang-page').forEach(function(page){
-    page.classList.remove('active');
-  });
-
-  document.getElementById(lang).classList.add('active');
-  document.documentElement.lang =
-    lang === 'ko' ? 'ko' :
-    lang === 'tw' ? 'zh-TW' : 'zh-CN';
-
+  if(!['ko','tw','cn'].includes(lang))return;
+  document.querySelectorAll('.lang-page').forEach(page=>page.classList.toggle('active',page.id===lang));
+  document.documentElement.lang=lang==='ko'?'ko':lang==='tw'?'zh-TW':'zh-CN';
+  document.getElementById('current-language').textContent={ko:'KO',tw:'TW',cn:'CN'}[lang];
+  const labels={ko:['소개','서비스','문의'],tw:['關於我們','服務項目','聯繫我們'],cn:['关于我们','服务项目','联系我们']}[lang];
+  document.querySelectorAll('[data-company-section]').forEach(a=>{const key=a.dataset.companySection;a.href='#'+lang+'-'+key;a.textContent=labels[['about','services','contact'].indexOf(key)];});
+  document.querySelectorAll('.language-picker').forEach(d=>d.open=false);
+  const languageUrl=new URL(location.href);
+  languageUrl.searchParams.set('lang',lang);
+  if(/^#(ko|tw|cn)-/.test(languageUrl.hash))languageUrl.hash='';
+  history.replaceState(history.state,'',languageUrl);
   window.scrollTo(0,0);
 }
+setLanguage(new URLSearchParams(location.search).get('lang')||'tw');
 </script>
 
 </body>
