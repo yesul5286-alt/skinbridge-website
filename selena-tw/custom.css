@@ -26,3 +26,18 @@ h2 { color: var(--heading-color); }
     padding-bottom: var(--mobile-section-gap);
   }
 }
+
+/* 2026-11: 부가세 전후 가격 표시 */
+.dose-price { flex-wrap: wrap; }
+.dose-price span { color: var(--muted); }
+.dose-price strong { white-space: normal; }
+.treatments .poster-card { flex-basis: calc((100% - 36px) / 4); }
+@media (max-width: 800px) { .treatments .poster-card { flex-basis: 46%; } }
+.treatments .poster-rail { scroll-snap-type: none; scroll-behavior: auto; scrollbar-width: none; }
+.treatments .poster-rail::-webkit-scrollbar { display: none; }
+.price-all > summary { display: flex; align-items: center; justify-content: center; min-height: 52px; margin-top: 14px; border: 1px solid var(--ink); border-radius: 999px; color: var(--ink); font-size: 17px; font-weight: 650; cursor: pointer; list-style: none; }
+.price-all > summary::-webkit-details-marker { display: none; }
+.price-all > summary::after { content: ""; width: 8px; height: 8px; margin: -4px 0 0 10px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); }
+.price-all[open] > summary { margin-bottom: 18px; }
+.price-all[open] > summary::after { margin-top: 4px; transform: rotate(225deg); }
+.price-all > summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }

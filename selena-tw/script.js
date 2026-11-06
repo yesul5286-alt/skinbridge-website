@@ -38,35 +38,35 @@ document.querySelectorAll('[data-copy]').forEach(btn=>{
 
 const posterGroups = [
   {
-    title:'麗珠蘭 價格表',
-    slides:[{src:'assets/price-rejuran.webp', title:'麗珠蘭 價格表'}]
-  },
-  {
-    title:'POTENZA 價格資訊',
+    title:'肌膚精選',
     slides:[
-      {src:'assets/price-potenza.webp', title:'POTENZA 完整價目'},
-      {src:'assets/price-potenza-single.webp', title:'POTENZA 單次療程'}
+      {src:'assets/nov-skin-01.webp', title:'喬雅露 JUVELOOK'},
+      {src:'assets/nov-skin-03.webp', title:'Meister of JUVELOOK'},
+      {src:'assets/nov-skin-02.webp', title:'11 月肌膚精選'}
     ]
   },
   {
-    title:'20–30歲人氣管理組合',
-    slides:[{src:'assets/price-2030-package.webp', title:'20–30歲人氣管理組合'}]
-  },
-  {
-    title:'精選療程組合',
-    slides:[{src:'assets/price-330-package.webp', title:'精選療程組合'}]
-  },
-  {
-    title:'毛孔管理療程',
-    slides:[{src:'assets/price-pores.webp', title:'毛孔管理療程'}]
-  },
-  {
-    title:'秋季肌膚禮遇',
+    title:'拉提精選',
     slides:[
-      {src:'assets/promo-autumn-01.png', title:'秋季肌膚禮遇 · 封面'},
-      {src:'assets/promo-autumn-02.png', title:'秋季肌膚禮遇 · 緊緻拉提方案'},
-      {src:'assets/promo-autumn-03.png', title:'秋季肌膚禮遇 · 肌膚管理方案'},
-      {src:'assets/promo-autumn-04.png', title:'秋季肌膚禮遇 · 複合療程方案'}
+      {src:'assets/nov-lifting-01.webp', title:'海芙電波 VOLNEWMER'},
+      {src:'assets/nov-lifting-03.webp', title:'音波？電波？怎麼選？'},
+      {src:'assets/nov-lifting-02.webp', title:'11 月拉提精選'}
+    ]
+  },
+  {
+    title:'秋季肌膚管理',
+    slides:[
+      {src:'assets/nov-autumn-01.jpg', title:'秋季肌膚管理計劃'},
+      {src:'assets/nov-autumn-02.jpg', title:'秋季熱門組合'},
+      {src:'assets/nov-autumn-03.jpg', title:'來院資訊與預約方式'}
+    ]
+  },
+  {
+    title:'秋季皮膚改善計劃',
+    slides:[
+      {src:'assets/nov-care-01.jpg', title:'11 月秋季皮膚改善計劃'},
+      {src:'assets/nov-care-02.jpg', title:'全臉黃金微針・喬雅露'},
+      {src:'assets/nov-care-03.jpg', title:'組合方案與麗珠蘭'}
     ]
   }
 ];
@@ -256,3 +256,44 @@ window.addEventListener('hashchange',revealPriceHash); revealPriceHash();
 reviewDialogVideo.addEventListener('loadedmetadata',()=>{
  reviewDialogVideo.style.aspectRatio=`${reviewDialogVideo.videoWidth} / ${reviewDialogVideo.videoHeight}`;
 });
+
+// 11월 포스터: 자동으로 천천히 흐르고, 누르거나 만지는 동안에는 멈춘다.
+(function(){
+ const rail=document.querySelector('.treatments .poster-rail');
+ if(!rail || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+ const originals=[...rail.querySelectorAll('.poster-card')];
+ originals.forEach(card=>{
+  const copy=card.cloneNode(true);
+  copy.classList.add('is-copy');
+  copy.setAttribute('aria-hidden','true');
+  copy.tabIndex=-1;
+  copy.addEventListener('click',()=>card.click());
+  rail.append(copy);
+ });
+ const firstCopy=rail.querySelector('.is-copy');
+ let pos=0, resumeAt=0, last=0;
+ const hold=ms=>{resumeAt=performance.now()+ms};
+ ['pointerenter','pointerdown','touchstart','focusin','wheel'].forEach(type=>rail.addEventListener(type,()=>hold(2500),{passive:true}));
+ rail.addEventListener('scroll',()=>{ if(performance.now()<resumeAt) pos=rail.scrollLeft; },{passive:true});
+ function tick(now){
+  const dt=Math.min(now-last,50); last=now;
+  const loop=firstCopy.offsetLeft-originals[0].offsetLeft;
+  if(now>=resumeAt && !rail.matches(':hover') && !posterDialog?.open && loop>0){
+   pos+=dt*.03;
+   if(pos>=loop) pos-=loop;
+   rail.scrollLeft=pos;
+  }
+  requestAnimationFrame(tick);
+ }
+ requestAnimationFrame(tick);
+})();
+
+// 전체 가격표: 처음에는 접혀 있고, 가격표로 가는 링크를 누르면 펼친다.
+(function(){
+ const all=document.querySelector('#priceAll');
+ if(!all) return;
+ const open=()=>{ if(['#prices','#rejuran-prices','#potenza-prices'].includes(location.hash)) all.open=true; };
+ window.addEventListener('hashchange',open);
+ open();
+ document.querySelectorAll('a[href="#prices"]').forEach(link=>link.addEventListener('click',()=>{all.open=true;}));
+})();
