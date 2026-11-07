@@ -1,4 +1,5 @@
 const META_PIXEL_ID = "4662163010727947";
+const META_PIXEL_IDS = [META_PIXEL_ID, "1668583751442846"];
 
 (function initMetaPixel(){
   if(window.selenaPixelInitialized) return;
@@ -8,8 +9,8 @@ const META_PIXEL_ID = "4662163010727947";
     t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)
   }(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init',META_PIXEL_ID);
-  fbq('trackSingle',META_PIXEL_ID,'PageView');
+  META_PIXEL_IDS.forEach(id=>fbq('init',id));
+  META_PIXEL_IDS.forEach(id=>fbq('trackSingle',id,'PageView'));
   window.selenaPixelInitialized = true;
 })();
 
@@ -18,7 +19,7 @@ document.querySelectorAll('.js-line').forEach(link=>{
   link.dataset.pixelBound = 'true';
   link.addEventListener('click',()=>{
     if(typeof window.fbq === 'function'){
-      window.fbq('trackSingle',META_PIXEL_ID,'Contact');
+      META_PIXEL_IDS.forEach(id=>window.fbq('trackSingle',id,'Contact'));
     }
   });
 });
