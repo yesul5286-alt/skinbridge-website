@@ -56,6 +56,11 @@ section h2 + .lead { color: var(--muted); font-size: 14px; margin: 6px 0 14px; }
 .num { flex: none; width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(135deg, var(--gold-d), #d4ab57); color: #fff; font: 900 15px/30px Arial; text-align: center; }
 .tip { margin-top: 10px; font-size: 14px; color: var(--gold-d); font-weight: 700; }
 
+/* 일반 정보 */
+.gen-label { display: inline-block; font-size: 12px; color: var(--muted); border: 1px solid var(--line); border-radius: 20px; padding: 2px 10px; margin-bottom: 8px; }
+.gen .dot { flex: none; width: 8px; height: 8px; margin-top: 9px; border-radius: 50%; background: var(--gold); }
+.gen li { font-weight: 400; }
+
 /* 가격 */
 .pr { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 13px 0; border-top: 1px solid var(--line); }
 .pr:first-child { border-top: 0; }
