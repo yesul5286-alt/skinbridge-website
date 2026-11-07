@@ -1,0 +1,94 @@
+/* 편별 안내 페이지 공통 스타일. 색·글꼴은 운영 중인 /selena-tw/style.css 토큰을 그대로 따른다(크림·골드). */
+:root {
+  --ink: #222d30; --muted: #69645d; --gold: #a98446; --gold-d: #795232; --rust: #a8471d;
+  --line: #e8ddd0; --cream: #fffaf3; --card: #fffdf9; --soft: #fff6e8; --line-green: #06c755;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--cream); color: var(--ink); font-family: Arial, "PingFang TC", "Microsoft JhengHei", sans-serif; line-height: 1.6; padding-bottom: 92px; }
+a { color: inherit; text-decoration: none; }
+img { display: block; max-width: 100%; height: auto; }
+h1, h2, h3 { font-family: Georgia, "Noto Serif TC", "PMingLiU", serif; margin: 0; }
+a:focus-visible { outline: 3px solid #9c591d; outline-offset: 4px; }
+
+.wrap { max-width: 720px; margin: 0 auto; padding: 0 16px; }
+.header { position: sticky; top: 0; z-index: 20; background: #fffaf4ed; backdrop-filter: blur(12px); border-bottom: 1px solid #dfceb466; }
+.header .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.logo { display: flex; align-items: center; gap: 10px; color: #765019; }
+.logo img { height: 44px; width: auto; }
+.logo span { font: 20px Georgia, serif; letter-spacing: 2px; }
+.home-link { font-size: 14px; color: var(--gold-d); border: 1px solid #dfceb4; border-radius: 40px; padding: 6px 14px; }
+
+/* 첫 화면 */
+.hero { padding: 28px 0 8px; }
+.kicker { display: inline-block; font-size: 14px; font-weight: 700; color: #fff; background: linear-gradient(90deg, var(--gold-d), var(--gold)); padding: 4px 14px; border-radius: 40px; }
+.hero h1 { font-size: clamp(34px, 9vw, 52px); line-height: 1.15; font-weight: 900; letter-spacing: -1px; margin: 14px 0 10px; }
+.hero h1 span { color: var(--gold-d); display: block; }
+.hero .sub { font-size: 18px; font-weight: 700; margin: 0 0 18px; }
+.doctor { display: flex; align-items: center; gap: 14px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 12px; }
+.doctor img { width: 72px; height: 72px; border-radius: 50%; object-fit: cover; object-position: 50% 18%; flex: none; }
+.doctor b { display: block; font-size: 16px; white-space: nowrap; }
+.doctor small { display: block; color: var(--muted); font-size: 13px; }
+
+/* 목차 */
+.toc { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 0; padding: 0; list-style: none; }
+.toc a { display: block; font-size: 14px; padding: 6px 12px; border-radius: 40px; background: var(--soft); border: 1px solid #ead9bd; color: var(--gold-d); }
+
+/* 섹션 */
+section { padding: 30px 0 6px; scroll-margin-top: 70px; }
+section h2 { font-size: 24px; line-height: 1.3; }
+section h2 + .lead { color: var(--muted); font-size: 14px; margin: 6px 0 14px; }
+.panel { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 6px 16px; box-shadow: 0 8px 22px rgba(120, 90, 40, .07); }
+.note { margin-top: 12px; padding: 14px 16px; background: var(--soft); border: 1px solid #dcc196; border-radius: 14px; font-weight: 700; }
+
+/* 비교: 모바일에선 시술마다 카드 한 장 */
+.cmp { display: grid; gap: 12px; }
+.cmp article { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px; }
+.cmp h3 { font-size: 19px; color: var(--gold-d); margin-bottom: 6px; }
+.cmp dl { margin: 0; display: grid; grid-template-columns: 6.5em 1fr; gap: 6px 10px; }
+.cmp dt { color: var(--muted); font-size: 14px; padding-top: 1px; }
+.cmp dd { margin: 0; font-weight: 700; }
+
+/* 체크리스트 */
+.check { list-style: none; margin: 0; }
+.check li { display: flex; gap: 12px; padding: 14px 0; border-top: 1px solid var(--line); font-weight: 700; }
+.check li:first-child { border-top: 0; }
+.num { flex: none; width: 30px; height: 30px; border-radius: 50%; background: linear-gradient(135deg, var(--gold-d), #d4ab57); color: #fff; font: 900 15px/30px Arial; text-align: center; }
+.tip { margin-top: 10px; font-size: 14px; color: var(--gold-d); font-weight: 700; }
+
+/* 가격 */
+.pr { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 13px 0; border-top: 1px solid var(--line); }
+.pr:first-child { border-top: 0; }
+.pr span { font-weight: 700; font-size: 15px; }
+.pr strong { flex: none; color: var(--rust); font-size: 18px; white-space: nowrap; }
+.pr strong small { font-size: 12px; color: var(--muted); font-weight: 400; margin-left: 2px; }
+.period { font-size: 13px; color: var(--muted); margin-top: 10px; }
+
+/* 원장님 한마디 */
+.quote { text-align: center; padding: 26px 16px; background: var(--card); border: 1px solid var(--line); border-radius: 16px; }
+.quote q { display: block; font: 900 26px/1.35 Georgia, "Noto Serif TC", serif; color: var(--gold-d); quotes: "「" "」"; }
+.quote cite { display: block; margin-top: 10px; font-style: normal; font-size: 14px; color: var(--muted); }
+
+/* 병원 정보 */
+.keys { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 12px; }
+.keys div { text-align: center; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 10px 4px; }
+.keys b { display: block; font-size: 13px; letter-spacing: .5px; }
+.keys i { display: block; font-style: normal; color: var(--gold-d); font-weight: 700; }
+.keys em { display: block; font-style: normal; font-size: 12px; color: var(--muted); }
+.info { list-style: none; margin: 12px 0 0; }
+.info li { padding: 8px 0; border-top: 1px solid var(--line); }
+.info li:first-child { border-top: 0; }
+.map { border-radius: 14px; border: 1px solid var(--line); margin-top: 12px; }
+.disc { font-size: 12px; color: var(--muted); padding: 24px 0 10px; }
+
+/* LINE 버튼 */
+.line-btn { display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--line-green); color: #fff; font-weight: 800; font-size: 17px; border-radius: 40px; padding: 14px 20px; }
+.line-btn svg { width: 22px; height: 22px; fill: #fff; }
+.sticky { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: #fffaf4f2; border-top: 1px solid var(--line); }
+.sticky .line-btn { max-width: 688px; margin: 0 auto; }
+
+.home-btn { display: block; text-align: center; padding: 13px 20px; border: 1.5px solid var(--gold); border-radius: 40px; color: var(--gold-d); font-weight: 800; background: var(--card); }
+.home-link { font-weight: 700; }
+
+/* 검토판(_review)에서만 나오는 한국어 뜻 */
+.ko { display: block; font: 400 13px/1.45 "Malgun Gothic", sans-serif; color: #2f6db5; margin-top: 2px; }
