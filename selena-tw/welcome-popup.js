@@ -7,12 +7,15 @@
  // Taiwan customer day; expiry follows the calendar rather than 24 hours.
  const day=()=>new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Taipei',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
  let index=0,start=null,suppressClick=false,returnTo=null;
- const base=new URL(image.src);
+ // 2026-11-08: 팝업 이미지는 index.html 의 data-slides("경로|제목;경로|제목") 에서 읽는다 (셀레나 번체 이벤트 포스터).
+ const slides=(popup.dataset.slides||'').split(';').map(s=>s.split('|')).filter(s=>s[0]);
+ const total=slides.length||1;
  function show(next){
-  index=(next+5)%5;
-  image.src=new URL(`welcome-${String(index+1).padStart(2,'0')}.png`,base).href;
-  image.alt=`SELENA 診所介紹 ${index+1} / 5`;
-  count.textContent=`${index+1} / 5`;
+  index=(next+total)%total;
+  const [src,title]=slides[index]||[image.getAttribute('src'),''];
+  image.src=new URL(src,document.baseURI).href;
+  image.alt=`${title} ${index+1} / ${total}`;
+  count.textContent=`${index+1} / ${total}`;
  }
  function remember(){try{if(hide.checked)localStorage.setItem(key,day());}catch{}}
  popup.querySelectorAll('[data-welcome-close]').forEach(button=>button.addEventListener('click',()=>popup.close()));

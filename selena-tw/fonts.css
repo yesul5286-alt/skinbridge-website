@@ -1,0 +1,266 @@
+/* 셀레나 대만 페이지 글꼴 — 명조 제목 + 고딕 본문 (2026-11-08 사용자 선택 B)
+   - 제목·이벤트 이름: Noto Serif TC 600 (思源宋體)
+   - 본문: Noto Sans TC 400 (思源黑體), 줄 간격 넉넉하게
+   - 영문 라벨·숫자: Montserrat 400~500
+   맨 마지막에 불러와서 style.css·custom.css 의 글꼴만 덮어쓴다. 구글 폰트는 필요한 글자 조각만 내려받는다. */
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@500;600&display=swap");
+
+:root{
+  --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  --f-head:"Noto Serif TC","Songti TC","PMingLiU",serif;
+  --f-latin:"Montserrat","Noto Sans TC",Arial,sans-serif;
+}
+
+/* 본문 */
+body,button,input,select,textarea,summary{font-family:var(--f-body);font-weight:400}
+body{line-height:1.75;letter-spacing:.03em}
+b,strong{font-weight:500}
+
+/* 제목 · 이벤트 이름 (명조) */
+h1,h2,h3,.hero h1,.section-title h2,.doctor-note blockquote,
+.evg-zh,.ev-zh,.ev-intro h1,.ev-hero-text h1,.ev-posters h2{font-family:var(--f-head);font-weight:600;letter-spacing:.02em}
+.hero h1{line-height:1.3}
+h3{font-weight:500}
+
+/* 짧은 강조(아이콘 아래 글, 포스터 제목, 버튼) — 고딕 500 */
+.benefit-grid strong,.poster-meta b,.btn,.cta,.ev-cta,.floating-line-label,
+.ev-group h2,.ev-period,.ev-textprice summary{font-family:var(--f-body);font-weight:500}
+
+/* 보조 설명은 한 단계 가늘게 */
+.evg-help,.poster-help,.ev-note,.ev-desc{font-weight:300}
+
+/* 영문 라벨 · 숫자 */
+.hero-kicker,.eyebrow,.section-title p,.ev-kicker,.ev-en{font-family:var(--f-latin);font-weight:400;font-style:normal;letter-spacing:.2em}
+.ev-p b{font-family:var(--f-latin);font-weight:500}
+
+/* 첫 화면 제목 아래 2줄 (2026-11-08) */
+.hero-place{margin:0 0 4px;font-size:13px;font-weight:500;color:#8b552a;letter-spacing:.06em}
+.hero-sub2{margin:0;font-size:15px;font-weight:400;color:#2f3a3d;letter-spacing:.04em}
+@media(min-width:801px){.hero-place{font-size:17px}.hero-sub2{font-size:clamp(18px,1.8vw,24px)}}
+
+/* 첫 화면 사진이 떠 보이지 않게 (휴대폰): 아래 빈 띠 없애고 사진 끝을 아이콘 칸 색으로 녹임 */
+@media(max-width:800px){
+  .hero{padding-bottom:0!important;background:#fffcf8!important}
+  .hero:after{display:none}
+  .hero-image{-webkit-mask-image:linear-gradient(180deg,#000 72%,transparent 100%);mask-image:linear-gradient(180deg,#000 72%,transparent 100%)}
+  .hero-caption{bottom:6px;right:12px;background:none;padding:0;font-size:10px;color:#9a8a76}
+  .benefit-band{margin-top:0;border-top:0}
+}
+
+/* 구글 지도 평점 줄 (아이콘 칸 바로 아래) */
+.g-rating-wrap{max-width:1184px;margin:0 auto;padding:12px 16px 0}
+.g-rating{display:flex;align-items:center;gap:10px;padding:11px 16px;border:1px solid #e8ddd0;border-radius:999px;background:#fffcf8;color:#222d30;text-decoration:none}
+.g-src{font-size:12px;color:#7a7268;white-space:nowrap}
+.g-score{display:flex;align-items:center;gap:6px}
+.g-score b{font-family:var(--f-latin);font-weight:500;font-size:18px;letter-spacing:0}
+.g-stars{color:#c9a24e;font-size:12px;letter-spacing:1px}
+.g-count{font-size:12px;color:#7a7268;margin-left:auto;white-space:nowrap}
+.g-arrow{color:#a98446;font-size:14px}
+.g-rating:hover{border-color:#d8c3a3}
+@media(min-width:801px){.g-rating-wrap{padding:18px 24px 0}.g-rating{max-width:560px;margin:0 auto}}
+@media(max-width:360px){.g-src{display:none}}
+@media(max-width:420px){.g-rating{gap:7px;padding:10px 14px}.g-src,.g-count{font-size:11px}.g-score b{font-size:17px}.g-stars{font-size:11px;letter-spacing:0}}
+
+/* 의료진 이름·전문 분야 */
+.doctor-team{list-style:none;margin:18px 0 0;padding:0;display:grid;gap:10px}
+.doctor-team li{padding:14px 16px;border:1px solid #e8ddd0;border-radius:4px;background:#fffcf8}
+.dt-name{margin:0;font-family:var(--f-head);font-weight:600;font-size:17px;color:#2f3a3d;letter-spacing:.02em}
+.dt-name span{margin-left:8px;font-family:var(--f-body);font-weight:400;font-size:12px;color:#8b552a;letter-spacing:.04em}
+.dt-focus{margin:4px 0 0;font-size:13px;color:#765019;font-weight:500}
+.dt-cv{margin:6px 0 0;font-size:12px;line-height:1.7;color:#7a7268;font-weight:300}
+.dt-zh{display:inline-block;margin:8px 0 0;padding:3px 10px;border-radius:999px;background:#06c755;color:#fff;font-size:11px;font-weight:500;letter-spacing:.06em}
+@media(min-width:801px){.doctor-team{grid-template-columns:repeat(3,1fr)}}
+
+/* ── 휴대폰 하단 고정 LINE 바 (고급형) ── */
+.line-bar{display:none}
+@media(max-width:800px){
+  .line-bar{position:fixed;left:10px;right:10px;bottom:max(10px,env(safe-area-inset-bottom));z-index:70;display:flex;align-items:stretch;gap:6px;padding:6px;border-radius:16px;
+    background:rgba(38,31,24,.9);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+    border:1px solid rgba(201,163,94,.45);box-shadow:0 14px 30px -14px rgba(30,20,10,.65)}
+  .lb-main{flex:1;display:flex;align-items:center;gap:11px;padding:7px 12px 7px 8px;border-radius:11px;text-decoration:none;color:#f3e6cc}
+  .lb-icon{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#06c755;color:#fff}
+  .lb-icon svg{width:20px;height:20px}
+  .lb-text{display:flex;flex-direction:column;line-height:1.25}
+  .lb-text b{font-family:var(--f-head);font-weight:600;font-size:15.5px;letter-spacing:.06em;color:#f6e9cf}
+  .lb-text small{font-size:11px;color:#c9a35e;letter-spacing:.06em;font-weight:400}
+  .lb-arrow{margin-left:auto;color:#c9a35e;font-size:18px;transition:transform .2s ease}
+  .lb-main:active .lb-arrow{transform:translateX(3px)}
+  .lb-sns{flex:none;width:44px;display:grid;place-items:center;border-radius:11px;border:1px solid rgba(201,163,94,.3);color:#c9a35e}
+  .lb-sns svg{width:20px;height:20px}
+  /* 기존 떠 있는 동그란 버튼 3개는 휴대폰에서 숨김 */
+  .floating-line,.floating-social,.floating-contacts{display:none!important}
+  body{padding-bottom:84px}
+}
+/* 하단 LINE 바: 얇고 깔끔하게 (한 줄 알약형) */
+@media(max-width:800px){
+  .line-bar{left:14px;right:14px;bottom:max(12px,env(safe-area-inset-bottom));padding:4px 6px 4px 4px;gap:2px;border-radius:999px;align-items:center}
+  .lb-main{padding:4px 8px 4px 4px;gap:9px;border-radius:999px}
+  .lb-icon{width:28px;height:28px}
+  .lb-icon svg{width:16px;height:16px}
+  .lb-text small{display:none}
+  .lb-text b{font-size:14px;letter-spacing:.08em}
+  .lb-arrow{font-size:15px;margin-right:6px}
+  .lb-sns{width:32px;height:32px;border:0;border-left:1px solid rgba(201,163,94,.25);border-radius:0}
+  .lb-sns + .lb-sns{border-left:0}
+  .lb-sns svg{width:17px;height:17px}
+  body{padding-bottom:64px}
+}
+
+/* 이벤트 카드 아래 안심 띠 3칸 */
+.trust-strip{list-style:none;margin:16px 0 0;padding:14px 0;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #e3d7c6;border-bottom:1px solid #e3d7c6}
+.trust-strip li{display:flex;flex-direction:column;align-items:center;text-align:center;gap:3px;padding:0 4px}
+.trust-strip li + li{border-left:1px solid #ece2d4}
+.ts-ic svg{width:24px;height:24px;fill:none;stroke:#a98446;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+.trust-strip b{font-family:var(--f-head);font-weight:600;font-size:13.5px;color:#3d3026;letter-spacing:.04em;margin-top:2px}
+.trust-strip small{font-size:10.5px;color:#8a7a68;font-weight:300}
+@media(min-width:801px){.trust-strip{max-width:960px;margin:26px auto 0;padding:20px 0}.ts-ic svg{width:30px;height:30px}.trust-strip b{font-size:17px}.trust-strip small{font-size:13px}}
+/* 위치 칸 일요일 진료 표시 */
+.sun-badge{display:inline-block;margin-left:8px;padding:2px 9px;border:1px solid #a98446;border-radius:999px;color:#765019;font-style:normal;font-size:11px;font-weight:500;letter-spacing:.06em;vertical-align:2px}
+
+/* ── 시술 이념 · 진행 3단계 · 안전 원칙 ── */
+.philo{max-width:1200px;margin:0 auto;padding:40px 16px 34px;text-align:center}
+.philo-kicker,.ps-kicker{margin:0 0 8px;font:400 11px/1.4 var(--f-latin);letter-spacing:.24em;color:#a07c48}
+.philo-kicker::before{content:"";display:block;width:40px;height:1px;margin:0 auto 14px;background:#b8955c}
+.philo-quote{margin:0;font-family:var(--f-head);font-weight:500;font-size:22px;line-height:1.55;color:#3d3026;letter-spacing:.04em}
+.philo-steps{list-style:none;margin:26px 0 0;padding:0;display:grid;gap:10px;text-align:left}
+.philo-steps li{position:relative;display:grid;grid-template-columns:44px 1fr;column-gap:12px;align-items:center;padding:14px 16px;background:#fffcf8;border:1px solid #e8ddd0;border-radius:4px}
+.ps-no{grid-row:span 2;font-family:var(--f-head);font-style:italic;font-size:24px;color:#a98446;text-align:center;border-right:1px solid #e8ddd0}
+.philo-steps b{font-family:var(--f-head);font-weight:600;font-size:15px;color:#2f3a3d;letter-spacing:.04em}
+.philo-steps small{font-size:12px;color:#7a7268;font-weight:300}
+.philo-steps li + li::before{content:"";position:absolute;left:37px;top:-11px;width:1px;height:10px;background:#c9a35e}
+.philo-safe{margin:26px 0 0;padding:26px 18px 22px;background:#2a231c;color:#efe2c6;border-radius:4px;position:relative}
+.philo-safe::before{content:"";position:absolute;inset:6px;border:1px solid rgba(201,163,94,.35);pointer-events:none}
+.ps-kicker{color:#c9a35e}
+.philo-safe h3{margin:0;font-family:var(--f-head);font-weight:600;font-size:20px;color:#f3e6cc;letter-spacing:.06em}
+.ps-lead{margin:12px 0 0;font-size:13px;color:#cdb894;font-weight:300}
+.ps-no-list{list-style:none;margin:14px 0 0;padding:0;display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+.ps-no-list li{padding:7px 14px;border:1px solid rgba(201,163,94,.55);border-radius:999px;font-size:13px;color:#f3e6cc;letter-spacing:.06em}
+.ps-no-list li::before{content:"✕";margin-right:6px;color:#c9a35e;font-size:11px}
+.ps-foot{margin:16px 0 0;font-size:12px;color:#a8946f;letter-spacing:.06em}
+@media(min-width:801px){
+  .philo{padding:70px 24px 60px}
+  .philo-quote{font-size:34px}
+  .philo-steps{grid-template-columns:repeat(3,1fr);gap:16px;max-width:1000px;margin:40px auto 0}
+  .philo-steps li + li::before{display:none}
+  .philo-safe{max-width:1000px;margin:36px auto 0;padding:40px}
+  .philo-safe h3{font-size:28px}
+}
+
+/* ══ 디자인 통일 (2026-11-08) ══ */
+/* 1. 모든 큰 칸 제목: 금색 짧은 선 + 영문 소제목 + 명조 제목, 가운데 */
+.section-title{display:block!important;text-align:center;margin:0 0 20px!important}
+.section-title p,.doctor-copy .eyebrow,.info-copy .eyebrow,.price-intro .eyebrow{display:block!important;order:0;margin:0 0 6px;font:400 11px/1.4 var(--f-latin)!important;letter-spacing:.24em!important;color:#a07c48!important;text-align:center}
+.section-title p::before,.doctor-copy .eyebrow::before,.info-copy .eyebrow::before,.price-intro .eyebrow::before{content:"";display:block;width:40px;height:1px;margin:0 auto 14px;background:#b8955c}
+.section-title h2,.doctor-copy h2,.info-copy h2,.price-intro h2{font-family:var(--f-head)!important;font-weight:500!important;font-size:24px!important;line-height:1.5!important;letter-spacing:.06em;color:#3d3026;text-align:center;margin:0}
+.review-intro,.review-intro p,.doctor-copy .philosophy-line,.doctor-copy .doctor-lead,.price-intro p{text-align:center}
+.doctor-team{text-align:left}
+@media(min-width:801px){.section-title h2,.doctor-copy h2,.info-copy h2,.price-intro h2{font-size:34px!important}.section-title p,.doctor-copy .eyebrow,.info-copy .eyebrow,.price-intro .eyebrow{font-size:13px!important}}
+
+/* 2. 아이콘 금색, 바닥글 에스프레소 */
+.benefit-grid svg{stroke:#a98446!important;stroke-width:1.4!important}
+.footer{background:#2a231c!important;color:#e9dcc2;border-top:1px solid rgba(201,163,94,.4)}
+
+/* 3. 원장 카드에 둥근 사진, 겹치는 큰 사진·문구 숨김 */
+.doctor-team li{display:grid;grid-template-columns:64px 1fr;column-gap:14px;align-items:start}
+.doctor-team li > *:not(.dt-photo){grid-column:2}
+.dt-photo{grid-row:1 / span 4;width:64px;height:64px;border-radius:50%;object-fit:cover;border:1px solid #d8c3a3;padding:2px;background:#fff}
+.doctor-photo,.doctor-note blockquote,.doctor-note ul{display:none!important}
+@media(min-width:801px){.doctor-team li{grid-template-columns:76px 1fr}.dt-photo{width:76px;height:76px}}
+
+/* 4. FAQ: 기본 삼각형 대신 금색 ＋, 질문 사이 가는 선 */
+.faq-list details{border-top:1px solid #e8ddd0;padding:0}
+.faq-list details:last-child{border-bottom:1px solid #e8ddd0}
+.faq-list summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 2px!important;font-family:var(--f-head);font-weight:500!important;font-size:16px!important;color:#3d3026!important;letter-spacing:.03em}
+.faq-list summary::marker,.faq-list summary::-webkit-details-marker{content:"";display:none}
+.faq-list summary::before{display:none!important;content:none!important}
+.faq-list summary::after{content:"＋";flex:none;color:#a98446;font-family:var(--f-latin);font-size:18px;font-weight:300;transition:transform .25s ease}
+.faq-list details[open] summary::after{transform:rotate(45deg)}
+.faq-list details p{margin:0 0 18px;padding:0 2px;color:#5b544c;font-size:14px;line-height:1.8}
+
+/* 원장 사진 크게 */
+.doctor-team li{grid-template-columns:88px 1fr;column-gap:16px;align-items:center}
+.dt-photo{width:88px;height:88px;padding:3px}
+@media(min-width:801px){.doctor-team li{grid-template-columns:108px 1fr}.dt-photo{width:108px;height:108px}}
+.dt-zh{justify-self:start;width:auto}
+
+/* 원장 카드 글자 정렬: 이름 / 직함 / 전문 / 경력 네 줄로 고르게 */
+.dt-name{line-height:1.3}
+.dt-name span{display:block;margin:3px 0 0;font-size:12px;letter-spacing:.06em}
+.dt-focus{margin-top:8px;font-size:13px;line-height:1.5}
+.dt-cv{margin-top:4px;font-size:12px;line-height:1.65}
+.dt-zh{margin-top:8px}
+.doctor-team li{padding:16px 18px}
+@media(min-width:801px){.dt-name{font-size:19px}.dt-name span{font-size:13px}.dt-focus{font-size:14px}.dt-cv{font-size:13px}}
+.dt-focus span{font-weight:400;color:#8b6a3e}
+.dt-focus,.dt-cv{word-break:keep-all}
+
+/* 5. 가격 안내 칸 가볍게 */
+.price-intro p{margin:6px 0 0;font-size:13px;line-height:1.7;color:#6b6259}
+.price-intro .price-condition{color:#8b6a3e}
+.price-all > summary{margin:18px auto 0;max-width:280px;justify-content:center;gap:8px;padding:12px 18px!important;border:1px solid #b8955c!important;border-radius:999px;background:transparent!important;color:#765019!important;font-family:var(--f-body);font-weight:500!important;font-size:14px!important;letter-spacing:.08em}
+
+/* 7. 마지막 LINE 마무리 카드 */
+.closing-cta{margin:28px 16px 0;padding:34px 22px 30px;text-align:center;background:#2a231c;color:#efe2c6;border-radius:4px;position:relative}
+.closing-cta::before{content:"";position:absolute;inset:6px;border:1px solid rgba(201,163,94,.35);pointer-events:none}
+.cc-kicker{margin:0 0 10px;font:400 11px/1.4 var(--f-latin);letter-spacing:.24em;color:#c9a35e}
+.closing-cta h2{margin:0;font-family:var(--f-head);font-weight:500;font-size:22px;line-height:1.5;letter-spacing:.04em;color:#f6e9cf}
+.cc-lead{margin:12px 0 0;font-size:13px;line-height:1.75;color:#cdb894;font-weight:300}
+.cc-btn{position:relative;display:inline-flex;align-items:center;gap:10px;margin-top:20px;padding:12px 26px;border-radius:999px;background:#06c755;color:#fff;text-decoration:none;font-size:15px;font-weight:500;letter-spacing:.08em}
+@media(min-width:801px){.closing-cta{max-width:1000px;margin:50px auto 0;padding:56px 40px}.closing-cta h2{font-size:32px}.cc-lead{font-size:15px}}
+
+/* 8. 칸별 배경 리듬 (화면 끝까지 꽉 채움) */
+.review-section,.doctor-section,.clinic-section,.faq-section{background:#ffffff;box-shadow:0 0 0 100vmax #ffffff;clip-path:inset(0 -100vmax)}
+#posters,.price-section,.philo,.info-section{background:#fbf7f1;box-shadow:0 0 0 100vmax #fbf7f1;clip-path:inset(0 -100vmax)}
+.price-section{padding-top:30px;padding-bottom:30px}
+.price-intro p{word-break:keep-all}
+
+/* ── 대표원장 영상 ── */
+.dv-play{position:absolute;left:50%;top:50%;width:56px;height:56px;margin:-28px 0 0 -28px;border-radius:50%;background:rgba(42,35,28,.55);border:1px solid rgba(255,255,255,.7);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.dv-play::after{content:"";position:absolute;left:22px;top:17px;border-left:16px solid #fff;border-top:11px solid transparent;border-bottom:11px solid transparent}
+/* ① 의료진 칸 대표 영상 */
+.dv-hero{position:relative;display:block;width:100%;max-width:360px;margin:20px auto 18px;padding:0;border:0;border-radius:6px;overflow:hidden;aspect-ratio:9/14;background:#2a231c;cursor:pointer;box-shadow:0 18px 34px -22px rgba(42,35,28,.7)}
+.dv-hero img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+.dv-hero::before{content:"";position:absolute;inset:6px;border:1px solid rgba(201,163,94,.45);z-index:1;pointer-events:none;border-radius:3px}
+.dv-hero .dv-play{width:68px;height:68px;margin:-34px 0 0 -34px}
+.dv-hero .dv-play::after{left:27px;top:21px;border-left-width:19px;border-top-width:13px;border-bottom-width:13px}
+.dv-cap{position:absolute;left:0;right:0;bottom:0;padding:40px 18px 16px;text-align:left;color:#fff;background:linear-gradient(180deg,transparent,rgba(30,22,15,.85));display:flex;flex-direction:column;gap:3px}
+.dv-cap small{font:400 11px/1.4 var(--f-latin);letter-spacing:.16em;color:#e3c992}
+.dv-cap b{font-family:var(--f-head);font-weight:500;font-size:18px;letter-spacing:.04em}
+.dv-cap i{font-style:normal;font-size:11px;opacity:.75}
+/* 이상경 원장 사진 ▶ */
+.doctor-team li{position:relative}
+.dt-play{grid-column:1;grid-row:1 / span 4;align-self:end;justify-self:end;width:28px;height:28px;margin:0 -2px -2px 0;border-radius:50%;border:2px solid #fff;background:#a98446;cursor:pointer;position:relative;z-index:1}
+.dt-play::after{content:"";position:absolute;left:10px;top:7px;border-left:8px solid #fff;border-top:5px solid transparent;border-bottom:5px solid transparent}
+/* ② 원장 해설 줄 */
+.dv-section{max-width:1200px;margin:0 auto;padding:36px 0 30px;background:#ffffff;box-shadow:0 0 0 100vmax #ffffff;clip-path:inset(0 -100vmax)}
+.dv-section .section-title{padding:0 16px}
+.dv-lead{margin:-8px 16px 16px;text-align:center;font-size:13px;color:#7a7268;font-weight:300}
+.dv-rail{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:0 16px 6px;scrollbar-width:none}
+.dv-rail::-webkit-scrollbar{display:none}
+.dv-card{position:relative;flex:0 0 42%;scroll-snap-align:start;padding:0;border:0;background:none;text-align:left;cursor:pointer}
+.dv-card img{width:100%;aspect-ratio:9/16;object-fit:cover;border-radius:5px;display:block}
+.dv-card .dv-play{top:42%;width:44px;height:44px;margin:-22px 0 0 -22px}
+.dv-card .dv-play::after{left:17px;top:13px;border-left-width:13px;border-top-width:9px;border-bottom-width:9px}
+.dv-card i{position:absolute;right:8px;top:8px;padding:2px 7px;border-radius:999px;background:rgba(42,35,28,.6);color:#fff;font-style:normal;font-size:11px}
+.dv-card b{display:block;margin-top:8px;font-family:var(--f-head);font-weight:500;font-size:14px;line-height:1.45;color:#3d3026;letter-spacing:.02em}
+@media(min-width:801px){.dv-rail{justify-content:center;padding:0 24px;overflow:visible}.dv-card{flex:0 0 220px}.dv-hero{max-width:400px}}
+/* 재생 창 */
+.dv-dialog{width:min(420px,94vw);max-height:94vh;padding:0;border:0;border-radius:8px;background:#1d1813;color:#f3e6cc;overflow:hidden}
+.dv-dialog::backdrop{background:rgba(20,15,10,.82)}
+.dv-dialog video{display:block;width:100%;max-height:calc(94vh - 56px);aspect-ratio:9/16;background:#000;object-fit:contain}
+.dv-bar{display:flex;align-items:center;gap:8px;padding:10px 10px}
+.dv-bar p{flex:1;margin:0;text-align:center;font-size:13px;color:#e3c992}
+.dv-bar button,.dv-close{width:36px;height:36px;border-radius:50%;border:1px solid rgba(201,163,94,.5);background:transparent;color:#f3e6cc;font-size:20px;line-height:1;cursor:pointer}
+.dv-close{position:absolute;right:10px;top:10px;z-index:2;background:rgba(0,0,0,.45)}
+.dv-card img{height:auto}
+
+/* 영상 정리: 해설 줄 한 곳, 카드 작게, 상담 사진 숨김 */
+.dv-card{flex:0 0 34%}
+.dv-card b{font-size:12.5px;margin-top:6px}
+.dv-card .dv-play{width:36px;height:36px;margin:-18px 0 0 -18px}
+.dv-card .dv-play::after{left:14px;top:10px;border-left-width:11px;border-top-width:8px;border-bottom-width:8px}
+.dv-section{padding:30px 0 24px}
+.doctor-note{display:none!important}
+@media(min-width:801px){.dv-card{flex:0 0 180px}.dv-card b{font-size:14px}}
+.doctor-team li > .dt-play{position:absolute;grid-column:auto;grid-row:auto;left:82px;top:calc(50% + 16px);margin:0}
+@media(min-width:801px){.doctor-team li > .dt-play{left:100px;top:calc(50% + 24px)}}
