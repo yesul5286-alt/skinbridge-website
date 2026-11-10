@@ -1,5 +1,5 @@
 const META_PIXEL_ID = "4662163010727947";
-const META_PIXEL_IDS = [META_PIXEL_ID, "1668583751442846"];
+const META_PIXEL_IDS = [META_PIXEL_ID, "1668583751442846", "1776658760237143"];
 
 (function initMetaPixel(){
   if(window.selenaPixelInitialized) return;
