@@ -3,7 +3,7 @@
  * - LINE 링크(a.js-line) 클릭 시 Contact
  * 구글 광고 전환(SELENA_LINE_Click)은 ../google-ads.js, LINE 주소 분기는 ../line-routing.js 가 맡는다. */
 (function () {
-  var META_PIXEL_IDS = ["4662163010727947", "1668583751442846"];
+  var META_PIXEL_IDS = ["4662163010727947", "1668583751442846", "1776658760237143"];
   if (!window.selenaPixelInitialized) {
     !function (f, b, e, v, n, t, s) {
       if (f.fbq) return; n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments) };
