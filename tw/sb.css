@@ -568,3 +568,27 @@ button.link{background:none;border:0;padding:0}
   .scard:nth-child(even){margin-top:0}
   .scard{min-height:300px}
 }
+
+/* 홈 휴대폰 보정 */
+.home2{gap:26px}
+.h-hero-tx{padding-top:40px}
+.trust{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:10px;justify-content:stretch}
+.trust li{justify-content:center;font-size:.76rem;padding:0 4px}
+.trust li:nth-child(3){border-left:0}
+.more{white-space:nowrap;flex:none}
+.h-head .row2 p{flex:1;min-width:0}
+.why{grid-template-columns:1fr;gap:16px;padding:22px 0}
+.disp.big{border-right:0;padding-right:0;font-size:1.5rem}
+.disp.big br{display:none}
+.why-l b{font-size:.74rem}
+@media(min-width:520px){
+  .trust{grid-template-columns:repeat(4,auto);justify-content:space-between}
+  .trust li:nth-child(3){border-left:1px solid var(--rule)}
+}
+@media(min-width:900px){
+  .home2{gap:56px}
+  .why{grid-template-columns:240px 1fr;padding:40px 0}
+  .disp.big{font-size:2rem;border-right:1px solid var(--rule);padding-right:24px}
+  .disp.big br{display:inline}
+  .why-l b{font-size:.9rem}
+}
