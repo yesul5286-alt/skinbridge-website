@@ -1,7 +1,7 @@
 /* Layout: 매거진형 단일 컬럼(최대 1080px). 첫 화면은 체험단 줄 → 병원 줄 → 마감 임박 줄이 가로 넘김으로 번갈아 나옴.
    해시로 화면 전환: 首頁 / #camps / #clinics / #c-병원id / #apply. 연분홍 종이 느낌 한 가지 테마로 고정. */
 :root{
-  --paper:#F1F0EB; --white:#FAF9F6; --ink:#1E1E1C; --muted:#7B766E; --rule:#E2DED7;
+  --paper:#F1F0EB; --white:#FAF9F6; --ink:#1E1E1C; --muted:#68635B; --rule:#E2DED7;
   --rose:#75433F; --rose-deep:#5E3532; --rose-soft:#ECE5DC; --line-green:#05823D; --btn-line:#D6D1C9;
   --wood:#B99E7E; --sage:#A5A99D;
   --display:"Cormorant Garamond","Times New Roman",serif;
@@ -36,7 +36,7 @@ button{font:inherit;cursor:pointer}
 .view{display:flex;flex-direction:column;gap:30px;padding-top:22px}
 .search{display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--ink);padding:8px 2px}
 .search input{flex:1;border:0;background:transparent;font:inherit;color:var(--ink);padding:4px 0;min-width:0}
-.search input::placeholder{color:#8F7E84}
+.search input::placeholder{color:var(--muted)}
 .search input:focus{outline:none}
 .search:focus-within{border-color:var(--rose)}
 .chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
@@ -355,7 +355,7 @@ body{font-size:15px;line-height:1.65}
 b,strong,h1,h2,h3{font-weight:600}
 .logo{font:400 1.35rem var(--display);letter-spacing:.24em}
 .logo small{font:400 .78rem var(--display);letter-spacing:.24em;color:var(--muted)}
-.en{font:500 .82rem var(--display);letter-spacing:.18em;color:#86704F}
+.en{font:500 .82rem var(--display);letter-spacing:.18em;color:#725C3E}
 .sh h2,.dhead h1{font-family:var(--sans);font-weight:600}
 .sh h2{font-size:1.25rem}
 .dhead h1{font-size:1.6rem}
