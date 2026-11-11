@@ -112,6 +112,8 @@ function render(){
   <fieldset><legend>병원 사진</legend>
     <p class="hint">병원 페이지 맨 위에서 옆으로 넘겨 보는 표지예요. 정사각형(1:1) 이미지가 좋고, 첫 장이 병원 목록 카드의 대표 사진이 돼요.</p>
     <div class="imgs" id="photos"></div>
+    <p class="hint" style="margin-top:12px">로그인 후에만 보이는 병원 제공 전후 사진·후기 캡처('評價' 칸).</p>
+    <div class="imgs" id="gated"></div>
     <p class="hint" style="margin-top:12px">병원 환경 사진('診所環境' 칸에 나와요).</p>
     <div class="imgs" id="interior"></div>
   </fieldset>
@@ -191,7 +193,7 @@ function render(){
   </div>`;
 
   addSecNav();
-  drawLogo(); drawPhotos(); drawInterior(); drawPimgs(); drawPosters(); drawRows("progs"); drawRows("feats"); drawRows("docs"); drawRows("menu"); drawRows("events"); drawRows("tiers");
+  drawLogo(); drawPhotos(); drawInterior(); drawGated(); drawPimgs(); drawPosters(); drawRows("progs"); drawRows("feats"); drawRows("docs"); drawRows("menu"); drawRows("events"); drawRows("tiers");
   $("#c_on").onchange = e => { $("#campBox").hidden = !e.target.checked; };
 }
 
@@ -271,6 +273,11 @@ function drawPimgs(){
   $("#pimgs").innerHTML = arr.map((u, i) => `<div class="thumb" style="height:138px"><img src="${h(u)}" alt=""><button data-delpimg="${i}" title="삭제">✕</button></div>`).join("")
     + `<label class="up" style="height:138px">+ 가격표 이미지<input type="file" accept="image/*" multiple data-img="pimgs"></label>`;
 }
+function drawGated(){
+  const arr = cur.data.gated || (cur.data.gated = []);
+  $("#gated").innerHTML = arr.map((u, i) => `<div class="thumb"><img src="${h(u)}" alt=""><button data-delgated="${i}" title="삭제">✕</button></div>`).join("")
+    + `<label class="up">+ 전후 사진<input type="file" accept="image/*" multiple data-img="gated"></label>`;
+}
 function drawInterior(){
   const arr = cur.data.interior || (cur.data.interior = []);
   $("#interior").innerHTML = arr.map((u, i) => `<div class="thumb"><img src="${h(u)}" alt=""><button data-delint="${i}" title="삭제">✕</button></div>`).join("")
@@ -324,6 +331,7 @@ $("#editor").addEventListener("click", async e => {
   else if (t.dataset.del) { readForm(); const [k, i] = t.dataset.del.split(":"); ROWDEF[k].src().splice(+i, 1); drawRows(k); }
   else if (t.dataset.dellogo) { readForm(); cur.data.logo = ""; drawLogo(); }
   else if (t.dataset.delpimg != null) { readForm(); cur.data.priceImgs.splice(+t.dataset.delpimg, 1); drawPimgs(); }
+  else if (t.dataset.delgated != null) { readForm(); cur.data.gated.splice(+t.dataset.delgated, 1); drawGated(); }
   else if (t.dataset.delint != null) { readForm(); cur.data.interior.splice(+t.dataset.delint, 1); drawInterior(); }
   else if (t.dataset.delposter != null) { readForm(); posterArr().splice(+t.dataset.delposter, 1); drawPosters(); }
   else if (t.dataset.delphoto != null) { readForm(); cur.data.photos.splice(+t.dataset.delphoto, 1); drawPhotos(); }
@@ -353,13 +361,14 @@ $("#editor").addEventListener("change", async e => {
       if (key === "photos") cur.data.photos.push(res.url);
       else if (key === "posters") posterArr().push({ img: res.url, title: "" });
       else if (key === "logo") cur.data.logo = res.url;
+      else if (key === "gated") (cur.data.gated || (cur.data.gated = [])).push(res.url);
       else if (key === "pimgs") (cur.data.priceImgs || (cur.data.priceImgs = [])).push(res.url);
       else if (key === "progs") ROWDEF.progs.src()[+i].img = res.url;
       else if (key === "interior") (cur.data.interior || (cur.data.interior = [])).push(res.url);
       else if (key === "docs") ROWDEF.docs.src()[+i].photo = res.url;
       else if (key === "events") ROWDEF.events.src()[+i].img = res.url;
     }
-    drawLogo(); drawPhotos(); drawInterior(); drawPimgs(); drawPosters(); drawRows("progs"); drawRows("docs"); drawRows("events");
+    drawLogo(); drawPhotos(); drawInterior(); drawGated(); drawPimgs(); drawPosters(); drawRows("progs"); drawRows("docs"); drawRows("events");
     msg("이미지를 올렸어요. 저장을 눌러야 홈페이지에 반영돼요.", "ok");
   } catch (err) { msg("이미지 올리기 실패: " + (err.message || err), "err"); }
 });

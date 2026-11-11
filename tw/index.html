@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&family=Montserrat:wght@500;700&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611120131">
+<link rel="stylesheet" href="/tw/sb.css?v=202611120204">
 </head>
 <body>
 <header class="hd">
@@ -35,7 +35,7 @@
 
 <div class="bar" id="bar"><div class="bar-in" id="barIn"></div></div>
 
-<script src="/tw/sb-common.js?v=202611120131"></script>
+<script src="/tw/sb-common.js?v=202611120204"></script>
 <script>
 /* ===== 화면 ===== */
 function viewHome(){
@@ -221,7 +221,9 @@ async function loadReviews(){
     const r = await fetch(SHEET_URL, { method:"POST", body:new URLSearchParams({ action:"reviews", clinic:id, idToken:v.idToken }) });
     const j = await r.json();
     if (!j.ok) { box.innerHTML = revLocked("登入已過期，請重新登入。") + write; return; }
-    box.innerHTML = (j.reviews.length
+    const cl = clinicOf(id), g = cl && cl.gated && cl.gated.length ? cl.gated : null;
+    const gBox = g ? `<h3 class="sub-h">診所提供・療程前後對比</h3><div class="posters gated">${g.map((u, i) => `<a class="poster" href="${esc(u)}" target="_blank" rel="noopener"><img src="${esc(u)}" alt="診所提供資料 ${i + 1}" loading="lazy"></a>`).join("")}</div><p class="note">以上為診所提供資料，療程效果因人而異。</p>` : "";
+    box.innerHTML = gBox + (j.reviews.length
       ? `<div class="revs">${j.reviews.map(revCard).join("")}</div><p class="note">評價為到診顧客個人感受，療程效果因人而異。</p>`
       : `<p class="empty">還沒有評價。</p>`) + write;
   } catch (_) { box.innerHTML = `<p class="empty">評價暫時無法載入，請稍後再試。</p>` + write; }
