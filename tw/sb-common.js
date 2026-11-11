@@ -157,7 +157,8 @@ function clinicCard(c){
   const k = campOf(c.id);
   const sub = [c.rating ? `★ <span class="num">${c.rating}</span>` : "", ...c.tags.slice(0,2)].filter(Boolean).join(" · ");
   return `<a class="clinic" href="#c-${c.id}">
-    <div class="ph ${c.tone} ${c.photos && c.photos.length ? "has-img" : ""}"${bg(c)}>${c.region.toUpperCase()}</div>
+    ${c.logo ? `<div class="logo-ph"><img src="${esc(c.logo)}" alt="${esc(c.name)} logo" loading="lazy"></div>`
+             : `<div class="ph ${c.tone} ${c.photos && c.photos.length ? "has-img" : ""}"${bg(c)}>${c.region.toUpperCase()}</div>`}
     <div class="bd"><span class="loc">${c.region} · ${esc(c.area)}</span>
       <div class="n">${esc(c.name)}${exTag(c)}</div>
       <div class="s">${sub}</div>

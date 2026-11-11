@@ -96,6 +96,11 @@ function render(){
     </div>
   </fieldset>
 
+  <fieldset><legend>병원 로고</legend>
+    <p class="hint">병원 목록 카드에 사진 대신 이 로고가 나와요. 배경이 투명한 PNG가 가장 좋아요.</p>
+    <div class="imgs" id="logoBox"></div>
+  </fieldset>
+
   <fieldset><legend>병원 사진</legend>
     <p class="hint">병원 페이지 맨 위에서 옆으로 넘겨 보는 표지예요. 정사각형(1:1) 이미지가 좋고, 첫 장이 병원 목록 카드의 대표 사진이 돼요.</p>
     <div class="imgs" id="photos"></div>
@@ -168,7 +173,7 @@ function render(){
     <button class="btn pri" id="saveBtn">저장</button>
   </div>`;
 
-  drawPhotos(); drawInterior(); drawPosters(); drawRows("feats"); drawRows("docs"); drawRows("menu"); drawRows("events"); drawRows("tiers");
+  drawLogo(); drawPhotos(); drawInterior(); drawPosters(); drawRows("feats"); drawRows("docs"); drawRows("menu"); drawRows("events"); drawRows("tiers");
   $("#c_on").onchange = e => { $("#campBox").hidden = !e.target.checked; };
 }
 
@@ -211,6 +216,11 @@ function drawPosters(){
   const arr = posterArr();
   $("#posters").innerHTML = arr.map((p, i) => `<div class="thumb" style="height:138px"><img src="${h(p.img)}" alt=""><button data-delposter="${i}" title="삭제">✕</button></div>`).join("")
     + `<label class="up" style="height:138px">+ 포스터 올리기<input type="file" accept="image/*" multiple data-img="posters"></label>`;
+}
+function drawLogo(){
+  const u = cur.data.logo;
+  $("#logoBox").innerHTML = (u ? `<div class="thumb" style="background:#F3EFEA"><img src="${h(u)}" alt="" style="object-fit:contain"><button data-dellogo="1" title="삭제">✕</button></div>` : "")
+    + `<label class="up">${u ? "로고 바꾸기" : "+ 로고 올리기"}<input type="file" accept="image/png,image/webp,image/jpeg" data-img="logo"></label>`;
 }
 function drawInterior(){
   const arr = cur.data.interior || (cur.data.interior = []);
@@ -263,6 +273,7 @@ $("#editor").addEventListener("click", async e => {
   const t = e.target;
   if (t.dataset.add) { readForm(); ROWDEF[t.dataset.add].src().push(JSON.parse(JSON.stringify(ROWDEF[t.dataset.add].empty))); drawRows(t.dataset.add); }
   else if (t.dataset.del) { readForm(); const [k, i] = t.dataset.del.split(":"); ROWDEF[k].src().splice(+i, 1); drawRows(k); }
+  else if (t.dataset.dellogo) { readForm(); cur.data.logo = ""; drawLogo(); }
   else if (t.dataset.delint != null) { readForm(); cur.data.interior.splice(+t.dataset.delint, 1); drawInterior(); }
   else if (t.dataset.delposter != null) { readForm(); posterArr().splice(+t.dataset.delposter, 1); drawPosters(); }
   else if (t.dataset.delphoto != null) { readForm(); cur.data.photos.splice(+t.dataset.delphoto, 1); drawPhotos(); }
@@ -286,20 +297,21 @@ $("#editor").addEventListener("change", async e => {
   msg(`이미지 ${files.length}장 올리는 중…`);
   try {
     for (const f of files) {
-      const { b64, mime } = await shrink(f, 1600);
+      const { b64, mime } = await shrink(f, t.dataset.img === "logo" ? 800 : 1600, t.dataset.img === "logo");
       const res = await call("adminUpload", f.name, mime, b64);
       const [key, i] = t.dataset.img.split(":");
       if (key === "photos") cur.data.photos.push(res.url);
       else if (key === "posters") posterArr().push({ img: res.url, title: "" });
+      else if (key === "logo") cur.data.logo = res.url;
       else if (key === "interior") (cur.data.interior || (cur.data.interior = [])).push(res.url);
       else if (key === "docs") ROWDEF.docs.src()[+i].photo = res.url;
       else if (key === "events") ROWDEF.events.src()[+i].img = res.url;
     }
-    drawPhotos(); drawInterior(); drawPosters(); drawRows("docs"); drawRows("events");
+    drawLogo(); drawPhotos(); drawInterior(); drawPosters(); drawRows("docs"); drawRows("events");
     msg("이미지를 올렸어요. 저장을 눌러야 홈페이지에 반영돼요.", "ok");
   } catch (err) { msg("이미지 올리기 실패: " + (err.message || err), "err"); }
 });
-function shrink(file, max){
+function shrink(file, max, png){
   return new Promise((ok, no) => {
     const img = new Image(), url = URL.createObjectURL(file);
     img.onload = () => {
@@ -307,7 +319,7 @@ function shrink(file, max){
       const c = document.createElement("canvas"); c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
       c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
       URL.revokeObjectURL(url);
-      ok({ b64: c.toDataURL("image/jpeg", 0.86).split(",")[1], mime: "image/jpeg" });
+      ok(png ? { b64: c.toDataURL("image/png").split(",")[1], mime: "image/png" } : { b64: c.toDataURL("image/jpeg", 0.86).split(",")[1], mime: "image/jpeg" });
     };
     img.onerror = () => no(new Error("이미지를 읽을 수 없어요."));
     img.src = url;
