@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&family=Montserrat:wght@500;700&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611120039">
+<link rel="stylesheet" href="/tw/sb.css?v=202611120040">
 </head>
 <body>
 <header class="hd">
@@ -35,7 +35,7 @@
 
 <div class="bar" id="bar"><div class="bar-in" id="barIn"></div></div>
 
-<script src="/tw/sb-common.js?v=202611120039"></script>
+<script src="/tw/sb-common.js?v=202611120040"></script>
 <script>
 /* ===== 화면 ===== */
 function viewHome(){
@@ -110,8 +110,7 @@ function viewClinic(c){
         <div class="tph ${c.tone}"><b>${tierLabel(x)}</b>${x.influencer ? `<span class="inf">網紅限定</span>` : ""}</div>
         <div class="tbd">${tierScope(x, k)}
           <div class="tm">招募 <span class="num">${x.quota}</span> 名</div>
-          ${x.notes ? `<details class="tdet"><summary>注意事項</summary><p>${esc(x.notes).replace(/
-/g, "<br>")}</p></details>` : ""}
+          ${x.notes ? `<details class="tdet"><summary>注意事項</summary><p>${esc(x.notes).replace(/\n/g, "<br>")}</p></details>` : ""}
           <button type="button" class="btn rose sm" data-apply="camp" data-clinic="${c.id}" data-tier="${tierKey(x)}">報名這個方案</button></div>
       </div>`).join("")}</div>
       <p class="note">可選第一、第二志願，最終方案由診所依審核結果安排並以 LINE 通知。網紅限定方案需填寫 Instagram。</p>`
@@ -251,8 +250,7 @@ function openLb(urls, start){
 /* 체험단 단계의 대상 시술: 전체 / 목록(길면 접기) */
 function tierScope(x, k){
   if (x.all) return `<div class="tt">全療程適用</div>`;
-  const list = String(x.items || "").split(/
-|、|,|，/).map(s => s.trim()).filter(Boolean);
+  const list = String(x.items || "").split(/\n|、|,|，/).map(s => s.trim()).filter(Boolean);
   if (!list.length) return `<div class="tt">${esc(k.target)}</div>`;
   if (list.length <= 3) return `<div class="tt">${list.map(esc).join("・")}</div>`;
   return `<div class="tt">${list.slice(0, 3).map(esc).join("・")}</div>
