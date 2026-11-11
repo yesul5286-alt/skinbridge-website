@@ -218,12 +218,14 @@ const ROWDEF = {
                            <label class="f">세부<input data-k="s" value="${h(x.s)}"></label>
                            <label class="f">원래 가격(원, 선택)<input data-k="orig" value="${h(x.orig)}" inputmode="numeric"></label>
                            <label class="f">이벤트 가격(원)<input data-k="krw" value="${h(x.krw)}" inputmode="numeric"></label>` },
-  tiers:  { cols:"1fr 90px auto 2fr auto", empty:{type:10,quota:1,influencer:false,items:""},
+  tiers:  { cols:"1fr 90px auto auto auto", empty:{type:10,quota:1,influencer:false,all:false,items:"",notes:""},
             src:() => { const d = cur.data; d.camp = d.camp || {end:"",target:"",cats:[],tiers:[]}; d.camp.tiers = d.camp.tiers || []; return d.camp.tiers; },
             html:(x,i) => `<label class="f">혜택<select data-k="type">${TIERS.map(([v,t]) => `<option value="${v}" ${String(x.type) === v ? "selected" : ""}>${t}</option>`).join("")}</select></label>
                            <label class="f">인원<input data-k="quota" value="${h(x.quota)}" inputmode="numeric"></label>
                            <label class="chk"><input type="checkbox" data-k="influencer" ${x.influencer ? "checked" : ""}> 인플루언서 한정</label>
-                           <label class="f">무료 시술 내용 (무료일 때)<input data-k="items" value="${h(x.items)}"></label>` },
+                           <label class="chk"><input type="checkbox" data-k="all" ${x.all ? "checked" : ""}> 모든 시술</label>
+                           <label class="f full" style="grid-column:1 / -1">대상 시술 목록 (한 줄에 하나, '모든 시술'이면 비워도 돼요)<textarea data-k="items" rows="3" placeholder="Potenza 微針電波 1 次&#10;水光針 2cc">${h(x.items)}</textarea></label>
+                           <label class="f full" style="grid-column:1 / -1">주의사항 (번체로, 길게 써도 돼요)<textarea data-k="notes" rows="3" placeholder="例：需於活動期間內到診、需配合拍攝…">${h(x.notes)}</textarea></label>` },
 };
 function drawRows(key){
   const def = ROWDEF[key], box = $("#" + key); if (!box) return;
