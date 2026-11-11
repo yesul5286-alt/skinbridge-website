@@ -621,8 +621,9 @@ button.link{background:none;border:0;padding:0}
   body.mhome .bnav{transition:transform .35s ease}
   body.mhome:not(.past-hero) .bnav{transform:translateY(110%)}
   .home2 .h-hero{display:none}
+  body.mhome{margin-top:0}
   .mh{display:block;position:relative;height:100svh;min-height:600px;max-height:940px;overflow:hidden;background:#F4F1EB;
-    margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));touch-action:pan-y;user-select:none}
+    width:100vw;margin-left:calc(50% - 50vw);margin-right:0;touch-action:pan-y;user-select:none}
   .home2{padding-top:0}
   .mh-top{position:absolute;z-index:3;top:env(safe-area-inset-top,0px);left:0;right:0;display:flex;justify-content:space-between;align-items:center;padding:10px 12px}
   .mh-ic{display:grid;place-items:center;width:48px;height:48px;border:0;background:none;color:var(--ink);padding:0}
@@ -634,7 +635,7 @@ button.link{background:none;border:0;padding:0}
   .mh-logo{font:400 2.05rem/1 "Libre Caslon Text",Georgia,serif;color:var(--ink);letter-spacing:-.01em}
   .mh-eb{font:400 .72rem "Montserrat",var(--latin);letter-spacing:.26em;color:var(--ink);margin-top:6px}
   .mh-ln{display:block;width:44px;height:1px;background:var(--ink);margin:8px 0 6px}
-  .mh-t{margin:0;font:500 clamp(1.5rem,7.3vw,1.95rem)/1.32 "Noto Serif TC",serif;letter-spacing:.04em;color:var(--ink)}
+  .mh-t{margin:0;font:500 clamp(1.45rem,7vw,1.95rem)/1.32 "Noto Serif TC",serif;letter-spacing:.02em;color:var(--ink)}
   .mh-cats{margin:0;font-size:.76rem;color:var(--muted);letter-spacing:.04em}
   .mh-cta{margin-top:10px;display:inline-flex;align-items:center;gap:10px;min-height:46px;padding:0 26px;background:var(--rose);color:#fff;border:0;border-radius:2px;font:500 .95rem var(--sans);letter-spacing:.12em}
   .mh-cta:active{background:var(--rose-deep)}
