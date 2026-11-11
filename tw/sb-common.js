@@ -9,6 +9,11 @@ const TWD_RATE = 41.6;                // 1 NT$ = 41.6원 (2026.11)
 const REGIONS = ["首爾","釜山","濟州","大邱"];
 const CATS = ["電波拉提","微針","膠原增生","肌膚管理","雷射","肉毒"];
 
+/* 병원마다 정하는 것
+   perk : 예약하면 주는 서비스(없으면 "")
+   camp : 체험단(없으면 null)
+     end    마감일, target 대상 시술, cats 시술 분류, example 예시 여부
+     tiers  혜택 단계(위에서부터 큰 혜택) — type: "free" 또는 할인율 숫자, quota 인원, influencer 인플루언서 한정, items 무료 시술 내용 */
 const CLINICS = [
   { id:"selena", name:"SELENA", region:"首爾", area:"弘大", tone:"t1", example:false,
     rating:"4.9", reviews:339,
@@ -26,28 +31,55 @@ const CLINICS = [
       {n:"Juvelook 膠原增生", s:"", krw:null},
       {n:"Volnewmer 電波拉提", s:"", krw:null},
       {n:"Ultherapy PRIME 音波拉提", s:"", krw:null},
+    ],
+    perk:"舒緩保濕護理 1 次", perkExample:true,
+    station:"弘大入口站 8 號出口",
+    features:[
+      {icon:"train",  label:"8 號出口步行 1 分鐘"},
+      {icon:"shield", label:"設備原廠正品認證"},
+      {icon:"chat",   label:"繁中・簡中・日・英諮詢"},
+      {icon:"tag",    label:"外國顧客同價"},
+      {icon:"cal",    label:"週日也看診"},
+      {icon:"list",   label:"價格事先公開"},
+    ],
+    intro:"SELENA 位於弘大入口站 8 號出口正前方。所有設備皆為原廠正品認證，價格事先公開，外國顧客與韓國顧客同價。\n不提供睡眠麻醉、鼻部填充、線雕，只建議真正需要的療程。",
+    fields:["電波拉提","音波拉提","微針","膠原增生","肌膚管理"],
+    doctors:[
+      {name:"Lee Sang-kyung", role:"代表院長", tags:["臨床經歷 10 年以上","Potenza Key Doctor","Juvelook Key Doctor","Volnewmer Key Doctor"]},
+    ],
+    hours:null, hoursExample:true,
+    monthly:{ month:"11 月", note:"VAT 另計", example:false, items:[
+      {n:"鳳凰電波 Thermage FLX", s:"眼周 225 發", krw:1089000},
+      {n:"鳳凰電波 Thermage FLX", s:"眼周 450 發", krw:1790000},
+      {n:"鳳凰電波 Thermage FLX", s:"全臉 600 發", krw:1990000},
     ]},
+    camp:{ end:"2026-11-30", target:"Potenza・Juvelook・Volnewmer", cats:["微針","膠原增生","電波拉提"], example:true,
+      tiers:[
+        {type:"free", quota:2,  influencer:true,  items:"Potenza 微針電波 1 次"},
+        {type:20,     quota:3,  influencer:true},
+        {type:15,     quota:5,  influencer:false},
+        {type:10,     quota:10, influencer:false},
+        {type:5,      quota:20, influencer:false},
+      ]}},
   { id:"gangnam-a", name:"江南 範例診所 A", region:"首爾", area:"江南", tone:"t3", example:true,
     tags:["中文諮詢"], address:"（範例）江南站附近", langs:"韓・繁中", about:"範例內容。", policy:"", more:"",
-    menu:[{n:"音波拉提",s:"",krw:null},{n:"肉毒除皺",s:"",krw:null}]},
+    menu:[{n:"音波拉提",s:"",krw:null},{n:"肉毒除皺",s:"",krw:null}],
+    perk:"肉毒 1 部位", camp:{ end:"2026-11-25", target:"音波拉提", cats:["電波拉提"], example:true,
+      tiers:[{type:20, quota:2, influencer:true},{type:10, quota:5, influencer:false}]}},
   { id:"busan-b", name:"釜山 範例診所 B", region:"釜山", area:"西面", tone:"t5", example:true,
     tags:["中文諮詢"], address:"（範例）西面站附近", langs:"韓・繁中", about:"範例內容。", policy:"", more:"",
-    menu:[{n:"水光肌膚管理",s:"",krw:null},{n:"皮秒雷射",s:"",krw:null}]},
+    menu:[{n:"水光肌膚管理",s:"",krw:null},{n:"皮秒雷射",s:"",krw:null}],
+    perk:"", camp:{ end:"2026-11-28", target:"水光肌膚管理", cats:["肌膚管理"], example:true,
+      tiers:[{type:"free", quota:1, influencer:true, items:"水光肌膚管理 1 次"},{type:15, quota:5, influencer:false},{type:5, quota:10, influencer:false}]}},
   { id:"jeju-c", name:"濟州 範例診所 C", region:"濟州", area:"濟州市", tone:"t2", example:true,
     tags:["中文諮詢"], address:"（範例）濟州市", langs:"韓・繁中", about:"範例內容。", policy:"", more:"",
-    menu:[{n:"皮秒雷射",s:"",krw:null}]},
+    menu:[{n:"皮秒雷射",s:"",krw:null}],
+    perk:"術後鎮靜面膜", camp:null},
   { id:"daegu-d", name:"大邱 範例診所 D", region:"大邱", area:"東城路", tone:"t4", example:true,
     tags:["中文諮詢"], address:"（範例）東城路", langs:"韓・繁中", about:"範例內容。", policy:"", more:"",
-    menu:[{n:"肉毒除皺",s:"",krw:null}]},
-];
-
-const CAMPS = [
-  {id:"k1", clinic:"selena",   title:"Potenza 微針電波體驗", short:"Potenza", cat:"微針",     end:"2026-11-16", applied:32, quota:3, tone:"t1"},
-  {id:"k2", clinic:"selena",   title:"Juvelook 膠原增生體驗", short:"Juvelook", cat:"膠原增生", end:"2026-11-20", applied:21, quota:2, tone:"t4"},
-  {id:"k3", clinic:"busan-b",  title:"水光肌膚管理體驗",      short:"水光",     cat:"肌膚管理", end:"2026-11-20", applied:18, quota:5, tone:"t2"},
-  {id:"k4", clinic:"jeju-c",   title:"皮秒雷射體驗",          short:"皮秒",     cat:"雷射",     end:"2026-11-23", applied:7,  quota:2, tone:"t3"},
-  {id:"k5", clinic:"daegu-d",  title:"肉毒除皺體驗",          short:"肉毒",     cat:"肉毒",     end:"2026-11-12", applied:41, quota:2, tone:"t4"},
-  {id:"k6", clinic:"gangnam-a",title:"音波拉提體驗",          short:"拉提",     cat:"電波拉提", end:"2026-11-13", applied:27, quota:3, tone:"t2"},
+    menu:[{n:"肉毒除皺",s:"",krw:null}],
+    perk:"", camp:{ end:"2026-12-05", target:"肉毒除皺", cats:["肉毒"], example:true,
+      tiers:[{type:10, quota:5, influencer:false},{type:5, quota:10, influencer:false}]}},
 ];
 
 /* ===== 도우미 ===== */
@@ -55,11 +87,56 @@ const $ = s => document.querySelector(s);
 const clinicOf = id => CLINICS.find(c => c.id === id);
 const today = () => { const d = new Date(); d.setHours(0,0,0,0); return d; };
 const daysLeft = end => Math.round((new Date(end + "T00:00:00") - today()) / 864e5);
-const openCamps = () => CAMPS.filter(k => daysLeft(k.end) >= 0);
 const won = n => "₩" + n.toLocaleString("en-US");
 const twd = n => "≈ NT$" + (Math.round(n / TWD_RATE / 10) * 10).toLocaleString("en-US");
 const esc = s => String(s).replace(/[&<>"]/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[ch]));
 const exTag = c => c.example ? '<span class="ex">範例</span>' : "";
+
+const ICON = {
+  train:'<path d="M7 3h10a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3Z"/><path d="M4 11h16M9 21l-2 0 2-4M15 21h2l-2-4"/><circle cx="8.5" cy="14" r=".6"/><circle cx="15.5" cy="14" r=".6"/>',
+  shield:'<path d="M12 3 4.5 6v5.5c0 4.6 3.2 8 7.5 9.5 4.3-1.5 7.5-4.9 7.5-9.5V6Z"/><path d="m8.8 12 2.3 2.3 4.2-4.6"/>',
+  chat:'<path d="M4 5h16v11H9l-5 4Z"/><path d="M8 9.5h8M8 12.5h5"/>',
+  tag:'<path d="M3.5 12.5V4h8.5l8.5 8.5-8.5 8.5Z"/><circle cx="8" cy="8.5" r="1.3"/>',
+  cal:'<rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/>',
+  list:'<path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r=".8"/><circle cx="4" cy="12" r=".8"/><circle cx="4" cy="18" r=".8"/>'
+};
+const icon = k => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICON[k] || ICON.list}</svg>`;
+const DAYS = ["週一","週二","週三","週四","週五","週六","週日"];
+const tierLabel = t => t.type === "free" ? "免費體驗" : `${t.type}% OFF`;
+const tierKey = t => t.type === "free" ? "free" : String(t.type);
+
+/* 체험단 목록은 병원 데이터에서 만든다 */
+let CAMPS = [];
+function buildCamps(){ CAMPS = CLINICS.filter(c => c.camp && c.camp.tiers && c.camp.tiers.length && c.camp.end).map(c => ({
+  id: c.id, clinic: c.id, tone: c.tone, end: c.camp.end, cats: c.camp.cats, target: c.camp.target,
+  example: c.example || c.camp.example, tiers: c.camp.tiers,
+  title: `${c.name} 體驗團`,
+  quota: c.camp.tiers.reduce((s, t) => s + t.quota, 0),
+  best: tierLabel(c.camp.tiers[0])
+})); }
+buildCamps();
+
+/* 관리자 시트의 최신 병원 데이터를 읽는다. 실패하면 이 파일에 적힌 데이터를 그대로 쓴다. */
+const DATA_URL = SHEET_URL ? SHEET_URL + "?action=data" : "";
+function normClinic(c){
+  return Object.assign({ tone:"t1", tags:[], menu:[], features:null, doctors:[], photos:[], fields:null, perk:"", camp:null,
+    address:"", langs:"", about:"", policy:"", more:"", area:"", region:"首爾" }, c);
+}
+async function loadData(){
+  if (!DATA_URL) return false;
+  try {
+    const ctl = new AbortController(); const timer = setTimeout(() => ctl.abort(), 6000);
+    const r = await fetch(DATA_URL, { signal: ctl.signal }); clearTimeout(timer);
+    const j = await r.json();
+    if (!j || !Array.isArray(j.clinics) || !j.clinics.length) return false;
+    CLINICS.splice(0, CLINICS.length, ...j.clinics.map(normClinic));
+    buildCamps();
+    return true;
+  } catch (_) { return false; }
+}
+const bg = (c, i) => { const u = c.photos && c.photos[i || 0]; return u ? ` style="background-image:url('${String(u).replace(/['"()\\]/g, "")}')"` : ""; };
+const openCamps = () => CAMPS.filter(k => daysLeft(k.end) >= 0);
+const campOf = id => openCamps().find(k => k.clinic === id);
 
 const state = { region:"全部", cat:"全部", q:"", cq:"", tab:"price", prefill:null };
 
@@ -67,23 +144,36 @@ function ddLabel(k){ const d = daysLeft(k.end); return d === 0 ? "今天截止" 
 
 function campCard(k){
   const c = clinicOf(k.clinic), d = daysLeft(k.end);
-  return `<a class="camp" href="#c-${c.id}" data-tab="camps">
-    <div class="ph ${k.tone}"><span class="dd ${d <= 2 ? "hot" : ""}">${ddLabel(k)}</span><b>${esc(k.short)}</b></div>
+  const inf = k.tiers.filter(t => t.influencer).reduce((s, t) => s + t.quota, 0);
+  return `<a class="camp" href="#c-${c.id}">
+    <div class="ph ${k.tone} ${c.photos && c.photos.length ? "has-img" : ""}"${bg(c)}><span class="dd ${d <= 2 ? "hot" : ""}">${ddLabel(k)}</span><b><small>最高</small>${k.best}</b></div>
     <span class="loc">${c.region} · ${esc(c.area)}</span>
-    <div class="t">${esc(k.title)}${c.example ? '<span class="ex">範例</span>' : ""}</div>
-    <div class="m">${esc(c.name)} · 報名 <span class="num">${k.applied}</span> / ${k.quota} 人</div>
+    <div class="t">${esc(k.target)}${k.example ? '<span class="ex">範例</span>' : ""}</div>
+    <div class="m">${esc(c.name)} · ${k.tiers.length} 種方案 · 共 <span class="num">${k.quota}</span> 名${inf ? `（網紅 ${inf}）` : ""}</div>
   </a>`;
 }
 function clinicCard(c){
-  const n = openCamps().filter(k => k.clinic === c.id).length;
+  const k = campOf(c.id);
   const sub = [c.rating ? `★ <span class="num">${c.rating}</span>` : "", ...c.tags.slice(0,2)].filter(Boolean).join(" · ");
   return `<a class="clinic" href="#c-${c.id}">
-    <div class="ph ${c.tone}">${c.region.toUpperCase()}</div>
+    <div class="ph ${c.tone} ${c.photos && c.photos.length ? "has-img" : ""}"${bg(c)}>${c.region.toUpperCase()}</div>
     <div class="bd"><span class="loc">${c.region} · ${esc(c.area)}</span>
       <div class="n">${esc(c.name)}${exTag(c)}</div>
       <div class="s">${sub}</div>
-      <div class="go">${n ? `體驗團 ${n} 項招募中 · ` : ""}預約諮詢 →</div></div>
+      ${c.perk ? `<div class="perk-s">預約即贈 ${esc(c.perk)}</div>` : ""}
+      <div class="go">${k ? `體驗團 最高 ${k.best} · ` : ""}預約諮詢 →</div></div>
   </a>`;
+}
+function ladder(k){
+  return `<ol class="ladder">${k.tiers.map((t, i) => `<li class="lv lv${Math.min(i,2)}">
+      <span class="tl">${tierLabel(t)}</span>
+      <span class="tq"><span class="num">${t.quota}</span> 名</span>
+      ${t.influencer ? `<span class="inf">網紅限定</span>` : ""}
+      ${t.items ? `<span class="ti">${esc(t.items)}</span>` : ""}
+    </li>`).join("")}</ol>`;
+}
+function perkBox(c){
+  return c.perk ? `<div class="perk"><span class="en">BOOKING GIFT</span><b>預約諮詢即贈：${esc(c.perk)}</b>${c.perkExample ? '<span class="ex">範例</span>' : ""}</div>` : "";
 }
 function chips(list, cur, key){
   return `<div class="chips" role="group">${["全部", ...list].map(v =>

@@ -62,8 +62,13 @@ function viewApply(){
       </div>
       <div class="two">
         <div class="f"><label for="fClinic">診所 <i>*</i></label><select id="fClinic">${opts}</select></div>
-        <div class="f"><label for="fItem">療程・體驗團 <i>*</i></label><select id="fItem"></select></div>
+        <div class="f" id="itemWrap"><label for="fItem">療程 <i>*</i></label><select id="fItem"></select></div>
       </div>
+      <div class="two" id="wishWrap">
+        <div class="f"><label for="fWish1">第一志願方案 <i>*</i></label><select id="fWish1"></select></div>
+        <div class="f"><label for="fWish2">第二志願方案</label><select id="fWish2"></select></div>
+      </div>
+      <p class="perk-note" id="perkNote" hidden></p>
       <div class="two">
         <div class="f"><label for="fDate">希望日期 <i>*</i></label><input id="fDate" type="date" min="${min}"></div>
         <div class="f"><label for="fTime">希望時段 <i>*</i></label><select id="fTime"><option value="">請選擇</option><option>上午 10–13 點</option><option>下午 13–17 點</option><option>傍晚 17–20 點</option><option>都可以</option></select></div>
@@ -72,7 +77,7 @@ function viewApply(){
         <div class="f"><label for="fName">姓名 <i>*</i></label><input id="fName" autocomplete="name" value="${esc(me.name)}"></div>
         <div class="f"><label for="fYear">出生年 <i>*</i></label><input id="fYear" inputmode="numeric" maxlength="4" placeholder="1995"></div>
       </div>
-      <div class="f" id="igWrap"><label for="fIg">Instagram 帳號</label><input id="fIg" placeholder="@xiaomei"></div>
+      <div class="f" id="igWrap"><label for="fIg">Instagram 帳號 <span id="igReq"></span></label><input id="fIg" placeholder="@xiaomei"></div>
       <div class="f"><label for="fConcern">目前的皮膚困擾</label><textarea id="fConcern" placeholder="例如：毛孔粗大、痘疤、下顎線不明顯"></textarea></div>
       <label class="agree"><input type="checkbox" id="fAgree"><span>我同意 Skin Bridge 為聯繫與安排之目的使用以上資料與 LINE 帳號，並了解實際施作與否須經醫師諮詢判斷。</span></label>
       <p class="err" id="err" aria-live="polite"></p>
@@ -139,17 +144,37 @@ function setupForm(){
   if (login) { login.addEventListener("click", lineLogin); return; }
 
   let type = (state.prefill && state.prefill.type) || "booking";
-  const fClinic = $("#fClinic"), fItem = $("#fItem");
-  function fillItems(){
-    const c = clinicOf(fClinic.value);
-    const items = type === "camp"
-      ? openCamps().filter(k => k.clinic === c.id).map(k => k.title)
-      : [...new Set(c.menu.map(m => m.n + (m.s ? " " + m.s : ""))), "還不確定，想先諮詢"];
-    fItem.innerHTML = items.length
-      ? `<option value="">請選擇</option>` + items.map(i => `<option>${esc(i)}</option>`).join("")
-      : `<option value="">這間診所目前沒有招募中的體驗團</option>`;
-    $("#igWrap").hidden = type !== "camp";
+  const fClinic = $("#fClinic"), fItem = $("#fItem"), fW1 = $("#fWish1"), fW2 = $("#fWish2");
+  const tierOpt = t => `<option value="${tierKey(t)}">${tierLabel(t)}${t.influencer ? "（網紅限定）" : ""}</option>`;
+  const tierOf = (k, key) => k && k.tiers.find(t => tierKey(t) === key);
+  function needIg(){
+    const k = campOf(fClinic.value);
+    const req = type === "camp" && [fW1.value, fW2.value].some(key => tierOf(k, key)?.influencer);
+    $("#igReq").innerHTML = req ? "<i>*</i>（網紅限定方案必填）" : "";
+    return req;
   }
+  function fillItems(){
+    const c = clinicOf(fClinic.value), k = campOf(c.id);
+    const items = [...new Set(c.menu.map(m => m.n + (m.s ? " " + m.s : ""))), "還不確定，想先諮詢"];
+    fItem.innerHTML = `<option value="">請選擇</option>` + items.map(i => `<option>${esc(i)}</option>`).join("");
+    fW1.innerHTML = k ? `<option value="">請選擇</option>` + k.tiers.map(tierOpt).join("")
+                      : `<option value="">這間診所目前沒有招募中的體驗團</option>`;
+    fW2.innerHTML = `<option value="">不需要</option>` + (k ? k.tiers.map(tierOpt).join("") : "");
+    const pre = state.prefill || {};
+    if (pre.clinic === c.id) {
+      if (pre.item && [...fItem.options].some(o => o.value === pre.item)) fItem.value = pre.item;
+      if (pre.tier && [...fW1.options].some(o => o.value === pre.tier)) fW1.value = pre.tier;
+    }
+    $("#itemWrap").hidden = type === "camp";
+    $("#wishWrap").hidden = type !== "camp";
+    $("#igWrap").hidden = type !== "camp";
+    const note = $("#perkNote");
+    note.hidden = !(type === "booking" && c.perk);
+    note.textContent = c.perk ? `預約諮詢即贈：${c.perk}` : "";
+    needIg();
+  }
+  fW1.addEventListener("change", needIg);
+  fW2.addEventListener("change", needIg);
   document.querySelectorAll(".seg button").forEach(b => b.addEventListener("click", () => {
     type = b.dataset.type;
     document.querySelectorAll(".seg button").forEach(x => x.setAttribute("aria-pressed", x === b));
@@ -162,25 +187,32 @@ function setupForm(){
     e.preventDefault();
     const v = id => $(id).value.trim();
     const miss = [];
-    if (!v("#fItem")) miss.push("療程・體驗團");
+    if (type === "booking" && !v("#fItem")) miss.push("療程");
+    if (type === "camp" && !v("#fWish1")) miss.push("第一志願方案");
+    if (type === "camp" && needIg() && !v("#fIg")) miss.push("Instagram 帳號");
     if (!v("#fDate")) miss.push("希望日期");
     if (!v("#fTime")) miss.push("希望時段");
     if (!v("#fName")) miss.push("姓名");
     if (!/^(19|20)\d{2}$/.test(v("#fYear"))) miss.push("出生年（4 位數）");
     if (miss.length) { $("#err").textContent = "請填寫：" + miss.join("、"); return; }
+    if (type === "camp" && v("#fWish2") && v("#fWish2") === v("#fWish1")) { $("#err").textContent = "第二志願請選擇和第一志願不同的方案，或選「不需要」。"; return; }
     if (!$("#fAgree").checked) { $("#err").textContent = "請勾選同意事項後再送出。"; return; }
     $("#err").textContent = "";
 
-    const c = clinicOf(v("#fClinic"));
+    const c = clinicOf(v("#fClinic")), k = campOf(c.id);
+    const label = key => { const t = tierOf(k, key); return t ? tierLabel(t) : ""; };
+    const item = type === "camp"
+      ? `${k.target}｜第一志願 ${label(v("#fWish1"))}｜第二志願 ${label(v("#fWish2")) || "無"}`
+      : v("#fItem") + (c.perk ? `｜預約贈 ${c.perk}` : "");
     const data = {
       type: type === "camp" ? "體驗團報名" : "預約諮詢",
-      clinic: c.name, item: v("#fItem"), date: v("#fDate"), time: v("#fTime"),
+      clinic: c.name, item, date: v("#fDate"), time: v("#fTime"),
       name: v("#fName"), year: v("#fYear"),
       ig: type === "camp" ? v("#fIg") : "", concern: v("#fConcern"),
       userId: me.userId, lineName: me.name
     };
     $("#submitBtn").disabled = true; $("#submitBtn").textContent = "送出中…";
-    if (SHEET_URL) {
+    if (SHEET_URL && me.userId !== "DEMO-USER") {   // 시연(미리보기) 신청은 시트에 저장하지 않음
       try { await fetch(SHEET_URL, { method:"POST", mode:"no-cors", body:new URLSearchParams(data) }); } catch (_) {}
     }
     $("#summary").textContent = [
@@ -202,15 +234,14 @@ function setupForm(){
 
 
 /* ===== 신청서 화면 ===== */
-(function(){
+function setPrefill(){
   const q = new URLSearchParams(location.search);
   const type = q.get("type") === "camp" ? "camp" : "booking";
   const clinic = clinicOf(q.get("clinic") || "") ? q.get("clinic") : "selena";
-  state.prefill = { type, clinic, item:"" };
-})();
+  state.prefill = { type, clinic, item: q.get("item") || "", tier: q.get("tier") || "" };
+}
 function route(){ $("#app").innerHTML = viewApply(); setupForm(); }
-route();
-initLine();
+loadData().finally(() => { setPrefill(); route(); initLine(); });
 
 </script>
 </body>

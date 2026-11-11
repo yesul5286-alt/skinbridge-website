@@ -42,14 +42,14 @@ function viewHome(){
   const q = state.q.trim();
   let body;
   if (q) {
-    const ks = openCamps().filter(k => (k.title + clinicOf(k.clinic).name + clinicOf(k.clinic).region + clinicOf(k.clinic).area + k.cat).includes(q));
+    const ks = openCamps().filter(k => { const c = clinicOf(k.clinic); return (k.target + c.name + c.region + c.area + k.cats.join("")).includes(q); });
     const cs = CLINICS.filter(c => (c.name + c.region + c.area + c.menu.map(m => m.n).join("")).includes(q));
     body = section("SEARCH", `「${esc(q)}」的搜尋結果`, "",
       (ks.length ? `<div class="row">${ks.map(campCard).join("")}</div>` : "") +
       (cs.length ? `<div class="row">${cs.map(clinicCard).join("")}</div>` : "") +
       (!ks.length && !cs.length ? `<p class="empty">找不到相關的體驗團或診所，換個關鍵字試試，例如「電波」「釜山」。</p>` : ""));
   } else {
-    const open = openCamps().sort((a,b) => (b.applied / b.quota) - (a.applied / a.quota));
+    const open = openCamps().sort((a,b) => daysLeft(a.end) - daysLeft(b.end));
     body =
       `<div class="hero ph"><span>本月精選</span><b>首爾 · 釜山 · 濟州 · 大邱<br>體驗團同步招募中</b></div>` +
       section("EXPERIENCE", "招募中的體驗團", "#camps", `<div class="row">${open.map(campCard).join("")}</div>`) +
@@ -62,7 +62,7 @@ function viewHome(){
 }
 
 function viewCamps(){
-  const list = openCamps().filter(k => (state.region === "全部" || clinicOf(k.clinic).region === state.region) && (state.cat === "全部" || k.cat === state.cat))
+  const list = openCamps().filter(k => (state.region === "全部" || clinicOf(k.clinic).region === state.region) && (state.cat === "全部" || k.cats.includes(state.cat)))
     .sort((a,b) => daysLeft(a.end) - daysLeft(b.end));
   return `<div class="view">
     <div class="sh" style="border:0;padding:0"><div><span class="en">EXPERIENCE</span><h2>全部體驗團</h2></div></div>
@@ -87,39 +87,98 @@ function viewClinics(){
 }
 
 function viewClinic(c){
-  const camps = openCamps().filter(k => k.clinic === c.id);
-  const T = state.tab;
-  const tab = (id, label) => `<button role="tab" aria-selected="${T === id}" data-tab="${id}">${label}</button>`;
-  let panel;
-  if (T === "price") {
-    panel = `<div class="price">${c.menu.map(m => `<div class="r">
-      <span class="nm">${esc(m.n)}</span>
-      ${m.krw ? `<span class="v">${won(m.krw)}<small>${twd(m.krw)}</small></span>` : `<span class="ask">LINE 詢價</span>`}
-      ${m.s ? `<span class="sub">${esc(m.s)}</span>` : ""}</div>`).join("")}</div>
-      <p class="note">韓元價格 VAT 另計。實際療程內容與價格以院所諮詢為準。</p>`;
-  } else if (T === "camps") {
-    panel = camps.length ? `<div class="grid">${camps.map(campCard).join("")}</div>
-      <p class="note">報名後由專人透過 LINE 以中文聯繫，選出結果以 LINE 通知。</p>`
-      : `<p class="empty">這間診所目前沒有招募中的體驗團，可以直接預約諮詢。</p>`;
-  } else {
-    panel = `<dl class="info">
-      <dt>地址</dt><dd>${esc(c.address)}</dd>
-      <dt>諮詢語言</dt><dd>${esc(c.langs)}</dd>
-      ${c.rating ? `<dt>Google 評分</dt><dd>★ <span class="num">${c.rating}</span>（<span class="num">${c.reviews}</span> 則評論，2026.11）</dd>` : ""}
-      <dt>介紹</dt><dd>${esc(c.about)}</dd>
-      ${c.policy ? `<dt>安全原則</dt><dd>${esc(c.policy)}</dd>` : ""}
-    </dl>
-    ${c.more ? `<a class="link" href="${c.more}" target="_blank" rel="noopener">查看完整價目與活動 →</a>` : ""}`;
-  }
-  return `<div class="view">
+  const k = campOf(c.id);
+  const sec = (id, en, title, body) => `<section class="dsec" id="s-${id}"><span class="en">${en}</span><h2>${title}</h2>${body}</section>`;
+
+  const feats = c.features && c.features.length
+    ? `<ul class="feats">${c.features.map(f => `<li>${icon(f.icon)}<span>${esc(f.label)}</span></li>`).join("")}</ul>` : "";
+  const intro = c.intro ? `<p class="intro">${esc(c.intro).replace(/\n/g, "<br>")}</p>` : `<p class="intro">${esc(c.about)}</p>`;
+  const fields = c.fields ? `<div class="fields">${c.fields.map(f => `<span>${esc(f)}</span>`).join("")}</div>` : "";
+  const docs = c.doctors && c.doctors.length ? `<h3 class="sub-h">主要醫療團隊</h3><div class="row docs">${c.doctors.map(d => `
+      <div class="doc">${d.photo ? `<img class="avatar" src="${esc(d.photo)}" alt="${esc(d.name)}">` : `<div class="avatar" aria-hidden="true">${esc((d.name || "?").slice(0,1))}</div>`}
+        <div><b>${esc(d.name)}</b> <span class="role">${esc(d.role)}</span>
+        <div class="dtags">${(d.tags || []).map(x => `<span>${esc(x)}</span>`).join("")}</div></div></div>`).join("")}</div>` : "";
+  const hours = `<h3 class="sub-h">診療時間</h3>` + (c.hours
+    ? `<table class="hours"><tr>${DAYS.map(d => `<th>${d}</th>`).join("")}</tr><tr>${c.hours.map(h => `<td>${h ? esc(h).replace("-", "<br>~<br>") : "休診"}</td>`).join("")}</tr></table>${c.lunch ? `<p class="note">午休 ${esc(c.lunch)}</p>` : ""}`
+    : `<p class="note">診療時間請透過 LINE 確認。${c.hoursExample ? '<span class="ex">待補</span>' : ""}</p>`);
+  const addr = `<h3 class="sub-h">地址</h3><div class="addr"><span id="addrText">${esc(c.address)}</span><button type="button" class="copy" data-copy="addrText">複製</button></div>`;
+
+  const campCards = k ? `<div class="dd-line">${esc(k.target)}・截止 ${k.end.slice(5).replace("-", "/")}（${ddLabel(k)}）${k.example ? '<span class="ex">範例</span>' : ""}</div>
+      <div class="tcards">${k.tiers.map((x, i) => `<div class="tcard ${i === 0 ? "top" : ""}">
+        <div class="tph ${c.tone}"><b>${tierLabel(x)}</b>${x.influencer ? `<span class="inf">網紅限定</span>` : ""}</div>
+        <div class="tbd"><div class="tt">${esc(x.items || k.target)}</div>
+          <div class="tm">招募 <span class="num">${x.quota}</span> 名</div>
+          <button type="button" class="btn rose sm" data-apply="camp" data-clinic="${c.id}" data-tier="${tierKey(x)}">報名這個方案</button></div>
+      </div>`).join("")}</div>
+      <p class="note">可選第一、第二志願，最終方案由診所依審核結果安排並以 LINE 通知。網紅限定方案需填寫 Instagram。</p>`
+    : `<p class="empty">這間診所目前沒有招募中的體驗團。</p>`;
+
+  const m = c.monthly && c.monthly.items && c.monthly.items.length ? c.monthly : null;
+  const rows = m ? m.items : c.menu;
+  const evCard = r => {
+    const off = r.orig && r.krw && r.orig > r.krw ? Math.round((1 - r.krw / r.orig) * 100) : 0;
+    return `<div class="ev">
+      <div class="ev-img ph ${c.tone}">${r.img ? `<img src="${esc(r.img)}" alt="${esc(r.n)}" loading="lazy">` : `<b>${esc(r.n)}</b>`}</div>
+      <div class="ev-bd"><div class="ev-t">${esc(r.n)}</div>${r.s ? `<div class="ev-s">${esc(r.s)}</div>` : ""}
+        <div class="ev-p">${r.krw ? `${off ? `<s>${won(r.orig)}</s><em>${off}%</em>` : ""}<b>${won(r.krw)}</b><small>${twd(r.krw)}</small>` : `<span class="ask">LINE 詢價</span>`}</div>
+        <button type="button" class="btn dark sm" data-apply="booking" data-clinic="${c.id}" data-item="${esc(r.n + (r.s ? " " + r.s : ""))}">預約這個活動</button></div>
+    </div>`; };
+  const priceTbl = m ? `<div class="evs">${rows.map(evCard).join("")}</div>
+    <p class="note">${esc(m.month)}活動${m.note ? "・" + esc(m.note) : ""}。實際療程內容與價格以院所諮詢為準。</p>
+    ${perkBox(c)}` : `<div class="ptable">${rows.map(r => `<div class="prow">
+      <div class="pn"><b>${esc(r.n)}</b>${r.s ? `<span>${esc(r.s)}</span>` : ""}</div>
+      <div class="pv">${r.krw ? `<b>${won(r.krw)}</b><small>${twd(r.krw)}</small>` : `<span class="ask">LINE 詢價</span>`}</div>
+      <button type="button" class="btn dark sm" data-apply="booking" data-clinic="${c.id}" data-item="${esc(r.n + (r.s ? " " + r.s : ""))}">預約</button>
+    </div>`).join("")}</div>
+    <p class="note">VAT 另計。實際療程內容與價格以院所諮詢為準。</p>
+    ${perkBox(c)}`;
+
+  const rating = c.rating ? `<span class="star">★ <b class="num">${c.rating}</b></span><span class="muted">Google 評論 <span class="num">${c.reviews}</span>（2026.11）</span>` : "";
+  return `<div class="view detail">
     <a class="back" href="#clinics">← 返回診所列表</a>
-    <div class="cover ph ${c.tone}">${c.region.toUpperCase()} · ${esc(c.area)}</div>
-    <div class="dhead"><span class="loc">${c.region} · ${esc(c.area)}</span>
+    ${c.photos && c.photos.length
+      ? `<div class="gallery" id="gallery">${c.photos.map(u => `<img src="${esc(u)}" alt="${esc(c.name)}" loading="lazy">`).join("")}</div>${c.photos.length > 1 ? `<span class="gcnt" id="gcnt">1 / ${c.photos.length}</span>` : ""}`
+      : `<div class="cover ph ${c.tone}"><span class="cnt">1 / 1</span></div>`}
+    <div class="dhead">
       <h1>${esc(c.name)}${exTag(c)}</h1>
-      <div class="s">${[c.rating ? `★ <span class="num">${c.rating}</span>` : "", ...c.tags].filter(Boolean).join(" · ")}</div></div>
-    <div class="tabs" role="tablist">${tab("price","療程價格")}${tab("camps", "體驗團" + (camps.length ? ` ${camps.length}` : ""))}${tab("info","診所資訊")}</div>
-    <div role="tabpanel">${panel}</div>
+      <div class="rate">${rating}</div>
+      <div class="where">${icon("train")}<span><b>${esc(c.station || c.area)}</b> ${esc(c.address)}</span></div>
+    </div>
+    <nav class="dtabs" aria-label="診所內容">
+      <button type="button" data-jump="info" class="on">診所資訊</button>
+      <button type="button" data-jump="camp">體驗團${k ? `<em>最高 ${k.best}</em>` : ""}</button>
+      <button type="button" data-jump="price">${m ? esc(m.month) + "價格" : "療程價格"}</button>
+    </nav>
+    ${sec("info", "CLINIC", `診所特色${c.features ? ` <span class="cnt-h">${c.features.length}</span>` : ""}`, feats + intro + fields + docs + hours + addr)}
+    ${sec("camp", "EXPERIENCE", "體驗團方案", campCards)}
+    ${sec("price", "THIS MONTH", m ? `${esc(m.month)}活動價格` : "療程價格", priceTbl)}
   </div>`;
+}
+
+function setupDetail(){
+  const g = document.getElementById("gallery"), gc = document.getElementById("gcnt");
+  if (g && gc) g.addEventListener("scroll", () => { gc.textContent = `${Math.round(g.scrollLeft / g.clientWidth) + 1} / ${g.children.length}`; }, { passive:true });
+  const tabs = [...document.querySelectorAll(".dtabs [data-jump]")];
+  if (!tabs.length) return;
+  const hd = document.querySelector(".hd");
+  if (hd) document.documentElement.style.setProperty("--hd-h", hd.offsetHeight + "px");
+  const secs = tabs.map(b => document.getElementById("s-" + b.dataset.jump));
+  const mark = id => tabs.forEach(b => b.classList.toggle("on", b.dataset.jump === id));
+  const onScroll = () => {
+    const y = document.querySelector(".dtabs").getBoundingClientRect().bottom + 8;
+    let curId = "info";
+    secs.forEach(s => { if (s && s.getBoundingClientRect().top <= y) curId = s.id.slice(2); });
+    mark(curId);
+  };
+  window.onscroll = onScroll;
+  if (state.jump) { const id = state.jump; state.jump = null; requestAnimationFrame(() => jump(id)); }
+}
+function jump(id){
+  const s = document.getElementById("s-" + id), bar = document.querySelector(".dtabs");
+  if (!s) return;
+  const hd = document.querySelector(".hd");
+  const y = s.getBoundingClientRect().top + scrollY - (hd ? hd.offsetHeight : 0) - (bar ? bar.offsetHeight : 0) + 2;
+  scrollTo({ top: y, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
 }
 
 /* ===== 라우팅 ===== */
@@ -142,10 +201,13 @@ function route(){
   }
   else { html = viewHome(); nav = "home"; }
   if (!bar && h !== "apply") bar = `<a class="btn line" href="https://line.me/R/ti/p/${encodeURIComponent(LINE_ID)}" target="_blank" rel="noopener">LINE 中文諮詢・預約</a>`;
+  window.onscroll = null;
+  document.body.classList.toggle("appmode", h.startsWith("c-") && !!clinicOf(h.slice(2)));
   $("#app").innerHTML = html;
   $("#barIn").innerHTML = bar;
   $("#bar").hidden = !bar;
   document.querySelectorAll("[data-nav]").forEach(a => a.classList.toggle("on", a.dataset.nav === nav));
+  setupDetail();
 }
 
 /* ===== 이벤트 ===== */
@@ -155,11 +217,19 @@ document.addEventListener("click", e => {
   if (t.dataset.region) { state.region = t.dataset.region; route(); }
   else if (t.dataset.cat) { state.cat = t.dataset.cat; route(); }
   else if (t.dataset.gocat) { state.cat = t.dataset.gocat; }
-  else if (t.matches(".tabs [data-tab]")) { state.tab = t.dataset.tab; route(); }
-  else if (t.matches("a.camp")) { state.tab = "camps"; }
-  else if (t.matches("a.clinic")) { state.tab = "price"; }
+  else if (t.dataset.jump) { jump(t.dataset.jump); return; }
+  else if (t.dataset.copy) {
+    const txt = document.getElementById(t.dataset.copy).textContent;
+    const ok = () => { t.textContent = "已複製"; setTimeout(() => t.textContent = "複製", 1500); };
+    navigator.clipboard ? navigator.clipboard.writeText(txt).then(ok).catch(() => {}) : null;
+    return;
+  }
+  else if (t.matches("a.camp")) { state.jump = "camp"; }
   else if (t.dataset.apply) {
-    location.href = "/apply/?type=" + encodeURIComponent(t.dataset.apply) + "&clinic=" + encodeURIComponent(t.dataset.clinic);
+    const qs = new URLSearchParams({ type: t.dataset.apply, clinic: t.dataset.clinic });
+    if (t.dataset.item) qs.set("item", t.dataset.item);
+    if (t.dataset.tier) qs.set("tier", t.dataset.tier);
+    location.href = "/apply/?" + qs;
     return;
   }
   const href = t.getAttribute("href");
@@ -180,6 +250,7 @@ addEventListener("hashchange", () => {
 });
 
 route();
+loadData().then(ok => { if (ok) route(); });
 </script>
 </body>
 </html>
