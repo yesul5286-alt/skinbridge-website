@@ -12,8 +12,8 @@
 <link rel="canonical" href="https://www.skinbridgekorea.com/tw/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&family=Montserrat:wght@500;700&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611120249">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/tw/sb.css?v=202611120328">
 </head>
 <body>
 <header class="hd">
@@ -35,7 +35,7 @@
 
 <div class="bar" id="bar"><div class="bar-in" id="barIn"></div></div>
 
-<script src="/tw/sb-common.js?v=202611120249"></script>
+<script src="/tw/sb-common.js?v=202611120328"></script>
 <script>
 /* ===== 화면 ===== */
 function viewHome(){
@@ -84,7 +84,7 @@ function clinicRow(c){
       : c.logo ? `<div class="crow-img logo"><img src="${esc(c.logo)}" alt="${esc(c.name)}" loading="lazy"></div>`
       : `<div class="crow-img ph ${c.tone}"></div>`}
     <div class="crow-bd">
-      <div class="crow-top"><span class="loc">${esc(c.area || c.region)}</span>${c.selected ? `<span class="bdg sel">SELECTED</span>` : ""}${k ? `<span class="bdg camp">體驗團招募中</span>` : ""}</div>
+      <div class="crow-top"><span class="loc">${esc(c.area || c.region)}</span>${c.selected ? `<span class="bdg sel">★ SELECTED</span>` : ""}${k ? `<span class="bdg camp">EXPERIENCE OPEN</span>` : ""}</div>
       <div class="n">${esc(c.name)}${exTag(c)}</div>
       ${c.oneliner ? `<div class="one">${esc(c.oneliner)}</div>` : ""}
       ${tags.length ? `<div class="tg">${tags.map(x => `<span>${esc(x)}</span>`).join("")}</div>` : ""}
@@ -369,7 +369,7 @@ function route(){
           (hasCamp ? `<button class="btn rose" data-apply="camp" data-clinic="${c.id}">報名體驗團</button>` : "");
   }
   else { html = viewHome(); nav = "home"; }
-  if (!bar && h !== "apply") bar = `<a class="btn line" href="https://line.me/R/ti/p/${encodeURIComponent(LINE_ID)}" target="_blank" rel="noopener">LINE 中文諮詢・預約</a>`;
+  if (!bar && h !== "apply") bar = `<a class="btn line" href="https://line.me/R/ti/p/${encodeURIComponent(LINE_ID)}" target="_blank" rel="noopener">LINE 預約諮詢</a>`;
   window.onscroll = null;
   document.body.classList.toggle("appmode", h.startsWith("c-") && !!clinicOf(h.slice(2)));
   $("#app").innerHTML = html;

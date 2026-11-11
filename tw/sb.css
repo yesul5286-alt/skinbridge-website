@@ -1,11 +1,11 @@
 /* Layout: 매거진형 단일 컬럼(최대 1080px). 첫 화면은 체험단 줄 → 병원 줄 → 마감 임박 줄이 가로 넘김으로 번갈아 나옴.
    해시로 화면 전환: 首頁 / #camps / #clinics / #c-병원id / #apply. 연분홍 종이 느낌 한 가지 테마로 고정. */
 :root{
-  --paper:#FBF6F4; --white:#FFFFFF; --ink:#2B1F22; --muted:#6B5A60; --rule:#E5D6DA;
-  --rose:#A8425F; --rose-deep:#7D3349; --rose-soft:#F4DDE3; --line-green:#05823D;
-  --serif:"Noto Serif TC","Songti TC","PMingLiU",serif;
+  --paper:#F7F5F2; --white:#FFFFFF; --ink:#191817; --muted:#77716D; --rule:#E8E3DF;
+  --rose:#956269; --rose-deep:#7A4E55; --rose-soft:#F1E7E5; --line-green:#05823D; --btn-line:#D8D2CE;
+  --serif:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
   --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
-  --latin:"Montserrat","Helvetica Neue",Arial,sans-serif;
+  --latin:"Inter","Helvetica Neue",Arial,sans-serif;
   color-scheme:light;
 }
 *{box-sizing:border-box}
@@ -347,3 +347,50 @@ img.avatar{object-fit:cover;width:64px;height:64px;object-position:center 30%}
 footer{border-top:1px solid var(--rule);margin-top:40px;padding-top:18px;font-size:.76rem;color:var(--muted);display:flex;flex-direction:column;gap:4px}
 @media (min-width:900px){.camp{width:200px}.clinic{width:300px}.hero{height:240px}.cover{height:300px}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* ===== 2026-11 디자인 시스템 (B 리스트형): 웜 아이보리 · 뮤트 로즈 · Noto Sans TC ===== */
+body{font-size:15px;line-height:1.65}
+b,strong,h1,h2,h3{font-weight:600}
+.logo{font:500 1.15rem var(--latin);letter-spacing:.22em}
+.logo small{font:500 .62rem var(--latin);letter-spacing:.3em;color:var(--muted)}
+.en{font:500 .68rem var(--latin);letter-spacing:.16em}
+.sh h2,.dhead h1{font-family:var(--sans);font-weight:600}
+.sh h2{font-size:1.25rem}
+.dhead h1{font-size:1.6rem}
+.loc{font:500 .72rem var(--sans);letter-spacing:.02em;color:var(--muted)}
+.search{background:var(--white);border:1px solid var(--rule);border-radius:12px;padding:10px 14px}
+.search:focus-within{border-color:var(--rose)}
+.chip{border:1px solid var(--rule);color:var(--muted);background:var(--white);font-size:.84rem;padding:5px 13px}
+.chip.on{background:var(--rose-soft);border-color:var(--rose-soft);color:var(--rose-deep);font-weight:500}
+.fsel select{border:1px solid var(--rule);color:var(--muted);border-radius:999px}
+.btn{border-radius:12px;min-height:52px;letter-spacing:.02em;font-weight:500;border-color:var(--ink)}
+.btn.sm{min-height:36px;border-radius:10px}
+.btn.dark{background:var(--ink);color:var(--white)}
+.btn.light{background:var(--white);border-color:var(--btn-line);color:var(--ink)}
+.btn.rose{background:var(--rose);border-color:var(--rose);color:var(--white)}
+.btn.line{background:var(--ink);border-color:var(--ink);color:var(--white)}
+.bar{background:linear-gradient(to top,var(--paper) 72%,rgba(247,245,242,0))}
+.crows{background:var(--white);border:1px solid var(--rule);border-radius:16px;padding:0 14px}
+.crow{border-bottom:1px solid var(--rule);padding:14px 0}
+.crow:last-child{border-bottom:0}
+.crow .n{font:600 1.05rem var(--sans)}
+.crow .one{color:var(--ink);font-size:.86rem}
+.crow .tg span{background:transparent;border:1px solid var(--rule);color:var(--muted)}
+.crow:hover .n{color:var(--rose-deep)}
+.bdg{font:500 .6rem var(--latin);letter-spacing:.08em;padding:2px 6px;border-radius:4px}
+.bdg.sel{background:var(--rose-soft);color:var(--rose-deep)}
+.bdg.camp{background:var(--rose);color:var(--white);font-family:var(--latin);letter-spacing:.08em}
+.clinic,.form,.prog{border-color:var(--rule);border-radius:16px;overflow:hidden}
+.logo-ph{background:#F1EDE8;border-color:var(--rule)}
+.ex{font-family:var(--latin);font-weight:500}
+.t1{background:linear-gradient(160deg,#E9DFDA,#A58C88)}
+.t2{background:linear-gradient(160deg,#ECE2D7,#A88E78)}
+.t3{background:linear-gradient(160deg,#DFE1E3,#868E96)}
+.t4{background:linear-gradient(160deg,#E4DDE3,#93848F)}
+.t5{background:linear-gradient(160deg,#DEE3DD,#86948A)}
+.hero.ph{background:linear-gradient(140deg,#E9DFDA,#B39C97 60%,#8A6F6C)}
+.hero b{font-family:var(--sans);font-weight:600}
+.ph::after{background:linear-gradient(to top,rgba(25,24,23,.5),rgba(25,24,23,0) 55%)}
+.price .v,.ad-p b{font-family:var(--latin);font-weight:600}
+.link,.price .ask,.clinic .go{color:var(--rose-deep);font-weight:500}
+.nav a.on{font-weight:500}
