@@ -94,12 +94,17 @@ function render(){
       <label class="f">Google 리뷰 수<input id="i_reviews" value="${h(d.reviews)}" inputmode="numeric"></label>
       <label class="f">짧은 태그 (쉼표로 구분)<input id="i_tags" value="${h((d.tags || []).join(", "))}"></label>
       <label class="f full">병원 소개 (줄바꿈 가능)<textarea id="i_intro">${h(d.intro || d.about)}</textarea></label>
+      <label class="f full">한 줄 강점 (병원 찾기 카드에 나와요, 繁體)<input id="i_one" value="${h(d.oneliner)}" placeholder="例：自然拉提・院長親自諮詢"></label>
+      <div class="f full">피부 고민 (필터)<div class="cks">${CONCERNS.map(x => `<label><input type="checkbox" data-ck="concerns" value="${h(x)}" ${(d.concerns || []).includes(x) ? "checked" : ""}> ${h(x)}</label>`).join("")}</div></div>
+      <div class="f full">대표 시술 (필터)<div class="cks">${TREATS.map(x => `<label><input type="checkbox" data-ck="treats" value="${h(x)}" ${(d.treats || []).includes(x) ? "checked" : ""}> ${h(x)}</label>`).join("")}</div></div>
+      <div class="f full">병원 특징 (필터)<div class="cks">${TRAITS.map(x => `<label><input type="checkbox" data-ck="traits" value="${h(x)}" ${(d.traits || []).includes(x) ? "checked" : ""}> ${h(x)}</label>`).join("")}</div></div>
       <label class="f full">진료 항목 (쉼표로 구분)<input id="i_fields" value="${h((d.fields || []).join(", "))}"></label>
       <label class="f full">주요 설비 (쉼표로 구분, '主要設備' 칸에 나와요)<input id="i_equip" value="${h((d.equipment || []).join(", "))}"></label>
       <label class="f full">안전 원칙·하지 않는 시술<input id="i_policy" value="${h(d.policy)}"></label>
       <label class="f full">병원 자체 페이지 링크<input id="i_more" value="${h(d.more)}" placeholder="https://"></label>
       <label class="f">목록 순서 (작을수록 위)<input id="i_order" value="${h(cur.order)}" inputmode="numeric"></label>
       <label class="chk"><input type="checkbox" id="i_visible" ${cur.visible ? "checked" : ""}> 홈페이지에 공개</label>
+      <label class="chk"><input type="checkbox" id="i_selected" ${d.selected ? "checked" : ""}> 'SKINBRIDGE SELECTED' 배지 (일부 병원만)</label>
       <label class="chk"><input type="checkbox" id="i_example" ${d.example ? "checked" : ""}> '範例(예시)' 표시</label>
     </div>
   </fieldset>
@@ -121,6 +126,12 @@ function render(){
   <fieldset><legend>병원 특징 (아이콘)</legend>
     <div class="rows" id="feats"></div>
     <button class="btn sm" data-add="feats">+ 특징 추가</button>
+  </fieldset>
+
+  <fieldset><legend>광고 이미지 ('活動・優惠' 칸)</legend>
+    <p class="hint">병원 광고 이미지(정사각형이 가장 좋아요)와 시술 이름·가격. 병원 페이지에 2칸 격자로 나와요.</p>
+    <div class="rows" id="ads"></div>
+    <button class="btn sm" data-add="ads">+ 광고 추가</button>
   </fieldset>
 
   <fieldset><legend>특색 시술 (사진 + 설명, '特色療程' 칸)</legend>
@@ -193,7 +204,7 @@ function render(){
   </div>`;
 
   addSecNav();
-  drawLogo(); drawPhotos(); drawInterior(); drawGated(); drawPimgs(); drawPosters(); drawRows("progs"); drawRows("feats"); drawRows("docs"); drawRows("menu"); drawRows("events"); drawRows("tiers");
+  drawLogo(); drawPhotos(); drawInterior(); drawGated(); drawPimgs(); drawPosters(); drawRows("progs"); drawRows("ads"); drawRows("feats"); drawRows("docs"); drawRows("menu"); drawRows("events"); drawRows("tiers");
   $("#c_on").onchange = e => { $("#campBox").hidden = !e.target.checked; };
 }
 
@@ -226,6 +237,12 @@ const ROWDEF = {
                            <label class="f">이름<input data-k="name" value="${h(x.name)}"></label>
                            <label class="f">직함 (例: 代表院長)<input data-k="role" value="${h(x.role)}"></label>
                            <label class="f">경력·전문 (쉼표)<input data-k="tags" value="${h((x.tags || []).join(", "))}"></label>` },
+  ads:    { cols:"auto 2fr 1fr 1fr 1fr auto", empty:{img:"",n:"",s:"",orig:null,krw:null}, src:() => cur.data.ads || (cur.data.ads = []),
+            html:(x,i) => `<div class="one-img">${x.img ? `<img src="${h(x.img)}" alt="">` : ""}<label class="up" style="width:72px;height:54px">이미지<input type="file" accept="image/*" data-img="ads:${i}"></label></div>
+                           <label class="f">시술 이름<input data-k="n" value="${h(x.n)}"></label>
+                           <label class="f">세부<input data-k="s" value="${h(x.s)}"></label>
+                           <label class="f">원래 가격(선택)<input data-k="orig" value="${h(x.orig)}" inputmode="numeric"></label>
+                           <label class="f">가격(원)<input data-k="krw" value="${h(x.krw)}" inputmode="numeric"></label>` },
   progs:  { cols:"auto 1fr 2fr auto", empty:{title:"",desc:"",img:""}, src:() => cur.data.programs || (cur.data.programs = []),
             html:(x,i) => `<div class="one-img">${x.img ? `<img src="${h(x.img)}" alt="">` : ""}<label class="up" style="width:72px;height:54px">사진<input type="file" accept="image/*" data-img="progs:${i}"></label></div>
                            <label class="f">이름<input data-k="title" value="${h(x.title)}"></label>
@@ -310,7 +327,10 @@ function readForm(){
   const d = cur.data;
   Object.assign(d, { name:v("i_name"), region:v("i_region"), area:v("i_area"), station:v("i_station"), address:v("i_address"),
     langs:v("i_langs"), rating:v("i_rating"), reviews:v("i_reviews") ? Number(v("i_reviews")) : null, tags:list("i_tags"),
-    intro:v("i_intro"), about:v("i_intro").split("\n")[0], fields:list("i_fields"), equipment:list("i_equip"), priceNote:v("i_pnote"), policy:v("i_policy"), more:v("i_more"),
+    intro:v("i_intro"), about:v("i_intro").split("\n")[0], fields:list("i_fields"), oneliner:v("i_one"), selected:$("#i_selected").checked,
+    concerns:[...document.querySelectorAll('[data-ck="concerns"]:checked')].map(e => e.value),
+    treats:[...document.querySelectorAll('[data-ck="treats"]:checked')].map(e => e.value),
+    traits:[...document.querySelectorAll('[data-ck="traits"]:checked')].map(e => e.value), equipment:list("i_equip"), priceNote:v("i_pnote"), policy:v("i_policy"), more:v("i_more"),
     example:$("#i_example").checked, perk:v("i_perk"), lunch:v("i_lunch"), hoursNote:v("i_hnote") });
   const hrs = [0,1,2,3,4,5,6].map(i => v("i_h" + i));
   d.hours = hrs.some(Boolean) ? hrs : null;
@@ -364,11 +384,12 @@ $("#editor").addEventListener("change", async e => {
       else if (key === "gated") (cur.data.gated || (cur.data.gated = [])).push(res.url);
       else if (key === "pimgs") (cur.data.priceImgs || (cur.data.priceImgs = [])).push(res.url);
       else if (key === "progs") ROWDEF.progs.src()[+i].img = res.url;
+      else if (key === "ads") ROWDEF.ads.src()[+i].img = res.url;
       else if (key === "interior") (cur.data.interior || (cur.data.interior = [])).push(res.url);
       else if (key === "docs") ROWDEF.docs.src()[+i].photo = res.url;
       else if (key === "events") ROWDEF.events.src()[+i].img = res.url;
     }
-    drawLogo(); drawPhotos(); drawInterior(); drawGated(); drawPimgs(); drawPosters(); drawRows("progs"); drawRows("docs"); drawRows("events");
+    drawLogo(); drawPhotos(); drawInterior(); drawGated(); drawPimgs(); drawPosters(); drawRows("progs"); drawRows("ads"); drawRows("docs"); drawRows("events");
     msg("이미지를 올렸어요. 저장을 눌러야 홈페이지에 반영돼요.", "ok");
   } catch (err) { msg("이미지 올리기 실패: " + (err.message || err), "err"); }
 });

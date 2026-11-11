@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&family=Montserrat:wght@500;700&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611120204">
+<link rel="stylesheet" href="/tw/sb.css?v=202611120249">
 </head>
 <body>
 <header class="hd">
@@ -35,7 +35,7 @@
 
 <div class="bar" id="bar"><div class="bar-in" id="barIn"></div></div>
 
-<script src="/tw/sb-common.js?v=202611120204"></script>
+<script src="/tw/sb-common.js?v=202611120249"></script>
 <script>
 /* ===== 화면 ===== */
 function viewHome(){
@@ -53,7 +53,7 @@ function viewHome(){
     body =
       `<div class="hero ph"><span>本月精選</span><b>首爾 · 釜山 · 濟州 · 大邱<br>體驗團同步招募中</b></div>` +
       section("EXPERIENCE", "招募中的體驗團", "#camps", `<div class="row">${open.map(campCard).join("")}</div>`) +
-      section("CLINICS", "可預約的診所", "#clinics", `<div class="row">${CLINICS.map(clinicCard).join("")}</div>`);
+      section("CLINICS", "合作診所", "#clinics", `<div class="crows">${CLINICS.slice(0, 5).map(clinicRow).join("")}</div>`);
   }
   return `<div class="view">
     <label class="search"><input id="q" type="search" placeholder="搜尋療程、診所、地區" value="${esc(state.q)}" aria-label="搜尋"><span aria-hidden="true">→</span></label>
@@ -72,17 +72,65 @@ function viewCamps(){
   </div>`;
 }
 
+const areasOf = () => [...new Set(CLINICS.map(c => c.area).filter(Boolean))];
+const tagsOf = c => [...(c.concerns || []), ...(c.treats || [])];
+function clinicRow(c){
+  const k = campOf(c.id);
+  const img = c.photos && c.photos.length ? c.photos[0] : "";
+  const langs = LANGS.filter(([, ch]) => (c.langs || "").includes(ch)).map(([n]) => n);
+  const tags = tagsOf(c).slice(0, 3);
+  return `<a class="crow" href="#c-${c.id}">
+    ${img ? `<div class="crow-img"><img src="${esc(img)}" alt="${esc(c.name)}" loading="lazy"></div>`
+      : c.logo ? `<div class="crow-img logo"><img src="${esc(c.logo)}" alt="${esc(c.name)}" loading="lazy"></div>`
+      : `<div class="crow-img ph ${c.tone}"></div>`}
+    <div class="crow-bd">
+      <div class="crow-top"><span class="loc">${esc(c.area || c.region)}</span>${c.selected ? `<span class="bdg sel">SELECTED</span>` : ""}${k ? `<span class="bdg camp">體驗團招募中</span>` : ""}</div>
+      <div class="n">${esc(c.name)}${exTag(c)}</div>
+      ${c.oneliner ? `<div class="one">${esc(c.oneliner)}</div>` : ""}
+      ${tags.length ? `<div class="tg">${tags.map(x => `<span>${esc(x)}</span>`).join("")}</div>` : ""}
+      ${langs.length ? `<div class="lg">${langs.join("・")}諮詢</div>` : ""}
+    </div></a>`;
+}
+function fchips(list, key, label){
+  const v = state.f[key];
+  return `<div class="frow"><span class="flab">${label}</span><div class="chips">${list.map(x =>
+    `<button class="chip ${x === v ? "on" : ""}" data-f="${key}" data-v="${esc(x)}" aria-pressed="${x === v}">${esc(x)}</button>`).join("")}</div></div>`;
+}
+function fsel(key, opts, label){
+  const v = state.f[key];
+  return `<label class="fsel"><span class="sr-only">${label}</span><select data-fsel="${key}">
+    <option value="">${label}</option>${opts.map(o => `<option ${o === v ? "selected" : ""}>${esc(o)}</option>`).join("")}</select></label>`;
+}
 function viewClinics(){
-  const q = state.cq.trim().toLowerCase();
-  const hay = c => [c.name, c.region, c.area, c.address, ...c.tags, ...c.menu.map(m => m.n)].join(" ").toLowerCase();
-  const list = CLINICS.filter(c => (state.region === "全部" || c.region === state.region) && (!q || hay(c).includes(q)));
-  const none = q ? `找不到符合「${esc(state.cq)}」的診所。可以試試診所名稱、地區（例如「弘大」「釜山」）或療程（例如「電波」）。`
-                 : "這個地區的合作診所準備中。";
+  const f = state.f, q = state.cq.trim().toLowerCase();
+  const hay = c => [c.name, c.region, c.area, c.address, c.oneliner || "", ...c.tags, ...tagsOf(c), ...(c.traits || []), ...(c.fields || []), ...c.menu.map(m => m.n)].join(" ").toLowerCase();
+  let list = CLINICS.filter(c =>
+    (!q || hay(c).includes(q)) &&
+    (!f.area || c.area === f.area) &&
+    (!f.concern || (c.concerns || []).includes(f.concern)) &&
+    (!f.treat || (c.treats || []).includes(f.treat)) &&
+    (!f.lang || (c.langs || "").includes((LANGS.find(l => l[0] === f.lang) || ["", "?"])[1])) &&
+    (!f.trait || (c.traits || []).includes(f.trait)) &&
+    (!f.camp || campOf(c.id)));
+  list = f.sort === "new" ? list.slice().reverse() : list.slice().sort((a, b) => (b.selected ? 1 : 0) - (a.selected ? 1 : 0));
+  const any = q || f.area || f.concern || f.treat || f.lang || f.trait || f.camp;
   return `<div class="view">
-    <div class="sh" style="border:0;padding:0"><div><span class="en">CLINICS</span><h2>找診所</h2></div></div>
-    <label class="search"><input id="cq" type="search" placeholder="搜尋診所名稱、地區、療程" value="${esc(state.cq)}" aria-label="搜尋診所"><span aria-hidden="true">→</span></label>
-    ${chips(REGIONS, state.region, "region")}
-    ${list.length ? `<div class="grid cl">${list.map(clinicCard).join("")}</div>` : `<p class="empty">${none}</p>`}
+    <div class="sh" style="border:0;padding:0"><div><span class="en">PARTNER CLINICS</span><h2>找診所</h2></div></div>
+    <p class="note" style="margin:-6px 0 0">所有診所皆為 Skin Bridge 合作夥伴，可用中文預約諮詢。</p>
+    <label class="search"><input id="cq" type="search" placeholder="搜尋診所、療程、膚況（例：Ulthera、毛孔、弘大）" value="${esc(state.cq)}" aria-label="搜尋診所"><span aria-hidden="true">→</span></label>
+    ${fchips(CONCERNS, "concern", "膚況")}
+    ${fchips(areasOf(), "area", "地區")}
+    ${fchips(TREATS, "treat", "療程")}
+    <div class="fbar">
+      <label class="fsel"><span class="sr-only">排序</span><select data-fsel="sort"><option value="rec" ${f.sort !== "new" ? "selected" : ""}>推薦排序</option><option value="new" ${f.sort === "new" ? "selected" : ""}>最新加入</option></select></label>
+      ${fsel("lang", LANGS.map(l => l[0]), "語言")}
+      ${fsel("trait", TRAITS, "診所特色")}
+      <button class="chip ${f.camp ? "on" : ""}" data-fcamp="1" aria-pressed="${f.camp}">體驗團招募中</button>
+      ${any ? `<button class="chip clear" data-fclear="1">清除條件</button>` : ""}
+    </div>
+    <p class="cnt-line"><span class="num">${list.length}</span> 間診所</p>
+    ${list.length ? `<div class="crows">${list.map(clinicRow).join("")}</div>`
+      : `<p class="empty">找不到符合條件的診所。可以減少篩選條件，或直接用 LINE 告訴我們你的需求，我們幫你推薦。</p>`}
   </div>`;
 }
 
@@ -94,6 +142,15 @@ function viewClinic(c){
     ? `<ul class="feats">${c.features.map(f => `<li>${icon(f.icon)}<span>${esc(f.label)}</span></li>`).join("")}</ul>` : "";
   const intro = c.intro ? `<p class="intro">${esc(c.intro).replace(/\n/g, "<br>")}</p>` : `<p class="intro">${esc(c.about)}</p>`;
   const fields = c.fields ? `<div class="fields">${c.fields.map(f => `<span>${esc(f)}</span>`).join("")}</div>` : "";
+  const ads = c.ads && c.ads.length ? c.ads : null;
+  const adCard = (r, i) => {
+    const off = r.orig && r.krw && r.orig > r.krw ? Math.round((1 - r.krw / r.orig) * 100) : 0;
+    return `<div class="ad">
+      <a class="ad-img" href="${esc(r.img)}" target="_blank" rel="noopener"><img src="${esc(r.img)}" alt="${esc(r.n)}" loading="lazy"></a>
+      <div class="ad-bd"><div class="ad-t">${esc(r.n)}</div>${r.s ? `<div class="ad-s">${esc(r.s)}</div>` : ""}
+        <div class="ad-p">${r.krw ? `${off ? `<s>${won(r.orig)}</s> ` : ""}<b>${won(r.krw)}</b><small>${twd(r.krw)}</small>` : `<span class="ask">LINE 詢價</span>`}</div>
+        <button type="button" class="btn dark sm" data-apply="booking" data-clinic="${c.id}" data-item="${esc(r.n + (r.s ? " " + r.s : ""))}">預約</button></div></div>`; };
+  const adsBox = ads ? `<div class="ads">${ads.map(adCard).join("")}</div><p class="note">${esc(c.priceNote || "VAT 另計")}。實際療程內容與價格以院所諮詢為準。</p>` : "";
   const progs = c.programs && c.programs.length ? `<h3 class="sub-h">特色療程</h3><div class="progs">${c.programs.map(p => `<div class="prog">${p.img ? `<img src="${esc(p.img)}" alt="${esc(p.title)}" loading="lazy">` : ""}<div class="prog-bd"><b>${esc(p.title)}</b>${p.desc ? `<p>${esc(p.desc).replace(/\n/g, "<br>")}</p>` : ""}</div></div>`).join("")}</div>` : "";
   const equip = c.equipment && c.equipment.length ? `<h3 class="sub-h">主要設備</h3><div class="fields equip">${c.equipment.map(f => `<span>${esc(f)}</span>`).join("")}</div>` : "";
   const env = c.interior && c.interior.length ? `<h3 class="sub-h">診所環境</h3><div class="row envs">${c.interior.map(u => `<img src="${esc(u)}" alt="${esc(c.name)} 診所環境" loading="lazy">`).join("")}</div>` : "";
@@ -159,11 +216,13 @@ function viewClinic(c){
     </div>
     <nav class="dtabs" aria-label="診所內容">
       <button type="button" data-jump="info" class="on">診所資訊</button>
+      ${ads ? `<button type="button" data-jump="ads">活動</button>` : ""}
       <button type="button" data-jump="camp">體驗團${k ? `<em>最高 ${k.best}</em>` : ""}</button>
       <button type="button" data-jump="price">${m ? esc(m.month) + "價格" : "療程價格"}</button>
       <button type="button" data-jump="review">評價</button>
     </nav>
     ${sec("info", "CLINIC", `診所特色${c.features ? ` <span class="cnt-h">${c.features.length}</span>` : ""}`, feats + intro + fields + progs + equip + env + docs + hours + addr)}
+    ${ads ? sec("ads", "EVENTS", "活動・優惠", adsBox) : ""}
     ${sec("camp", "EXPERIENCE", "體驗團方案", campCards)}
     ${sec("price", "THIS MONTH", m ? `${esc(m.month)}活動價格` : "療程價格", priceTbl)}
     ${sec("review", "REVIEWS", "評價・前後對比", `<div id="revBox" data-clinic="${c.id}"></div>`)}
@@ -324,6 +383,9 @@ function route(){
 document.addEventListener("click", e => {
   const t = e.target.closest("button, a");
   if (!t) return;
+  if (t.dataset.f) { const k = t.dataset.f; state.f[k] = state.f[k] === t.dataset.v ? "" : t.dataset.v; route(); return; }
+  if (t.dataset.fcamp) { state.f.camp = !state.f.camp; route(); return; }
+  if (t.dataset.fclear) { state.f = { area:"", concern:"", treat:"", lang:"", trait:"", camp:false, sort:state.f.sort }; state.cq = ""; route(); return; }
   if (t.dataset.region) { state.region = t.dataset.region; route(); }
   else if (t.dataset.cat) { state.cat = t.dataset.cat; route(); }
   else if (t.dataset.gocat) { state.cat = t.dataset.gocat; }
@@ -353,6 +415,10 @@ document.addEventListener("input", e => {
     route();
     const q = $("#" + id); q.focus(); q.setSelectionRange(pos, pos);
   }
+});
+document.addEventListener("change", e => {
+  const k = e.target.dataset && e.target.dataset.fsel; if (!k) return;
+  state.f[k] = e.target.value; route();
 });
 addEventListener("hashchange", () => {
   const h = location.hash.slice(1);

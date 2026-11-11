@@ -8,6 +8,10 @@ const TWD_RATE = 41.6;                // 1 NT$ = 41.6원 (2026.11)
 /* ===== 데이터 ===== */
 const REGIONS = ["首爾","釜山","濟州","大邱"];
 const CATS = ["電波拉提","微針","膠原增生","肌膚管理","雷射","肉毒"];
+const CONCERNS = ["拉提","毛孔","痘痘","痘疤","色素","輪廓","皺紋","彈力","身體雕塑"];
+const TREATS = ["Ultherapy","Thermage","Potenza","Rejuran","ONDA","肉毒","玻尿酸","InMode","水光","線雕","抽脂"];
+const TRAITS = ["院長親診","女醫師","全預約制","私人空間","拉提專門","中文諮詢","可辦退稅","車站直達"];
+const LANGS = [["中文","中"],["英文","英"],["日文","日"]];
 
 /* 병원마다 정하는 것
    perk : 예약하면 주는 서비스(없으면 "")
@@ -140,7 +144,7 @@ const bg = (c, i) => { const u = c.photos && c.photos[i || 0]; return u ? ` styl
 const openCamps = () => CAMPS.filter(k => daysLeft(k.end) >= 0);
 const campOf = id => openCamps().find(k => k.clinic === id);
 
-const state = { region:"全部", cat:"全部", q:"", cq:"", tab:"price", prefill:null };
+const state = { region:"全部", cat:"全部", q:"", cq:"", tab:"price", prefill:null, f:{ area:"", concern:"", treat:"", lang:"", trait:"", camp:false, sort:"rec" } };
 
 function ddLabel(k){ const d = daysLeft(k.end); return d === 0 ? "今天截止" : "D-" + d; }
 
