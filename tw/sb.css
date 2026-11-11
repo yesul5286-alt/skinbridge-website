@@ -355,7 +355,7 @@ body{font-size:15px;line-height:1.65}
 b,strong,h1,h2,h3{font-weight:600}
 .logo{font:400 1.35rem var(--display);letter-spacing:.24em}
 .logo small{font:400 .78rem var(--display);letter-spacing:.24em;color:var(--muted)}
-.en{font:500 .82rem var(--display);letter-spacing:.18em;color:var(--wood)}
+.en{font:500 .82rem var(--display);letter-spacing:.18em;color:#86704F}
 .sh h2,.dhead h1{font-family:var(--sans);font-weight:600}
 .sh h2{font-size:1.25rem}
 .dhead h1{font-size:1.6rem}
