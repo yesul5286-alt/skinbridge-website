@@ -1,8 +1,10 @@
 /* Layout: 매거진형 단일 컬럼(최대 1080px). 첫 화면은 체험단 줄 → 병원 줄 → 마감 임박 줄이 가로 넘김으로 번갈아 나옴.
    해시로 화면 전환: 首頁 / #camps / #clinics / #c-병원id / #apply. 연분홍 종이 느낌 한 가지 테마로 고정. */
 :root{
-  --paper:#F7F5F2; --white:#FFFFFF; --ink:#191817; --muted:#77716D; --rule:#E8E3DF;
-  --rose:#956269; --rose-deep:#7A4E55; --rose-soft:#F1E7E5; --line-green:#05823D; --btn-line:#D8D2CE;
+  --paper:#F1F0EB; --white:#FAF9F6; --ink:#1E1E1C; --muted:#7B766E; --rule:#E2DED7;
+  --rose:#75433F; --rose-deep:#5E3532; --rose-soft:#ECE5DC; --line-green:#05823D; --btn-line:#D6D1C9;
+  --wood:#B99E7E; --sage:#A5A99D;
+  --display:"Cormorant Garamond","Times New Roman",serif;
   --serif:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
   --sans:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif;
   --latin:"Inter","Helvetica Neue",Arial,sans-serif;
@@ -351,9 +353,9 @@ footer{border-top:1px solid var(--rule);margin-top:40px;padding-top:18px;font-si
 /* ===== 2026-11 디자인 시스템 (B 리스트형): 웜 아이보리 · 뮤트 로즈 · Noto Sans TC ===== */
 body{font-size:15px;line-height:1.65}
 b,strong,h1,h2,h3{font-weight:600}
-.logo{font:500 1.15rem var(--latin);letter-spacing:.22em}
-.logo small{font:500 .7rem var(--latin);letter-spacing:.26em;color:var(--muted)}
-.en{font:500 .72rem var(--latin);letter-spacing:.14em}
+.logo{font:400 1.35rem var(--display);letter-spacing:.24em}
+.logo small{font:400 .78rem var(--display);letter-spacing:.24em;color:var(--muted)}
+.en{font:500 .82rem var(--display);letter-spacing:.18em;color:var(--wood)}
 .sh h2,.dhead h1{font-family:var(--sans);font-weight:600}
 .sh h2{font-size:1.25rem}
 .dhead h1{font-size:1.6rem}
@@ -368,8 +370,8 @@ b,strong,h1,h2,h3{font-weight:600}
 .btn.dark{background:var(--ink);color:var(--white)}
 .btn.light{background:var(--white);border-color:var(--btn-line);color:var(--ink)}
 .btn.rose{background:var(--rose);border-color:var(--rose);color:var(--white)}
-.btn.line{background:var(--ink);border-color:var(--ink);color:var(--white)}
-.bar{background:linear-gradient(to top,var(--paper) 72%,rgba(247,245,242,0))}
+.btn.line{background:var(--rose);border-color:var(--rose);color:#FAF9F6}
+.bar{background:linear-gradient(to top,var(--paper) 72%,rgba(241,240,235,0))}
 .crows{background:var(--white);border:1px solid var(--rule);border-radius:16px;padding:0 14px}
 .crow{border-bottom:1px solid var(--rule);padding:14px 0}
 .crow:last-child{border-bottom:0}
@@ -378,10 +380,10 @@ b,strong,h1,h2,h3{font-weight:600}
 .crow .tg span{background:transparent;border:1px solid var(--rule);color:var(--muted)}
 .crow:hover .n{color:var(--rose-deep)}
 .bdg{font:500 .72rem var(--latin);letter-spacing:.06em;padding:2px 6px;border-radius:4px}
-.bdg.sel{background:var(--rose-soft);color:var(--rose-deep)}
+.bdg.sel{background:var(--rose-soft);color:#6B5A45}
 .bdg.camp{background:var(--rose);color:var(--white);font-family:var(--latin);letter-spacing:.08em}
 .clinic,.form,.prog{border-color:var(--rule);border-radius:16px;overflow:hidden}
-.logo-ph{background:#F1EDE8;border-color:var(--rule)}
+.logo-ph{background:#ECE9E2;border-color:var(--rule)}
 .ex{font-family:var(--latin);font-weight:500}
 .t1{background:linear-gradient(160deg,#E9DFDA,#A58C88)}
 .t2{background:linear-gradient(160deg,#ECE2D7,#A88E78)}
