@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+TC:wght@500;600&family=Libre+Caslon+Text&family=Montserrat:wght@400&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611120530">
+<link rel="stylesheet" href="/tw/sb.css?v=202611120537">
 </head>
 <body>
 <header class="hd">
@@ -39,7 +39,7 @@
     <a href="#me" data-nav="me"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span>我的</span></a>
 </nav>
 
-<script src="/tw/sb-common.js?v=202611120530"></script>
+<script src="/tw/sb-common.js?v=202611120537"></script>
 <script>
 /* ===== 화면 ===== */
 const HOME = {
@@ -241,9 +241,64 @@ function fsel(key, opts, label){
   return `<label class="fsel"><span class="sr-only">${label}</span><select data-fsel="${key}">
     <option value="">${label}</option>${opts.map(o => `<option ${o === v ? "selected" : ""}>${esc(o)}</option>`).join("")}</select></label>`;
 }
+/* ===== 병원 찾기 (診所探索) ===== */
+const FKEYS = [
+  ["area", "地區", () => areasOf()],
+  ["treat", "療程", () => TREATS],
+  ["concern", "肌膚問題", () => CONCERNS],
+  ["trait", "診所特色", () => TRAITS],
+  ["lang", "語言", () => LANGS.map(l => l[0])]
+];
+const REGION_EN = { "首爾":"SEOUL", "濟州":"JEJU", "釜山":"BUSAN", "大邱":"DAEGU", "仁川":"INCHEON", "京畿":"GYEONGGI" };
+const lineUrl = () => "https://line.me/R/ti/p/" + encodeURIComponent(LINE_ID);
+function clinicCard(c, i){
+  const k = campOf(c.id);
+  const img = (c.photos && c.photos[0]) || (c.interior && c.interior[0]) || "";
+  const langs = LANGS.filter(([, ch]) => (c.langs || "").includes(ch)).map(([n]) => n);
+  const cats = tagsOf(c).slice(0, 3);
+  const cur = c.curation || c.oneliner || "";
+  return `<article class="cl">
+    <a class="cl-img${img ? "" : " none"}" href="#c-${c.id}" tabindex="-1" aria-hidden="true">${img
+      ? `<img src="${esc(img)}" alt="" loading="${i < 2 ? "eager" : "lazy"}">`
+      : c.logo ? `<img class="lg" src="${esc(c.logo)}" alt="" loading="lazy">` : `<span>${esc(c.name)}</span>`}</a>
+    <div class="cl-bd">
+      <div class="cl-meta"><span class="cl-no">${String(i + 1).padStart(2, "0")}</span>
+        <span class="cl-loc">${REGION_EN[c.region] || esc(c.region)} · ${esc(c.area)}</span>
+        ${c.selected ? `<span class="cl-bdg sel">SKINBRIDGE SELECTED</span>` : ""}${k ? `<span class="cl-bdg">EXPERIENCE OPEN</span>` : ""}</div>
+      <h2 class="cl-n"><a href="#c-${c.id}">${esc(c.name)}</a>${exTag(c)}</h2>
+      ${cur ? `<p class="cl-cur">${esc(cur)}</p>` : ""}
+      ${cats.length ? `<p class="cl-cats">${cats.map(esc).join(" / ")}</p>` : ""}
+      ${langs.length ? `<p class="cl-lg">${langs.join("・")}諮詢</p>` : ""}
+      <div class="cl-ft">
+        <div><span class="cl-pt">SKINBRIDGE PARTNER</span>${c.benefit ? `<span class="cl-ben">全療程 9折專屬禮遇</span>` : ""}</div>
+        <a class="cl-go" href="#c-${c.id}">查看診所 <span aria-hidden="true">→</span></a>
+      </div>
+    </div></article>`;
+}
+function lineReco(){
+  return `<aside class="cl-line">
+    <span class="cl-line-en">NOT SURE YET?</span>
+    <h2>還不知道哪間適合你？</h2>
+    <p>告訴我們你的肌膚問題與預算，<br>Skinbridge 幫你整理適合的選擇。</p>
+    <a class="cl-line-btn" href="${lineUrl()}" target="_blank" rel="noopener">LINE 諮詢推薦 <span aria-hidden="true">→</span></a>
+  </aside>`;
+}
+function filterSheet(){
+  const def = FKEYS.find(x => x[0] === state.sheet);
+  if (!def) return "";
+  const [key, label, opts] = def, v = state.f[key];
+  return `<div class="fsheet" data-fsheetx="1">
+    <div class="fsheet-in" role="dialog" aria-modal="true" aria-label="${label}">
+      <div class="fsheet-h"><b>${label}</b><button type="button" class="fsheet-x" data-fsheetx="1" aria-label="關閉">✕</button></div>
+      <div class="fsheet-l">
+        <button type="button" data-fpick="${key}" data-v="" aria-pressed="${!v}">全部</button>
+        ${opts().map(o => `<button type="button" data-fpick="${key}" data-v="${esc(o)}" aria-pressed="${o === v}">${esc(o)}</button>`).join("")}
+      </div>
+    </div></div>`;
+}
 function viewClinics(){
   const f = state.f, q = state.cq.trim().toLowerCase();
-  const hay = c => [c.name, c.region, c.area, c.address, c.oneliner || "", ...c.tags, ...tagsOf(c), ...(c.traits || []), ...(c.fields || []), ...c.menu.map(m => m.n)].join(" ").toLowerCase();
+  const hay = c => [c.name, c.region, c.area, c.address, c.oneliner || "", c.curation || "", ...c.tags, ...tagsOf(c), ...(c.traits || []), ...(c.fields || []), ...c.menu.map(m => m.n)].join(" ").toLowerCase();
   let list = CLINICS.filter(c =>
     (!q || hay(c).includes(q)) &&
     (!f.area || c.area === f.area) &&
@@ -255,24 +310,29 @@ function viewClinics(){
     (!f.ben || c.benefit));
   list = f.sort === "new" ? list.slice().reverse() : list.slice().sort((a, b) => (b.selected ? 1 : 0) - (a.selected ? 1 : 0));
   const any = q || f.area || f.concern || f.treat || f.lang || f.trait || f.camp || f.ben;
-  return `<div class="view">
-    <div class="sh" style="border:0;padding:0"><div><span class="en">PARTNER CLINICS</span><h2>找診所</h2></div></div>
-    <p class="note" style="margin:-6px 0 0">所有診所皆為 Skin Bridge 合作夥伴，可用中文預約諮詢。</p>
-    <label class="search"><input id="cq" type="search" placeholder="搜尋診所、療程、膚況（例：Ulthera、毛孔、弘大）" value="${esc(state.cq)}" aria-label="搜尋診所"><span aria-hidden="true">→</span></label>
-    ${fchips(CONCERNS, "concern", "膚況")}
-    ${fchips(areasOf(), "area", "地區")}
-    ${fchips(TREATS, "treat", "療程")}
-    <div class="fbar">
-      <label class="fsel"><span class="sr-only">排序</span><select data-fsel="sort"><option value="rec" ${f.sort !== "new" ? "selected" : ""}>推薦排序</option><option value="new" ${f.sort === "new" ? "selected" : ""}>最新加入</option></select></label>
-      ${fsel("lang", LANGS.map(l => l[0]), "語言")}
-      ${fsel("trait", TRAITS, "診所特色")}
-      <button class="chip ${f.camp ? "on" : ""}" data-fcamp="1" aria-pressed="${f.camp}">體驗團招募中</button>
-      ${f.ben || CLINICS.some(c => c.benefit) ? `<button class="chip ${f.ben ? "on" : ""}" data-f="ben" data-v="1" aria-pressed="${!!f.ben}">9折禮遇</button>` : ""}
-      ${any ? `<button class="chip clear" data-fclear="1">清除條件</button>` : ""}
+  const regions = [...new Set(list.map(c => c.region))];
+  const where = f.area ? f.area : regions.length === 1 ? regions[0] : "";
+  const at = Math.min(3, list.length);
+  const rows = list.map(clinicCard);
+  if (list.length) rows.splice(at, 0, lineReco());
+  return `<div class="view disc">
+    <div class="cd-top"><a class="cd-back" href="#" aria-label="回到首頁">← <span>Skinbridge</span></a></div>
+    <header class="cd-h"><h1>診所探索</h1><span class="cd-en">CLINIC DISCOVERY</span>
+      <p>所有診所皆為 Skinbridge 合作夥伴，可用中文預約諮詢。</p></header>
+    <label class="cd-search">${'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>'}<input id="cq" type="search" placeholder="搜尋診所、療程或肌膚問題" value="${esc(state.cq)}" aria-label="搜尋診所、療程或肌膚問題"></label>
+    <div class="cd-fl" role="group" aria-label="篩選">
+      ${FKEYS.map(([key, label]) => `<button type="button" class="cd-f${f[key] ? " on" : ""}" data-fsheet="${key}" aria-haspopup="dialog">${esc(f[key] || label)} <span aria-hidden="true">⌄</span></button>`).join("")}
+      <button type="button" class="cd-f${f.camp ? " on" : ""}" data-fcamp="1" aria-pressed="${f.camp}">體驗團招募中</button>
+      ${f.ben || CLINICS.some(c => c.benefit) ? `<button type="button" class="cd-f${f.ben ? " on" : ""}" data-f="ben" data-v="1" aria-pressed="${!!f.ben}">9折禮遇</button>` : ""}
+      ${any ? `<button type="button" class="cd-f clear" data-fclear="1">清除</button>` : ""}
     </div>
-    <p class="cnt-line"><span class="num">${list.length}</span> 間診所</p>
-    ${list.length ? `<div class="crows">${list.map(clinicRow).join("")}</div>`
-      : `<p class="empty">找不到符合條件的診所。可以減少篩選條件，或直接用 LINE 告訴我們你的需求，我們幫你推薦。</p>`}
+    <div class="cd-rh">
+      <p>${where ? `${esc(where)} · ` : ""}<span class="num">${list.length}</span> 間合作診所</p>
+      <label class="cd-sort"><span class="sr-only">排序</span><select data-fsel="sort"><option value="rec" ${f.sort !== "new" ? "selected" : ""}>推薦順</option><option value="new" ${f.sort === "new" ? "selected" : ""}>最新合作</option></select></label>
+    </div>
+    ${list.length ? `<div class="cls">${rows.join("")}</div>`
+      : `<p class="empty">找不到符合條件的診所。可以減少篩選條件，或直接用 LINE 告訴我們你的需求，我們幫你推薦。</p>${lineReco()}`}
+    ${filterSheet()}
   </div>`;
 }
 
@@ -514,6 +574,9 @@ function route(){
           `<button class="btn rose wide" data-apply="booking" data-clinic="${c.id}">LINE 預約諮詢</button>`;
   }
   else { html = viewHome(); nav = "home"; }
+  if (h !== "clinics") state.sheet = "";
+  document.body.classList.toggle("cdpage", h === "clinics");
+  document.body.classList.toggle("fsheet-open", h === "clinics" && !!state.sheet);
   const bn = document.getElementById("bnav");
   if (bn) bn.hidden = !!bar || h === "apply" || h === "review";
   document.body.classList.toggle("has-bnav", !!bn && !bn.hidden);
@@ -586,6 +649,9 @@ document.addEventListener("click", e => {
   const t = e.target.closest("button, a");
   if (!t) return;
   if (t.dataset.mmenu) { mSheet(true); return; }
+  if (t.dataset.fsheet) { state.sheet = t.dataset.fsheet; route(); const b = document.querySelector(".fsheet-l [aria-pressed=true]"); if (b) b.focus(); return; }
+  if (t.dataset.fpick) { state.f[t.dataset.fpick] = t.dataset.v; state.sheet = ""; route(); return; }
+  if (t.dataset.fsheetx) { const k = state.sheet; state.sheet = ""; route(); const b = document.querySelector(`[data-fsheet="${k}"]`); if (b) b.focus(); return; }
   if (t.dataset.mclose) { mSheet(false); if (t.tagName === "BUTTON") return; }
   if (t.dataset.hscroll) { const el = document.getElementById(t.dataset.hscroll); if (el) el.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }); return; }
   if (t.dataset.gof) { state.f = { area:"", concern:"", treat:"", lang:"", trait:"", camp:false, ben:"", sort:state.f.sort }; state.cq = ""; state.f[t.dataset.gof] = t.dataset.v; go("clinics"); return; }
@@ -612,6 +678,12 @@ document.addEventListener("click", e => {
   }
   const href = t.getAttribute("href");
   if (t.tagName === "A" && href && href.startsWith("#")) { e.preventDefault(); go(href.slice(1)); }
+});
+document.addEventListener("click", e => {
+  if (e.target.classList && e.target.classList.contains("fsheet")) { state.sheet = ""; route(); }
+});
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape" && state.sheet) { const k = state.sheet; state.sheet = ""; route(); const b = document.querySelector(`[data-fsheet="${k}"]`); if (b) b.focus(); }
 });
 document.addEventListener("input", e => {
   const id = e.target.id;

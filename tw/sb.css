@@ -653,3 +653,82 @@ button.link{background:none;border:0;padding:0}
   .mh-s,.mh-s.on{transition:none}
   body.mhome .bnav{transition:none}
 }
+
+/* ===== 병원 찾기: 診所探索 ===== */
+.disc{gap:22px}
+.cd-top{display:none}
+@media(max-width:899px){
+  body.cdpage .hd{display:none}
+  .cd-top{display:flex;align-items:center;min-height:52px;margin-bottom:-10px}
+  .cd-back{display:inline-flex;align-items:center;gap:10px;min-height:44px;font-size:1.1rem;color:var(--ink)}
+  .cd-back span{font:400 1.25rem "Libre Caslon Text",Georgia,serif}
+}
+.cd-h{display:flex;flex-direction:column;gap:4px;padding-top:6px}
+.cd-h h1{margin:0;font:500 1.7rem/1.3 var(--sans);letter-spacing:.04em}
+.cd-en{font:400 .74rem "Montserrat",var(--latin);letter-spacing:.26em;color:#725C3E}
+.cd-h p{margin:8px 0 0;font-size:.88rem;color:var(--muted)}
+.cd-search{display:flex;align-items:center;gap:10px;background:var(--white);border:1px solid #E6E1D8;border-radius:18px;padding:0 18px;min-height:54px;box-shadow:0 1px 8px rgba(30,30,28,.04);color:var(--muted)}
+.cd-search:focus-within{border-color:#B99E7E}
+.cd-search input{flex:1;min-width:0;border:0;background:transparent;font:inherit;font-size:1rem;color:var(--ink);padding:12px 0}
+.cd-search input:focus{outline:none}
+.cd-search input::placeholder{color:#8A847A}
+.cd-fl{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding:2px max(16px,env(safe-area-inset-left,0px))}
+.cd-fl::-webkit-scrollbar{display:none}
+.cd-f{flex:none;display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 14px;border:1px solid #D9D3C9;border-radius:999px;background:var(--white);color:var(--ink);font-size:.86rem;white-space:nowrap}
+.cd-f span{color:var(--muted);font-size:.8rem}
+.cd-f.on{background:#ECE5DC;border-color:#B99E7E;color:var(--rose-deep)}
+.cd-f.clear{border-color:transparent;background:none;color:var(--muted);text-decoration:underline;text-underline-offset:3px}
+.cd-rh{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid #D6D1C9;padding-bottom:12px}
+.cd-rh p{margin:0;font-size:.9rem}
+.cd-sort select{appearance:none;-webkit-appearance:none;border:0;background:transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2368635B' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right center;padding:8px 18px 8px 4px;font:inherit;font-size:.86rem;color:var(--ink);min-height:40px}
+.cls{display:flex;flex-direction:column}
+.cl{display:flex;flex-direction:column;gap:16px;padding:8px 0 30px;border-bottom:1px solid var(--rule)}
+.cl+.cl,.cl-line+.cl{padding-top:28px}
+.cl-img{display:block;aspect-ratio:4/3;overflow:hidden;background:#E6E1D8}
+.cl-img img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(.88);transition:transform .5s ease}
+.cl-img img.lg{object-fit:contain;padding:18%;filter:none}
+.cl-img.none{display:grid;place-items:center;background:#E9E4DB}
+.cl-img.none span{font:400 1.6rem "Libre Caslon Text",Georgia,serif;letter-spacing:.06em;color:#8C7A62;text-transform:uppercase}
+.cl:hover .cl-img img{transform:scale(1.02)}
+.cl-bd{display:flex;flex-direction:column;gap:6px}
+.cl-meta{display:flex;align-items:center;flex-wrap:wrap;gap:6px 12px}
+.cl-no{font:400 1.05rem "Libre Caslon Text",Georgia,serif;color:#8C7A62}
+.cl-loc{font:400 .74rem "Montserrat",var(--latin);letter-spacing:.18em;color:var(--ink)}
+.cl-bdg{font:500 .7rem var(--latin);letter-spacing:.12em;color:#725C3E;border:1px solid #CDBFA9;padding:2px 8px}
+.cl-bdg.sel{color:var(--rose);border-color:#C9A9A4}
+.cl-n{margin:2px 0 0;font:400 1.75rem/1.15 "Libre Caslon Text",Georgia,serif;letter-spacing:.02em;text-transform:uppercase}
+.cl-cur{margin:4px 0 0;font-size:.98rem;line-height:1.65;color:var(--ink)}
+.cl-cats{margin:0;font-size:.84rem;color:var(--muted)}
+.cl-lg{margin:0;font-size:.82rem;color:var(--muted)}
+.cl-ft{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-top:10px;padding-top:12px;border-top:1px solid var(--rule)}
+.cl-ft>div{display:flex;flex-direction:column;gap:2px}
+.cl-pt{font:400 .72rem "Montserrat",var(--latin);letter-spacing:.16em;color:#725C3E}
+.cl-ben{font-size:.84rem;color:var(--rose)}
+.cl-go{flex:none;display:inline-flex;align-items:center;gap:6px;min-height:44px;font-size:.9rem;color:var(--ink);white-space:nowrap}
+.cl-go:hover,.cl-n a:hover{color:var(--rose)}
+.cl-line{margin:28px 0 2px;padding:28px 22px;background:#E8E3D9;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.cl-line-en{font:400 .7rem "Montserrat",var(--latin);letter-spacing:.24em;color:#725C3E}
+.cl-line h2{margin:0;font:500 1.2rem var(--sans)}
+.cl-line p{margin:0;font-size:.9rem;line-height:1.75;color:var(--ink)}
+.cl-line-btn{margin-top:8px;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 20px;border:1px solid var(--ink);color:var(--ink);font-size:.9rem;letter-spacing:.04em}
+.cl-line-btn:hover{background:var(--ink);color:var(--white)}
+.fsheet{position:fixed;inset:0;z-index:30;background:rgba(30,30,28,.35);display:flex;align-items:flex-end;justify-content:center}
+.fsheet-in{width:100%;max-width:560px;max-height:72vh;background:var(--white);display:flex;flex-direction:column;padding:0 0 env(safe-area-inset-bottom,0px)}
+.fsheet-h{display:flex;justify-content:space-between;align-items:center;padding:12px 12px 12px 22px;border-bottom:1px solid var(--rule)}
+.fsheet-h b{font-weight:500;font-size:1.02rem}
+.fsheet-x{width:44px;height:44px;border:0;background:none;font-size:1.1rem;color:var(--ink)}
+.fsheet-l{overflow-y:auto;padding:6px 22px 18px;display:flex;flex-direction:column}
+.fsheet-l button{text-align:left;border:0;border-bottom:1px solid var(--rule);background:none;padding:14px 0;font-size:.98rem;color:var(--ink);display:flex;justify-content:space-between}
+.fsheet-l button[aria-pressed=true]{color:var(--rose);font-weight:500}
+.fsheet-l button[aria-pressed=true]::after{content:"✓"}
+body.fsheet-open{overflow:hidden}
+@media(min-width:900px){
+  .fsheet{align-items:center}
+  .cd-h h1{font-size:2.1rem}
+  .cd-fl{margin-inline:0;padding-inline:0;flex-wrap:wrap}
+  .cls{display:grid;grid-template-columns:1fr 1fr;column-gap:48px}
+  .cl{padding-top:28px}
+  .cl-line{grid-column:1 / -1;flex-direction:row;flex-wrap:wrap;align-items:center;column-gap:28px;padding:30px 36px}
+  .cl-line h2{flex-basis:100%}
+}
+@media(prefers-reduced-motion:reduce){.cl-img img{transition:none}}

@@ -144,7 +144,7 @@ const bg = (c, i) => { const u = c.photos && c.photos[i || 0]; return u ? ` styl
 const openCamps = () => CAMPS.filter(k => daysLeft(k.end) >= 0);
 const campOf = id => openCamps().find(k => k.clinic === id);
 
-const state = { region:"全部", cat:"全部", q:"", cq:"", tab:"price", prefill:null, f:{ area:"", concern:"", treat:"", lang:"", trait:"", camp:false, ben:"", sort:"rec" } };
+const state = { sheet:"", region:"全部", cat:"全部", q:"", cq:"", tab:"price", prefill:null, f:{ area:"", concern:"", treat:"", lang:"", trait:"", camp:false, ben:"", sort:"rec" } };
 
 function ddLabel(k){ const d = daysLeft(k.end); return d === 0 ? "今天截止" : "D-" + d; }
 
