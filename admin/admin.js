@@ -342,7 +342,7 @@ $("#editor").addEventListener("click", async e => {
   }
   else if (t.id === "jsonShow") { readForm(); $("#jsonBox").value = JSON.stringify(Object.assign({id: cur.id}, cur.data), null, 2); }
   else if (t.id === "jsonApply") {
-    try { const j = JSON.parse($("#jsonBox").value); if (cur.isNew && j.id) cur.id = j.id; delete j.id; cur.data = j; render(); if (cur.isNew) $("#i_id").value = cur.id; msg("JSON을 채웠어요. 확인하고 저장하세요.", "ok"); }
+    try { const j = JSON.parse($("#jsonBox").value); if (cur.isNew && j.id) cur.id = j.id; delete j.id; if (j._merge) { delete j._merge; readForm(); cur.data = Object.assign(cur.data, j); } else cur.data = j; render(); if (cur.isNew) $("#i_id").value = cur.id; msg("JSON을 채웠어요. 확인하고 저장하세요.", "ok"); }
     catch (err) { msg("JSON 형식이 맞지 않아요: " + err.message, "err"); }
   }
 });
