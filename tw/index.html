@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Skin Bridge 韓國診所指南｜預約諮詢・體驗團</title>
+<meta name="description" content="Skin Bridge 連接台灣與韓國首爾、釜山、濟州、大邱的合作診所：瀏覽診所與療程價格，用 LINE 中文預約諮詢、報名體驗團。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Skin Bridge 韓國診所指南｜預約諮詢・體驗團">
+<meta property="og:description" content="Skin Bridge 連接台灣與韓國首爾、釜山、濟州、大邱的合作診所：瀏覽診所與療程價格，用 LINE 中文預約諮詢、報名體驗團。">
+<meta property="og:url" content="https://www.skinbridgekorea.com/tw/">
+<link rel="canonical" href="https://www.skinbridgekorea.com/tw/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&family=Montserrat:wght@500;700&display=swap">
+<link rel="stylesheet" href="/tw/sb.css">
+</head>
+<body>
+<header class="hd">
+  <div class="hd-in">
+    <a href="#" class="logo">SKIN BRIDGE<small>KOREA CLINIC GUIDE</small></a>
+    <nav class="nav" aria-label="主選單">
+      <a href="#" data-nav="home">首頁</a>
+      <a href="##camps" data-nav="camps">體驗團</a>
+      <a href="##clinics" data-nav="clinics">找診所</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap" id="app"></main>
+
+<div class="wrap"><footer>
+  <p>Skin Bridge 為連接台灣顧客與韓國合作醫療院所的服務，醫療行為皆由各院所醫師執行，是否適合施作須經醫師諮詢判斷。</p>
+  <p>價格為韓元、VAT 另計；台幣為參考價（1 NT$ ≈ 41.6 韓元，2026.11）。標示「範例」的診所與體驗團為示意內容。</p>
+</footer></div>
+
+<div class="bar" id="bar"><div class="bar-in" id="barIn"></div></div>
+
+<script src="/tw/sb-common.js"></script>
+<script>
+/* ===== 화면 ===== */
+function viewHome(){
+  const q = state.q.trim();
+  let body;
+  if (q) {
+    const ks = openCamps().filter(k => (k.title + clinicOf(k.clinic).name + clinicOf(k.clinic).region + clinicOf(k.clinic).area + k.cat).includes(q));
+    const cs = CLINICS.filter(c => (c.name + c.region + c.area + c.menu.map(m => m.n).join("")).includes(q));
+    body = section("SEARCH", `「${esc(q)}」的搜尋結果`, "",
+      (ks.length ? `<div class="row">${ks.map(campCard).join("")}</div>` : "") +
+      (cs.length ? `<div class="row">${cs.map(clinicCard).join("")}</div>` : "") +
+      (!ks.length && !cs.length ? `<p class="empty">找不到相關的體驗團或診所，換個關鍵字試試，例如「電波」「釜山」。</p>` : ""));
+  } else {
+    const open = openCamps().sort((a,b) => (b.applied / b.quota) - (a.applied / a.quota));
+    body =
+      `<div class="hero ph"><span>本月精選</span><b>首爾 · 釜山 · 濟州 · 大邱<br>體驗團同步招募中</b></div>` +
+      section("EXPERIENCE", "招募中的體驗團", "#camps", `<div class="row">${open.map(campCard).join("")}</div>`) +
+      section("CLINICS", "可預約的診所", "#clinics", `<div class="row">${CLINICS.map(clinicCard).join("")}</div>`);
+  }
+  return `<div class="view">
+    <label class="search"><input id="q" type="search" placeholder="搜尋療程、診所、地區" value="${esc(state.q)}" aria-label="搜尋"><span aria-hidden="true">→</span></label>
+    <div class="chips">${CATS.map(c => `<a class="chip" href="#camps" data-gocat="${c}">${c}</a>`).join("")}</div>
+    ${body}</div>`;
+}
+
+function viewCamps(){
+  const list = openCamps().filter(k => (state.region === "全部" || clinicOf(k.clinic).region === state.region) && (state.cat === "全部" || k.cat === state.cat))
+    .sort((a,b) => daysLeft(a.end) - daysLeft(b.end));
+  return `<div class="view">
+    <div class="sh" style="border:0;padding:0"><div><span class="en">EXPERIENCE</span><h2>全部體驗團</h2></div></div>
+    ${chips(REGIONS, state.region, "region")}
+    ${chips(CATS, state.cat, "cat")}
+    ${list.length ? `<div class="grid">${list.map(campCard).join("")}</div>` : `<p class="empty">這個條件目前沒有招募中的體驗團，可以先看看其他地區，或直接預約診所諮詢。</p>`}
+  </div>`;
+}
+
+function viewClinics(){
+  const q = state.cq.trim().toLowerCase();
+  const hay = c => [c.name, c.region, c.area, c.address, ...c.tags, ...c.menu.map(m => m.n)].join(" ").toLowerCase();
+  const list = CLINICS.filter(c => (state.region === "全部" || c.region === state.region) && (!q || hay(c).includes(q)));
+  const none = q ? `找不到符合「${esc(state.cq)}」的診所。可以試試診所名稱、地區（例如「弘大」「釜山」）或療程（例如「電波」）。`
+                 : "這個地區的合作診所準備中。";
+  return `<div class="view">
+    <div class="sh" style="border:0;padding:0"><div><span class="en">CLINICS</span><h2>找診所</h2></div></div>
+    <label class="search"><input id="cq" type="search" placeholder="搜尋診所名稱、地區、療程" value="${esc(state.cq)}" aria-label="搜尋診所"><span aria-hidden="true">→</span></label>
+    ${chips(REGIONS, state.region, "region")}
+    ${list.length ? `<div class="grid cl">${list.map(clinicCard).join("")}</div>` : `<p class="empty">${none}</p>`}
+  </div>`;
+}
+
+function viewClinic(c){
+  const camps = openCamps().filter(k => k.clinic === c.id);
+  const T = state.tab;
+  const tab = (id, label) => `<button role="tab" aria-selected="${T === id}" data-tab="${id}">${label}</button>`;
+  let panel;
+  if (T === "price") {
+    panel = `<div class="price">${c.menu.map(m => `<div class="r">
+      <span class="nm">${esc(m.n)}</span>
+      ${m.krw ? `<span class="v">${won(m.krw)}<small>${twd(m.krw)}</small></span>` : `<span class="ask">LINE 詢價</span>`}
+      ${m.s ? `<span class="sub">${esc(m.s)}</span>` : ""}</div>`).join("")}</div>
+      <p class="note">韓元價格 VAT 另計。實際療程內容與價格以院所諮詢為準。</p>`;
+  } else if (T === "camps") {
+    panel = camps.length ? `<div class="grid">${camps.map(campCard).join("")}</div>
+      <p class="note">報名後由專人透過 LINE 以中文聯繫，選出結果以 LINE 通知。</p>`
+      : `<p class="empty">這間診所目前沒有招募中的體驗團，可以直接預約諮詢。</p>`;
+  } else {
+    panel = `<dl class="info">
+      <dt>地址</dt><dd>${esc(c.address)}</dd>
+      <dt>諮詢語言</dt><dd>${esc(c.langs)}</dd>
+      ${c.rating ? `<dt>Google 評分</dt><dd>★ <span class="num">${c.rating}</span>（<span class="num">${c.reviews}</span> 則評論，2026.11）</dd>` : ""}
+      <dt>介紹</dt><dd>${esc(c.about)}</dd>
+      ${c.policy ? `<dt>安全原則</dt><dd>${esc(c.policy)}</dd>` : ""}
+    </dl>
+    ${c.more ? `<a class="link" href="${c.more}" target="_blank" rel="noopener">查看完整價目與活動 →</a>` : ""}`;
+  }
+  return `<div class="view">
+    <a class="back" href="#clinics">← 返回診所列表</a>
+    <div class="cover ph ${c.tone}">${c.region.toUpperCase()} · ${esc(c.area)}</div>
+    <div class="dhead"><span class="loc">${c.region} · ${esc(c.area)}</span>
+      <h1>${esc(c.name)}${exTag(c)}</h1>
+      <div class="s">${[c.rating ? `★ <span class="num">${c.rating}</span>` : "", ...c.tags].filter(Boolean).join(" · ")}</div></div>
+    <div class="tabs" role="tablist">${tab("price","療程價格")}${tab("camps", "體驗團" + (camps.length ? ` ${camps.length}` : ""))}${tab("info","診所資訊")}</div>
+    <div role="tabpanel">${panel}</div>
+  </div>`;
+}
+
+/* ===== 라우팅 ===== */
+let cur = location.hash.slice(1);
+function go(h){
+  cur = h;
+  try { if (location.hash.slice(1) !== h) location.hash = h; } catch (_) {}
+  route(); scrollTo(0, 0);
+}
+function route(){
+  const h = cur;
+  let html, nav = "", bar = "";
+  if (h === "camps") { html = viewCamps(); nav = "camps"; }
+  else if (h === "clinics") { html = viewClinics(); nav = "clinics"; }
+  else if (h.startsWith("c-") && clinicOf(h.slice(2))) {
+    const c = clinicOf(h.slice(2)); html = viewClinic(c); nav = "clinics";
+    const hasCamp = openCamps().some(k => k.clinic === c.id);
+    bar = `<button class="btn dark" data-apply="booking" data-clinic="${c.id}">預約諮詢</button>` +
+          (hasCamp ? `<button class="btn rose" data-apply="camp" data-clinic="${c.id}">報名體驗團</button>` : "");
+  }
+  else { html = viewHome(); nav = "home"; }
+  if (!bar && h !== "apply") bar = `<a class="btn line" href="https://line.me/R/ti/p/${encodeURIComponent(LINE_ID)}" target="_blank" rel="noopener">LINE 中文諮詢・預約</a>`;
+  $("#app").innerHTML = html;
+  $("#barIn").innerHTML = bar;
+  $("#bar").hidden = !bar;
+  document.querySelectorAll("[data-nav]").forEach(a => a.classList.toggle("on", a.dataset.nav === nav));
+}
+
+/* ===== 이벤트 ===== */
+document.addEventListener("click", e => {
+  const t = e.target.closest("button, a");
+  if (!t) return;
+  if (t.dataset.region) { state.region = t.dataset.region; route(); }
+  else if (t.dataset.cat) { state.cat = t.dataset.cat; route(); }
+  else if (t.dataset.gocat) { state.cat = t.dataset.gocat; }
+  else if (t.matches(".tabs [data-tab]")) { state.tab = t.dataset.tab; route(); }
+  else if (t.matches("a.camp")) { state.tab = "camps"; }
+  else if (t.matches("a.clinic")) { state.tab = "price"; }
+  else if (t.dataset.apply) {
+    location.href = "/apply/?type=" + encodeURIComponent(t.dataset.apply) + "&clinic=" + encodeURIComponent(t.dataset.clinic);
+    return;
+  }
+  const href = t.getAttribute("href");
+  if (t.tagName === "A" && href && href.startsWith("#")) { e.preventDefault(); go(href.slice(1)); }
+});
+document.addEventListener("input", e => {
+  const id = e.target.id;
+  if (id === "q" || id === "cq") {
+    state[id] = e.target.value;
+    const pos = e.target.selectionStart;
+    route();
+    const q = $("#" + id); q.focus(); q.setSelectionRange(pos, pos);
+  }
+});
+addEventListener("hashchange", () => {
+  const h = location.hash.slice(1);
+  if (h !== cur) { cur = h; route(); scrollTo(0, 0); }
+});
+
+route();
+</script>
+</body>
+</html>

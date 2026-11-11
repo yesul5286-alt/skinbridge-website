@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>預約諮詢・報名體驗團｜Skin Bridge</title>
+<meta name="description" content="用 LINE 登入即可預約韓國合作診所的中文諮詢，或報名 Skin Bridge 體驗團。">
+<meta property="og:type" content="website">
+<meta property="og:title" content="預約諮詢・報名體驗團｜Skin Bridge">
+<meta property="og:description" content="用 LINE 登入即可預約韓國合作診所的中文諮詢，或報名 Skin Bridge 體驗團。">
+<meta property="og:url" content="https://www.skinbridgekorea.com/apply/">
+<link rel="canonical" href="https://www.skinbridgekorea.com/apply/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&family=Montserrat:wght@500;700&display=swap">
+<link rel="stylesheet" href="/tw/sb.css">
+</head>
+<body>
+<header class="hd">
+  <div class="hd-in">
+    <a href="/tw/" class="logo">SKIN BRIDGE<small>KOREA CLINIC GUIDE</small></a>
+    <nav class="nav" aria-label="主選單">
+      <a href="/tw/" data-nav="home">首頁</a>
+      <a href="/tw/#camps" data-nav="camps">體驗團</a>
+      <a href="/tw/#clinics" data-nav="clinics">找診所</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap" id="app"></main>
+
+<div class="wrap"><footer>
+  <p>Skin Bridge 為連接台灣顧客與韓國合作醫療院所的服務，醫療行為皆由各院所醫師執行，是否適合施作須經醫師諮詢判斷。</p>
+  <p>價格為韓元、VAT 另計；台幣為參考價（1 NT$ ≈ 41.6 韓元，2026.11）。標示「範例」的診所與體驗團為示意內容。</p>
+</footer></div>
+
+<div class="bar" id="bar" hidden><div class="bar-in" id="barIn"></div></div>
+
+<script src="/tw/sb-common.js"></script>
+<script>
+function viewApply(){
+  const p = state.prefill || { type:"booking", clinic:"selena", item:"" };
+  const opts = CLINICS.map(c => `<option value="${c.id}" ${c.id === p.clinic ? "selected" : ""}>${esc(c.name)}（${c.region}）</option>`).join("");
+  const min = new Date(Date.now() + 864e5).toISOString().slice(0,10);
+  const head = `<div class="sh" style="border:0;padding:0"><div><span class="en">APPLY</span><h2>預約諮詢・報名體驗團</h2></div></div>`;
+
+  if (!me) {
+    return `<div class="view">${head}
+      <div class="gate">
+        <h3>用 LINE 登入後即可申請</h3>
+        <p>不需要另外註冊。登入時會一併加入 Skin Bridge LINE 好友，審核結果、到診提醒都會用 LINE 以中文通知你。</p>
+        <button class="btn line" type="button" id="lineLogin">用 LINE 登入</button>
+        ${IS_SITE ? "" : `<p class="note">示範模式：正式上線後，這個按鈕會開啟 LINE 登入畫面。</p>`}
+      </div></div>`;
+  }
+
+  return `<div class="view">${head}
+    <div class="who"><span>已用 LINE 登入：<b>${esc(me.name)}</b></span>${me.friend ? `<span class="ok">已是好友</span>` : `<a class="link" href="${friendUrl()}" target="_blank" rel="noopener">加入好友 →</a>`}</div>
+    <form class="form" id="form" novalidate>
+      <div class="seg" role="group" aria-label="申請類型">
+        <button type="button" data-type="booking" aria-pressed="${p.type === "booking"}">預約諮詢</button>
+        <button type="button" data-type="camp" aria-pressed="${p.type === "camp"}">報名體驗團</button>
+      </div>
+      <div class="two">
+        <div class="f"><label for="fClinic">診所 <i>*</i></label><select id="fClinic">${opts}</select></div>
+        <div class="f"><label for="fItem">療程・體驗團 <i>*</i></label><select id="fItem"></select></div>
+      </div>
+      <div class="two">
+        <div class="f"><label for="fDate">希望日期 <i>*</i></label><input id="fDate" type="date" min="${min}"></div>
+        <div class="f"><label for="fTime">希望時段 <i>*</i></label><select id="fTime"><option value="">請選擇</option><option>上午 10–13 點</option><option>下午 13–17 點</option><option>傍晚 17–20 點</option><option>都可以</option></select></div>
+      </div>
+      <div class="two">
+        <div class="f"><label for="fName">姓名 <i>*</i></label><input id="fName" autocomplete="name" value="${esc(me.name)}"></div>
+        <div class="f"><label for="fYear">出生年 <i>*</i></label><input id="fYear" inputmode="numeric" maxlength="4" placeholder="1995"></div>
+      </div>
+      <div class="f" id="igWrap"><label for="fIg">Instagram 帳號</label><input id="fIg" placeholder="@xiaomei"></div>
+      <div class="f"><label for="fConcern">目前的皮膚困擾</label><textarea id="fConcern" placeholder="例如：毛孔粗大、痘疤、下顎線不明顯"></textarea></div>
+      <label class="agree"><input type="checkbox" id="fAgree"><span>我同意 Skin Bridge 為聯繫與安排之目的使用以上資料與 LINE 帳號，並了解實際施作與否須經醫師諮詢判斷。</span></label>
+      <p class="err" id="err" aria-live="polite"></p>
+      <button class="btn rose" type="submit" id="submitBtn">送出申請</button>
+    </form>
+    <div class="done" id="done" hidden>
+      <h3>已收到你的申請</h3>
+      <p id="doneMsg"></p>
+      <pre id="summary"></pre>
+      <div class="acts" id="doneActs"></div>
+    </div>
+  </div>`;
+}
+
+/* ===== LINE 로그인 (LIFF) ===== */
+let me = null;   // { userId, name, friend }
+let liffOk = false; // LIFF 를 쓸 수 있는 곳(skinbridgekorea.com/apply/)에서만 true
+const friendUrl = () => "https://line.me/R/ti/p/" + encodeURIComponent(LINE_ID);
+const store = {
+  get(k){ try { return JSON.parse(sessionStorage.getItem(k)); } catch (_) { return null; } },
+  set(k, v){ try { sessionStorage.setItem(k, JSON.stringify(v)); } catch (_) {} },
+  del(k){ try { sessionStorage.removeItem(k); } catch (_) {} }
+};
+function loadLiff(){
+  return new Promise((ok, fail) => {
+    if (window.liff) return ok();
+    const s = document.createElement("script");
+    s.src = "https://static.line-scdn.net/liff/edge/2/sdk.js";
+    s.onload = ok; s.onerror = fail;
+    document.head.appendChild(s);
+  });
+}
+async function initLine(){
+  if (!LIFF_ID) return;
+  try {
+    await loadLiff();
+    await liff.init({ liffId: LIFF_ID });
+    liffOk = true;
+    if (liff.isLoggedIn()) {
+      const p = await liff.getProfile();
+      let friend = false;
+      try { friend = (await liff.getFriendship()).friendFlag; } catch (_) {}
+      me = { userId: p.userId, name: p.displayName, friend };
+    }
+  } catch (_) { /* LINE 로그인을 쓸 수 없으면 둘러보기는 그대로 */ }
+  route();
+}
+function lineLogin(){
+  if (!liffOk && !IS_SITE) {    // 미리보기 등 홈페이지 밖에서는 시연
+    me = { userId: "DEMO-USER", name: "示範用戶", friend: false };
+    route(); return;
+  }
+  if (!liffOk) {                 // 홈페이지인데 LINE 로그인을 못 불러온 경우
+    $("#lineLogin").outerHTML = `<p class="err">LINE 登入暫時無法使用，請直接<a class="link" href="${friendUrl()}" target="_blank" rel="noopener">加入 LINE 好友</a>聯繫我們。</p>`;
+    return;
+  }
+  if (!window.liff) { $("#lineLogin").textContent = "LINE 載入中，請稍候再試"; return; }
+  liff.login({ redirectUri: location.href.split("#")[0] });
+}
+
+/* ===== 신청서 ===== */
+function setupForm(){
+  const login = $("#lineLogin");
+  if (login) { login.addEventListener("click", lineLogin); return; }
+
+  let type = (state.prefill && state.prefill.type) || "booking";
+  const fClinic = $("#fClinic"), fItem = $("#fItem");
+  function fillItems(){
+    const c = clinicOf(fClinic.value);
+    const items = type === "camp"
+      ? openCamps().filter(k => k.clinic === c.id).map(k => k.title)
+      : [...new Set(c.menu.map(m => m.n + (m.s ? " " + m.s : ""))), "還不確定，想先諮詢"];
+    fItem.innerHTML = items.length
+      ? `<option value="">請選擇</option>` + items.map(i => `<option>${esc(i)}</option>`).join("")
+      : `<option value="">這間診所目前沒有招募中的體驗團</option>`;
+    $("#igWrap").hidden = type !== "camp";
+  }
+  document.querySelectorAll(".seg button").forEach(b => b.addEventListener("click", () => {
+    type = b.dataset.type;
+    document.querySelectorAll(".seg button").forEach(x => x.setAttribute("aria-pressed", x === b));
+    fillItems();
+  }));
+  fClinic.addEventListener("change", fillItems);
+  fillItems();
+
+  $("#form").addEventListener("submit", async e => {
+    e.preventDefault();
+    const v = id => $(id).value.trim();
+    const miss = [];
+    if (!v("#fItem")) miss.push("療程・體驗團");
+    if (!v("#fDate")) miss.push("希望日期");
+    if (!v("#fTime")) miss.push("希望時段");
+    if (!v("#fName")) miss.push("姓名");
+    if (!/^(19|20)\d{2}$/.test(v("#fYear"))) miss.push("出生年（4 位數）");
+    if (miss.length) { $("#err").textContent = "請填寫：" + miss.join("、"); return; }
+    if (!$("#fAgree").checked) { $("#err").textContent = "請勾選同意事項後再送出。"; return; }
+    $("#err").textContent = "";
+
+    const c = clinicOf(v("#fClinic"));
+    const data = {
+      type: type === "camp" ? "體驗團報名" : "預約諮詢",
+      clinic: c.name, item: v("#fItem"), date: v("#fDate"), time: v("#fTime"),
+      name: v("#fName"), year: v("#fYear"),
+      ig: type === "camp" ? v("#fIg") : "", concern: v("#fConcern"),
+      userId: me.userId, lineName: me.name
+    };
+    $("#submitBtn").disabled = true; $("#submitBtn").textContent = "送出中…";
+    if (SHEET_URL) {
+      try { await fetch(SHEET_URL, { method:"POST", mode:"no-cors", body:new URLSearchParams(data) }); } catch (_) {}
+    }
+    $("#summary").textContent = [
+      `${data.type}`, `診所：${data.clinic}`, `項目：${data.item}`, `希望日期：${data.date} ${data.time}`,
+      `姓名：${data.name}（${data.year}）`,
+      ...(type === "camp" ? [`Instagram：${data.ig || "未填"}`] : []),
+      `皮膚困擾：${data.concern || "未填"}`
+    ].join("\n");
+    $("#doneMsg").textContent = me.friend
+      ? "專人確認後會透過 LINE 通知你審核結果與到診時間。"
+      : "請加入 Skin Bridge LINE 好友，才收得到審核結果與到診提醒。";
+    $("#doneActs").innerHTML =
+      (me.friend ? "" : `<a class="btn line" href="${friendUrl()}" target="_blank" rel="noopener">加入 LINE 好友</a>`) +
+      `<a class="btn light" href="/tw/">回到首頁</a>`;
+    $("#form").hidden = true; $("#done").hidden = false;
+    $("#done").scrollIntoView({ block:"start" });
+  });
+}
+
+
+/* ===== 신청서 화면 ===== */
+(function(){
+  const q = new URLSearchParams(location.search);
+  const type = q.get("type") === "camp" ? "camp" : "booking";
+  const clinic = clinicOf(q.get("clinic") || "") ? q.get("clinic") : "selena";
+  state.prefill = { type, clinic, item:"" };
+})();
+function route(){ $("#app").innerHTML = viewApply(); setupForm(); }
+route();
+initLine();
+
+</script>
+</body>
+</html>
