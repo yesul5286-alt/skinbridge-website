@@ -394,3 +394,16 @@ b,strong,h1,h2,h3{font-weight:600}
 .price .v,.ad-p b{font-family:var(--latin);font-weight:600}
 .link,.price .ask,.clinic .go{color:var(--rose-deep);font-weight:500}
 .nav a.on{font-weight:500}
+
+.home{gap:26px}
+.hero2{padding:18px 2px 0}
+.hero2 h1{margin:0;font:600 clamp(1.75rem,7vw,2.1rem)/1.28 var(--sans);letter-spacing:.01em}
+.hero2 p{margin:8px 0 0;color:var(--muted);font-size:.92rem}
+.search .sgo{border:0;background:none;color:var(--ink);font-size:1.1rem;padding:0 2px}
+.tiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+@media(min-width:720px){.tiles{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.tile{background:var(--white);border:1px solid var(--rule);border-radius:12px;padding:14px 6px;display:flex;flex-direction:column;align-items:center;gap:2px;color:var(--ink)}
+.tile b{font-size:.98rem;font-weight:500}
+.tile span{font-size:.74rem;color:var(--muted)}
+.tile:hover{border-color:var(--rose);background:var(--rose-soft)}
+.tile:hover b{color:var(--rose-deep)}

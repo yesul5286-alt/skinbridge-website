@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Inter:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611120331">
+<link rel="stylesheet" href="/tw/sb.css?v=202611120336">
 </head>
 <body>
 <header class="hd">
@@ -35,30 +35,30 @@
 
 <div class="bar" id="bar"><div class="bar-in" id="barIn"></div></div>
 
-<script src="/tw/sb-common.js?v=202611120331"></script>
+<script src="/tw/sb-common.js?v=202611120336"></script>
 <script>
 /* ===== 화면 ===== */
 function viewHome(){
-  const q = state.q.trim();
-  let body;
-  if (q) {
-    const ks = openCamps().filter(k => { const c = clinicOf(k.clinic); return (k.target + c.name + c.region + c.area + k.cats.join("")).includes(q); });
-    const cs = CLINICS.filter(c => (c.name + c.region + c.area + c.menu.map(m => m.n).join("")).includes(q));
-    body = section("SEARCH", `「${esc(q)}」的搜尋結果`, "",
-      (ks.length ? `<div class="row">${ks.map(campCard).join("")}</div>` : "") +
-      (cs.length ? `<div class="row">${cs.map(clinicCard).join("")}</div>` : "") +
-      (!ks.length && !cs.length ? `<p class="empty">找不到相關的體驗團或診所，換個關鍵字試試，例如「電波」「釜山」。</p>` : ""));
-  } else {
-    const open = openCamps().sort((a,b) => daysLeft(a.end) - daysLeft(b.end));
-    body =
-      `<div class="hero ph"><span>本月精選</span><b>首爾 · 釜山 · 濟州 · 大邱<br>體驗團同步招募中</b></div>` +
-      section("EXPERIENCE", "招募中的體驗團", "#camps", `<div class="row">${open.map(campCard).join("")}</div>`) +
-      section("CLINICS", "合作診所", "#clinics", `<div class="crows">${CLINICS.slice(0, 5).map(clinicRow).join("")}</div>`);
-  }
-  return `<div class="view">
-    <label class="search"><input id="q" type="search" placeholder="搜尋療程、診所、地區" value="${esc(state.q)}" aria-label="搜尋"><span aria-hidden="true">→</span></label>
-    <div class="chips">${CATS.map(c => `<a class="chip" href="#camps" data-gocat="${c}">${c}</a>`).join("")}</div>
-    ${body}</div>`;
+  const cnt = x => CLINICS.filter(c => (c.concerns || []).includes(x)).length;
+  const rec = CLINICS.slice().sort((a, b) => (b.selected ? 1 : 0) - (a.selected ? 1 : 0)).slice(0, 5);
+  const open = openCamps().sort((a, b) => daysLeft(a.end) - daysLeft(b.end));
+  return `<div class="view home">
+    <div class="hero2">
+      <h1>找到真正適合你的<br>韓國醫美診所。</h1>
+      <p>精選合作診所・中文預約諮詢</p>
+    </div>
+    <form class="search" id="hsearch" role="search"><input id="hq" type="search" placeholder="搜尋診所、療程或肌膚問題" aria-label="搜尋診所"><button type="submit" class="sgo" aria-label="搜尋">→</button></form>
+    <section class="sec">
+      <div class="sh"><div><span class="en">FIND BY CONCERN</span><h2>依照你的需求找診所</h2></div></div>
+      <div class="tiles">${CONCERNS.map(x => { const n = cnt(x); return `<button type="button" class="tile" data-gof="concern" data-v="${esc(x)}"><b>${esc(x)}</b><span>${n ? n + " 間診所" : "準備中"}</span></button>`; }).join("")}</div>
+    </section>
+    <section class="sec">
+      <div class="sh"><div><span class="en">BY AREA</span><h2>依地區</h2></div></div>
+      <div class="chips">${areasOf().map(a => `<button type="button" class="chip" data-gof="area" data-v="${esc(a)}">${esc(a)}</button>`).join("")}</div>
+    </section>
+    ${section("CLINICS", "推薦診所", "#clinics", `<div class="crows">${rec.map(clinicRow).join("")}</div>`)}
+    ${open.length ? section("EXPERIENCE", "招募中的體驗團", "#camps", `<div class="row">${open.map(campCard).join("")}</div>`) : ""}
+  </div>`;
 }
 
 function viewCamps(){
@@ -383,6 +383,7 @@ function route(){
 document.addEventListener("click", e => {
   const t = e.target.closest("button, a");
   if (!t) return;
+  if (t.dataset.gof) { state.f = { area:"", concern:"", treat:"", lang:"", trait:"", camp:false, sort:state.f.sort }; state.cq = ""; state.f[t.dataset.gof] = t.dataset.v; go("clinics"); return; }
   if (t.dataset.f) { const k = t.dataset.f; state.f[k] = state.f[k] === t.dataset.v ? "" : t.dataset.v; route(); return; }
   if (t.dataset.fcamp) { state.f.camp = !state.f.camp; route(); return; }
   if (t.dataset.fclear) { state.f = { area:"", concern:"", treat:"", lang:"", trait:"", camp:false, sort:state.f.sort }; state.cq = ""; route(); return; }
@@ -415,6 +416,12 @@ document.addEventListener("input", e => {
     route();
     const q = $("#" + id); q.focus(); q.setSelectionRange(pos, pos);
   }
+});
+document.addEventListener("submit", e => {
+  if (e.target.id !== "hsearch") return;
+  e.preventDefault();
+  state.f = { area:"", concern:"", treat:"", lang:"", trait:"", camp:false, sort:state.f.sort };
+  state.cq = $("#hq").value; go("clinics");
 });
 document.addEventListener("change", e => {
   const k = e.target.dataset && e.target.dataset.fsel; if (!k) return;
