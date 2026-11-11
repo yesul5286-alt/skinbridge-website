@@ -12,6 +12,13 @@ const h = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({"&":"&amp;",
 const call = (fn, ...args) => new Promise((ok, no) => google.script.run.withSuccessHandler(ok).withFailureHandler(e => no(e))[fn](...args));
 const msg = (t, kind) => { const m = $("#msg"); if (m) { m.textContent = t; m.className = "msg " + (kind || ""); } };
 
+(function addSiteLinks(){
+  const hd = document.querySelector("header");
+  const box = document.createElement("span");
+  box.className = "site-links";
+  box.innerHTML = `<a href="https://www.skinbridgekorea.com/tw/" target="_blank" rel="noopener">홈페이지 보기 ↗</a>`;
+  hd.insertBefore(box, hd.querySelector("#who"));
+})();
 async function boot(){
   try {
     $("#who").textContent = await call("adminWho") + " 로 로그인됨";
@@ -72,7 +79,7 @@ function render(){
   const camp = d.camp || null;
   const hours = d.hours || ["","","","","","",""];
   $("#editor").innerHTML = `
-  <h2>${cur.isNew ? "새 병원" : h(d.name || cur.id)}</h2>
+  <h2>${cur.isNew ? "새 병원" : h(d.name || cur.id)}${cur.isNew ? "" : ` <a class="view-link" href="https://www.skinbridgekorea.com/tw/#c-${h(cur.id)}" target="_blank" rel="noopener">홈페이지에서 보기 ↗</a>`}</h2>
 
   <fieldset><legend>기본 정보</legend>
     <div class="grid">

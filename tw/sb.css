@@ -293,6 +293,7 @@ img.avatar{object-fit:cover;width:64px;height:64px;object-position:center 30%}
 .tdet summary{cursor:pointer;color:var(--rose);font-weight:700}
 .tdet ul{margin:6px 0 0;padding-left:18px;color:var(--muted)}
 .tdet p{margin:6px 0 0;color:var(--muted);white-space:normal}
+.backs{display:flex;gap:14px}
 footer{border-top:1px solid var(--rule);margin-top:40px;padding-top:18px;font-size:.76rem;color:var(--muted);display:flex;flex-direction:column;gap:4px}
 @media (min-width:900px){.camp{width:200px}.clinic{width:300px}.hero{height:240px}.cover{height:300px}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}

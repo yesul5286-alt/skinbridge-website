@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&family=Montserrat:wght@500;700&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611120040">
+<link rel="stylesheet" href="/tw/sb.css?v=202611120104">
 </head>
 <body>
 <header class="hd">
@@ -23,6 +23,7 @@
       <a href="/tw/" data-nav="home">首頁</a>
       <a href="/tw/#camps" data-nav="camps">體驗團</a>
       <a href="/tw/#clinics" data-nav="clinics">找診所</a>
+      <a href="/">關於我們</a>
     </nav>
   </div>
 </header>
@@ -35,13 +36,13 @@
 
 <div class="bar" id="bar" hidden><div class="bar-in" id="barIn"></div></div>
 
-<script src="/tw/sb-common.js?v=202611120040"></script>
+<script src="/tw/sb-common.js?v=202611120104"></script>
 <script>
 function viewApply(){
   const p = state.prefill || { type:"booking", clinic:"selena", item:"" };
   const opts = CLINICS.map(c => `<option value="${c.id}" ${c.id === p.clinic ? "selected" : ""}>${esc(c.name)}（${c.region}）</option>`).join("");
   const min = new Date(Date.now() + 864e5).toISOString().slice(0,10);
-  const head = `<div class="sh" style="border:0;padding:0"><div><span class="en">APPLY</span><h2>預約諮詢・報名體驗團</h2></div></div>`;
+  const head = `<a class="back" href="${HOME_URL}">← 回到首頁</a><div class="sh" style="border:0;padding:0"><div><span class="en">APPLY</span><h2>預約諮詢・報名體驗團</h2></div></div>`;
 
   if (!me) {
     return `<div class="view">${head}
@@ -93,7 +94,7 @@ function viewApply(){
 }
 
 function viewReview(){
-  const head = `<div class="sh" style="border:0;padding:0"><div><span class="en">REVIEW</span><h2>撰寫評價</h2></div></div>`;
+  const head = `<a class="back" href="${HOME_URL}">← 回到首頁</a><div class="sh" style="border:0;padding:0"><div><span class="en">REVIEW</span><h2>撰寫評價</h2></div></div>`;
   if (!me) {
     return `<div class="view">${head}
       <div class="gate"><h3>用 LINE 登入後撰寫評價</h3>

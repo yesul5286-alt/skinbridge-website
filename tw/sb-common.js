@@ -102,6 +102,7 @@ const ICON = {
 };
 const icon = k => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICON[k] || ICON.list}</svg>`;
 const DAYS = ["週一","週二","週三","週四","週五","週六","週日"];
+const HOME_URL = /\/apply\//.test(location.pathname) ? "/tw/" : "#";
 const stars = n => "★★★★★".slice(0, n) + "☆☆☆☆☆".slice(0, 5 - n);
 const tierLabel = t => t.type === "free" ? "免費體驗" : `${t.type}% OFF`;
 const tierKey = t => t.type === "free" ? "free" : String(t.type);
