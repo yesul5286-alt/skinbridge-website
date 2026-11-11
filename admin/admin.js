@@ -173,8 +173,28 @@ function render(){
     <button class="btn pri" id="saveBtn">저장</button>
   </div>`;
 
+  addSecNav();
   drawLogo(); drawPhotos(); drawInterior(); drawPosters(); drawRows("feats"); drawRows("docs"); drawRows("menu"); drawRows("events"); drawRows("tiers");
   $("#c_on").onchange = e => { $("#campBox").hidden = !e.target.checked; };
+}
+
+/* 위쪽 항목 버튼: 누르면 그 칸으로 이동 */
+function addSecNav(){
+  const ed = $("#editor");
+  const secs = [...ed.querySelectorAll("fieldset")];
+  secs.forEach((f, i) => { f.id = "sec-" + i; });
+  const nav = document.createElement("nav");
+  nav.className = "secnav"; nav.setAttribute("aria-label", "항목으로 이동");
+  nav.innerHTML = secs.map((f, i) => `<button type="button" data-sec="${i}">${h(f.querySelector("legend").textContent.trim())}</button>`).join("")
+    + `<button type="button" data-sec="json">JSON</button>`;
+  ed.querySelector("h2").after(nav);
+  nav.addEventListener("click", e => {
+    const b = e.target.closest("[data-sec]"); if (!b) return;
+    let target = b.dataset.sec === "json" ? ed.querySelector("details") : document.getElementById("sec-" + b.dataset.sec);
+    if (b.dataset.sec === "json") target.open = true;
+    const top = target.getBoundingClientRect().top + scrollY - (document.querySelector("header").offsetHeight + nav.offsetHeight + 12);
+    scrollTo({ top, behavior: "smooth" });
+  });
 }
 
 /* 반복 칸 */
