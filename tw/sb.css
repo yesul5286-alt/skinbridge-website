@@ -236,6 +236,11 @@ body.appmode{--paper:#FFFFFF}
 .prow .btn.sm{margin:0;align-self:center}
 @media (max-width:420px){.feats{grid-template-columns:1fr 1fr}.prow{grid-template-columns:1fr auto}.prow .btn.sm{grid-column:1 / -1;justify-self:end}}
 .ph.has-img{background-size:cover;background-position:center 22%}
+.progs{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-top:8px}
+.prog{border:1px solid var(--line,#eee);border-radius:12px;overflow:hidden;background:#fff}
+.prog img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block}
+.prog-bd{padding:10px 12px}.prog-bd p{margin:4px 0 0;font-size:.88rem;color:#555;line-height:1.55}
+.pgrp{padding:14px 4px 6px;font-weight:700;font-size:.95rem;border-bottom:2px solid #222}
 .envs img{width:240px;height:150px;object-fit:cover;border-radius:10px;max-width:100%}
 .gallery{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:2px}
 .slide{flex:0 0 min(45%,220px);aspect-ratio:4/5;position:relative;overflow:hidden;scroll-snap-align:start;display:grid;place-items:center;border:0;padding:0;border-radius:10px;background:#1f1a1b;cursor:zoom-in}
