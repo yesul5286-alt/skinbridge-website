@@ -2,6 +2,24 @@
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
+<!-- liff-return: LINE 로그인 후 원래 보던 페이지(/tw/, /apply/)로 돌려보내기 -->
+<script>
+(function () {
+  var q = location.search;
+  if (q.indexOf("liff.state=") < 0 && q.indexOf("liffClientId=") < 0) return;
+  document.documentElement.style.visibility = "hidden";
+  var s = document.createElement("script");
+  s.src = "https://static.line-scdn.net/liff/edge/2/sdk.js";
+  s.onload = function () {
+    liff.init({ liffId: "2012557390-efGtDTc1" }).catch(function () {
+      var st = new URLSearchParams(q).get("liff.state");
+      location.replace(st && st.charAt(0) === "/" ? st : "/tw/");
+    });
+  };
+  s.onerror = function () { document.documentElement.style.visibility = ""; };
+  document.head.appendChild(s);
+})();
+</script>
 <meta name="facebook-domain-verification" content="96omr41tsp3l8rxk3xe71ohbo2sxjz" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SKINBRIDGE | Korea Medical Tourism</title>
