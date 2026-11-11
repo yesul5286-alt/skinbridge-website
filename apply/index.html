@@ -92,6 +92,19 @@ function viewApply(){
   </div>`;
 }
 
+function viewReview(){
+  const head = `<div class="sh" style="border:0;padding:0"><div><span class="en">REVIEW</span><h2>撰寫評價</h2></div></div>`;
+  if (!me) {
+    return `<div class="view">${head}
+      <div class="gate"><h3>用 LINE 登入後撰寫評價</h3>
+        <p>只有透過 Skin Bridge 預約並完成到診的顧客可以撰寫評價。評價經確認後，只會公開給已登入的會員。</p>
+        <button class="btn line" type="button" id="lineLogin">用 LINE 登入</button></div></div>`;
+  }
+  return `<div class="view">${head}
+    <div class="who"><span>已用 LINE 登入：<b>${esc(me.name)}</b></span></div>
+    <div id="revForm"><p class="note">確認到診紀錄中…</p></div></div>`;
+}
+
 /* ===== LINE 로그인 (LIFF) ===== */
 let me = null;   // { userId, name, friend }
 let liffOk = false; // LIFF 를 쓸 수 있는 곳(skinbridgekorea.com/apply/)에서만 true
@@ -120,7 +133,7 @@ async function initLine(){
       const p = await liff.getProfile();
       let friend = false;
       try { friend = (await liff.getFriendship()).friendFlag; } catch (_) {}
-      me = { userId: p.userId, name: p.displayName, friend };
+      me = { userId: p.userId, name: p.displayName, friend, idToken: liff.getIDToken() };
     }
   } catch (_) { /* LINE 로그인을 쓸 수 없으면 둘러보기는 그대로 */ }
   route();
@@ -237,6 +250,68 @@ function setupForm(){
   });
 }
 
+/* ===== 후기 쓰기 ===== */
+async function setupReview(){
+  const login = $("#lineLogin");
+  if (login) { login.addEventListener("click", lineLogin); return; }
+  const box = $("#revForm"); if (!box) return;
+  let list = [];
+  if (me.userId === "DEMO-USER") list = [{ id:"selena", name:"SELENA", item:"示範療程" }];
+  else {
+    try {
+      const r = await fetch(SHEET_URL, { method:"POST", body:new URLSearchParams({ action:"eligible", idToken: me.idToken || "" }) });
+      const j = await r.json(); list = j.ok ? j.clinics : [];
+    } catch (_) {}
+  }
+  if (!list.length) { box.innerHTML = `<p class="empty">目前找不到可以評價的到診紀錄。完成到診後，我們會用 LINE 傳送評價連結給你。</p>`; return; }
+  const want = new URLSearchParams(location.search).get("clinic");
+  box.innerHTML = `<form class="form" id="rForm" novalidate>
+    <div class="f"><label for="rClinic">診所 <i>*</i></label><select id="rClinic">${list.map(c => `<option value="${esc(c.id)}" ${c.id === want ? "selected" : ""}>${esc(c.name)}</option>`).join("")}</select></div>
+    <div class="f"><label for="rItem">療程</label><input id="rItem" value="${esc(list[0].item || "")}"></div>
+    <div class="f"><span class="lbl">滿意度 <i>*</i></span><div class="rate-in" role="radiogroup">${[5,4,3,2,1].map(n => `<label><input type="radio" name="rRate" value="${n}" ${n === 5 ? "checked" : ""}> ${stars(n)}</label>`).join("")}</div></div>
+    <div class="f"><label for="rText">評價內容 <i>*</i>（20 字以上）</label><textarea id="rText" placeholder="分享諮詢、療程過程與到診的感受"></textarea></div>
+    <div class="two">
+      <div class="f"><label for="rBefore">療程前照片（選填）</label><input id="rBefore" type="file" accept="image/*"><img class="rprev" id="pBefore" alt="" hidden></div>
+      <div class="f"><label for="rAfter">療程後照片（選填）</label><input id="rAfter" type="file" accept="image/*"><img class="rprev" id="pAfter" alt="" hidden></div>
+    </div>
+    <label class="agree"><input type="checkbox" id="rAgree"><span>我同意評價與照片經 Skin Bridge 確認後，以遮蔽姓名的方式只公開給已登入的會員。不想露臉可以先遮住眼睛再上傳。</span></label>
+    <p class="err" id="rErr" aria-live="polite"></p>
+    <button class="btn rose" type="submit" id="rSubmit">送出評價</button>
+  </form>`;
+  const pick = (inp, img) => $(inp).addEventListener("change", e => {
+    const f = e.target.files[0]; if (!f) { $(img).hidden = true; return; }
+    $(img).src = URL.createObjectURL(f); $(img).hidden = false;
+  });
+  pick("#rBefore", "#pBefore"); pick("#rAfter", "#pAfter");
+  $("#rClinic").addEventListener("change", e => { const c = list.find(x => x.id === e.target.value); $("#rItem").value = c ? (c.item || "") : ""; });
+  $("#rForm").addEventListener("submit", async e => {
+    e.preventDefault();
+    const text = $("#rText").value.trim();
+    if (text.length < 20) { $("#rErr").textContent = "評價內容請寫 20 字以上。"; return; }
+    if (!$("#rAgree").checked) { $("#rErr").textContent = "請勾選同意事項後再送出。"; return; }
+    $("#rErr").textContent = ""; $("#rSubmit").disabled = true; $("#rSubmit").textContent = "送出中…";
+    const shrinkTo = async f => {
+      if (!f) return "";
+      const img = await new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = no; i.src = URL.createObjectURL(f); });
+      const s = Math.min(1, 1000 / Math.max(img.width, img.height));
+      const cv = document.createElement("canvas"); cv.width = Math.round(img.width * s); cv.height = Math.round(img.height * s);
+      cv.getContext("2d").drawImage(img, 0, 0, cv.width, cv.height);
+      return cv.toDataURL("image/jpeg", 0.82).split(",")[1];
+    };
+    if (me.userId === "DEMO-USER") { $("#revForm").innerHTML = `<p class="empty">（預覽畫面）正式網站送出後，會在確認後公開給已登入的會員。</p>`; return; }
+    try {
+      const body = new URLSearchParams({ action:"review", idToken: me.idToken || "", clinic: $("#rClinic").value, item: $("#rItem").value.trim(),
+        rating: (document.querySelector('input[name="rRate"]:checked') || {}).value || "5", text,
+        before: await shrinkTo($("#rBefore").files[0]), after: await shrinkTo($("#rAfter").files[0]) });
+      const r = await fetch(SHEET_URL, { method:"POST", body }); const j = await r.json();
+      if (!j.ok) throw new Error(j.error);
+      $("#revForm").innerHTML = `<div class="done"><h3>謝謝你的評價</h3><p>Skin Bridge 確認後會公開給已登入的會員。</p><a class="btn light" href="/tw/">回到首頁</a></div>`;
+    } catch (err) {
+      $("#rErr").textContent = "送出失敗，請稍後再試，或直接用 LINE 告訴我們。"; $("#rSubmit").disabled = false; $("#rSubmit").textContent = "送出評價";
+    }
+  });
+}
+
 
 /* ===== 신청서 화면 ===== */
 function setPrefill(){
@@ -245,7 +320,8 @@ function setPrefill(){
   const clinic = clinicOf(q.get("clinic") || "") ? q.get("clinic") : "selena";
   state.prefill = { type, clinic, item: q.get("item") || "", tier: q.get("tier") || "" };
 }
-function route(){ $("#app").innerHTML = viewApply(); setupForm(); }
+const MODE = new URLSearchParams(location.search).get("mode");
+function route(){ if (MODE === "review") { $("#app").innerHTML = viewReview(); setupReview(); } else { $("#app").innerHTML = viewApply(); setupForm(); } }
 loadData().finally(() => { setPrefill(); route(); initLine(); });
 
 </script>

@@ -319,6 +319,42 @@ async function save(){
   finally { const b = $("#saveBtn"); if (b) b.disabled = false; }
 }
 
+/* ── 후기 관리 ── */
+(function addReviewButton(){
+  const b = document.createElement("button");
+  b.className = "btn"; b.id = "revBtn"; b.textContent = "후기 관리";
+  const stack = document.querySelector("aside .stack"); stack.insertBefore(b, stack.children[1]);
+  b.addEventListener("click", showReviews);
+})();
+async function showReviews(){
+  cur = null; loadList();
+  $("#editor").innerHTML = `<h2>후기 관리</h2><p class="hint">고객이 쓴 후기는 '대기'로 들어와요. 내용과 사진을 확인하고 [공개]를 누르면 LINE 로그인한 사람에게만 보여요. 얼굴이 드러나거나 효과를 과장하는 후기는 [숨김]을 권해요.</p><div id="revList"><p class="empty">불러오는 중…</p></div>`;
+  try {
+    const list = await call("adminReviews");
+    $("#revList").innerHTML = list.length ? list.map(r => `<div class="revrow" data-rid="${h(r.id)}">
+      <div class="revtop"><b>${h(r.clinicName)}</b> · ${"★".repeat(r.rating)} · ${h(r.name)} · ${h(r.at)} <span class="st st-${h(r.status)}">${h(r.status)}</span></div>
+      ${r.item ? `<div class="hint" style="margin:0">${h(r.item)}</div>` : ""}
+      <p style="margin:6px 0;white-space:pre-wrap">${h(r.text)}</p>
+      <div class="revph" id="ph-${h(r.id)}">${r.hasBefore || r.hasAfter ? `<button class="btn sm" data-ph="${h(r.id)}">사진 보기</button>` : `<span class="hint">사진 없음</span>`}</div>
+      <div style="display:flex;gap:6px;margin-top:8px">${["공개","대기","숨김"].map(s => `<button class="btn sm ${s === "공개" ? "pri" : ""}" data-rset="${s}" ${s === r.status ? "disabled" : ""}>${s}</button>`).join("")}</div>
+    </div>`).join("") : `<p class="empty">아직 들어온 후기가 없어요.</p>`;
+  } catch (e) { $("#revList").innerHTML = `<p class="err-box">${h(e.message || e)}</p>`; }
+}
+$("#editor").addEventListener("click", async e => {
+  const t = e.target;
+  if (t.dataset.ph) {
+    t.disabled = true; t.textContent = "불러오는 중…";
+    const p = await call("adminReviewPhotos", t.dataset.ph);
+    $("#ph-" + t.dataset.ph).innerHTML = [p.before && `<figure><img src="${p.before}" alt=""><figcaption>전</figcaption></figure>`, p.after && `<figure><img src="${p.after}" alt=""><figcaption>후</figcaption></figure>`].filter(Boolean).join("");
+  } else if (t.dataset.rset) {
+    const id = t.closest("[data-rid]").dataset.rid;
+    t.disabled = true;
+    try { await call("adminReviewSet", id, t.dataset.rset); showReviews(); }
+    catch (err) { alertBox("바꾸지 못했어요: " + (err.message || err)); }
+  }
+});
+function alertBox(text){ confirmBox(text); }
+
 boot();
 
 })();

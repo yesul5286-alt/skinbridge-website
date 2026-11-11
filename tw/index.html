@@ -153,14 +153,82 @@ function viewClinic(c){
       <button type="button" data-jump="info" class="on">診所資訊</button>
       <button type="button" data-jump="camp">體驗團${k ? `<em>最高 ${k.best}</em>` : ""}</button>
       <button type="button" data-jump="price">${m ? esc(m.month) + "價格" : "療程價格"}</button>
+      <button type="button" data-jump="review">評價</button>
     </nav>
     ${sec("info", "CLINIC", `診所特色${c.features ? ` <span class="cnt-h">${c.features.length}</span>` : ""}`, feats + intro + fields + docs + hours + addr)}
     ${sec("camp", "EXPERIENCE", "體驗團方案", campCards)}
     ${sec("price", "THIS MONTH", m ? `${esc(m.month)}活動價格` : "療程價格", priceTbl)}
+    ${sec("review", "REVIEWS", "評價・前後對比", `<div id="revBox" data-clinic="${c.id}"></div>`)}
   </div>`;
 }
 
+
+/* ===== 후기·전후 사진 (LINE 로그인한 사람만) ===== */
+let viewer = null;          // { idToken, name }
+let viewerP = null;
+const onSite = () => typeof IS_SITE !== "undefined" && IS_SITE;
+function lineSdk(){
+  return new Promise((ok, no) => {
+    if (window.liff) return ok();
+    const s = document.createElement("script"); s.src = "https://static.line-scdn.net/liff/edge/2/sdk.js";
+    s.onload = ok; s.onerror = no; document.head.appendChild(s);
+  });
+}
+function viewerReady(){
+  if (viewerP) return viewerP;
+  viewerP = (async () => {
+    if (!onSite() || !LIFF_ID) return null;
+    try {
+      await lineSdk(); await liff.init({ liffId: LIFF_ID });
+      if (liff.isLoggedIn()) { const p = await liff.getProfile(); viewer = { idToken: liff.getIDToken(), name: p.displayName }; }
+    } catch (_) {}
+    return viewer;
+  })();
+  return viewerP;
+}
+function revLocked(msg){
+  return `<div class="rev-lock">
+    <div class="rev-ghost" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="rev-lock-msg"><b>登入後查看評價與前後對比照片</b>
+      <p>${msg || "依韓國醫療相關法規，療程評價與前後對比照片僅提供已登入的會員參考。"}</p>
+      <button type="button" class="btn line sm" data-revlogin="1">用 LINE 登入查看</button></div></div>`;
+}
+function revCard(r){
+  return `<article class="rev">
+    <div class="rev-h"><span class="rev-star" aria-label="${r.rating} 顆星">${stars(r.rating)}</span><span class="muted">${esc(r.name)}・${esc(r.at)}</span></div>
+    ${r.item ? `<div class="rev-item">${esc(r.item)}</div>` : ""}
+    <p class="rev-t">${esc(r.text).replace(/\n/g, "<br>")}</p>
+    ${r.before || r.after ? `<div class="ba">${r.before ? `<figure><img src="${r.before}" alt="療程前"><figcaption>BEFORE</figcaption></figure>` : ""}${r.after ? `<figure><img src="${r.after}" alt="療程後"><figcaption>AFTER</figcaption></figure>` : ""}</div>` : ""}
+  </article>`;
+}
+async function loadReviews(){
+  const box = document.getElementById("revBox"); if (!box) return;
+  const id = box.dataset.clinic;
+  const write = `<a class="link rev-write" href="/apply/?mode=review&clinic=${encodeURIComponent(id)}">到診過了嗎？撰寫評價 →</a>`;
+  if (!onSite()) { box.innerHTML = revLocked("（預覽畫面：正式網站登入 LINE 後會顯示評價。）") + write; return; }
+  box.innerHTML = `<p class="note">載入中…</p>`;
+  const v = await viewerReady();
+  if (!v) { box.innerHTML = revLocked() + write; return; }
+  try {
+    const r = await fetch(SHEET_URL, { method:"POST", body:new URLSearchParams({ action:"reviews", clinic:id, idToken:v.idToken }) });
+    const j = await r.json();
+    if (!j.ok) { box.innerHTML = revLocked("登入已過期，請重新登入。") + write; return; }
+    box.innerHTML = (j.reviews.length
+      ? `<div class="revs">${j.reviews.map(revCard).join("")}</div><p class="note">評價為到診顧客個人感受，療程效果因人而異。</p>`
+      : `<p class="empty">還沒有評價。</p>`) + write;
+  } catch (_) { box.innerHTML = `<p class="empty">評價暫時無法載入，請稍後再試。</p>` + write; }
+}
+document.addEventListener("click", async e => {
+  const b = e.target.closest("[data-revlogin]"); if (!b) return;
+  if (!onSite()) return;
+  b.textContent = "開啟 LINE 中…";
+  try { sessionStorage.setItem("sb-rev", cur); } catch (_) {}
+  try { await lineSdk(); await liff.init({ liffId: LIFF_ID }); liff.login({ redirectUri: location.href.split("#")[0] }); }
+  catch (_) { b.textContent = "LINE 登入暫時無法使用"; }
+});
+
 function setupDetail(){
+  loadReviews();
   const g = document.getElementById("gallery"), gc = document.getElementById("gcnt");
   if (g && gc) g.addEventListener("scroll", () => { gc.textContent = `${Math.round(g.scrollLeft / g.clientWidth) + 1} / ${g.children.length}`; }, { passive:true });
   const tabs = [...document.querySelectorAll(".dtabs [data-jump]")];
@@ -254,6 +322,7 @@ addEventListener("hashchange", () => {
   if (h !== cur) { cur = h; route(); scrollTo(0, 0); }
 });
 
+try { const pend = sessionStorage.getItem("sb-rev"); if (pend) { sessionStorage.removeItem("sb-rev"); cur = pend; state.jump = "review"; } } catch (_) {}
 route();
 loadData().then(ok => { if (ok) route(); });
 </script>

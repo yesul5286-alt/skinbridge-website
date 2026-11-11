@@ -52,3 +52,12 @@ details summary{cursor:pointer;color:var(--muted);font-size:13px}
 .modal{background:#fff;border-radius:12px;padding:20px;max-width:380px;display:flex;flex-direction:column;gap:14px}
 .modal p{margin:0}
 .modal-acts{display:flex;justify-content:flex-end;gap:8px}
+.revrow{border:1px solid var(--line);border-radius:10px;padding:12px;margin-bottom:10px}
+.revtop{font-size:13px}
+.st{font-size:11px;border-radius:4px;padding:0 6px;margin-left:4px;color:#fff;background:#999}
+.st-공개{background:var(--ok)} .st-대기{background:#C47F17}
+.revph{display:flex;gap:8px;flex-wrap:wrap}
+.revph figure{margin:0;position:relative}
+.revph img{width:160px;height:200px;object-fit:cover;border-radius:8px}
+.revph figcaption{position:absolute;top:6px;left:6px;background:rgba(0,0,0,.6);color:#fff;font-size:11px;padding:0 6px;border-radius:4px}
+@media (max-width:620px){.r{grid-template-columns:1fr 1fr !important}}
