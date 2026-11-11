@@ -97,8 +97,10 @@ function render(){
   </fieldset>
 
   <fieldset><legend>병원 사진</legend>
-    <p class="hint">첫 사진이 대표 사진이에요. 가로로 긴 사진이 좋아요.</p>
+    <p class="hint">병원 페이지 맨 위에서 옆으로 넘겨 보는 표지예요. 정사각형(1:1) 이미지가 좋고, 첫 장이 병원 목록 카드의 대표 사진이 돼요.</p>
     <div class="imgs" id="photos"></div>
+    <p class="hint" style="margin-top:12px">병원 환경 사진('診所環境' 칸에 나와요).</p>
+    <div class="imgs" id="interior"></div>
   </fieldset>
 
   <fieldset><legend>병원 특징 (아이콘)</legend>
@@ -166,7 +168,7 @@ function render(){
     <button class="btn pri" id="saveBtn">저장</button>
   </div>`;
 
-  drawPhotos(); drawPosters(); drawRows("feats"); drawRows("docs"); drawRows("menu"); drawRows("events"); drawRows("tiers");
+  drawPhotos(); drawInterior(); drawPosters(); drawRows("feats"); drawRows("docs"); drawRows("menu"); drawRows("events"); drawRows("tiers");
   $("#c_on").onchange = e => { $("#campBox").hidden = !e.target.checked; };
 }
 
@@ -209,6 +211,11 @@ function drawPosters(){
   const arr = posterArr();
   $("#posters").innerHTML = arr.map((p, i) => `<div class="thumb" style="height:138px"><img src="${h(p.img)}" alt=""><button data-delposter="${i}" title="삭제">✕</button></div>`).join("")
     + `<label class="up" style="height:138px">+ 포스터 올리기<input type="file" accept="image/*" multiple data-img="posters"></label>`;
+}
+function drawInterior(){
+  const arr = cur.data.interior || (cur.data.interior = []);
+  $("#interior").innerHTML = arr.map((u, i) => `<div class="thumb"><img src="${h(u)}" alt=""><button data-delint="${i}" title="삭제">✕</button></div>`).join("")
+    + `<label class="up">+ 환경 사진<input type="file" accept="image/*" multiple data-img="interior"></label>`;
 }
 function drawPhotos(){
   const arr = cur.data.photos || (cur.data.photos = []);
@@ -256,6 +263,7 @@ $("#editor").addEventListener("click", async e => {
   const t = e.target;
   if (t.dataset.add) { readForm(); ROWDEF[t.dataset.add].src().push(JSON.parse(JSON.stringify(ROWDEF[t.dataset.add].empty))); drawRows(t.dataset.add); }
   else if (t.dataset.del) { readForm(); const [k, i] = t.dataset.del.split(":"); ROWDEF[k].src().splice(+i, 1); drawRows(k); }
+  else if (t.dataset.delint != null) { readForm(); cur.data.interior.splice(+t.dataset.delint, 1); drawInterior(); }
   else if (t.dataset.delposter != null) { readForm(); posterArr().splice(+t.dataset.delposter, 1); drawPosters(); }
   else if (t.dataset.delphoto != null) { readForm(); cur.data.photos.splice(+t.dataset.delphoto, 1); drawPhotos(); }
   else if (t.id === "saveBtn") save();
@@ -283,10 +291,11 @@ $("#editor").addEventListener("change", async e => {
       const [key, i] = t.dataset.img.split(":");
       if (key === "photos") cur.data.photos.push(res.url);
       else if (key === "posters") posterArr().push({ img: res.url, title: "" });
+      else if (key === "interior") (cur.data.interior || (cur.data.interior = [])).push(res.url);
       else if (key === "docs") ROWDEF.docs.src()[+i].photo = res.url;
       else if (key === "events") ROWDEF.events.src()[+i].img = res.url;
     }
-    drawPhotos(); drawPosters(); drawRows("docs"); drawRows("events");
+    drawPhotos(); drawInterior(); drawPosters(); drawRows("docs"); drawRows("events");
     msg("이미지를 올렸어요. 저장을 눌러야 홈페이지에 반영돼요.", "ok");
   } catch (err) { msg("이미지 올리기 실패: " + (err.message || err), "err"); }
 });

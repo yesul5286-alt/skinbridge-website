@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Noto+Serif+TC:wght@600;700&family=Montserrat:wght@500;700&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611112352">
+<link rel="stylesheet" href="/tw/sb.css?v=202611120007">
 </head>
 <body>
 <header class="hd">
@@ -35,7 +35,7 @@
 
 <div class="bar" id="bar"><div class="bar-in" id="barIn"></div></div>
 
-<script src="/tw/sb-common.js?v=202611112352"></script>
+<script src="/tw/sb-common.js?v=202611120007"></script>
 <script>
 /* ===== 화면 ===== */
 function viewHome(){
@@ -94,6 +94,7 @@ function viewClinic(c){
     ? `<ul class="feats">${c.features.map(f => `<li>${icon(f.icon)}<span>${esc(f.label)}</span></li>`).join("")}</ul>` : "";
   const intro = c.intro ? `<p class="intro">${esc(c.intro).replace(/\n/g, "<br>")}</p>` : `<p class="intro">${esc(c.about)}</p>`;
   const fields = c.fields ? `<div class="fields">${c.fields.map(f => `<span>${esc(f)}</span>`).join("")}</div>` : "";
+  const env = c.interior && c.interior.length ? `<h3 class="sub-h">診所環境</h3><div class="row envs">${c.interior.map(u => `<img src="${esc(u)}" alt="${esc(c.name)} 診所環境" loading="lazy">`).join("")}</div>` : "";
   const docs = c.doctors && c.doctors.length ? `<h3 class="sub-h">主要醫療團隊</h3><div class="row docs">${c.doctors.map(d => `
       <div class="doc">${d.photo ? `<img class="avatar" src="${esc(d.photo)}" alt="${esc(d.name)}">` : `<div class="avatar" aria-hidden="true">${esc((d.name || "?").slice(0,1))}</div>`}
         <div><b>${esc(d.name)}</b> <span class="role">${esc(d.role)}</span>
@@ -155,7 +156,7 @@ function viewClinic(c){
       <button type="button" data-jump="price">${m ? esc(m.month) + "價格" : "療程價格"}</button>
       <button type="button" data-jump="review">評價</button>
     </nav>
-    ${sec("info", "CLINIC", `診所特色${c.features ? ` <span class="cnt-h">${c.features.length}</span>` : ""}`, feats + intro + fields + docs + hours + addr)}
+    ${sec("info", "CLINIC", `診所特色${c.features ? ` <span class="cnt-h">${c.features.length}</span>` : ""}`, feats + intro + fields + env + docs + hours + addr)}
     ${sec("camp", "EXPERIENCE", "體驗團方案", campCards)}
     ${sec("price", "THIS MONTH", m ? `${esc(m.month)}活動價格` : "療程價格", priceTbl)}
     ${sec("review", "REVIEWS", "評價・前後對比", `<div id="revBox" data-clinic="${c.id}"></div>`)}
