@@ -593,3 +593,23 @@ button.link{background:none;border:0;padding:0}
   .why-l b{font-size:.9rem}
 }
 .partner{white-space:nowrap;letter-spacing:.08em}
+
+/* 병원 목록: 구분선형 */
+.crows{background:none;border:0;border-radius:0;padding:0;border-top:1px solid #D6D1C9}
+.crow{gap:16px;padding:18px 0;border-bottom:1px solid var(--rule)}
+.crow:last-child{border-bottom:1px solid var(--rule)}
+.crow-img{width:96px;height:120px;border-radius:0;background:#E6E1D8}
+.crow-img img{filter:saturate(.85)}
+.crow-bd{gap:4px;flex:1}
+.crow-loc{font:500 .72rem var(--latin);letter-spacing:.14em;color:var(--ink)}
+.crow .n{font:500 1.3rem/1.15 var(--display);letter-spacing:.02em;text-transform:uppercase}
+.crow .one{font-size:.86rem;line-height:1.55}
+.crow .cats{font-size:.8rem;color:var(--muted)}
+.crow .lg{font-size:.76rem}
+.crow-ben{font-size:.82rem;color:var(--rose)}
+.crow-pt{margin-top:4px;font:500 .72rem var(--latin);letter-spacing:.1em;color:var(--rose);white-space:nowrap}
+.crow:hover .n{color:var(--rose)}
+@media(min-width:900px){
+  .crows{display:grid;grid-template-columns:1fr 1fr;column-gap:48px}
+  .crow-img{width:128px;height:160px}
+}
