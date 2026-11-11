@@ -43,14 +43,28 @@ $("#newBtn").addEventListener("click", () => {
   render(); loadList();
 });
 $("#seedBtn").addEventListener("click", async () => {
-  if (!confirmBox("지금 홈페이지에 있는 병원 데이터를 관리자 시트로 옮길까요?")) return;
+  if (!(await confirmBox("지금 홈페이지에 있는 병원 데이터를 관리자 시트로 옮길까요? 예시 병원은 숨김으로 들어가요."))) return;
+  $("#seedBtn").disabled = true; $("#seedBtn").textContent = "넣는 중…";
   for (let i = 0; i < SEED.length; i++) {
     const c = Object.assign({}, SEED[i]); const id = c.id; delete c.id;
     await call("adminSave", id, c, !c.example, (i + 1) * 10);
   }
   await loadList();
 });
-function confirmBox(text){ return window.confirm(text); }
+function confirmBox(text){
+  return new Promise(ok => {
+    const bg = document.createElement("div");
+    bg.className = "modal-bg";
+    bg.innerHTML = `<div class="modal" role="dialog" aria-modal="true"><p>${h(text)}</p>
+      <div class="modal-acts"><button class="btn" data-a="no">취소</button><button class="btn pri" data-a="yes">확인</button></div></div>`;
+    document.body.appendChild(bg);
+    bg.addEventListener("click", e => {
+      const a = e.target.dataset && e.target.dataset.a; if (!a) return;
+      bg.remove(); ok(a === "yes");
+    });
+    bg.querySelector('[data-a="yes"]').focus();
+  });
+}
 
 /* ── 편집 화면 ── */
 function render(){
@@ -236,7 +250,7 @@ $("#editor").addEventListener("click", async e => {
   else if (t.dataset.delphoto != null) { readForm(); cur.data.photos.splice(+t.dataset.delphoto, 1); drawPhotos(); }
   else if (t.id === "saveBtn") save();
   else if (t.id === "delBtn") {
-    if (!confirmBox(`'${cur.data.name}' 병원을 완전히 지울까요? 되돌릴 수 없어요. 잠시 숨기려면 '홈페이지에 공개'만 끄세요.`)) return;
+    if (!(await confirmBox(`'${cur.data.name}' 병원을 완전히 지울까요? 되돌릴 수 없어요. 잠시 숨기려면 '홈페이지에 공개'만 끄세요.`))) return;
     await call("adminDelete", cur.id); cur = null; $("#editor").innerHTML = `<p class="empty">삭제했어요.</p>`; loadList();
   }
   else if (t.id === "jsonShow") { readForm(); $("#jsonBox").value = JSON.stringify(Object.assign({id: cur.id}, cur.data), null, 2); }
