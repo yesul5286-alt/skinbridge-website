@@ -13,17 +13,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611120402">
+<link rel="stylesheet" href="/tw/sb.css?v=202611120405">
 </head>
 <body>
 <header class="hd">
   <div class="hd-in">
-    <a href="#" class="logo">SKIN BRIDGE<small>KOREA CLINIC GUIDE</small></a>
-    <nav class="nav" aria-label="主選單">
-      <a href="#" data-nav="home">首頁</a>
-      <a href="#camps" data-nav="camps">體驗團</a>
-      <a href="#clinics" data-nav="clinics">找診所</a>
-    </nav>
+    <a href="#" class="logo">SKINBRIDGE<small>CURATED KOREAN AESTHETICS</small></a>
+    <a href="#clinics" class="hd-search" aria-label="搜尋診所"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></a>
   </div>
 </header>
 <main class="wrap" id="app"></main>
@@ -31,11 +27,19 @@
 <div class="wrap"><footer>
   <p>Skin Bridge 為連接台灣顧客與韓國合作醫療院所的服務，醫療行為皆由各院所醫師執行，是否適合施作須經醫師諮詢判斷。</p>
   <p>價格為韓元、VAT 另計；台幣為參考價（1 NT$ ≈ 41.6 韓元，2026.11）。標示「範例」的診所與體驗團為示意內容。</p>
+  <p class="fl"><span class="logo-s">SKINBRIDGE</span><a class="link" href="https://line.me/R/ti/p/%40911xoyoc" target="_blank" rel="noopener">LINE 官方帳號</a></p>
 </footer></div>
 
 <div class="bar" id="bar"><div class="bar-in" id="barIn"></div></div>
+<nav class="bnav" id="bnav" aria-label="主選單">
+    <a href="#" data-nav="home"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1z"/></svg><span>首頁</span></a>
+    <a href="#clinics" data-nav="clinics"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V7l7-3 7 3v13"/><path d="M3 20h18"/><path d="M12 9v5M9.5 11.5h5"/></svg><span>找診所</span></a>
+    <a href="#guide" data-nav="guide"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/></svg><span>療程指南</span></a>
+    <a href="#book" data-nav="book"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5h14v10H9l-4 4z"/><path d="M9 9h6M9 12h4"/></svg><span>預約諮詢</span></a>
+    <a href="#me" data-nav="me"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span>我的</span></a>
+</nav>
 
-<script src="/tw/sb-common.js?v=202611120402"></script>
+<script src="/tw/sb-common.js?v=202611120405"></script>
 <script>
 /* ===== 화면 ===== */
 function viewHome(){
@@ -58,6 +62,55 @@ function viewHome(){
     </section>
     ${section("CLINICS", "推薦診所", "#clinics", `<div class="crows">${rec.map(clinicRow).join("")}</div>`)}
     ${open.length ? section("EXPERIENCE", "招募中的體驗團", "#camps", `<div class="row">${open.map(campCard).join("")}</div>`) : ""}
+  </div>`;
+}
+
+const GUIDE = {
+  "拉提": "改善臉部鬆弛與輪廓線條的療程，常見有音波（Ultherapy 等）、電波（Thermage 等）與埋線。",
+  "毛孔": "針對毛孔粗大與膚質不均，常見有微針電波、雷射與皮膚管理。",
+  "痘痘": "針對發炎痘痘與出油，常見有痘痘處置、煥膚、抑制皮脂的光電療程。",
+  "痘疤": "針對凹洞與痘疤痕跡，常見有微針電波、飛梭雷射等，通常需要多次療程。",
+  "色素": "針對斑點、膚色不均，常見有皮秒雷射、IPL 與美白管理。",
+  "輪廓": "針對臉型線條，常見有肉毒、填充、溶脂與抽脂。",
+  "皺紋": "針對表情紋與細紋，常見有肉毒、玻尿酸與膠原增生療程。",
+  "彈力": "針對肌膚緊緻度，常見有電波、水光與膠原增生療程。",
+  "身體雕塑": "針對身體線條，常見有抽脂、溶脂針與身體電波。"
+};
+function viewGuide(){
+  return `<div class="view">
+    <div class="sh" style="border:0;padding:0"><div><span class="en">TREATMENT GUIDE</span><h2>療程指南</h2></div></div>
+    <p class="note" style="margin:-10px 0 0">依肌膚問題整理常見療程類型，實際適合的療程需由醫師評估。</p>
+    <div class="guide">${CONCERNS.map(x => { const n = CLINICS.filter(c => (c.concerns || []).includes(x)).length; return `<article class="g-item">
+      <h3>${esc(x)}</h3><p>${esc(GUIDE[x] || "")}</p>
+      ${n ? `<button type="button" class="link" data-gof="concern" data-v="${esc(x)}">查看 ${n} 間診所 →</button>` : `<span class="note">合作診所準備中</span>`}
+    </article>`; }).join("")}</div>
+  </div>`;
+}
+function viewBook(){
+  const line = "https://line.me/R/ti/p/" + encodeURIComponent(LINE_ID);
+  return `<div class="view">
+    <div class="sh" style="border:0;padding:0"><div><span class="en">BOOKING</span><h2>預約諮詢</h2></div></div>
+    <ol class="steps">
+      <li><b>選擇診所與療程</b><span>在「找診所」比較合作診所，或直接告訴我們你的需求。</span></li>
+      <li><b>LINE 中文諮詢</b><span>Skin Bridge 以中文協助確認療程、價格與可預約日期。</span></li>
+      <li><b>診所確認後到診</b><span>預約確定後以 LINE 通知，到診當天直接前往診所。</span></li>
+    </ol>
+    <div class="cta-col">
+      <a class="btn rose" href="${line}" target="_blank" rel="noopener">LINE 預約諮詢</a>
+      <a class="btn light" href="#clinics">先看看診所</a>
+    </div>
+  </div>`;
+}
+function viewMe(){
+  const line = "https://line.me/R/ti/p/" + encodeURIComponent(LINE_ID);
+  return `<div class="view">
+    <div class="sh" style="border:0;padding:0"><div><span class="en">MY PAGE</span><h2>我的</h2></div></div>
+    <p class="note" style="margin:-10px 0 0">Skin Bridge 使用 LINE 登入，預約紀錄與通知都會在 LINE 聊天室中。</p>
+    <div class="mlist">
+      <a href="${line}" target="_blank" rel="noopener"><b>我的預約與諮詢</b><span>在 LINE 聊天室查看與修改</span></a>
+      <a href="/apply/?mode=review"><b>撰寫評價</b><span>到診後分享你的經驗</span></a>
+      <a href="#camps"><b>體驗團</b><span>查看招募中的體驗團</span></a>
+    </div>
   </div>`;
 }
 
@@ -360,16 +413,21 @@ function go(h){
 function route(){
   const h = cur;
   let html, nav = "", bar = "";
-  if (h === "camps") { html = viewCamps(); nav = "camps"; }
+  if (h === "camps") { html = viewCamps(); nav = "home"; }
+  else if (h === "guide") { html = viewGuide(); nav = "guide"; }
+  else if (h === "book") { html = viewBook(); nav = "book"; }
+  else if (h === "me") { html = viewMe(); nav = "me"; }
   else if (h === "clinics") { html = viewClinics(); nav = "clinics"; }
   else if (h.startsWith("c-") && clinicOf(h.slice(2))) {
     const c = clinicOf(h.slice(2)); html = viewClinic(c); nav = "clinics";
     const hasCamp = openCamps().some(k => k.clinic === c.id);
-    bar = `<button class="btn dark" data-apply="booking" data-clinic="${c.id}">預約諮詢</button>` +
-          (hasCamp ? `<button class="btn rose" data-apply="camp" data-clinic="${c.id}">報名體驗團</button>` : "");
+    bar = (hasCamp ? `<button class="btn light" data-apply="camp" data-clinic="${c.id}">報名體驗團</button>` : "") +
+          `<button class="btn rose wide" data-apply="booking" data-clinic="${c.id}">LINE 預約諮詢</button>`;
   }
   else { html = viewHome(); nav = "home"; }
-  if (!bar && h !== "apply") bar = `<a class="btn line" href="https://line.me/R/ti/p/${encodeURIComponent(LINE_ID)}" target="_blank" rel="noopener">LINE 預約諮詢</a>`;
+  const bn = document.getElementById("bnav");
+  if (bn) bn.hidden = !!bar || h === "apply" || h === "review";
+  document.body.classList.toggle("has-bnav", !!bn && !bn.hidden);
   window.onscroll = null;
   document.body.classList.toggle("appmode", h.startsWith("c-") && !!clinicOf(h.slice(2)));
   $("#app").innerHTML = html;

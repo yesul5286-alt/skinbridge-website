@@ -409,3 +409,33 @@ b,strong,h1,h2,h3{font-weight:600}
 .tile span{font-size:.74rem;color:var(--muted)}
 .tile:hover{border-color:var(--rose);background:var(--rose-soft)}
 .tile:hover b{color:var(--rose-deep)}
+
+.hd{border-bottom:1px solid var(--rule)}
+.hd-in{flex-direction:row;align-items:center;justify-content:space-between;padding-bottom:10px}
+.hd .logo{text-align:left;font:400 1.3rem/1.1 var(--display);letter-spacing:.2em}
+.hd .logo small{font:400 .7rem var(--display);letter-spacing:.2em;margin-top:3px}
+.hd-search{display:grid;place-items:center;width:40px;height:40px;color:var(--ink)}
+.bnav{position:fixed;left:0;right:0;bottom:0;z-index:7;display:flex;justify-content:space-around;background:#FAF9F6;border-top:1px solid var(--rule);padding:6px max(8px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(8px,env(safe-area-inset-left,0px))}
+.bnav[hidden]{display:none}
+.bnav a{flex:1;max-width:110px;display:flex;flex-direction:column;align-items:center;gap:1px;font-size:.72rem;color:var(--muted);padding:4px 0;min-height:48px}
+.bnav a.on{color:var(--rose)}
+.bnav a.on span{font-weight:500}
+body.has-bnav .bar{display:none}
+.bar-in .btn.wide{flex:2}
+.guide{display:flex;flex-direction:column;border-top:1px solid var(--rule)}
+.g-item{padding:18px 0;border-bottom:1px solid var(--rule);display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.g-item h3{margin:0;font-size:1.05rem;font-weight:600}
+.g-item p{margin:0;font-size:.9rem;color:var(--muted);line-height:1.7}
+button.link{background:none;border:0;padding:0}
+.steps{list-style:none;margin:0;padding:0;counter-reset:s;border-top:1px solid var(--rule)}
+.steps li{counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:2px 8px;padding:18px 0;border-bottom:1px solid var(--rule)}
+.steps li::before{content:"0" counter(s);grid-row:span 2;font:400 1.4rem var(--display);color:var(--rose)}
+.steps b{font-weight:600}
+.steps span{color:var(--muted);font-size:.9rem}
+.cta-col{display:flex;flex-direction:column;gap:10px;max-width:420px}
+.mlist{display:flex;flex-direction:column;border-top:1px solid var(--rule)}
+.mlist a{display:flex;flex-direction:column;padding:16px 0;border-bottom:1px solid var(--rule)}
+.mlist b{font-weight:500}
+.mlist span{font-size:.84rem;color:var(--muted)}
+.fl{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.logo-s{font:400 1rem var(--display);letter-spacing:.2em;color:var(--ink)}
