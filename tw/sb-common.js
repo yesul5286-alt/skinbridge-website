@@ -148,7 +148,10 @@ function campCard(k){
   const c = clinicOf(k.clinic), d = daysLeft(k.end);
   const inf = k.tiers.filter(t => t.influencer).reduce((s, t) => s + t.quota, 0);
   return `<a class="camp" href="#c-${c.id}">
-    <div class="ph ${k.tone} ${c.photos && c.photos.length ? "has-img" : ""}"${bg(c)}><span class="dd ${d <= 2 ? "hot" : ""}">${ddLabel(k)}</span><b><small>最高</small>${k.best}</b></div>
+    ${c.photos && c.photos.length
+      ? `<div class="cimg" style="--bg:url('${esc(c.photos[0]).replace(/'/g, "")}')"><img src="${esc(c.photos[0])}" alt="${esc(c.name)}" loading="lazy"></div>`
+      : `<div class="cimg ph ${k.tone}"></div>`}
+    <div class="cchips"><span class="dd2 ${d <= 2 ? "hot" : ""}">${ddLabel(k)}</span><span class="best">最高 ${k.best}</span></div>
     <span class="loc">${c.region} · ${esc(c.area)}</span>
     <div class="t">${esc(k.target)}${k.example ? '<span class="ex">範例</span>' : ""}</div>
     <div class="m">${esc(c.name)} · ${k.tiers.length} 種方案 · 共 <span class="num">${k.quota}</span> 名${inf ? `（網紅 ${inf}）` : ""}</div>
