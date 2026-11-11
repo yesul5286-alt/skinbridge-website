@@ -155,7 +155,12 @@ function setupForm(){
   }
   function fillItems(){
     const c = clinicOf(fClinic.value), k = campOf(c.id);
-    const items = [...new Set(c.menu.map(m => m.n + (m.s ? " " + m.s : ""))), "還不確定，想先諮詢"];
+    const mo = c.monthly || null;
+    const evItems = mo ? [
+      ...((mo.posters && mo.posters.length) ? [(mo.month || "") + "活動"] : []),
+      ...((mo.items || []).map(m => m.n + (m.s ? " " + m.s : "")))
+    ] : [];
+    const items = [...new Set([...evItems, ...(c.menu || []).map(m => m.n + (m.s ? " " + m.s : "")), "還不確定，想先諮詢"])];
     fItem.innerHTML = `<option value="">請選擇</option>` + items.map(i => `<option>${esc(i)}</option>`).join("");
     fW1.innerHTML = k ? `<option value="">請選擇</option>` + k.tiers.map(tierOpt).join("")
                       : `<option value="">這間診所目前沒有招募中的體驗團</option>`;

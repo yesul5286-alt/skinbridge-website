@@ -100,7 +100,8 @@ function viewClinic(c){
         <div class="dtags">${(d.tags || []).map(x => `<span>${esc(x)}</span>`).join("")}</div></div></div>`).join("")}</div>` : "";
   const hours = `<h3 class="sub-h">診療時間</h3>` + (c.hours
     ? `<table class="hours"><tr>${DAYS.map(d => `<th>${d}</th>`).join("")}</tr><tr>${c.hours.map(h => `<td>${h ? esc(h).replace("-", "<br>~<br>") : "休診"}</td>`).join("")}</tr></table>${c.lunch ? `<p class="note">午休 ${esc(c.lunch)}</p>` : ""}`
-    : `<p class="note">診療時間請透過 LINE 確認。${c.hoursExample ? '<span class="ex">待補</span>' : ""}</p>`);
+    : `<p class="note">診療時間請透過 LINE 確認。${c.hoursExample ? '<span class="ex">待補</span>' : ""}</p>`)
+    + (c.hours && c.hoursNote ? `<p class="note">${esc(c.hoursNote)}</p>` : "");
   const addr = `<h3 class="sub-h">地址</h3><div class="addr"><span id="addrText">${esc(c.address)}</span><button type="button" class="copy" data-copy="addrText">複製</button></div>`;
 
   const campCards = k ? `<div class="dd-line">${esc(k.target)}・截止 ${k.end.slice(5).replace("-", "/")}（${ddLabel(k)}）${k.example ? '<span class="ex">範例</span>' : ""}</div>
@@ -113,8 +114,9 @@ function viewClinic(c){
       <p class="note">可選第一、第二志願，最終方案由診所依審核結果安排並以 LINE 通知。網紅限定方案需填寫 Instagram。</p>`
     : `<p class="empty">這間診所目前沒有招募中的體驗團。</p>`;
 
-  const m = c.monthly && c.monthly.items && c.monthly.items.length ? c.monthly : null;
-  const rows = m ? m.items : c.menu;
+  const posters = c.monthly && c.monthly.posters && c.monthly.posters.length ? c.monthly.posters : null;
+  const m = c.monthly && ((c.monthly.items && c.monthly.items.length) || posters) ? c.monthly : null;
+  const rows = c.menu;
   const evCard = r => {
     const off = r.orig && r.krw && r.orig > r.krw ? Math.round((1 - r.krw / r.orig) * 100) : 0;
     return `<div class="ev">
@@ -123,7 +125,10 @@ function viewClinic(c){
         <div class="ev-p">${r.krw ? `${off ? `<s>${won(r.orig)}</s><em>${off}%</em>` : ""}<b>${won(r.krw)}</b><small>${twd(r.krw)}</small>` : `<span class="ask">LINE 詢價</span>`}</div>
         <button type="button" class="btn dark sm" data-apply="booking" data-clinic="${c.id}" data-item="${esc(r.n + (r.s ? " " + r.s : ""))}">預約這個活動</button></div>
     </div>`; };
-  const priceTbl = m ? `<div class="evs">${rows.map(evCard).join("")}</div>
+  const posterBox = posters ? `<div class="posters">${posters.map((p, i) => `<a class="poster" href="${esc(p.img)}" target="_blank" rel="noopener">
+      <img src="${esc(p.img)}" alt="${esc(p.title || (m.month + "活動 " + (i + 1)))}" loading="lazy"></a>`).join("")}</div>
+    <div class="poster-acts"><button type="button" class="btn dark sm" data-apply="booking" data-clinic="${c.id}" data-item="${esc((m.month || "") + "活動")}">預約活動療程</button></div>` : "";
+  const priceTbl = m ? posterBox + (m.items && m.items.length ? `<div class="evs">${m.items.map(evCard).join("")}</div>` : "") + `
     <p class="note">${esc(m.month)}活動${m.note ? "・" + esc(m.note) : ""}。實際療程內容與價格以院所諮詢為準。</p>
     ${perkBox(c)}` : `<div class="ptable">${rows.map(r => `<div class="prow">
       <div class="pn"><b>${esc(r.n)}</b>${r.s ? `<span>${esc(r.s)}</span>` : ""}</div>

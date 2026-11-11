@@ -249,6 +249,10 @@ img.avatar{object-fit:cover}
 .ev-p em{font-style:normal;font-weight:700;color:var(--rose)}
 .ev-p b{font:700 1.08rem var(--latin)}
 .ev-p small{font-size:.74rem;color:var(--muted);width:100%}
+.posters{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px}
+.poster{flex:0 0 min(86%,420px);scroll-snap-align:start;border-radius:10px;overflow:hidden;border:1px solid var(--rule);background:#fff}
+.poster img{display:block;width:100%;height:auto;max-width:100%}
+.poster-acts{display:flex;justify-content:flex-end}
 footer{border-top:1px solid var(--rule);margin-top:40px;padding-top:18px;font-size:.76rem;color:var(--muted);display:flex;flex-direction:column;gap:4px}
 @media (min-width:900px){.camp{width:200px}.clinic{width:300px}.hero{height:240px}.cover{height:300px}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}

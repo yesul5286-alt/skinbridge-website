@@ -114,7 +114,8 @@ function render(){
   <fieldset><legend>진료 시간</legend>
     <p class="hint">비워 두면 '休診(휴진)'으로 나와요. 모두 비우면 'LINE으로 확인' 안내가 나와요. 예: 10:00-20:00</p>
     <div class="grid">${DAYS.map((d, i) => `<label class="f">${d}<input id="i_h${i}" value="${h(hours[i])}"></label>`).join("")}
-      <label class="f">점심시간<input id="i_lunch" value="${h(d.lunch)}" placeholder="13:30-14:30"></label></div>
+      <label class="f">점심시간<input id="i_lunch" value="${h(d.lunch)}" placeholder="13:30-14:30"></label>
+      <label class="f full">진료 시간 안내 (예: 最後預約 平日 19:00)<input id="i_hnote" value="${h(d.hoursNote)}"></label></div>
   </fieldset>
 
   <fieldset><legend>시술·가격 (기본 가격표)</legend>
@@ -127,7 +128,9 @@ function render(){
       <label class="f">이벤트 이름 (例: 11 月)<input id="i_month" value="${h(d.monthly && d.monthly.month)}"></label>
       <label class="f">가격 안내 (例: VAT 另計)<input id="i_mnote" value="${h(d.monthly && d.monthly.note)}"></label>
     </div>
-    <p class="hint">이벤트를 비워 두면 기본 가격표가 대신 나와요.</p>
+    <p class="hint">이벤트 포스터 이미지(세로로 긴 이미지 그대로 보여요). 포스터와 아래 항목 중 하나만 넣어도 돼요.</p>
+    <div class="imgs" id="posters"></div>
+    <p class="hint" style="margin-top:10px">항목별 이벤트 카드(선택). 둘 다 비워 두면 기본 가격표가 대신 나와요.</p>
     <div class="rows" id="events"></div>
     <button class="btn sm" data-add="events">+ 이벤트 항목 추가</button>
   </fieldset>
@@ -163,7 +166,7 @@ function render(){
     <button class="btn pri" id="saveBtn">저장</button>
   </div>`;
 
-  drawPhotos(); drawRows("feats"); drawRows("docs"); drawRows("menu"); drawRows("events"); drawRows("tiers");
+  drawPhotos(); drawPosters(); drawRows("feats"); drawRows("docs"); drawRows("menu"); drawRows("events"); drawRows("tiers");
   $("#c_on").onchange = e => { $("#campBox").hidden = !e.target.checked; };
 }
 
@@ -201,6 +204,12 @@ function drawRows(key){
   box.innerHTML = arr.map((x, i) => `<div class="r" style="grid-template-columns:${def.cols}" data-row="${key}:${i}">${def.html(x, i)}
       <button class="btn sm x" data-del="${key}:${i}" title="삭제">✕</button></div>`).join("") || `<p class="hint">아직 없어요.</p>`;
 }
+function posterArr(){ const d = cur.data; d.monthly = d.monthly || {month:"",note:"",items:[]}; d.monthly.items = d.monthly.items || []; return d.monthly.posters || (d.monthly.posters = []); }
+function drawPosters(){
+  const arr = posterArr();
+  $("#posters").innerHTML = arr.map((p, i) => `<div class="thumb" style="height:138px"><img src="${h(p.img)}" alt=""><button data-delposter="${i}" title="삭제">✕</button></div>`).join("")
+    + `<label class="up" style="height:138px">+ 포스터 올리기<input type="file" accept="image/*" multiple data-img="posters"></label>`;
+}
 function drawPhotos(){
   const arr = cur.data.photos || (cur.data.photos = []);
   $("#photos").innerHTML = arr.map((u, i) => `<div class="thumb"><img src="${h(u)}" alt=""><button data-delphoto="${i}" title="삭제">✕</button></div>`).join("")
@@ -229,10 +238,10 @@ function readForm(){
   Object.assign(d, { name:v("i_name"), region:v("i_region"), area:v("i_area"), station:v("i_station"), address:v("i_address"),
     langs:v("i_langs"), rating:v("i_rating"), reviews:v("i_reviews") ? Number(v("i_reviews")) : null, tags:list("i_tags"),
     intro:v("i_intro"), about:v("i_intro").split("\n")[0], fields:list("i_fields"), policy:v("i_policy"), more:v("i_more"),
-    example:$("#i_example").checked, perk:v("i_perk"), lunch:v("i_lunch") });
+    example:$("#i_example").checked, perk:v("i_perk"), lunch:v("i_lunch"), hoursNote:v("i_hnote") });
   const hrs = [0,1,2,3,4,5,6].map(i => v("i_h" + i));
   d.hours = hrs.some(Boolean) ? hrs : null;
-  if (d.monthly) { d.monthly.month = v("i_month"); d.monthly.note = v("i_mnote"); if (!d.monthly.items.length && !d.monthly.month) d.monthly = null; }
+  if (d.monthly) { d.monthly.month = v("i_month"); d.monthly.note = v("i_mnote"); if (!d.monthly.items.length && !(d.monthly.posters || []).length && !d.monthly.month) d.monthly = null; }
   if ($("#c_on").checked) {
     d.camp = d.camp || {tiers:[]};
     Object.assign(d.camp, { end:v("c_end"), target:v("c_target"), cats:list("c_cats"), example:$("#c_example").checked });
@@ -247,6 +256,7 @@ $("#editor").addEventListener("click", async e => {
   const t = e.target;
   if (t.dataset.add) { readForm(); ROWDEF[t.dataset.add].src().push(JSON.parse(JSON.stringify(ROWDEF[t.dataset.add].empty))); drawRows(t.dataset.add); }
   else if (t.dataset.del) { readForm(); const [k, i] = t.dataset.del.split(":"); ROWDEF[k].src().splice(+i, 1); drawRows(k); }
+  else if (t.dataset.delposter != null) { readForm(); posterArr().splice(+t.dataset.delposter, 1); drawPosters(); }
   else if (t.dataset.delphoto != null) { readForm(); cur.data.photos.splice(+t.dataset.delphoto, 1); drawPhotos(); }
   else if (t.id === "saveBtn") save();
   else if (t.id === "delBtn") {
@@ -272,10 +282,11 @@ $("#editor").addEventListener("change", async e => {
       const res = await call("adminUpload", f.name, mime, b64);
       const [key, i] = t.dataset.img.split(":");
       if (key === "photos") cur.data.photos.push(res.url);
+      else if (key === "posters") posterArr().push({ img: res.url, title: "" });
       else if (key === "docs") ROWDEF.docs.src()[+i].photo = res.url;
       else if (key === "events") ROWDEF.events.src()[+i].img = res.url;
     }
-    drawPhotos(); drawRows("docs"); drawRows("events");
+    drawPhotos(); drawPosters(); drawRows("docs"); drawRows("events");
     msg("이미지를 올렸어요. 저장을 눌러야 홈페이지에 반영돼요.", "ok");
   } catch (err) { msg("이미지 올리기 실패: " + (err.message || err), "err"); }
 });
