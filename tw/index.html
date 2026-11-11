@@ -12,13 +12,13 @@
 <link rel="canonical" href="https://www.skinbridgekorea.com/tw/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611120413">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+TC:wght@500;600&display=swap">
+<link rel="stylesheet" href="/tw/sb.css?v=202611120415">
 </head>
 <body>
 <header class="hd">
   <div class="hd-in">
-    <a href="#" class="logo">SKINBRIDGE<small>CURATED KOREAN AESTHETICS</small></a>
+    <a href="#" class="logo">Skinbridge<small>CURATED KOREAN AESTHETICS</small></a>
     <a href="#clinics" class="hd-search" aria-label="搜尋診所"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></a>
   </div>
 </header>
@@ -39,7 +39,7 @@
     <a href="#me" data-nav="me"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span>我的</span></a>
 </nav>
 
-<script src="/tw/sb-common.js?v=202611120413"></script>
+<script src="/tw/sb-common.js?v=202611120415"></script>
 <script>
 /* ===== 화면 ===== */
 const HOME = {
@@ -51,10 +51,10 @@ const HOME = {
     { en:"ANTI-AGING", zh:"抗老緊緻", img:"https://www.skinbridgekorea.com/tw/img/drtunes/interior-7.webp", key:"concern", v:"彈力" }
   ],
   why: [
-    ["shield", "嚴選合作診所", "親自拜訪、比較後才邀請合作，不是付費就能刊登。"],
-    ["user", "醫師專業與溝通度評估", "確認醫師經歷與諮詢方式，重視能好好說明的診所。"],
-    ["list", "療程規劃與風險管理", "協助整理療程選擇與注意事項，最終由醫師評估是否適合。"],
-    ["chat", "外國旅客一站式支援", "從諮詢、預約到到診當天，全程中文協助。"]
+    ["shield", "嚴選<br>合作診所", "親自拜訪、比較後才邀請合作，不是付費就能刊登。"],
+    ["user", "醫師專業與<br>溝通度評估", "確認醫師經歷與諮詢方式，重視能好好說明的診所。"],
+    ["list", "療程規劃<br>與風險管理", "協助整理療程選擇與注意事項，最終由醫師評估是否適合。"],
+    ["chat", "外國旅客<br>一站式支援", "從諮詢、預約到到診當天，全程中文協助。"]
   ]
 };
 const LI = {
@@ -67,15 +67,16 @@ const LI = {
 const lic = k => `<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${LI[k]}</svg>`;
 function selCard(c){
   const img = (c.interior && c.interior[0]) || (c.photos && c.photos[0]) || "";
-  const cats = (c.concerns || []).slice(0, 3).join(" / ");
+  const cats = (c.concerns || []).slice(0, 3);
+  const REG = { "首爾":"SEOUL", "濟州":"JEJU", "釜山":"BUSAN", "大邱":"DAEGU" };
   return `<a class="scard" href="#c-${c.id}">
     <div class="scard-img">${img ? `<img src="${esc(img)}" alt="${esc(c.name)}" loading="lazy">` : `<div class="ph ${c.tone}"></div>`}</div>
     <div class="scard-bd">
-      <span class="loc">${esc(c.region)} · ${esc(c.area)}</span>
+      <span class="scard-loc">${REG[c.region] || esc(c.region)} · ${esc(c.area)}</span>
       <h3>${esc(c.name)}</h3>
       ${c.oneliner ? `<p>${esc(c.oneliner)}</p>` : ""}
-      ${cats ? `<div class="scard-cat">${esc(cats)}</div>` : ""}
-      <div class="scard-ft"><span class="partner">SKINBRIDGE PARTNER</span>${c.benefit ? `<span class="benefit">全療程 9折專屬禮遇</span>` : ""}<span class="arr" aria-hidden="true">→</span></div>
+      ${cats.length ? `<div class="scard-cat">${cats.map(x => `<span>${esc(x)}</span>`).join("")}</div>` : ""}
+      <div class="scard-ft"><div><span class="partner">SKINBRIDGE PARTNER</span>${c.benefit ? `<span class="benefit">全療程 <em>9折</em> 專屬禮遇</span>` : ""}</div><span class="arr" aria-hidden="true">→</span></div>
     </div></a>`;
 }
 function viewHome(){
@@ -86,10 +87,11 @@ function viewHome(){
     <section class="h-hero">
       <div class="h-hero-img"><img src="${HOME.hero}" alt="合作診所空間" fetchpriority="high"></div>
       <div class="h-hero-tx">
-        <span class="disp-s">CURATED KOREAN AESTHETICS</span>
+        <span class="disp-s line">CURATED KOREAN AESTHETICS</span>
         <h1>精選韓國醫美，<br>找到真正適合你的選擇。</h1>
-        <p class="h-sub"><span class="disp-s">${regions}</span><br>診所精選 / 療程規劃 / 預約諮詢 / 中文支援</p>
-        <a class="btn rose h-cta" href="#clinics">探索診所 →</a>
+        <span class="disp-s reg">${regions}</span>
+        <p class="h-sub">診所精選 / 療程規劃 / 預約諮詢 / 中文支援</p>
+        <a class="h-cta" href="#clinics">探索診所 <span aria-hidden="true">→</span></a>
       </div>
     </section>
     <ul class="trust">
@@ -98,19 +100,19 @@ function viewHome(){
       <li>${lic("price")}<span>價格透明</span></li>
       <li>${lic("chat")}<span>中文全程支援</span></li>
     </ul>
-    <form class="search big" id="hsearch" role="search"><input id="hq" type="search" placeholder="搜尋診所、療程或肌膚問題" aria-label="搜尋診所"><button type="submit" class="sgo" aria-label="搜尋">→</button></form>
+    <form class="search big" id="hsearch" role="search"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><input id="hq" type="search" placeholder="搜尋診所、療程或肌膚問題" aria-label="搜尋診所"><button type="submit" class="sgo" aria-label="搜尋">→</button></form>
     <section class="h-sec">
-      <div class="h-head"><span class="disp">CURATED BY SKINBRIDGE</span><p>依照你的需求，精選適合的療程與診所。</p></div>
+      <div class="h-head"><span class="disp">CURATED BY SKINBRIDGE</span><div class="row2"><p>依照你的需求，精選適合的療程與診所。</p><a class="more" href="#guide">查看全部 →</a></div></div>
       <div class="cur">${HOME.curated.map(x => `<button type="button" class="cur-t" data-gof="${x.key}" data-v="${esc(x.v)}">
         <span class="cur-img"><img src="${x.img}" alt="" loading="lazy"></span>
         <span class="disp-s">${x.en}</span><b>${x.zh}</b></button>`).join("")}</div>
     </section>
-    <section class="h-sec why">
-      <div class="h-head"><span class="disp big">WHY<br>SKINBRIDGE</span></div>
-      <ul class="why-l">${HOME.why.map(([ic, t, d]) => `<li>${lic(ic)}<div><b>${t}</b><p>${d}</p></div></li>`).join("")}</ul>
+    <section class="why">
+      <span class="disp big">WHY<br>SKINBRIDGE</span>
+      <ul class="why-l">${HOME.why.map(([ic, t, d]) => `<li title="${d.replace(/<br>/g, "")}">${lic(ic)}<b>${t}</b></li>`).join("")}</ul>
     </section>
     <section class="h-sec">
-      <div class="h-head row2"><div><span class="disp">SELECTED CLINICS</span><h2>精選合作診所</h2></div><a class="more" href="#clinics">查看全部 →</a></div>
+      <div class="h-head row2"><div class="sel-t"><span class="disp">SELECTED CLINICS</span><span class="sel-zh">精選合作診所</span></div><a class="more" href="#clinics">查看全部 →</a></div>
       <div class="scards">${rec.map(selCard).join("")}</div>
     </section>
     ${open.length ? section("EXPERIENCE", "招募中的體驗團", "#camps", `<div class="row">${open.map(campCard).join("")}</div>`) : ""}
