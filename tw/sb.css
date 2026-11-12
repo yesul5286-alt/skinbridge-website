@@ -1012,7 +1012,7 @@ details.pi[open] .pi-h::after{content:"−"}
 .pcl-tx small{font-size:.78rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .pcl-go{font-size:1.4rem;color:var(--muted)}
 .plist[hidden],.pback[hidden],.pg-hero[hidden]{display:none}
-.pback{border:0;background:none;padding:8px 0;min-height:44px;font-size:.9rem;color:var(--ink)}
+.pback{display:block;text-align:left;border:0;background:none;padding:8px 0;min-height:44px;font-size:.9rem;color:var(--ink)}
 .pg-hero{position:relative;margin:4px 0 10px;padding:22px 18px;min-height:110px;display:flex;flex-direction:column;justify-content:center;gap:4px;background:linear-gradient(90deg,var(--paper) 40%,rgba(241,240,235,.2)),var(--im,none) right center/58% 100% no-repeat,#EAE5DC}
 .pg-hero h3{margin:0;font:500 1.35rem "Noto Serif TC",var(--sans)}
 .pg-hero span{font-size:.8rem;color:var(--muted)}
