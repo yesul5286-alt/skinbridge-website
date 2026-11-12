@@ -914,6 +914,7 @@ details.pi[open] .pi-h::after{content:"−"}
 .bk-note{margin:0;font-size:.84rem;line-height:1.75;color:var(--muted)}
 .bk-done{text-align:center}
 .bk-done .acts{display:flex;flex-direction:column;gap:10px;margin-top:10px}
+.bk-done .btn{flex:none;min-height:48px}
 .mine{display:flex;flex-direction:column;gap:12px}
 .mi{background:var(--white);border:1px solid var(--rule);padding:14px 16px;display:flex;flex-direction:column;gap:4px}
 .mi p{margin:0}

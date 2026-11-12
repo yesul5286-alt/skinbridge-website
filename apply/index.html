@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+TC:wght@500;600&family=Libre+Caslon+Text&family=Montserrat:wght@400&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611121701">
+<link rel="stylesheet" href="/tw/sb.css?v=202611121704">
 </head>
 <body>
 <header class="hd">
@@ -32,7 +32,7 @@
 
 <div class="bar" id="bar" hidden><div class="bar-in" id="barIn"></div></div>
 
-<script src="/tw/sb-common.js?v=202611121701"></script>
+<script src="/tw/sb-common.js?v=202611121704"></script>
 <script>
 function viewApply(){
   const p = state.prefill || { type:"booking", clinic:"selena", item:"" };
@@ -259,7 +259,7 @@ function setupBooking(){
       if (SHEET_URL && me.userId !== "DEMO-USER") {
         try { await fetch(SHEET_URL, { method:"POST", mode:"no-cors", body:new URLSearchParams(data) }); } catch (_) {}
       }
-      bk.done = true; bkSave(); rerender(); scrollTo(0, 0);
+      bk.done = true; try { sessionStorage.removeItem(bkKey(bk.clinic)); } catch (_) {} rerender(); scrollTo(0, 0);
     }
   });
   box.addEventListener("input", e => { const k = e.target.dataset.bki; if (k) { bk[k] = e.target.value; bkSave(); } });
