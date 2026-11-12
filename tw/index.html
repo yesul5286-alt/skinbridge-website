@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+TC:wght@500;600&family=Libre+Caslon+Text&family=Montserrat:wght@400&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611121737">
+<link rel="stylesheet" href="/tw/sb.css?v=202611121746">
 </head>
 <body>
 <header class="hd">
@@ -39,7 +39,7 @@
     <a href="#me" data-nav="me"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span>我的</span></a>
 </nav>
 
-<script src="/tw/sb-common.js?v=202611121737"></script>
+<script src="/tw/sb-common.js?v=202611121746"></script>
 <script>
 /* ===== 화면 ===== */
 const HOME = {
@@ -456,42 +456,52 @@ function viewClinic(c){
     <div class="poster-acts">${book((m.month || "") + "活動", "預約活動療程")}</div>` : "";
   const monthBox = m ? `<h3 class="sub-h">${esc(m.month)}活動</h3>` + posterBox + (m.items && m.items.length ? `<div class="evs">${m.items.map(evCard).join("")}</div>` : "")
     + `<p class="note">${esc(m.month)}活動${m.note ? "・" + esc(m.note) : ""}。</p>` : "";
-  const pimgs = c.priceImgs && c.priceImgs.length ? `${c.priceImgs.length > 1 ? `<p class="note">價目表共 <span class="num">${c.priceImgs.length}</span> 張・左右滑動，點一下可放大</p>` : ""}<div class="posters pimgs" id="pimgs">${c.priceImgs.map((u, i) => `<button type="button" class="poster" data-pimg="${i}" aria-label="放大價目表第 ${i + 1} 張"><img src="${esc(u)}" alt="${esc(c.name)} 價目表 ${i + 1}" loading="lazy"></button>`).join("")}</div>
-    <div class="poster-acts">${book("", "預約諮詢")}</div>` : "";
+  /* 가격표 이미지: 맨 아래 작은 사진 줄 */
+  const pimgs = c.priceImgs && c.priceImgs.length ? `<div class="pthumbs-h"><b>完整價目表</b><span>${c.priceImgs.length} 張・點擊放大</span></div>
+    <div class="pthumbs" id="pimgs">${c.priceImgs.map((u, i) => `<button type="button" data-pimg="${i}" aria-label="放大價目表第 ${i + 1} 張"><img src="${esc(u)}" alt="${esc(c.name)} 價目表 ${i + 1}" loading="lazy"></button>`).join("")}</div>` : "";
   // 시술 묶기: 분류(g) → 같은 이름(n) → 옵션(s)
-  const hasImgs = !!(c.priceImgs && c.priceImgs.length);
-  const rowsAll = c.menu || [];
-  const rowsUse = hasImgs ? rowsAll.filter(r => r.top) : rowsAll;
   const cats = [];
-  rowsUse.forEach(r => {
+  (c.menu || []).forEach(r => {
     const g = r.g || "";
     let cg = cats.find(x => x.g === g); if (!cg) cats.push(cg = { g, items: [] });
     let it = cg.items.find(x => x.n === r.n); if (!it) cg.items.push(it = { n: r.n, opts: [] });
     it.opts.push(r);
   });
-  const hasG = cats.some(x => x.g);
-  const optRow = r => {
-    const sp = sbPrice(c, r.krw);
-    return `<div class="po">
-      <span class="po-s">${esc(r.s || r.n)}</span>
-      <span class="po-p">${r.krw
-        ? (sp ? `<span class="po-l">診所價格 <span class="num">${won(r.krw)}</span></span><span class="po-sb">Skinbridge 專屬價 <b class="num">${won(sp)}</b></span><small>約 ${twd(sp).replace("≈ ", "")}</small>`
-              : `<b class="num">${won(r.krw)}</b><small>約 ${twd(r.krw).replace("≈ ", "")}</small>`)
-        : `<span class="ask">LINE 詢價</span>`}</span>
-      ${book(r.n + (r.s ? " " + r.s : ""), "預約", "po-bk")}</div>`; };
+  const hasG = cats.some(x => x.g) && cats.length > 1;
+  const CAT_IMG = [
+    [/拉提|提升|緊緻|Ulther|Therm|Onda|ONDA|埋線|InMode|電波|音波|超聲|Shurink|LAFERRA/i, "lifting"],
+    [/水光|Rejuran|麗珠蘭|膠原|再生|Juvelook|Booster|童顏|Re2O|Sculptra/i, "booster"],
+    [/肉毒|Botox|玻尿酸|輪廓|溶脂|瘦臉|Filler/i, "antiaging"],
+    [/色素|痘|毛孔|護膚|雷射|皮秒|煥膚|管理|IPL|微針|Potenza/i, "texture"]
+  ];
+  const catImg = x => { const s = x.g + " " + x.items.map(i => i.n).join(" "); const hit = CAT_IMG.find(([re]) => re.test(s)); return hit ? `https://www.skinbridgekorea.com/tw/img/home/${hit[1]}.webp` : ""; };
+  const isBen = !!c.benefit;
+  const optTable = it => `<div class="ptb${isBen ? " ben" : ""}">
+      <div class="ptb-h"><span>規格</span><span>${isBen ? "診所價格" : "價格"}</span><span>${isBen ? "Skinbridge 專屬價" : "約台幣"}</span></div>
+      ${it.opts.map(r => `<div class="ptb-r"><span>${esc(r.s || "—")}</span>${r.krw
+        ? (isBen ? `<span class="num mut">${won(r.krw)}</span><span class="num sb">${won(sbPrice(c, r.krw))}</span>`
+               : `<span class="num">${won(r.krw)}</span><span class="num mut">${twd(r.krw).replace("≈ ", "")}</span>`)
+        : `<span class="ask">LINE 詢價</span><span></span>`}</div>`).join("")}
+      <div class="ptb-f">${book(it.n, "預約這個療程", "po-bk")}</div>
+    </div>`;
+  const acc = (it, g) => `<details class="pi" data-q="${esc((it.n + " " + g + " " + it.opts.map(o => o.s).join(" ")).toLowerCase())}"><summary class="pi-h"><b>${esc(it.n)}</b><span>${it.opts.length > 1 ? it.opts.length + " 個選項" : ""}</span></summary>${optTable(it)}</details>`;
   const menuBox = cats.length ? `
-    ${hasImgs ? `<h3 class="sub-h">代表療程價格</h3>` : ""}
-    ${rowsUse.length > 8 ? `<label class="cd-search pq">${'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>'}<input id="pq" type="search" placeholder="搜尋療程" aria-label="搜尋療程"></label>` : ""}
-    ${hasG && cats.length > 1 && rowsUse.length > 8 ? `<div class="pcats" role="group" aria-label="療程分類"><button type="button" data-pcat="" aria-pressed="true">全部</button>${cats.map(x => `<button type="button" data-pcat="${esc(x.g || "其他")}" aria-pressed="false">${esc(x.g || "其他")}</button>`).join("")}</div>` : ""}
-    <div class="plist">${cats.map(x => `<div class="pg" data-g="${esc(x.g || "其他")}">
-      ${hasG ? `<h3 class="pg-h">${esc(x.g || "其他")}</h3>` : ""}
-      ${x.items.map(it => it.opts.length === 1 && !it.opts[0].s
-        ? `<div class="pi one" data-q="${esc((it.n + " " + x.g).toLowerCase())}"><div class="pi-h"><b>${esc(it.n)}</b></div>${optRow(it.opts[0])}</div>`
-        : `<details class="pi" data-q="${esc((it.n + " " + x.g + " " + it.opts.map(o => o.s).join(" ")).toLowerCase())}"><summary class="pi-h"><b>${esc(it.n)}</b><span>${it.opts.length} 個選項</span></summary>${it.opts.map(optRow).join("")}</details>`).join("")}
-    </div>`).join("")}</div>
+    ${(c.menu || []).length > 8 ? `<label class="cd-search pq">${'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>'}<input id="pq" type="search" placeholder="搜尋療程（如：音波、玻尿酸、水光）" aria-label="搜尋療程"></label>` : ""}
+    ${hasG ? `<div class="pcats" role="group" aria-label="療程分類"><button type="button" data-pcat="" aria-pressed="true">全部</button>${cats.map(x => `<button type="button" data-pcat="${esc(x.g || "其他")}" aria-pressed="false">${esc(x.g || "其他")}</button>`).join("")}</div>
+    <ul class="pcl" id="pcl">${cats.map(x => { const im = catImg(x); return `<li><button type="button" data-pcopen="${esc(x.g || "其他")}">
+        <span class="pcl-img">${im ? `<img src="${im}" alt="" loading="lazy">` : `<i>${esc((x.g || "其").slice(0, 1))}</i>`}</span>
+        <span class="pcl-tx"><b>${esc(x.g || "其他")}</b><small>${esc(x.items.slice(0, 3).map(i => i.n).join("、"))}${x.items.length > 3 ? " 等" : ""}</small></span>
+        <span class="pcl-go" aria-hidden="true">›</span></button></li>`; }).join("")}</ul>` : ""}
+    <div class="plist" id="plist"${hasG ? " hidden" : ""}>
+      ${hasG ? `<button type="button" class="pback" data-pback="1">‹ 所有療程</button>` : ""}
+      ${cats.map(x => { const im = catImg(x); return `<div class="pg" data-g="${esc(x.g || "其他")}">
+        ${hasG ? `<div class="pg-hero"${im ? ` style="--im:url('${im}')"` : ""}><h3>${esc(x.g || "其他")}</h3><span>共 ${x.items.length} 項療程</span></div>` : ""}
+        ${x.items.map(it => acc(it, x.g)).join("")}
+      </div>`; }).join("")}
+    </div>
     <p class="empty" id="pqEmpty" hidden>找不到這個療程，可以用 LINE 詢問。</p>` : "";
   const hasPrice = m || pimgs || cats.length;
-  const priceBody = (monthBox + pimgs + menuBox) + `
+  const priceBody = `<p class="d2-pintro">以下為參考價格，實際療程內容將由醫師依個人狀況評估建議。</p>` + monthBox + menuBox + pimgs + `
     <p class="note">${esc(c.priceNote || "VAT 另計")}。台幣價格僅供參考，實際以韓元結帳為準。實際療程內容與價格以診所諮詢為準。</p>${perkBox(c)}`;
 
   /* 환경 */
@@ -519,7 +529,7 @@ function viewClinic(c){
     ${recoSec}
     ${ben}
     ${ads ? sec("ads", "EVENTS", "活動・優惠", adsBox) : ""}
-    ${hasPrice ? sec("price", "PRICE", "價格參考", priceBody) : ""}
+    ${hasPrice ? sec("price", "PRICE", "療程與價格", priceBody) : ""}
     ${env ? sec("env", "SPACE", "診所環境", env) : ""}
     ${k ? sec("camp", "EXPERIENCE", "體驗團方案", campCards) : ""}
     ${sec("review", "REVIEWS", "訪客心得", `<div id="revBox" data-clinic="${c.id}"></div>`)}
@@ -639,28 +649,36 @@ function setupDetail(){
   if (pim) pim.addEventListener("click", e => { const b = e.target.closest("[data-pimg]"); if (b) openLb([...pim.querySelectorAll("img")].map(i => i.src), +b.dataset.pimg); });
   const env = document.querySelector(".d2-env");
   if (env) env.addEventListener("click", e => { const b = e.target.closest("[data-envlb]"); if (b) openLb([...env.querySelectorAll("img")].map(i => i.src), +b.dataset.envlb); });
-  const pq = document.getElementById("pq");
-  const pfilter = () => {
-    const q = pq ? pq.value.trim().toLowerCase() : "";
-    const on = document.querySelector("[data-pcat][aria-pressed=true]");
-    const cat = on ? on.dataset.pcat : "";
+  const pq = document.getElementById("pq"), pcl = document.getElementById("pcl"), plist = document.getElementById("plist");
+  const pview = (cat, q) => {
+    q = (q || "").trim().toLowerCase();
+    const list = !q && !cat && !!pcl;
+    if (pcl) pcl.hidden = !list;
+    if (plist) plist.hidden = list;
+    const back = document.querySelector("[data-pback]"); if (back) back.hidden = !cat || !!q;
     let shown = 0;
     document.querySelectorAll(".pg").forEach(pg => {
       let any = 0;
+      const hero = pg.querySelector(".pg-hero"); if (hero) hero.hidden = !!q;
       pg.querySelectorAll(".pi").forEach(pi => {
         const ok = (!cat || pg.dataset.g === cat) && (!q || pi.dataset.q.includes(q));
         pi.hidden = !ok; if (ok) any++;
-        if (pi.tagName === "DETAILS") pi.open = !!q && ok;
+        pi.open = !!q && ok;
       });
       pg.hidden = !any; shown += any;
     });
-    const em = document.getElementById("pqEmpty"); if (em) em.hidden = !!shown;
+    const em = document.getElementById("pqEmpty"); if (em) em.hidden = list || !!shown;
+    document.querySelectorAll("[data-pcat]").forEach(x => x.setAttribute("aria-pressed", (x.dataset.pcat || "") === (q ? "" : cat || "")));
   };
-  if (pq) pq.addEventListener("input", pfilter);
-  document.querySelectorAll("[data-pcat]").forEach(b => b.addEventListener("click", () => {
-    document.querySelectorAll("[data-pcat]").forEach(x => x.setAttribute("aria-pressed", x === b));
-    pfilter();
-  }));
+  let pcat = "";
+  const sp = document.getElementById("s-price");
+  const toTop = () => { if (sp) jump("price"); };
+  if (pq) pq.addEventListener("input", () => pview(pcat, pq.value));
+  document.querySelectorAll("[data-pcat]").forEach(b => b.addEventListener("click", () => { pcat = b.dataset.pcat; if (pq) pq.value = ""; pview(pcat, ""); }));
+  document.querySelectorAll("[data-pcopen]").forEach(b => b.addEventListener("click", () => { pcat = b.dataset.pcopen; if (pq) pq.value = ""; pview(pcat, ""); toTop(); }));
+  const pb = document.querySelector("[data-pback]");
+  if (pb) pb.addEventListener("click", () => { pcat = ""; pview("", ""); toTop(); });
+  if (pcl) pview("", "");
   const tabs = [...document.querySelectorAll(".dtabs [data-jump]")];
   if (!tabs.length) return;
   const hd = document.querySelector(".hd"), bar2 = document.querySelector(".d2-bar");

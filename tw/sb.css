@@ -995,3 +995,42 @@ details.pi[open] .pi-h::after{content:"−"}
 .bk-r dt{display:flex;align-items:center;gap:6px}
 .bk-r dt svg{width:16px;height:16px;fill:none;stroke:#725C3E;stroke-width:1.4;flex:none}
 .cl-pt{white-space:nowrap;font-size:.62rem}
+
+/* ===== 가격표 4차: 분야 목록 → 분야 화면 ===== */
+.d2-pintro{margin:-4px 0 0;font-size:.86rem;color:var(--muted);line-height:1.7}
+.pcats button[aria-pressed=true]{background:var(--rose);border-color:var(--rose);color:#fff}
+.pcats button{border-radius:999px}
+.pcl{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.pcl[hidden]{display:none}
+.pcl li{border-bottom:1px solid var(--rule)}
+.pcl button{width:100%;display:flex;align-items:center;gap:14px;padding:12px 0;border:0;background:none;text-align:left;color:var(--ink)}
+.pcl-img{flex:none;width:78px;height:62px;overflow:hidden;background:#E6E1D8;display:grid;place-items:center}
+.pcl-img img{width:100%;height:100%;object-fit:cover;display:block}
+.pcl-img i{font-style:normal;font:400 1.3rem "Noto Serif TC",serif;color:#8C7A62}
+.pcl-tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.pcl-tx b{font-weight:500;font-size:1rem}
+.pcl-tx small{font-size:.78rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pcl-go{font-size:1.4rem;color:var(--muted)}
+.plist[hidden],.pback[hidden],.pg-hero[hidden]{display:none}
+.pback{border:0;background:none;padding:8px 0;min-height:44px;font-size:.9rem;color:var(--ink)}
+.pg-hero{position:relative;margin:4px 0 10px;padding:22px 18px;min-height:110px;display:flex;flex-direction:column;justify-content:center;gap:4px;background:linear-gradient(90deg,var(--paper) 40%,rgba(241,240,235,.2)),var(--im,none) right center/58% 100% no-repeat,#EAE5DC}
+.pg-hero h3{margin:0;font:500 1.35rem "Noto Serif TC",var(--sans)}
+.pg-hero span{font-size:.8rem;color:var(--muted)}
+.pi{background:var(--white);border:1px solid var(--rule);border-bottom:1px solid var(--rule);margin-bottom:8px;padding:0 14px}
+.pi-h b{font:400 .98rem "Libre Caslon Text","Noto Sans TC",serif;letter-spacing:.01em}
+.ptb{margin:0 0 12px;font-size:.84rem}
+.ptb-h,.ptb-r{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:8px;align-items:center;padding:9px 8px}
+.ptb-h{background:#F2EEE7;font-size:.74rem;color:var(--muted)}
+.ptb.ben .ptb-h span:last-child{color:var(--rose)}
+.ptb-r{border-bottom:1px solid var(--rule)}
+.ptb-r span:nth-child(2),.ptb-r span:nth-child(3),.ptb-h span:nth-child(2),.ptb-h span:nth-child(3){text-align:right}
+.ptb-r .mut{color:var(--muted)}
+.ptb-r .sb{color:var(--rose);font-weight:600}
+.ptb-f{display:flex;justify-content:flex-end;padding-top:10px}
+.pthumbs-h{display:flex;align-items:baseline;gap:10px;margin-top:10px}
+.pthumbs-h b{font-weight:500}
+.pthumbs-h span{font-size:.8rem;color:var(--muted)}
+.pthumbs{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:4px}
+.pthumbs::-webkit-scrollbar{display:none}
+.pthumbs button{flex:0 0 76px;height:104px;padding:0;border:1px solid var(--rule);background:#fff;cursor:zoom-in}
+.pthumbs img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
