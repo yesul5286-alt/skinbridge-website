@@ -994,3 +994,4 @@ details.pi[open] .pi-h::after{content:"−"}
 .bk-r{grid-template-columns:118px 1fr}
 .bk-r dt{display:flex;align-items:center;gap:6px}
 .bk-r dt svg{width:16px;height:16px;fill:none;stroke:#725C3E;stroke-width:1.4;flex:none}
+.cl-pt{white-space:nowrap;font-size:.62rem}
