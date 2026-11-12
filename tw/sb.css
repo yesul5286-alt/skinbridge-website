@@ -925,3 +925,8 @@ details.pi[open] .pi-h::after{content:"−"}
 .mi-flow{list-style:none;margin:8px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;font-size:.72rem;color:var(--muted)}
 .mi-flow li{border-top:2px solid #D6D1C9;padding-top:6px}
 .mi-flow li.on{border-color:var(--rose);color:var(--ink)}
+
+.bk-sec{margin:10px 0 -8px;font:500 1.05rem var(--sans);padding-top:16px;border-top:1px solid var(--rule)}
+.bk-times{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.bk-times button{min-height:44px;border:1px solid #D9D3C9;background:var(--white);color:var(--ink);font:500 .9rem var(--latin)}
+.bk-times button[aria-pressed=true]{background:#ECE5DC;border-color:var(--rose);color:var(--rose-deep)}
