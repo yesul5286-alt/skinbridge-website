@@ -854,3 +854,6 @@ details.pi[open] .pi-h::after{content:"−"}
   .d2-env{grid-template-columns:repeat(3,1fr)}
   .d2-env button:first-child{grid-column:span 2}
 }
+
+.pimgs .poster{padding:0;cursor:zoom-in;display:block}
+.pimgs .poster img{display:block;width:100%}

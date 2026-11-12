@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+TC:wght@500;600&family=Libre+Caslon+Text&family=Montserrat:wght@400&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611121538">
+<link rel="stylesheet" href="/tw/sb.css?v=202611121608">
 </head>
 <body>
 <header class="hd">
@@ -39,7 +39,7 @@
     <a href="#me" data-nav="me"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span>我的</span></a>
 </nav>
 
-<script src="/tw/sb-common.js?v=202611121538"></script>
+<script src="/tw/sb-common.js?v=202611121608"></script>
 <script>
 /* ===== 화면 ===== */
 const HOME = {
@@ -446,11 +446,14 @@ function viewClinic(c){
     <div class="poster-acts">${book((m.month || "") + "活動", "預約活動療程")}</div>` : "";
   const monthBox = m ? `<h3 class="sub-h">${esc(m.month)}活動</h3>` + posterBox + (m.items && m.items.length ? `<div class="evs">${m.items.map(evCard).join("")}</div>` : "")
     + `<p class="note">${esc(m.month)}活動${m.note ? "・" + esc(m.note) : ""}。</p>` : "";
-  const pimgs = c.priceImgs && c.priceImgs.length ? `<div class="posters pimgs">${c.priceImgs.map((u, i) => `<a class="poster" href="${esc(u)}" target="_blank" rel="noopener"><img src="${esc(u)}" alt="${esc(c.name)} 價目表 ${i + 1}" loading="lazy"></a>`).join("")}</div>
+  const pimgs = c.priceImgs && c.priceImgs.length ? `${c.priceImgs.length > 1 ? `<p class="note">價目表共 <span class="num">${c.priceImgs.length}</span> 張・左右滑動，點一下可放大</p>` : ""}<div class="posters pimgs" id="pimgs">${c.priceImgs.map((u, i) => `<button type="button" class="poster" data-pimg="${i}" aria-label="放大價目表第 ${i + 1} 張"><img src="${esc(u)}" alt="${esc(c.name)} 價目表 ${i + 1}" loading="lazy"></button>`).join("")}</div>
     <div class="poster-acts">${book("", "預約諮詢")}</div>` : "";
   // 시술 묶기: 분류(g) → 같은 이름(n) → 옵션(s)
+  const hasImgs = !!(c.priceImgs && c.priceImgs.length);
+  const rowsAll = c.menu || [];
+  const rowsUse = hasImgs ? rowsAll.filter(r => r.top) : rowsAll;
   const cats = [];
-  (c.menu || []).forEach(r => {
+  rowsUse.forEach(r => {
     const g = r.g || "";
     let cg = cats.find(x => x.g === g); if (!cg) cats.push(cg = { g, items: [] });
     let it = cg.items.find(x => x.n === r.n); if (!it) cg.items.push(it = { n: r.n, opts: [] });
@@ -467,8 +470,9 @@ function viewClinic(c){
         : `<span class="ask">LINE 詢價</span>`}</span>
       ${book(r.n + (r.s ? " " + r.s : ""), "預約", "po-bk")}</div>`; };
   const menuBox = cats.length ? `
-    ${(c.menu || []).length > 8 ? `<label class="cd-search pq">${'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>'}<input id="pq" type="search" placeholder="搜尋療程" aria-label="搜尋療程"></label>` : ""}
-    ${hasG && cats.length > 1 ? `<div class="pcats" role="group" aria-label="療程分類"><button type="button" data-pcat="" aria-pressed="true">全部</button>${cats.map(x => `<button type="button" data-pcat="${esc(x.g || "其他")}" aria-pressed="false">${esc(x.g || "其他")}</button>`).join("")}</div>` : ""}
+    ${hasImgs ? `<h3 class="sub-h">代表療程價格</h3>` : ""}
+    ${rowsUse.length > 8 ? `<label class="cd-search pq">${'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>'}<input id="pq" type="search" placeholder="搜尋療程" aria-label="搜尋療程"></label>` : ""}
+    ${hasG && cats.length > 1 && rowsUse.length > 8 ? `<div class="pcats" role="group" aria-label="療程分類"><button type="button" data-pcat="" aria-pressed="true">全部</button>${cats.map(x => `<button type="button" data-pcat="${esc(x.g || "其他")}" aria-pressed="false">${esc(x.g || "其他")}</button>`).join("")}</div>` : ""}
     <div class="plist">${cats.map(x => `<div class="pg" data-g="${esc(x.g || "其他")}">
       ${hasG ? `<h3 class="pg-h">${esc(x.g || "其他")}</h3>` : ""}
       ${x.items.map(it => it.opts.length === 1 && !it.opts[0].s
@@ -619,6 +623,8 @@ function setupDetail(){
       dots.forEach((d, k) => d.classList.toggle("on", k === Math.min(i, dots.length - 1)));
     }, { passive: true });
   }
+  const pim = document.getElementById("pimgs");
+  if (pim) pim.addEventListener("click", e => { const b = e.target.closest("[data-pimg]"); if (b) openLb([...pim.querySelectorAll("img")].map(i => i.src), +b.dataset.pimg); });
   const env = document.querySelector(".d2-env");
   if (env) env.addEventListener("click", e => { const b = e.target.closest("[data-envlb]"); if (b) openLb([...env.querySelectorAll("img")].map(i => i.src), +b.dataset.envlb); });
   const pq = document.getElementById("pq");

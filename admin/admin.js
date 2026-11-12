@@ -153,7 +153,7 @@ function render(){
   </fieldset>
 
   <fieldset><legend>시술·가격 (기본 가격표)</legend>
-    <p class="hint">가격표 이미지(병원이 준 가격표 그대로). 이미지와 아래 표 중 하나만 넣어도 되고, 둘 다 넣으면 이미지 → 표 순서로 나와요.</p>
+    <p class="hint">가격표 이미지(병원이 준 가격표 그대로). <b>이미지가 있으면 아래 표는 '대표'에 체크한 시술만</b> 글로 나와요(대만 달러·9折·預約 버튼). 이미지가 없으면 표 전체가 나와요.</p>
     <div class="imgs" id="pimgs"></div>
     <label class="f" style="margin:10px 0">가격 안내 문구<input id="i_pnote" value="${h(d.priceNote)}" placeholder="VAT 另計"></label>
     <p class="hint">'분류'를 적으면 표에 분류 제목이 생겨요(같은 분류끼리 붙여서 입력).</p>
@@ -248,11 +248,12 @@ const ROWDEF = {
             html:(x,i) => `<div class="one-img">${x.img ? `<img src="${h(x.img)}" alt="">` : ""}<label class="up" style="width:72px;height:54px">사진<input type="file" accept="image/*" data-img="progs:${i}"></label></div>
                            <label class="f">이름<input data-k="title" value="${h(x.title)}"></label>
                            <label class="f">설명 (繁體)<textarea data-k="desc" rows="2">${h(x.desc)}</textarea></label>` },
-  menu:   { cols:"1fr 2fr 1fr 1fr auto", empty:{g:"",n:"",s:"",krw:null}, src:() => cur.data.menu || (cur.data.menu = []),
+  menu:   { cols:"1fr 2fr 1fr 1fr auto auto", empty:{g:"",n:"",s:"",krw:null,top:false}, src:() => cur.data.menu || (cur.data.menu = []),
             html:(x,i) => `<label class="f">분류 (선택)<input data-k="g" value="${h(x.g)}"></label>
                            <label class="f">시술 이름<input data-k="n" value="${h(x.n)}"></label>
                            <label class="f">세부 (부위·샷)<input data-k="s" value="${h(x.s)}"></label>
-                           <label class="f">가격(원, 비우면 LINE 문의)<input data-k="krw" value="${h(x.krw)}" inputmode="numeric"></label>` },
+                           <label class="f">가격(원, 비우면 LINE 문의)<input data-k="krw" value="${h(x.krw)}" inputmode="numeric"></label>
+                           <label class="chk"><input type="checkbox" data-k="top" ${x.top ? "checked" : ""}> 대표</label>` },
   events: { cols:"auto 2fr 1fr 1fr 1fr auto", empty:{n:"",s:"",krw:null,orig:null,img:""},
             src:() => { const d = cur.data; d.monthly = d.monthly || {month:"",note:"",items:[]}; d.monthly.items = d.monthly.items || []; return d.monthly.items; },
             html:(x,i) => `<div class="one-img">${x.img ? `<img src="${h(x.img)}" alt="">` : ""}<label class="up" style="width:72px;height:54px">이미지<input type="file" accept="image/*" data-img="events:${i}"></label></div>
