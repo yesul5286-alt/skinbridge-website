@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>預約諮詢・報名體驗團｜Skin Bridge</title>
-<meta name="description" content="用 LINE 登入即可預約韓國合作診所的中文諮詢，或報名 Skin Bridge 體驗團。">
+<title>預約諮詢・報名體驗團｜Skinbridge</title>
+<meta name="description" content="用 LINE 登入即可預約韓國合作診所的中文諮詢，或報名 Skinbridge 體驗團。">
 <meta property="og:type" content="website">
-<meta property="og:title" content="預約諮詢・報名體驗團｜Skin Bridge">
-<meta property="og:description" content="用 LINE 登入即可預約韓國合作診所的中文諮詢，或報名 Skin Bridge 體驗團。">
+<meta property="og:title" content="預約諮詢・報名體驗團｜Skinbridge">
+<meta property="og:description" content="用 LINE 登入即可預約韓國合作診所的中文諮詢，或報名 Skinbridge 體驗團。">
 <meta property="og:url" content="https://www.skinbridgekorea.com/apply/">
 <meta property="og:image" content="https://www.skinbridgekorea.com/tw/img/og.jpg">
 <meta property="og:image:width" content="1200">
@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+TC:wght@500;600&family=Libre+Caslon+Text&family=Montserrat:wght@400&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611122158">
+<link rel="stylesheet" href="/tw/sb.css?v=202611122255">
 </head>
 <body>
 <header class="hd">
@@ -30,14 +30,14 @@
 <main class="wrap" id="app"></main>
 
 <div class="wrap"><footer>
-  <p>Skin Bridge 為連接台灣顧客與韓國合作醫療院所的服務，醫療行為皆由各院所醫師執行，是否適合施作須經醫師諮詢判斷。</p>
-  <p>價格為韓元、VAT 另計；台幣為參考價（1 NT$ ≈ 41.6 韓元，2026.11）。標示「範例」的診所與體驗團為示意內容。</p>
+  <p>Skinbridge 為連接台灣顧客與韓國合作醫療院所的服務，醫療行為皆由各院所醫師執行，是否適合施作須經醫師諮詢判斷。</p>
+  <p>價格以韓元為準，是否含 VAT 依各診所標示；台幣為參考價（1 NT$ ≈ 41.6 韓元，2026.11）。實際療程與價格以診所諮詢為準。</p>
   <p class="fl"><span class="logo-s">SKINBRIDGE</span><a class="link" href="https://line.me/R/ti/p/%40911xoyoc" target="_blank" rel="noopener">LINE 官方帳號</a></p>
 </footer></div>
 
 <div class="bar" id="bar" hidden><div class="bar-in" id="barIn"></div></div>
 
-<script src="/tw/sb-common.js?v=202611122158"></script>
+<script src="/tw/sb-common.js?v=202611122255"></script>
 <script>
 function viewApply(){
   const p = state.prefill || { type:"booking", clinic:"selena", item:"" };
@@ -51,7 +51,7 @@ function viewApply(){
     return `<div class="view">${head}
       <div class="gate">
         <h3>用 LINE 登入後即可申請</h3>
-        <p>不需要另外註冊。登入時會一併加入 Skin Bridge LINE 好友，審核結果、到診提醒都會用 LINE 以中文通知你。</p>
+        <p>不需要另外註冊。登入時會一併加入 Skinbridge LINE 好友，審核結果、到診提醒都會用 LINE 以中文通知你。</p>
         <button class="btn line" type="button" id="lineLogin">用 LINE 登入</button>
         ${IS_SITE ? "" : `<p class="note">示範模式：正式上線後，這個按鈕會開啟 LINE 登入畫面。</p>`}
       </div></div>`;
@@ -83,7 +83,7 @@ function viewApply(){
       </div>
       <div class="f" id="igWrap"><label for="fIg">Instagram 帳號 <span id="igReq"></span></label><input id="fIg" placeholder="@xiaomei"></div>
       <div class="f"><label for="fConcern">目前的皮膚困擾</label><textarea id="fConcern" placeholder="例如：毛孔粗大、痘疤、下顎線不明顯"></textarea></div>
-      <label class="agree"><input type="checkbox" id="fAgree"><span>我同意 Skin Bridge 為聯繫與安排之目的使用以上資料與 LINE 帳號，並了解實際施作與否須經醫師諮詢判斷。</span></label>
+      <label class="agree"><input type="checkbox" id="fAgree"><span>我同意 Skinbridge 為聯繫與安排之目的使用以上資料與 LINE 帳號，並了解實際施作與否須經醫師諮詢判斷。</span></label>
       <p class="err" id="err" aria-live="polite"></p>
       <button class="btn rose" type="submit" id="submitBtn">送出申請</button>
     </form>
@@ -150,7 +150,7 @@ function viewBookGate(p){
   return `<div class="view bk">${bkHead(c, 0)}
     <div class="gate">
       <h3>用 LINE 登入後即可預約</h3>
-      <p>不需要另外註冊。登入時會一併加入 Skin Bridge LINE 好友，預約確認與到診提醒都會用 LINE 以中文通知你。</p>
+      <p>不需要另外註冊。登入時會一併加入 Skinbridge LINE 好友，預約確認與到診提醒都會用 LINE 以中文通知你。</p>
       <button class="btn line" type="button" id="lineLogin">用 LINE 登入</button>
       ${IS_SITE ? "" : `<p class="note">示範模式：正式上線後，這個按鈕會開啟 LINE 登入畫面。</p>`}
     </div></div>`;
@@ -230,7 +230,7 @@ function viewBookDone(c){
     <div class="done bk-done">
       <h3>預約已送出</h3>
       <p>Skinbridge 會向診所預約你選的時間，<br>完成後透過 LINE 通知你預約結果。</p>
-      ${me && me.friend ? "" : `<p class="note">請先加入 Skin Bridge LINE 好友，才收得到預約通知。</p><a class="btn line" href="${friendUrl()}" target="_blank" rel="noopener">加入 LINE 好友</a>`}
+      ${me && me.friend ? "" : `<p class="note">請先加入 Skinbridge LINE 好友，才收得到預約通知。</p><a class="btn line" href="${friendUrl()}" target="_blank" rel="noopener">加入 LINE 好友</a>`}
       <div class="acts"><a class="btn rose" href="/apply/?mode=mine">查看我的預約</a><a class="btn light" href="/tw/">回到首頁</a></div>
     </div></div>`;
 }
@@ -376,7 +376,7 @@ function viewReview(){
   if (!me) {
     return `<div class="view">${head}
       <div class="gate"><h3>用 LINE 登入後撰寫評價</h3>
-        <p>只有透過 Skin Bridge 預約並完成到診的顧客可以撰寫評價。評價經確認後，只會公開給已登入的會員。</p>
+        <p>只有透過 Skinbridge 預約並完成到診的顧客可以撰寫評價。評價經確認後，只會公開給已登入的會員。</p>
         <button class="btn line" type="button" id="lineLogin">用 LINE 登入</button></div></div>`;
   }
   return `<div class="view">${head}
@@ -522,7 +522,7 @@ function setupForm(){
     ].join("\n");
     $("#doneMsg").textContent = me.friend
       ? "專人確認後會透過 LINE 通知你審核結果與到診時間。"
-      : "請加入 Skin Bridge LINE 好友，才收得到審核結果與到診提醒。";
+      : "請加入 Skinbridge LINE 好友，才收得到審核結果與到診提醒。";
     $("#doneActs").innerHTML =
       (me.friend ? "" : `<a class="btn line" href="${friendUrl()}" target="_blank" rel="noopener">加入 LINE 好友</a>`) +
       `<a class="btn light" href="/tw/">回到首頁</a>`;
@@ -555,7 +555,7 @@ async function setupReview(){
       <div class="f"><label for="rBefore">療程前照片（選填）</label><input id="rBefore" type="file" accept="image/*"><img class="rprev" id="pBefore" alt="" hidden></div>
       <div class="f"><label for="rAfter">療程後照片（選填）</label><input id="rAfter" type="file" accept="image/*"><img class="rprev" id="pAfter" alt="" hidden></div>
     </div>
-    <label class="agree"><input type="checkbox" id="rAgree"><span>我同意評價與照片經 Skin Bridge 確認後，以遮蔽姓名的方式只公開給已登入的會員。不想露臉可以先遮住眼睛再上傳。</span></label>
+    <label class="agree"><input type="checkbox" id="rAgree"><span>我同意評價與照片經 Skinbridge 確認後，以遮蔽姓名的方式只公開給已登入的會員。不想露臉可以先遮住眼睛再上傳。</span></label>
     <p class="err" id="rErr" aria-live="polite"></p>
     <button class="btn rose" type="submit" id="rSubmit">送出評價</button>
   </form>`;
@@ -586,7 +586,7 @@ async function setupReview(){
         before: await shrinkTo($("#rBefore").files[0]), after: await shrinkTo($("#rAfter").files[0]) });
       const r = await fetch(SHEET_URL, { method:"POST", body }); const j = await r.json();
       if (!j.ok) throw new Error(j.error);
-      $("#revForm").innerHTML = `<div class="done"><h3>謝謝你的評價</h3><p>Skin Bridge 確認後會公開給已登入的會員。</p><a class="btn light" href="/tw/">回到首頁</a></div>`;
+      $("#revForm").innerHTML = `<div class="done"><h3>謝謝你的評價</h3><p>Skinbridge 確認後會公開給已登入的會員。</p><a class="btn light" href="/tw/">回到首頁</a></div>`;
     } catch (err) {
       $("#rErr").textContent = "送出失敗，請稍後再試，或直接用 LINE 告訴我們。"; $("#rSubmit").disabled = false; $("#rSubmit").textContent = "送出評價";
     }
