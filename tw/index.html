@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+TC:wght@500;600&family=Libre+Caslon+Text&family=Montserrat:wght@400&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611121748">
+<link rel="stylesheet" href="/tw/sb.css?v=202611121750">
 </head>
 <body>
 <header class="hd">
@@ -39,7 +39,7 @@
     <a href="#me" data-nav="me"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span>我的</span></a>
 </nav>
 
-<script src="/tw/sb-common.js?v=202611121748"></script>
+<script src="/tw/sb-common.js?v=202611121750"></script>
 <script>
 /* ===== 화면 ===== */
 const HOME = {
@@ -285,10 +285,12 @@ function clinicCard(c, i){
 }
 function lineReco(){
   return `<aside class="cl-line">
-    <span class="cl-line-en">NOT SURE YET?</span>
-    <h2>還不知道哪間適合你？</h2>
-    <p>告訴我們你的肌膚問題與預算，<br>Skinbridge 幫你整理適合的選擇。</p>
-    <a class="cl-line-btn" href="${lineUrl()}" target="_blank" rel="noopener">LINE 諮詢推薦 <span aria-hidden="true">→</span></a>
+    <span class="cl-line-img" aria-hidden="true"><img src="https://www.skinbridgekorea.com/tw/img/home/hero-1.webp" alt="" loading="lazy"></span>
+    <div class="cl-line-tx">
+      <h2>還不知道哪間適合你？</h2>
+      <p>告訴我們你的肌膚問題與預算，Skinbridge 幫你整理適合的選擇。</p>
+      <a class="cl-line-btn" href="${lineUrl()}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 4C6.8 4 3 7.2 3 11.2c0 3.5 3 6.4 7.1 7l-.6 2.3 3.3-2.2c4.8-.3 8.2-3.4 8.2-7.1C21 7.2 17.2 4 12 4Z"/></svg> LINE 諮詢推薦 <span aria-hidden="true">→</span></a>
+    </div>
   </aside>`;
 }
 function filterSheet(){
@@ -324,9 +326,11 @@ function viewClinics(){
   const rows = list.map(clinicCard);
   if (list.length) rows.splice(at, 0, lineReco());
   return `<div class="view disc">
+    <div class="cd-hero">
     <div class="cd-top"><a class="cd-back" href="#" aria-label="回到首頁">← <span>Skinbridge</span></a></div>
     <header class="cd-h"><h1>診所探索</h1><span class="cd-en">CLINIC DISCOVERY</span>
       <p>所有診所皆為 Skinbridge 合作夥伴，可用中文預約諮詢。</p></header>
+    </div>
     <label class="cd-search">${'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>'}<input id="cq" type="search" placeholder="搜尋診所、療程或肌膚問題" value="${esc(state.cq)}" aria-label="搜尋診所、療程或肌膚問題"></label>
     <div class="cd-fl" role="group" aria-label="篩選">
       ${FKEYS.map(([key, label]) => `<button type="button" class="cd-f${f[key] ? " on" : ""}" data-fsheet="${key}" aria-haspopup="dialog">${esc(f[key] || label)} <span aria-hidden="true">⌄</span></button>`).join("")}

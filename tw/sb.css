@@ -1034,3 +1034,20 @@ details.pi[open] .pi-h::after{content:"−"}
 .pthumbs::-webkit-scrollbar{display:none}
 .pthumbs button{flex:0 0 76px;height:104px;padding:0;border:1px solid var(--rule);background:#fff;cursor:zoom-in}
 .pthumbs img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+
+/* ===== 은은한 공간 사진 ===== */
+.cd-hero{width:100vw;margin-left:calc(50% - 50vw);padding:0 max(16px,env(safe-area-inset-left,0px)) 6px;display:flex;flex-direction:column;gap:14px;
+  background:linear-gradient(90deg,var(--paper) 0%,rgba(241,240,235,.88) 38%,rgba(241,240,235,.2) 100%),url(https://www.skinbridgekorea.com/tw/img/home/hero-3.webp) right top/62% 100% no-repeat}
+.cd-hero>*{max-width:1080px;width:100%;margin-inline:auto}
+.cl-line{flex-direction:row;align-items:stretch;gap:14px;padding:14px}
+.cl-line-img{flex:0 0 34%;max-width:150px;overflow:hidden;background:#DDD6CB}
+.cl-line-img img{width:100%;height:100%;object-fit:cover;display:block}
+.cl-line-tx{display:flex;flex-direction:column;gap:6px;align-items:flex-start;justify-content:center}
+.cl-line-tx p{font-size:.84rem}
+.cl-line-btn{background:#4A3A33;color:#fff;border-color:#4A3A33;padding:0 14px;font-size:.84rem;gap:6px}
+.cl-line-btn:hover{background:var(--ink);color:#fff}
+@media(min-width:900px){ .cl-line{flex-direction:row;padding:18px} .cl-line-img{max-width:220px} }
+.bk-h{width:100vw;margin-left:calc(50% - 50vw);padding:14px max(16px,env(safe-area-inset-left,0px)) 14px;min-height:110px;justify-content:center;
+  background:linear-gradient(90deg,var(--paper) 0%,rgba(241,240,235,.9) 40%,rgba(241,240,235,.15) 100%),url(https://www.skinbridgekorea.com/tw/img/home/hero-1.webp) right center/56% 100% no-repeat}
+.bk .bk-h{margin-top:-6px}
+@media(min-width:620px){ .bk-h{width:auto;margin-left:0} }
