@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+TC:wght@500;600&family=Libre+Caslon+Text&family=Montserrat:wght@400&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611120611">
+<link rel="stylesheet" href="/tw/sb.css?v=202611121535">
 </head>
 <body>
 <header class="hd">
@@ -39,7 +39,7 @@
     <a href="#me" data-nav="me"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span>我的</span></a>
 </nav>
 
-<script src="/tw/sb-common.js?v=202611120611"></script>
+<script src="/tw/sb-common.js?v=202611121535"></script>
 <script>
 /* ===== 화면 ===== */
 const HOME = {
@@ -190,6 +190,9 @@ function viewMe(){
   return `<div class="view">
     <div class="sh" style="border:0;padding:0"><div><span class="en">MY PAGE</span><h2>我的</h2></div></div>
     <p class="note" style="margin:-10px 0 0">Skin Bridge 使用 LINE 登入，預約紀錄與通知都會在 LINE 聊天室中。</p>
+    ${(() => { const f = favs.all().map(clinicOf).filter(Boolean); return `<div class="mfav"><h3>收藏的診所</h3>${f.length
+      ? `<ul>${f.map(c => `<li><a href="#c-${c.id}"><span>${esc(c.name)}</span><small>${esc(c.area)}</small></a></li>`).join("")}</ul>`
+      : `<p class="note">在診所頁面按 ♡ 即可收藏。收藏只會保存在這台裝置。</p>`}</div>`; })()}
     <div class="mlist">
       <a href="${line}" target="_blank" rel="noopener"><b>我的預約與諮詢</b><span>在 LINE 聊天室查看與修改</span></a>
       <a href="/apply/?mode=review"><b>撰寫評價</b><span>到診後分享你的經驗</span></a>
@@ -336,36 +339,151 @@ function viewClinics(){
   </div>`;
 }
 
+/* 관심 병원(이 기기에만 저장) */
+const favs = {
+  all(){ try { return JSON.parse(localStorage.getItem("sb-fav")) || []; } catch (_) { return []; } },
+  has(id){ return this.all().includes(id); },
+  toggle(id){ const a = this.all(), i = a.indexOf(id); i < 0 ? a.push(id) : a.splice(i, 1); try { localStorage.setItem("sb-fav", JSON.stringify(a)); } catch (_) {} return i < 0; }
+};
+const HEART = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/></svg>';
+/* 9折 가격: 병원에서 9折 을 켠 경우에만 */
+const sbPrice = (c, krw) => c.benefit && krw ? Math.round(krw * 0.9 / 100) * 100 : 0;
+
 function viewClinic(c){
   const k = campOf(c.id);
   const sec = (id, en, title, body) => `<section class="dsec" id="s-${id}"><span class="en">${en}</span><h2>${title}</h2>${body}</section>`;
+  const book = (item, label, cls) => `<button type="button" class="${cls || "btn dark sm"}" data-apply="booking" data-clinic="${c.id}" data-item="${esc(item)}">${label}</button>`;
 
+  /* 맨 위 사진 */
+  const pics = [...(c.interior || []), ...(c.photos || [])];
+  const fav = favs.has(c.id);
+  const top = `<div class="d2-top">
+      <a class="d2-ic" href="#clinics" aria-label="回到診所列表"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a>
+      <span class="d2-logo">Skinbridge</span>
+      <button type="button" class="d2-ic d2-fav" data-fav="${c.id}" aria-pressed="${fav}" aria-label="${fav ? "取消收藏" : "收藏這間診所"}">${HEART}</button>
+    </div>`;
+  const hero = pics.length
+    ? `<div class="d2-hero">${top}<div class="d2-gal" id="gallery">${pics.map((u, i) => `<button type="button" class="d2-slide" data-lb="${i}" aria-label="放大第 ${i + 1} 張"><img src="${esc(u)}" alt="${esc(c.name)} ${i + 1}" ${i ? 'loading="lazy"' : 'fetchpriority="high"'}></button>`).join("")}</div>
+        ${pics.length > 1 ? `<span class="d2-cnt" id="galCnt">1 / ${pics.length}</span><div class="d2-dots" aria-hidden="true">${pics.slice(0, 10).map((_, i) => `<i${i ? "" : ' class="on"'}></i>`).join("")}</div>` : ""}</div>`
+    : `<div class="d2-hero none">${top}<div class="d2-ph"><span>${esc(c.name)}</span></div></div>`;
+
+  /* 이름 */
+  const cur = c.curation || c.oneliner || "";
+  const rating = c.rating ? `<p class="d2-rate"><span class="star">★ <b class="num">${c.rating}</b></span> Google 評論 <span class="num">${c.reviews}</span>（2026.11）</p>` : "";
+  const head = `<div class="d2-head">
+      <div class="d2-meta"><span class="d2-loc">${REGION_EN[c.region] || esc(c.region)} · ${esc(c.area)}</span><span class="d2-bdg${c.selected ? " sel" : ""}">${c.selected ? "SKINBRIDGE SELECTED" : "SKINBRIDGE PARTNER"}</span></div>
+      <h1>${esc(c.name)}${exTag(c)}</h1>
+      ${cur ? `<p class="d2-cur">${esc(cur)}</p>` : ""}
+      ${rating}
+    </div>`;
   const feats = c.features && c.features.length
-    ? `<ul class="feats">${c.features.map(f => `<li>${icon(f.icon)}<span>${esc(f.label)}</span></li>`).join("")}</ul>` : "";
-  const intro = c.intro ? `<p class="intro">${esc(c.intro).replace(/\n/g, "<br>")}</p>` : `<p class="intro">${esc(c.about)}</p>`;
-  const fields = c.fields ? `<div class="fields">${c.fields.map(f => `<span>${esc(f)}</span>`).join("")}</div>` : "";
-  const ads = c.ads && c.ads.length ? c.ads : null;
-  const adCard = (r, i) => {
-    const off = r.orig && r.krw && r.orig > r.krw ? Math.round((1 - r.krw / r.orig) * 100) : 0;
-    return `<div class="ad">
-      <a class="ad-img" href="${esc(r.img)}" target="_blank" rel="noopener"><img src="${esc(r.img)}" alt="${esc(r.n)}" loading="lazy"></a>
-      <div class="ad-bd"><div class="ad-t">${esc(r.n)}</div>${r.s ? `<div class="ad-s">${esc(r.s)}</div>` : ""}
-        <div class="ad-p">${r.krw ? `${off ? `<s>${won(r.orig)}</s> ` : ""}<b>${won(r.krw)}</b><small>${twd(r.krw)}</small>` : `<span class="ask">LINE 詢價</span>`}</div>
-        <button type="button" class="btn dark sm" data-apply="booking" data-clinic="${c.id}" data-item="${esc(r.n + (r.s ? " " + r.s : ""))}">預約</button></div></div>`; };
-  const adsBox = ads ? `<div class="ads">${ads.map(adCard).join("")}</div><p class="note">${esc(c.priceNote || "VAT 另計")}。實際療程內容與價格以院所諮詢為準。</p>` : "";
-  const progs = c.programs && c.programs.length ? `<h3 class="sub-h">特色療程</h3><div class="progs">${c.programs.map(p => `<div class="prog">${p.img ? `<img src="${esc(p.img)}" alt="${esc(p.title)}" loading="lazy">` : ""}<div class="prog-bd"><b>${esc(p.title)}</b>${p.desc ? `<p>${esc(p.desc).replace(/\n/g, "<br>")}</p>` : ""}</div></div>`).join("")}</div>` : "";
+    ? `<ul class="d2-feats">${c.features.map(f => `<li>${icon(f.icon)}<span>${esc(f.label)}</span></li>`).join("")}</ul>` : "";
+  const cards = `<div class="d2-cards${k ? "" : " one"}">
+      ${k ? `<button type="button" class="d2-card" data-jump="camp"><b>體驗團</b><span>招募中・截止 ${k.end.slice(5).replace("-", "/")}</span><i>查看方案 →</i></button>` : ""}
+      <button type="button" class="d2-card" data-jump="review"><b>訪客心得 <span aria-hidden="true">🔒</span></b><span>登入 LINE 後查看</span><i>查看 →</i></button>
+    </div>`;
+
+  /* 소개 */
+  const introTx = c.intro || c.about || "";
+  const side = (c.interior && c.interior[1]) || (c.photos && c.photos[1]) || "";
+  const intro = `<div class="d2-about${side ? "" : " solo"}">
+      <div><p class="d2-intro" id="introTx">${esc(introTx).replace(/\n/g, "<br>")}</p>
+        ${introTx.length > 90 ? `<button type="button" class="d2-more" data-more="introTx" aria-expanded="false">更多</button>` : ""}</div>
+      ${side ? `<img src="${esc(side)}" alt="${esc(c.name)} 診所" loading="lazy">` : ""}
+    </div>`;
+  const fields = c.fields && c.fields.length ? `<div class="fields">${c.fields.map(f => `<span>${esc(f)}</span>`).join("")}</div>` : "";
   const equip = c.equipment && c.equipment.length ? `<h3 class="sub-h">主要設備</h3><div class="fields equip">${c.equipment.map(f => `<span>${esc(f)}</span>`).join("")}</div>` : "";
-  const env = c.interior && c.interior.length ? `<h3 class="sub-h">診所環境</h3><div class="row envs">${c.interior.map(u => `<img src="${esc(u)}" alt="${esc(c.name)} 診所環境" loading="lazy">`).join("")}</div>` : "";
-  const docs = c.doctors && c.doctors.length ? `<h3 class="sub-h">主要醫療團隊</h3><div class="row docs">${c.doctors.map(d => `
+  const docs = c.doctors && c.doctors.length ? `<h3 class="sub-h">醫療團隊</h3><div class="row docs">${c.doctors.map(d => `
       <div class="doc">${d.photo ? `<img class="avatar" src="${esc(d.photo)}" alt="${esc(d.name)}">` : `<div class="avatar" aria-hidden="true">${esc((d.name || "?").slice(0,1))}</div>`}
         <div><b>${esc(d.name)}</b> <span class="role">${esc(d.role)}</span>
         <div class="dtags">${(d.tags || []).map(x => `<span>${esc(x)}</span>`).join("")}</div></div></div>`).join("")}</div>` : "";
   const hours = `<h3 class="sub-h">診療時間</h3>` + (c.hours
     ? `<table class="hours"><tr>${DAYS.map(d => `<th>${d}</th>`).join("")}</tr><tr>${c.hours.map(h => `<td>${h ? esc(h).replace("-", "<br>~<br>") : "休診"}</td>`).join("")}</tr></table>${c.lunch ? `<p class="note">午休 ${esc(c.lunch)}</p>` : ""}`
-    : `<p class="note">診療時間請透過 LINE 確認。${c.hoursExample ? '<span class="ex">待補</span>' : ""}</p>`)
+    : `<p class="note">診療時間請透過 LINE 確認。</p>`)
     + (c.hours && c.hoursNote ? `<p class="note">${esc(c.hoursNote)}</p>` : "");
-  const addr = `<h3 class="sub-h">地址</h3><div class="addr"><span id="addrText">${esc(c.address)}</span><button type="button" class="copy" data-copy="addrText">複製</button></div>`;
+  const addr = c.address ? `<h3 class="sub-h">位置與交通</h3>
+    ${c.station ? `<p class="d2-st">${icon("train")}<span>${esc(c.station)}</span></p>` : ""}
+    <div class="addr"><span id="addrText">${esc(c.address)}</span><button type="button" class="copy" data-copy="addrText">複製</button></div>
+    <a class="d2-map" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.address)}" target="_blank" rel="noopener">在 Google 地圖開啟 →</a>` : "";
 
+  /* 추천 시술 */
+  const progs = c.programs && c.programs.length ? c.programs.slice(0, 3) : null;
+  const reco = progs
+    ? `<div class="d2-progs">${progs.map(p => `<div class="d2-prog">${p.img ? `<img src="${esc(p.img)}" alt="${esc(p.title)}" loading="lazy">` : ""}<div><b>${esc(p.title)}</b>${p.desc ? `<p>${esc(p.desc).replace(/\n/g, "<br>")}</p>` : ""}</div></div>`).join("")}</div>`
+    : (c.treats && c.treats.length ? `<ul class="d2-treats">${c.treats.slice(0, 8).map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : "");
+  const recoSec = reco ? `<section class="dsec" id="s-reco"><span class="en">TREATMENTS</span>
+      <div class="d2-sh"><h2>推薦療程</h2><button type="button" class="d2-link" data-jump="price">查看更多療程 →</button></div>${reco}</section>` : "";
+
+  /* 9折 */
+  const ben = c.benefit ? `<div class="d2-ben"><span class="en">SKINBRIDGE 專屬禮遇</span>
+      <p>透過 Skinbridge 預約，享 <b>全療程 9折</b></p>
+      <p class="note">實際適用範圍以診所諮詢為準。</p></div>` : "";
+
+  /* 활동(광고) */
+  const ads = c.ads && c.ads.length ? c.ads : null;
+  const adCard = r => {
+    const off = r.orig && r.krw && r.orig > r.krw ? Math.round((1 - r.krw / r.orig) * 100) : 0;
+    return `<div class="ad">
+      <a class="ad-img" href="${esc(r.img)}" target="_blank" rel="noopener"><img src="${esc(r.img)}" alt="${esc(r.n)}" loading="lazy"></a>
+      <div class="ad-bd"><div class="ad-t">${esc(r.n)}</div>${r.s ? `<div class="ad-s">${esc(r.s)}</div>` : ""}
+        <div class="ad-p">${r.krw ? `${off ? `<s>${won(r.orig)}</s> ` : ""}<b>${won(r.krw)}</b><small>${twd(r.krw)}</small>` : `<span class="ask">LINE 詢價</span>`}</div>
+        ${book(r.n + (r.s ? " " + r.s : ""), "預約")}</div></div>`; };
+  const adsBox = ads ? `<div class="ads">${ads.map(adCard).join("")}</div>` : "";
+
+  /* 가격 */
+  const posters = c.monthly && c.monthly.posters && c.monthly.posters.length ? c.monthly.posters : null;
+  const m = c.monthly && ((c.monthly.items && c.monthly.items.length) || posters) ? c.monthly : null;
+  const evCard = r => {
+    const off = r.orig && r.krw && r.orig > r.krw ? Math.round((1 - r.krw / r.orig) * 100) : 0;
+    return `<div class="ev">
+      <div class="ev-img ph ${c.tone}">${r.img ? `<img src="${esc(r.img)}" alt="${esc(r.n)}" loading="lazy">` : `<b>${esc(r.n)}</b>`}</div>
+      <div class="ev-bd"><div class="ev-t">${esc(r.n)}</div>${r.s ? `<div class="ev-s">${esc(r.s)}</div>` : ""}
+        <div class="ev-p">${r.krw ? `${off ? `<s>${won(r.orig)}</s><em>${off}%</em>` : ""}<b>${won(r.krw)}</b><small>${twd(r.krw)}</small>` : `<span class="ask">LINE 詢價</span>`}</div>
+        ${book(r.n + (r.s ? " " + r.s : ""), "預約這個活動")}</div>
+    </div>`; };
+  const posterBox = posters ? `<div class="posters">${posters.map((p, i) => `<a class="poster" href="${esc(p.img)}" target="_blank" rel="noopener">
+      <img src="${esc(p.img)}" alt="${esc(p.title || (m.month + "活動 " + (i + 1)))}" loading="lazy"></a>`).join("")}</div>
+    <div class="poster-acts">${book((m.month || "") + "活動", "預約活動療程")}</div>` : "";
+  const monthBox = m ? `<h3 class="sub-h">${esc(m.month)}活動</h3>` + posterBox + (m.items && m.items.length ? `<div class="evs">${m.items.map(evCard).join("")}</div>` : "")
+    + `<p class="note">${esc(m.month)}活動${m.note ? "・" + esc(m.note) : ""}。</p>` : "";
+  const pimgs = c.priceImgs && c.priceImgs.length ? `<div class="posters pimgs">${c.priceImgs.map((u, i) => `<a class="poster" href="${esc(u)}" target="_blank" rel="noopener"><img src="${esc(u)}" alt="${esc(c.name)} 價目表 ${i + 1}" loading="lazy"></a>`).join("")}</div>
+    <div class="poster-acts">${book("", "預約諮詢")}</div>` : "";
+  // 시술 묶기: 분류(g) → 같은 이름(n) → 옵션(s)
+  const cats = [];
+  (c.menu || []).forEach(r => {
+    const g = r.g || "";
+    let cg = cats.find(x => x.g === g); if (!cg) cats.push(cg = { g, items: [] });
+    let it = cg.items.find(x => x.n === r.n); if (!it) cg.items.push(it = { n: r.n, opts: [] });
+    it.opts.push(r);
+  });
+  const hasG = cats.some(x => x.g);
+  const optRow = r => {
+    const sp = sbPrice(c, r.krw);
+    return `<div class="po">
+      <span class="po-s">${esc(r.s || r.n)}</span>
+      <span class="po-p">${r.krw
+        ? (sp ? `<span class="po-l">診所價格 <span class="num">${won(r.krw)}</span></span><span class="po-sb">Skinbridge 專屬價 <b class="num">${won(sp)}</b></span><small>約 ${twd(sp).replace("≈ ", "")}</small>`
+              : `<b class="num">${won(r.krw)}</b><small>約 ${twd(r.krw).replace("≈ ", "")}</small>`)
+        : `<span class="ask">LINE 詢價</span>`}</span>
+      ${book(r.n + (r.s ? " " + r.s : ""), "預約", "po-bk")}</div>`; };
+  const menuBox = cats.length ? `
+    ${(c.menu || []).length > 8 ? `<label class="cd-search pq">${'<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>'}<input id="pq" type="search" placeholder="搜尋療程" aria-label="搜尋療程"></label>` : ""}
+    ${hasG && cats.length > 1 ? `<div class="pcats" role="group" aria-label="療程分類"><button type="button" data-pcat="" aria-pressed="true">全部</button>${cats.map(x => `<button type="button" data-pcat="${esc(x.g || "其他")}" aria-pressed="false">${esc(x.g || "其他")}</button>`).join("")}</div>` : ""}
+    <div class="plist">${cats.map(x => `<div class="pg" data-g="${esc(x.g || "其他")}">
+      ${hasG ? `<h3 class="pg-h">${esc(x.g || "其他")}</h3>` : ""}
+      ${x.items.map(it => it.opts.length === 1 && !it.opts[0].s
+        ? `<div class="pi one" data-q="${esc((it.n + " " + x.g).toLowerCase())}"><div class="pi-h"><b>${esc(it.n)}</b></div>${optRow(it.opts[0])}</div>`
+        : `<details class="pi" data-q="${esc((it.n + " " + x.g + " " + it.opts.map(o => o.s).join(" ")).toLowerCase())}"><summary class="pi-h"><b>${esc(it.n)}</b><span>${it.opts.length} 個選項</span></summary>${it.opts.map(optRow).join("")}</details>`).join("")}
+    </div>`).join("")}</div>
+    <p class="empty" id="pqEmpty" hidden>找不到這個療程，可以用 LINE 詢問。</p>` : "";
+  const hasPrice = m || pimgs || cats.length;
+  const priceBody = (monthBox + pimgs + menuBox) + `
+    <p class="note">${esc(c.priceNote || "VAT 另計")}。台幣價格僅供參考，實際以韓元結帳為準。實際療程內容與價格以診所諮詢為準。</p>${perkBox(c)}`;
+
+  /* 환경 */
+  const env = c.interior && c.interior.length ? `<div class="d2-env">${c.interior.map((u, i) => `<button type="button" data-envlb="${i}" aria-label="放大第 ${i + 1} 張"><img src="${esc(u)}" alt="${esc(c.name)} 診所環境 ${i + 1}" loading="lazy"></button>`).join("")}</div>` : "";
+
+  /* 체험단 */
   const campCards = k ? `<div class="dd-line">${esc(k.target)}・截止 ${k.end.slice(5).replace("-", "/")}（${ddLabel(k)}）${k.example ? '<span class="ex">範例</span>' : ""}</div>
       <div class="tcards">${k.tiers.map((x, i) => `<div class="tcard ${i === 0 ? "top" : ""}">
         <div class="tph ${c.tone}"><b>${tierLabel(x)}</b>${x.influencer ? `<span class="inf">網紅限定</span>` : ""}</div>
@@ -374,63 +492,26 @@ function viewClinic(c){
           ${x.notes ? `<details class="tdet"><summary>注意事項</summary><p>${esc(x.notes).replace(/\n/g, "<br>")}</p></details>` : ""}
           <button type="button" class="btn rose sm" data-apply="camp" data-clinic="${c.id}" data-tier="${tierKey(x)}">報名這個方案</button></div>
       </div>`).join("")}</div>
-      <p class="note">可選第一、第二志願，最終方案由診所依審核結果安排並以 LINE 通知。網紅限定方案需填寫 Instagram。</p>`
-    : `<p class="empty">這間診所目前沒有招募中的體驗團。</p>`;
+      <p class="note">可選第一、第二志願，最終方案由診所依審核結果安排並以 LINE 通知。網紅限定方案需填寫 Instagram。</p>` : "";
 
-  const posters = c.monthly && c.monthly.posters && c.monthly.posters.length ? c.monthly.posters : null;
-  const m = c.monthly && ((c.monthly.items && c.monthly.items.length) || posters) ? c.monthly : null;
-  const rows = c.menu;
-  const pimgs = c.priceImgs && c.priceImgs.length ? `<div class="posters pimgs">${c.priceImgs.map((u, i) => `<a class="poster" href="${esc(u)}" target="_blank" rel="noopener"><img src="${esc(u)}" alt="${esc(c.name)} 價目表 ${i + 1}" loading="lazy"></a>`).join("")}</div>
-    <div class="poster-acts"><button type="button" class="btn dark sm" data-apply="booking" data-clinic="${c.id}" data-item="">預約諮詢</button></div>` : "";
-  let lastG = "";
-  const prow = r => { const g = r.g && r.g !== lastG ? `<div class="pgrp">${esc(lastG = r.g)}</div>` : ""; return g + `<div class="prow">
-      <div class="pn"><b>${esc(r.n)}</b>${r.s ? `<span>${esc(r.s)}</span>` : ""}</div>
-      <div class="pv">${r.krw ? `<b>${won(r.krw)}</b><small>${twd(r.krw)}</small>` : `<span class="ask">LINE 詢價</span>`}</div>
-      <button type="button" class="btn dark sm" data-apply="booking" data-clinic="${c.id}" data-item="${esc(r.n + (r.s ? " " + r.s : ""))}">預約</button>
-    </div>`; };
-  const evCard = r => {
-    const off = r.orig && r.krw && r.orig > r.krw ? Math.round((1 - r.krw / r.orig) * 100) : 0;
-    return `<div class="ev">
-      <div class="ev-img ph ${c.tone}">${r.img ? `<img src="${esc(r.img)}" alt="${esc(r.n)}" loading="lazy">` : `<b>${esc(r.n)}</b>`}</div>
-      <div class="ev-bd"><div class="ev-t">${esc(r.n)}</div>${r.s ? `<div class="ev-s">${esc(r.s)}</div>` : ""}
-        <div class="ev-p">${r.krw ? `${off ? `<s>${won(r.orig)}</s><em>${off}%</em>` : ""}<b>${won(r.krw)}</b><small>${twd(r.krw)}</small>` : `<span class="ask">LINE 詢價</span>`}</div>
-        <button type="button" class="btn dark sm" data-apply="booking" data-clinic="${c.id}" data-item="${esc(r.n + (r.s ? " " + r.s : ""))}">預約這個活動</button></div>
-    </div>`; };
-  const posterBox = posters ? `<div class="posters">${posters.map((p, i) => `<a class="poster" href="${esc(p.img)}" target="_blank" rel="noopener">
-      <img src="${esc(p.img)}" alt="${esc(p.title || (m.month + "活動 " + (i + 1)))}" loading="lazy"></a>`).join("")}</div>
-    <div class="poster-acts"><button type="button" class="btn dark sm" data-apply="booking" data-clinic="${c.id}" data-item="${esc((m.month || "") + "活動")}">預約活動療程</button></div>` : "";
-  const priceTbl = m ? posterBox + (m.items && m.items.length ? `<div class="evs">${m.items.map(evCard).join("")}</div>` : "") + `
-    <p class="note">${esc(m.month)}活動${m.note ? "・" + esc(m.note) : ""}。實際療程內容與價格以院所諮詢為準。</p>
-    ${perkBox(c)}` : pimgs + (rows.length ? `<div class="ptable">${rows.map(prow).join("")}</div>` : "") + `
-    <p class="note">${esc(c.priceNote || "VAT 另計")}。實際療程內容與價格以院所諮詢為準。</p>
-    ${perkBox(c)}`;
-
-  const rating = c.rating ? `<span class="star">★ <b class="num">${c.rating}</b></span><span class="muted">Google 評論 <span class="num">${c.reviews}</span>（2026.11）</span>` : "";
-  return `<div class="view detail">
-    <div class="backs"><a class="back" href="#">← 首頁</a><a class="back" href="#clinics">診所列表</a></div>
-    ${c.photos && c.photos.length
-      ? `<div class="gallery" id="gallery">${c.photos.map((u, i) => `<button type="button" class="slide" data-lb="${i}" aria-label="放大第 ${i + 1} 張" style="--bg:url('${esc(u).replace(/'/g, "")}')"><img src="${esc(u)}" alt="${esc(c.name)}" loading="lazy"></button>`).join("")}</div>`
-      : `<div class="cover ph ${c.tone}"><span class="cnt">1 / 1</span></div>`}
-    <div class="dhead">
-      <h1>${esc(c.name)}${exTag(c)}</h1>
-      <div class="rate">${rating}</div>
-      <div class="where">${icon("train")}<span><b>${esc(c.station || c.area)}</b> ${esc(c.address)}</span></div>
-    </div>
-    <nav class="dtabs" aria-label="診所內容">
-      <button type="button" data-jump="info" class="on">診所資訊</button>
-      ${ads ? `<button type="button" data-jump="ads">活動</button>` : ""}
-      <button type="button" data-jump="camp">體驗團${k ? `<em>最高 ${k.best}</em>` : ""}</button>
-      <button type="button" data-jump="price">${m ? esc(m.month) + "價格" : "療程價格"}</button>
-      <button type="button" data-jump="review">評價</button>
-    </nav>
-    ${sec("info", "CLINIC", `診所特色${c.features ? ` <span class="cnt-h">${c.features.length}</span>` : ""}`, feats + intro + fields + progs + equip + env + docs + hours + addr)}
+  const tabs = [["info", "診所介紹"], ...(reco ? [["reco", "代表療程"]] : []), ...(hasPrice ? [["price", "價格參考"]] : []), ...(env ? [["env", "診所環境"]] : [])];
+  return `<div class="view detail d2">
+    ${hero}
+    ${head}
+    ${feats}
+    ${cards}
+    <nav class="dtabs d2-tabs" aria-label="診所內容" style="--n:${tabs.length}">${tabs.map(([id, l], i) => `<button type="button" data-jump="${id}"${i ? "" : ' class="on"'}>${l}</button>`).join("")}</nav>
+    ${sec("info", "ABOUT", `關於 ${esc(c.name)}`, intro + fields + equip + docs + hours + addr)}
+    ${recoSec}
+    ${ben}
     ${ads ? sec("ads", "EVENTS", "活動・優惠", adsBox) : ""}
-    ${sec("camp", "EXPERIENCE", "體驗團方案", campCards)}
-    ${sec("price", "THIS MONTH", m ? `${esc(m.month)}活動價格` : "療程價格", priceTbl)}
-    ${sec("review", "REVIEWS", "評價・前後對比", `<div id="revBox" data-clinic="${c.id}"></div>`)}
+    ${hasPrice ? sec("price", "PRICE", "價格參考", priceBody) : ""}
+    ${env ? sec("env", "SPACE", "診所環境", env) : ""}
+    ${k ? sec("camp", "EXPERIENCE", "體驗團方案", campCards) : ""}
+    ${sec("review", "REVIEWS", "訪客心得", `<div id="revBox" data-clinic="${c.id}"></div>`)}
+    <div class="d2-pre"><p>還沒決定療程也沒關係。<br>告訴我們你的需求，Skinbridge 會協助你確認診所與預約流程。</p></div>
   </div>`;
 }
-
 
 /* ===== 후기·전후 사진 (LINE 로그인한 사람만) ===== */
 let viewer = null;          // { idToken, name }
@@ -529,6 +610,39 @@ function setupDetail(){
   loadReviews();
   const g = document.getElementById("gallery");
   if (g) g.addEventListener("click", e => { const s = e.target.closest("[data-lb]"); if (s) openLb([...g.querySelectorAll("img")].map(i => i.src), +s.dataset.lb); });
+  const cnt = document.getElementById("galCnt");
+  if (g && cnt) {
+    const dots = [...document.querySelectorAll(".d2-dots i")], n = g.children.length;
+    g.addEventListener("scroll", () => {
+      const i = Math.round(g.scrollLeft / g.clientWidth);
+      cnt.textContent = `${i + 1} / ${n}`;
+      dots.forEach((d, k) => d.classList.toggle("on", k === Math.min(i, dots.length - 1)));
+    }, { passive: true });
+  }
+  const env = document.querySelector(".d2-env");
+  if (env) env.addEventListener("click", e => { const b = e.target.closest("[data-envlb]"); if (b) openLb([...env.querySelectorAll("img")].map(i => i.src), +b.dataset.envlb); });
+  const pq = document.getElementById("pq");
+  const pfilter = () => {
+    const q = pq ? pq.value.trim().toLowerCase() : "";
+    const on = document.querySelector("[data-pcat][aria-pressed=true]");
+    const cat = on ? on.dataset.pcat : "";
+    let shown = 0;
+    document.querySelectorAll(".pg").forEach(pg => {
+      let any = 0;
+      pg.querySelectorAll(".pi").forEach(pi => {
+        const ok = (!cat || pg.dataset.g === cat) && (!q || pi.dataset.q.includes(q));
+        pi.hidden = !ok; if (ok) any++;
+        if (pi.tagName === "DETAILS") pi.open = !!q && ok;
+      });
+      pg.hidden = !any; shown += any;
+    });
+    const em = document.getElementById("pqEmpty"); if (em) em.hidden = !!shown;
+  };
+  if (pq) pq.addEventListener("input", pfilter);
+  document.querySelectorAll("[data-pcat]").forEach(b => b.addEventListener("click", () => {
+    document.querySelectorAll("[data-pcat]").forEach(x => x.setAttribute("aria-pressed", x === b));
+    pfilter();
+  }));
   const tabs = [...document.querySelectorAll(".dtabs [data-jump]")];
   if (!tabs.length) return;
   const hd = document.querySelector(".hd");
@@ -537,7 +651,7 @@ function setupDetail(){
   const mark = id => tabs.forEach(b => b.classList.toggle("on", b.dataset.jump === id));
   const onScroll = () => {
     const y = document.querySelector(".dtabs").getBoundingClientRect().bottom + 8;
-    let curId = "info";
+    let curId = tabs[0].dataset.jump;
     secs.forEach(s => { if (s && s.getBoundingClientRect().top <= y) curId = s.id.slice(2); });
     mark(curId);
   };
@@ -569,13 +683,13 @@ function route(){
   else if (h === "clinics") { html = viewClinics(); nav = "clinics"; }
   else if (h.startsWith("c-") && clinicOf(h.slice(2))) {
     const c = clinicOf(h.slice(2)); html = viewClinic(c); nav = "clinics";
-    const hasCamp = openCamps().some(k => k.clinic === c.id);
-    bar = (hasCamp ? `<button class="btn light" data-apply="camp" data-clinic="${c.id}">報名體驗團</button>` : "") +
-          `<button class="btn rose wide" data-apply="booking" data-clinic="${c.id}">LINE 預約諮詢</button>`;
+    bar = `<a class="btn light d2-line" href="https://line.me/R/ti/p/${encodeURIComponent(LINE_ID)}" target="_blank" rel="noopener">LINE 諮詢</a>` +
+          `<button class="btn rose wide" data-apply="booking" data-clinic="${c.id}">${c.benefit ? "9折預約諮詢" : "預約諮詢"}</button>`;
   }
   else { html = viewHome(); nav = "home"; }
   if (h !== "clinics") state.sheet = "";
   document.body.classList.toggle("cdpage", h === "clinics");
+  document.body.classList.toggle("dpage", h.startsWith("c-") && !!clinicOf(h.slice(2)));
   document.body.classList.toggle("fsheet-open", h === "clinics" && !!state.sheet);
   const bn = document.getElementById("bnav");
   if (bn) bn.hidden = !!bar || h === "apply" || h === "review";
@@ -649,6 +763,8 @@ document.addEventListener("click", e => {
   const t = e.target.closest("button, a");
   if (!t) return;
   if (t.dataset.mmenu) { mSheet(true); return; }
+  if (t.dataset.fav) { const on = favs.toggle(t.dataset.fav); t.setAttribute("aria-pressed", on); t.setAttribute("aria-label", on ? "取消收藏" : "收藏這間診所"); return; }
+  if (t.dataset.more) { const el = document.getElementById(t.dataset.more); const open = el.classList.toggle("open"); t.textContent = open ? "收起" : "更多"; t.setAttribute("aria-expanded", open); return; }
   if (t.dataset.fsheet) { state.sheet = t.dataset.fsheet; route(); const b = document.querySelector(".fsheet-l [aria-pressed=true]"); if (b) b.focus(); return; }
   if (t.dataset.fpick) { state.f[t.dataset.fpick] = t.dataset.v; state.sheet = ""; route(); return; }
   if (t.dataset.fsheetx) { const k = state.sheet; state.sheet = ""; route(); const b = document.querySelector(`[data-fsheet="${k}"]`); if (b) b.focus(); return; }
