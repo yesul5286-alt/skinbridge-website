@@ -108,7 +108,7 @@ const icon = k => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICON[k] || ICON
 const DAYS = ["週一","週二","週三","週四","週五","週六","週日"];
 const HOME_URL = /\/apply\//.test(location.pathname) ? "/tw/" : "#";
 const stars = n => "★★★★★".slice(0, n) + "☆☆☆☆☆".slice(0, 5 - n);
-const tierLabel = t => t.type === "free" ? "免費體驗" : `${t.type}% OFF`;
+const tierLabel = t => { if (t.type === "free") return "免費體驗"; const r = 100 - Number(t.type); return `體驗價 ${r % 10 ? r : r / 10}折`; };
 const tierKey = t => t.type === "free" ? "free" : String(t.type);
 
 /* 체험단 목록은 병원 데이터에서 만든다 */
@@ -155,7 +155,7 @@ function campCard(k){
     ${c.photos && c.photos.length
       ? `<div class="cimg" style="--bg:url('${esc(c.photos[0]).replace(/'/g, "")}')"><img src="${esc(c.photos[0])}" alt="${esc(c.name)}" loading="lazy"></div>`
       : `<div class="cimg ph ${k.tone}"></div>`}
-    <div class="cchips"><span class="dd2 ${d <= 2 ? "hot" : ""}">${ddLabel(k)}</span><span class="best">最高 ${k.best}</span></div>
+    <div class="cchips"><span class="dd2 ${d <= 2 ? "hot" : ""}">${ddLabel(k)}</span><span class="best">體驗團招募中</span></div>
     <span class="loc">${c.region} · ${esc(c.area)}</span>
     <div class="t">${esc(k.target)}${k.example ? '<span class="ex">範例</span>' : ""}</div>
     <div class="m">${esc(c.name)} · ${k.tiers.length} 種方案 · 共 <span class="num">${k.quota}</span> 名${inf ? `（網紅 ${inf}）` : ""}</div>
@@ -171,7 +171,7 @@ function clinicCard(c){
       <div class="n">${esc(c.name)}${exTag(c)}</div>
       <div class="s">${sub}</div>
       ${c.perk ? `<div class="perk-s">預約即贈 ${esc(c.perk)}</div>` : ""}
-      <div class="go">${k ? `體驗團 最高 ${k.best} · ` : ""}預約諮詢 →</div></div>
+      <div class="go">${k ? "體驗團招募中 · " : ""}預約諮詢 →</div></div>
   </a>`;
 }
 function ladder(k){
