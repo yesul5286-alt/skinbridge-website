@@ -1051,3 +1051,7 @@ details.pi[open] .pi-h::after{content:"−"}
   background:linear-gradient(90deg,var(--paper) 0%,var(--paper) 44%,rgba(241,240,235,.6) 62%,rgba(241,240,235,.12) 100%),url(https://www.skinbridgekorea.com/tw/img/home/hero-1.webp) right center/56% 100% no-repeat}
 .bk .bk-h{margin-top:-6px}
 @media(min-width:620px){ .bk-h{width:auto;margin-left:0} }
+
+.pi-dev{flex:none;width:44px;height:52px;background:#fff;border:1px solid var(--rule);display:grid;place-items:center;overflow:hidden}
+.pi-dev img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+.pi-h b{flex:1;min-width:0}
