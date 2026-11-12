@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+TC:wght@500;600&family=Libre+Caslon+Text&family=Montserrat:wght@400&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611122255">
+<link rel="stylesheet" href="/tw/sb.css?v=202611130306">
 </head>
 <body>
 <header class="hd">
@@ -39,12 +39,12 @@
 <nav class="bnav" id="bnav" aria-label="主選單">
     <a href="#" data-nav="home"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6h-6v6H5a1 1 0 0 1-1-1z"/></svg><span>首頁</span></a>
     <a href="#clinics" data-nav="clinics"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 20V7l7-3 7 3v13"/><path d="M3 20h18"/><path d="M12 9v5M9.5 11.5h5"/></svg><span>找診所</span></a>
-    <a href="#guide" data-nav="guide"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/></svg><span>療程指南</span></a>
+    <a href="#camps" data-nav="camps"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4l2.4 5 5.4.6-4 3.7 1.1 5.3L12 16l-4.9 2.6 1.1-5.3-4-3.7 5.4-.6z"/></svg><span>體驗團</span></a>
     <a href="#book" data-nav="book"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 5h14v10H9l-4 4z"/><path d="M9 9h6M9 12h4"/></svg><span>預約</span></a>
     <a href="#me" data-nav="me"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span>我的</span></a>
 </nav>
 
-<script src="/tw/sb-common.js?v=202611122255"></script>
+<script src="/tw/sb-common.js?v=202611130306"></script>
 <script>
 /* ===== 화면 ===== */
 const HOME = {
@@ -119,7 +119,7 @@ function viewHome(){
     <div class="msheet" id="msheet" hidden><div class="msheet-in" role="dialog" aria-modal="true" aria-label="選單">
       <button type="button" class="mh-ic msheet-x" data-mclose="1" aria-label="關閉選單"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button>
       <span class="mh-logo">Skinbridge</span>
-      <nav><a href="#" data-mclose="1">首頁</a><a href="#clinics" data-mclose="1">找診所</a><a href="#guide" data-mclose="1">療程指南</a><a href="#book" data-mclose="1">預約諮詢</a><a href="#me" data-mclose="1">我的</a></nav></div></div>
+      <nav><a href="#" data-mclose="1">首頁</a><a href="#clinics" data-mclose="1">找診所</a><a href="#camps" data-mclose="1">體驗團</a><a href="#guide" data-mclose="1">療程指南</a><a href="#book" data-mclose="1">預約</a><a href="#me" data-mclose="1">我的</a></nav></div></div>
     <section class="h-hero">
       <div class="h-hero-img"><img src="${HOME.hero}" alt="合作診所空間" fetchpriority="high"></div>
       <div class="h-hero-tx">
@@ -237,13 +237,18 @@ function viewMe(){
 }
 
 function viewCamps(){
-  const list = openCamps().filter(k => (state.region === "全部" || clinicOf(k.clinic).region === state.region) && (state.cat === "全部" || k.cats.includes(state.cat)))
+  const all = openCamps();
+  const regs = [...new Set(all.map(k => clinicOf(k.clinic).region))];
+  const cats = [...new Set(all.flatMap(k => k.cats || []))];
+  const reg = regs.includes(state.region) ? state.region : "全部", cat = cats.includes(state.cat) ? state.cat : "全部";
+  const list = all.filter(k => (reg === "全部" || clinicOf(k.clinic).region === reg) && (cat === "全部" || k.cats.includes(cat)))
     .sort((a,b) => daysLeft(a.end) - daysLeft(b.end));
-  return `<div class="view">
-    <div class="sh" style="border:0;padding:0"><div><span class="en">EXPERIENCE</span><h2>全部體驗團</h2></div></div>
-    ${chips(REGIONS, state.region, "region")}
-    ${chips(CATS, state.cat, "cat")}
-    ${list.length ? `<div class="grid">${list.map(campCard).join("")}</div>` : `<p class="empty">這個條件目前沒有招募中的體驗團，可以先看看其他地區，或直接預約診所諮詢。</p>`}
+  return `<div class="view pg">
+    ${pgHead("體驗團", "EXPERIENCE", "合作診所的體驗團招募中。選擇方案報名，診所審核後以 LINE 通知結果。", "hero-2")}
+    ${regs.length > 1 ? chips(regs, reg, "region") : ""}
+    ${cats.length > 1 ? chips(cats, cat, "cat") : ""}
+    <p class="cd-rh" style="margin:0"><span>招募中 <span class="num">${list.length}</span> 個體驗團</span></p>
+    ${list.length ? `<div class="grid">${list.map(campCard).join("")}</div>` : `<p class="empty">目前沒有招募中的體驗團，可以先看看合作診所，或用 LINE 告訴我們你的需求。</p>${lineReco()}`}
   </div>`;
 }
 
@@ -363,7 +368,7 @@ function viewClinics(){
     <div class="cd-hero">
     <div class="cd-top"><a class="cd-back" href="#" aria-label="回到首頁">← <span>Skinbridge</span></a></div>
     <header class="cd-h"><h1>診所探索</h1><span class="cd-en">CLINIC DISCOVERY</span>
-      <p>所有診所皆為 Skinbridge 合作夥伴，可用中文預約諮詢。</p></header>
+      <p>所有診所皆為 Skinbridge 合作夥伴，可用中文預約諮詢。</p><a class="cd-gl" href="#guide">不知道從哪開始？看療程指南 <span aria-hidden="true">→</span></a></header>
     </div>
     <label class="cd-search">${'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>'}<input id="cq" type="search" placeholder="搜尋診所、療程或肌膚問題" value="${esc(state.cq)}" aria-label="搜尋診所、療程或肌膚問題"></label>
     <div class="cd-fl" role="group" aria-label="篩選">
@@ -764,7 +769,7 @@ function go(h){
 function route(){
   const h = cur;
   let html, nav = "", bar = "";
-  if (h === "camps") { html = viewCamps(); nav = "home"; }
+  if (h === "camps") { html = viewCamps(); nav = "camps"; }
   else if (h === "guide") { html = viewGuide(); nav = "guide"; }
   else if (h === "book") { html = viewBook(); nav = "book"; }
   else if (h === "me") { html = viewMe(); nav = "me"; }
@@ -776,7 +781,7 @@ function route(){
   }
   else { html = viewHome(); nav = "home"; }
   if (h !== "clinics") state.sheet = "";
-  document.body.classList.toggle("cdpage", ["clinics", "guide", "book", "me"].includes(h));
+  document.body.classList.toggle("cdpage", ["clinics", "guide", "book", "me", "camps"].includes(h));
   document.body.classList.toggle("dpage", h.startsWith("c-") && !!clinicOf(h.slice(2)));
   document.body.classList.toggle("fsheet-open", h === "clinics" && !!state.sheet);
   const bn = document.getElementById("bnav");
