@@ -1052,23 +1052,23 @@ details.pi[open] .pi-h::after{content:"−"}
 .bk .bk-h{margin-top:-6px}
 @media(min-width:620px){ .bk-h{width:auto;margin-left:0} }
 
-.pi-dev{flex:none;width:46px;height:56px;display:grid;place-items:center}
-.pi-dev img{max-width:100%;max-height:100%;object-fit:contain;display:block}
+.pi-dev{flex:none;width:40px;height:40px;overflow:hidden;display:block;margin-right:10px}
+.pi-dev img{width:100%;height:100%;object-fit:contain;display:block}
 .pi-h b{flex:1;min-width:0}
 
 /* ===== 원장 격자 ===== */
 .d2-docs{display:grid;grid-template-columns:repeat(var(--cols,3),minmax(0,1fr));gap:12px 10px;align-items:start}
 .d2-doc{display:flex;flex-direction:column;gap:3px;min-width:0}
-.d2-doc-ph{aspect-ratio:3/4;overflow:hidden;background:#E6E1D8;display:grid;place-items:center;margin-bottom:6px}
+.d2-doc-ph{width:64px;height:64px;border-radius:50%;overflow:hidden;background:#E6E1D8;display:grid;place-items:center;margin-bottom:6px}
 .d2-doc-ph img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
-.d2-doc-ph span{font:400 1.6rem "Noto Serif TC",serif;color:#8C7A62}
+.d2-doc-ph span{font:400 1.2rem "Noto Serif TC",serif;color:#8C7A62}
 .d2-doc b{font-weight:500;font-size:.95rem;line-height:1.3}
 .d2-doc .role{font-size:.74rem;color:var(--rose)}
 .d2-doc-t,.d2-doc-more ul{list-style:none;margin:4px 0 0;padding:0;display:flex;flex-direction:column;gap:3px}
 .d2-doc-t li,.d2-doc-more li{font-size:.72rem;line-height:1.45;color:var(--muted)}
 .d2-doc-more summary{font-size:.74rem;color:var(--ink);cursor:pointer;margin-top:4px;text-decoration:underline;text-underline-offset:3px;list-style:none}
 .d2-doc-more summary::-webkit-details-marker{display:none}
-.d2-docs[style*="--cols:1"] .d2-doc{display:grid;grid-template-columns:110px 1fr;column-gap:14px}
+.d2-docs[style*="--cols:1"] .d2-doc{display:grid;grid-template-columns:64px 1fr;column-gap:14px}
 .d2-docs[style*="--cols:1"] .d2-doc-ph{grid-row:span 5;margin:0}
 /* ===== 좌우 화살표 ===== */
 .hs{position:relative}
@@ -1079,3 +1079,5 @@ details.pi[open] .pi-h::after{content:"−"}
 .hs-next{right:2px}
 .hs-prev{left:2px}
 .hs-btn:hover{border-color:var(--rose);color:var(--rose)}
+.pi-h{align-items:center}
+.pi-h .pi-dev+b{margin-left:0}
