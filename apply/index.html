@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+TC:wght@500;600&family=Libre+Caslon+Text&family=Montserrat:wght@400&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611121608">
+<link rel="stylesheet" href="/tw/sb.css?v=202611121701">
 </head>
 <body>
 <header class="hd">
@@ -32,13 +32,15 @@
 
 <div class="bar" id="bar" hidden><div class="bar-in" id="barIn"></div></div>
 
-<script src="/tw/sb-common.js?v=202611121608"></script>
+<script src="/tw/sb-common.js?v=202611121701"></script>
 <script>
 function viewApply(){
   const p = state.prefill || { type:"booking", clinic:"selena", item:"" };
   const opts = CLINICS.map(c => `<option value="${c.id}" ${c.id === p.clinic ? "selected" : ""}>${esc(c.name)}（${c.region}）</option>`).join("");
   const min = new Date(Date.now() + 864e5).toISOString().slice(0,10);
   const head = `<a class="back" href="${HOME_URL}">← 回到首頁</a><div class="sh" style="border:0;padding:0"><div><span class="en">APPLY</span><h2>預約諮詢・報名體驗團</h2></div></div>`;
+  if (!me && p.type !== "camp") return viewBookGate(p);
+  if (me && p.type !== "camp") return viewBooking(p);
 
   if (!me) {
     return `<div class="view">${head}
@@ -87,6 +89,221 @@ function viewApply(){
       <div class="acts" id="doneActs"></div>
     </div>
   </div>`;
+}
+
+/* ===== 예약 신청 3단계 ===== */
+const BK_TIME = [["上午","오전"],["下午","오후"],["晚上","저녁"],["都可以","시간 무관"]];
+const BK_YN = [["沒有","없음"],["有","있음"],["不確定","미확인"]];
+let bk = null;
+function bkKey(id){ return "sb-bk-" + id; }
+function bkLoad(p){
+  const c = clinicOf(p.clinic) || CLINICS[0];
+  let s = null; try { s = JSON.parse(sessionStorage.getItem(bkKey(c.id))); } catch (_) {}
+  const base = { clinic:c.id, step:1, concerns:[], treats:p.item ? [p.item] : [], extra:p.item || "", name:"", birth:"", date:"", time:"",
+    past:"", pastT:"", allergy:"", allergyT:"", meds:"", medsT:"", people:"1", note:"", agree:false, done:false };
+  bk = Object.assign(base, s || {});
+  if (p.item && !bk.treats.includes(p.item) && !s) bk.treats.push(p.item);
+  if (p.item) bk.extra = bk.extra || p.item;
+  if (!bk.name && me && me.name) bk.name = me.name;
+  return c;
+}
+function bkSave(){ try { sessionStorage.setItem(bkKey(bk.clinic), JSON.stringify(bk)); } catch (_) {} }
+function bkHead(c, step){
+  const img = (c.interior && c.interior[0]) || (c.photos && c.photos[0]) || "";
+  const title = c.benefit ? "9折預約諮詢" : "預約諮詢";
+  const steps = ["需求與療程", "預約資料", "確認送出"];
+  return `<a class="back" href="/tw/#c-${c.id}">← 回到診所頁面</a>
+    <header class="bk-h"><h1>${step === 2 ? "預約資料" : step === 3 ? "確認送出" : title}</h1>
+      <span class="bk-en">${c.benefit ? "SKINBRIDGE PRIVILEGE · 專屬 9折禮遇" : "SKINBRIDGE BOOKING"}</span></header>
+    ${step ? `<ol class="bk-steps" aria-label="步驟 ${step} / 3">${steps.map((s, i) => `<li class="${i + 1 === step ? "on" : i + 1 < step ? "ok" : ""}"${i + 1 === step ? ' aria-current="step"' : ""}><span>${i + 1 < step ? "✓" : i + 1}</span><b>${s}</b></li>`).join("")}</ol>` : ""}
+    <div class="bk-cl">${img ? `<img src="${esc(img)}" alt="">` : ""}<div><b>${esc(c.name)}</b><span>${esc(c.area)} · ${esc(c.region)}</span>${c.benefit ? `<em>SKINBRIDGE PRIVILEGE · 專屬 9折禮遇</em>` : ""}</div></div>`;
+}
+function viewBookGate(p){
+  const c = clinicOf(p.clinic) || CLINICS[0];
+  return `<div class="view bk">${bkHead(c, 0)}
+    <div class="gate">
+      <h3>用 LINE 登入後即可預約</h3>
+      <p>不需要另外註冊。登入時會一併加入 Skin Bridge LINE 好友，預約進度會用 LINE 以中文通知你。</p>
+      <button class="btn line" type="button" id="lineLogin">用 LINE 登入</button>
+      ${IS_SITE ? "" : `<p class="note">示範模式：正式上線後，這個按鈕會開啟 LINE 登入畫面。</p>`}
+    </div></div>`;
+}
+const bkChips = (key, list, sel) => `<div class="bk-chips" role="group">${list.map(x => `<button type="button" data-bkm="${key}" data-v="${esc(x)}" aria-pressed="${sel.includes(x)}">${esc(x)}</button>`).join("")}</div>`;
+const bkYN = (key, label, ph) => `<div class="bk-f" id="f-${key}"><span class="bk-l">${label} <i>*</i></span>
+    <div class="bk-seg" role="group" aria-label="${label}">${BK_YN.map(([v]) => `<button type="button" data-bks="${key}" data-v="${v}" aria-pressed="${bk[key] === v}">${v}</button>`).join("")}</div>
+    ${bk[key] === "有" ? `<input data-bki="${key}T" value="${esc(bk[key + "T"])}" maxlength="60" placeholder="${ph}" aria-label="${label}內容">` : ""}
+    <p class="bk-err" data-err="${key}"></p></div>`;
+function viewBooking(p){
+  const c = bk && bk.clinic === p.clinic ? clinicOf(bk.clinic) : bkLoad(p);
+  if (bk.done) return viewBookDone(c);
+  const min = new Date(Date.now() + 864e5).toISOString().slice(0, 10);
+  let body = "";
+  if (bk.step === 1) {
+    const tr = [...new Set([...(bk.extra ? [bk.extra] : []), ...(c.treats || []), "還沒決定"])];
+    body = `<div class="bk-f" id="f-concerns"><span class="bk-l">你想改善什麼？<small>可複選</small></span>${bkChips("concerns", [...CONCERNS, "還不確定"], bk.concerns)}<p class="bk-err" data-err="concerns"></p></div>
+      <div class="bk-f" id="f-treats"><span class="bk-l">有想做的療程嗎？<small>可複選</small></span>${bkChips("treats", tr, bk.treats)}<p class="bk-err" data-err="treats"></p></div>
+      <div class="bk-cta"><button type="button" class="btn rose" data-bkgo="2">下一步 →</button></div>`;
+  } else if (bk.step === 2) {
+    body = `<div class="bk-line"><span class="bk-ok">LINE</span><div><b>已連動 LINE 帳號</b><span>${esc(me.name)}・預約進度會用 LINE 通知你</span></div></div>
+      <label class="bk-f" id="f-name"><span class="bk-l">姓名 <i>*</i><small>請填寫與護照相同的英文姓名</small></span><input data-bki="name" value="${esc(bk.name)}" maxlength="40" autocomplete="name" placeholder="例：WANG XIAO MEI"><p class="bk-err" data-err="name"></p></label>
+      <label class="bk-f" id="f-birth"><span class="bk-l">出生日期 <i>*</i></span><input type="date" data-bki="birth" value="${esc(bk.birth)}" max="${new Date().toISOString().slice(0, 10)}"><p class="bk-err" data-err="birth"></p></label>
+      <label class="bk-f" id="f-date"><span class="bk-l">希望到診日期 <i>*</i></span><input type="date" data-bki="date" value="${esc(bk.date)}" min="${min}"><p class="bk-err" data-err="date"></p></label>
+      <div class="bk-f" id="f-time"><span class="bk-l">希望時段 <i>*</i></span><div class="bk-seg" role="group" aria-label="希望時段">${BK_TIME.map(([v]) => `<button type="button" data-bks="time" data-v="${v}" aria-pressed="${bk.time === v}">${v}</button>`).join("")}</div><p class="bk-err" data-err="time"></p></div>
+      ${bkYN("past", "過往醫美療程", "療程名稱與大約時間，例：Ultherapy 2025 年")}
+      ${bkYN("allergy", "過敏史", "例：麻醉藥、特定藥物")}
+      ${bkYN("meds", "目前服用藥物", "藥物名稱")}
+      <label class="bk-f"><span class="bk-l">同行人數</span><select data-bki="people">${[["1","只有我"],["2","共 2 人"],["3","共 3 人"],["4","共 4 人以上"]].map(([v, l]) => `<option value="${v}" ${bk.people === v ? "selected" : ""}>${l}</option>`).join("")}</select></label>
+      <label class="bk-f"><span class="bk-l">其他備註<small>選填</small></span><textarea data-bki="note" maxlength="150" rows="3" placeholder="例：同行朋友也想諮詢">${esc(bk.note)}</textarea></label>
+      <div class="bk-info"><p>還沒決定療程也沒關係。<br>Skinbridge 會協助你確認診所與預約流程，實際療程由診所醫師諮詢後決定。</p></div>
+      <div class="bk-cta two"><button type="button" class="btn light" data-bkgo="1">上一步</button><button type="button" class="btn rose" data-bkgo="3">下一步 →</button></div>`;
+  } else {
+    const yn = k => bk[k] === "有" ? `有（${esc(bk[k + "T"] || "")}）` : esc(bk[k]);
+    const row = (l, v) => `<div class="bk-r"><dt>${l}</dt><dd>${v}</dd></div>`;
+    body = `<dl class="bk-sum">
+        ${row("預約診所", `${esc(c.name)} · ${esc(c.area)}`)}
+        ${row("改善需求", esc(bk.concerns.join(" / ")))}
+        ${row("偏好療程", esc(bk.treats.join(" / ")))}
+        ${row("姓名", esc(bk.name))}
+        ${row("出生日期", esc(bk.birth.replace(/-/g, "/")))}
+        ${row("希望到診", `${esc(bk.date.replace(/-/g, "/"))}・${esc(bk.time)}`)}
+        ${row("過往醫美療程", yn("past"))}
+        ${row("過敏史", yn("allergy"))}
+        ${row("目前服用藥物", yn("meds"))}
+        ${row("同行人數", bk.people === "1" ? "只有我" : `共 ${bk.people === "4" ? "4 人以上" : bk.people + " 人"}`)}
+        ${bk.note ? row("其他備註", esc(bk.note)) : ""}
+        ${row("LINE", "已連動")}
+      </dl>
+      ${c.benefit ? `<div class="bk-ben"><span>SKINBRIDGE PRIVILEGE</span><p>本診所享專屬 <b>9折</b> 禮遇</p><small>${esc(c.benefitScope || "實際適用範圍以診所諮詢為準。")}</small></div>` : ""}
+      <ol class="bk-flow"><li>預約申請</li><li>診所確認</li><li>預約確認</li></ol>
+      <p class="bk-note">送出後，Skinbridge 會先向診所確認時段與療程資訊，確認後再透過 LINE 與你聯絡。最終是否施作由診所醫師諮詢後判斷。</p>
+      <label class="agree" id="f-agree"><input type="checkbox" data-bkc="agree" ${bk.agree ? "checked" : ""}><span>我同意 Skinbridge 為安排諮詢與預約，將以上資料（含療程史、過敏史、用藥）提供給本次預約的診所，並以 LINE 與我聯絡。</span></label>
+      <p class="bk-err" data-err="agree"></p>
+      <div class="bk-cta col"><button type="button" class="btn rose" data-bksend="1">送出預約需求</button><button type="button" class="btn light" data-bkgo="2">返回修改</button></div>`;
+  }
+  return `<div class="view bk" id="bk">${bkHead(c, bk.step)}<div class="bk-body">${body}</div></div>`;
+}
+function viewBookDone(c){
+  return `<div class="view bk" id="bk">${bkHead(c, 0)}
+    <div class="done bk-done">
+      <h3>已收到你的預約需求</h3>
+      <p>Skinbridge 將先向診所確認時間與相關資訊，<br>確認後會透過 LINE 與你聯絡。</p>
+      ${me && me.friend ? "" : `<p class="note">請先加入 Skin Bridge LINE 好友，才收得到預約通知。</p><a class="btn line" href="${friendUrl()}" target="_blank" rel="noopener">加入 LINE 好友</a>`}
+      <div class="acts"><a class="btn rose" href="/apply/?mode=mine">查看我的預約</a><a class="btn light" href="/tw/">回到首頁</a></div>
+    </div></div>`;
+}
+function bkCheck(step){
+  const errs = {};
+  if (step === 1) {
+    if (!bk.concerns.length) errs.concerns = "請至少選一項，不確定可以選「還不確定」";
+    if (!bk.treats.length) errs.treats = "請至少選一項，沒決定可以選「還沒決定」";
+  }
+  if (step === 2) {
+    if (!bk.name.trim()) errs.name = "請填寫姓名";
+    if (!bk.birth) errs.birth = "請選擇出生日期";
+    if (!bk.date) errs.date = "請選擇希望到診日期";
+    if (!bk.time) errs.time = "請選擇希望時段";
+    ["past", "allergy", "meds"].forEach(k => { if (!bk[k]) errs[k] = "請選擇一項"; else if (bk[k] === "有" && !bk[k + "T"].trim()) errs[k] = "請簡單填寫內容"; });
+  }
+  if (step === 3 && !bk.agree) errs.agree = "請勾選同意事項後再送出";
+  document.querySelectorAll("[data-err]").forEach(p => p.textContent = errs[p.dataset.err] || "");
+  const first = Object.keys(errs)[0];
+  if (first) { const el = document.getElementById("f-" + first); if (el) el.scrollIntoView({ block: "center" }); }
+  return !first;
+}
+function bkBlock(c){
+  const kday = ["일","월","화","수","목","금","토"];
+  const d = bk.date ? new Date(bk.date + "T00:00:00") : null;
+  const ko = (list, v) => (list.find(x => x[0] === v) || ["", v])[1];
+  const yn = k => ko(BK_YN, bk[k]) + (bk[k] === "有" ? `（${bk[k + "T"]}）` : "");
+  return [
+    `① 顧客姓名 고객성함: ${bk.name.trim()}`,
+    `② 出生日期 생년월일: ${bk.birth.replace(/-/g, "/")}`,
+    `③ 預約時間 예약시간: ${d ? `${d.getMonth() + 1}/${d.getDate()}(${kday[d.getDay()]})` : ""} ${ko(BK_TIME, bk.time)}`,
+    `④ 過往療程 과거시술이력: ${yn("past")}`,
+    `⑤ 過敏史 알레르기: ${yn("allergy")}`,
+    `⑥ 目前服用藥物 복용중인약: ${yn("meds")}`,
+    `*관심시술: ${bk.treats.join(" / ")}`,
+    `*고민: ${bk.concerns.join(" / ")}`,
+    `*특별사항: ${bk.people === "1" ? "본인 1명" : (bk.people === "4" ? "4명 이상" : bk.people + "명") + " 동반 예약"}${bk.note ? " / " + bk.note : ""}`,
+    ...(clinicOf(bk.clinic).benefit ? ["*9折 적용 병원"] : [])
+  ].join("\n");
+}
+function setupBooking(){
+  const box = document.getElementById("bk");
+  if (!box || box.dataset.on) return;
+  box.dataset.on = "1";
+  const rerender = () => { $("#app").innerHTML = viewApply(); setupBooking(); };
+  box.addEventListener("click", async e => {
+    const b = e.target.closest("button"); if (!b) return;
+    if (b.dataset.bkm) {
+      const k = b.dataset.bkm, v = b.dataset.v, a = bk[k];
+      const none = v === "還不確定" || v === "還沒決定";
+      if (a.includes(v)) a.splice(a.indexOf(v), 1);
+      else { if (none) a.length = 0; else { const i = a.findIndex(x => x === "還不確定" || x === "還沒決定"); if (i >= 0) a.splice(i, 1); } a.push(v); }
+      box.querySelectorAll(`[data-bkm="${k}"]`).forEach(x => x.setAttribute("aria-pressed", a.includes(x.dataset.v)));
+      bkSave(); return;
+    }
+    if (b.dataset.bks) { bk[b.dataset.bks] = b.dataset.v; bkSave(); const y = scrollY; rerender(); scrollTo(0, y); return; }
+    if (b.dataset.bkgo) {
+      const to = +b.dataset.bkgo;
+      if (to > bk.step && !bkCheck(bk.step)) return;
+      bk.step = to; bkSave(); rerender(); scrollTo(0, 0); return;
+    }
+    if (b.dataset.bksend) {
+      if (!bkCheck(3)) return;
+      const c = clinicOf(bk.clinic);
+      b.disabled = true; b.textContent = "送出中…";
+      const data = { type: c.benefit ? "9折預約諮詢" : "預約諮詢", clinic: c.name, item: bk.treats.join(" / "),
+        date: bk.date, time: bk.time, name: bk.name.trim(), year: bk.birth.replace(/-/g, "/"), ig: "",
+        concern: bkBlock(), userId: me.userId, lineName: me.name };
+      if (SHEET_URL && me.userId !== "DEMO-USER") {
+        try { await fetch(SHEET_URL, { method:"POST", mode:"no-cors", body:new URLSearchParams(data) }); } catch (_) {}
+      }
+      bk.done = true; bkSave(); rerender(); scrollTo(0, 0);
+    }
+  });
+  box.addEventListener("input", e => { const k = e.target.dataset.bki; if (k) { bk[k] = e.target.value; bkSave(); } });
+  box.addEventListener("change", e => {
+    const k = e.target.dataset.bki; if (k) { bk[k] = e.target.value; bkSave(); }
+    if (e.target.dataset.bkc) { bk[e.target.dataset.bkc] = e.target.checked; bkSave(); }
+  });
+}
+
+/* ===== 내 예약 ===== */
+const BK_STATUS = [
+  ["새 신청", "預約申請", 1], ["병원 확인 중", "診所確認中", 2], ["예약 확정", "預約確認", 3], ["방문 완료", "已完成", 4],
+  ["취소", "已取消", 0], ["선정", "體驗團入選", 3], ["미선정", "體驗團未入選", 0]
+];
+function viewMine(){
+  const head = `<a class="back" href="/tw/">← 回到首頁</a><header class="bk-h"><h1>我的預約</h1><span class="bk-en">MY BOOKINGS</span></header>`;
+  if (!me) return `<div class="view bk">${head}<div class="gate"><h3>用 LINE 登入後查看預約</h3>
+      <button class="btn line" type="button" id="lineLogin">用 LINE 登入</button>
+      ${IS_SITE ? "" : `<p class="note">示範模式：正式上線後，這個按鈕會開啟 LINE 登入畫面。</p>`}</div></div>`;
+  return `<div class="view bk">${head}<div id="mineBox"><p class="note">載入中…</p></div>
+    <p class="note">預約的修改或取消，請直接在 <a class="link" href="${friendUrl()}" target="_blank" rel="noopener">LINE 聊天室</a> 告訴我們。</p></div>`;
+}
+async function setupMine(){
+  const login = $("#lineLogin");
+  if (login) { login.addEventListener("click", lineLogin); return; }
+  const box = $("#mineBox"); if (!box) return;
+  if (me.userId === "DEMO-USER") { box.innerHTML = `<p class="empty">（示範畫面）正式網站登入後會顯示你的預約。</p>`; return; }
+  try {
+    const r = await fetch(SHEET_URL, { method:"POST", body:new URLSearchParams({ action:"mine", idToken: me.idToken || "" }) });
+    const j = await r.json();
+    if (!j.ok) throw new Error(j.error);
+    if (!j.list.length) { box.innerHTML = `<p class="empty">目前沒有預約紀錄。</p><a class="btn rose" href="/tw/#clinics">探索診所</a>`; return; }
+    const steps = ["預約申請", "診所確認中", "預約確認", "已完成"];
+    box.innerHTML = `<div class="mine">${j.list.map(x => {
+      const st = BK_STATUS.find(s => s[0] === x.status) || (x.visit ? ["", "預約確認", 3] : ["", "預約申請", 1]);
+      return `<article class="mi">
+        <div class="mi-h"><b>${esc(x.clinic)}</b><span class="mi-st${st[2] ? "" : " off"}">${st[1]}</span></div>
+        <p>${esc(x.type)}${x.item ? "・" + esc(x.item) : ""}</p>
+        <p class="note">${x.visit ? `確定到診：${esc(x.visit)}` : `希望日期：${esc(x.date)} ${esc(x.time)}`}・申請於 ${esc(x.at)}</p>
+        ${st[2] ? `<ol class="mi-flow">${steps.map((s, i) => `<li class="${i + 1 <= st[2] ? "on" : ""}">${s}</li>`).join("")}</ol>` : ""}
+      </article>`; }).join("")}</div>`;
+  } catch (_) {
+    box.innerHTML = `<p class="empty">預約紀錄暫時無法載入，請在 <a class="link" href="${friendUrl()}" target="_blank" rel="noopener">LINE 聊天室</a> 查看。</p>`;
+  }
 }
 
 function viewReview(){
@@ -152,6 +369,7 @@ function lineLogin(){
 function setupForm(){
   const login = $("#lineLogin");
   if (login) { login.addEventListener("click", lineLogin); return; }
+  if (document.getElementById("bk")) { setupBooking(); return; }
 
   let type = (state.prefill && state.prefill.type) || "booking";
   const fClinic = $("#fClinic"), fItem = $("#fItem"), fW1 = $("#fWish1"), fW2 = $("#fWish2");
@@ -191,6 +409,7 @@ function setupForm(){
   fW1.addEventListener("change", needIg);
   fW2.addEventListener("change", needIg);
   document.querySelectorAll(".seg button").forEach(b => b.addEventListener("click", () => {
+    if (b.dataset.type === "booking") { location.href = "/apply/?type=booking&clinic=" + encodeURIComponent(fClinic.value); return; }
     type = b.dataset.type;
     document.querySelectorAll(".seg button").forEach(x => x.setAttribute("aria-pressed", x === b));
     fillItems();
@@ -318,7 +537,7 @@ function setPrefill(){
   state.prefill = { type, clinic, item: q.get("item") || "", tier: q.get("tier") || "" };
 }
 const MODE = new URLSearchParams(location.search).get("mode");
-function route(){ if (MODE === "review") { $("#app").innerHTML = viewReview(); setupReview(); } else { $("#app").innerHTML = viewApply(); setupForm(); } }
+function route(){ if (MODE === "review") { $("#app").innerHTML = viewReview(); setupReview(); } else if (MODE === "mine") { $("#app").innerHTML = viewMine(); setupMine(); } else { $("#app").innerHTML = viewApply(); setupForm(); } }
 loadData().finally(() => { setPrefill(); route(); initLine(); });
 
 </script>

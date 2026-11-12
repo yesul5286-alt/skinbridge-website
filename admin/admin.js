@@ -105,6 +105,7 @@ function render(){
       <label class="f">목록 순서 (작을수록 위)<input id="i_order" value="${h(cur.order)}" inputmode="numeric"></label>
       <label class="chk"><input type="checkbox" id="i_visible" ${cur.visible ? "checked" : ""}> 홈페이지에 공개</label>
       <label class="chk"><input type="checkbox" id="i_benefit" ${d.benefit ? "checked" : ""}> '全療程 9折專屬禮遇' 표시 (외국인환자 유치기관 등록·계약 확인된 병원만)</label>
+      <label class="f full">9折 적용 범위 (번체, 비우면 '實際適用範圍以診所諮詢為準。')<input id="i_bscope" value="${h(d.benefitScope)}" placeholder="例：適用全療程，活動價與套餐除外。"></label>
       <label class="chk"><input type="checkbox" id="i_selected" ${d.selected ? "checked" : ""}> 'SKINBRIDGE SELECTED' 배지 (일부 병원만)</label>
       <label class="chk"><input type="checkbox" id="i_example" ${d.example ? "checked" : ""}> '範例(예시)' 표시</label>
     </div>
@@ -329,7 +330,7 @@ function readForm(){
   const d = cur.data;
   Object.assign(d, { name:v("i_name"), region:v("i_region"), area:v("i_area"), station:v("i_station"), address:v("i_address"),
     langs:v("i_langs"), rating:v("i_rating"), reviews:v("i_reviews") ? Number(v("i_reviews")) : null, tags:list("i_tags"),
-    intro:v("i_intro"), about:v("i_intro").split("\n")[0], fields:list("i_fields"), oneliner:v("i_one"), selected:$("#i_selected").checked, benefit:$("#i_benefit").checked,
+    intro:v("i_intro"), about:v("i_intro").split("\n")[0], fields:list("i_fields"), oneliner:v("i_one"), selected:$("#i_selected").checked, benefit:$("#i_benefit").checked, benefitScope:v("i_bscope"),
     concerns:[...document.querySelectorAll('[data-ck="concerns"]:checked')].map(e => e.value),
     treats:[...document.querySelectorAll('[data-ck="treats"]:checked')].map(e => e.value),
     traits:[...document.querySelectorAll('[data-ck="traits"]:checked')].map(e => e.value), equipment:list("i_equip"), priceNote:v("i_pnote"), policy:v("i_policy"), more:v("i_more"),
