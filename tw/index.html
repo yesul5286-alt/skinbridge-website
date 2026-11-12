@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+TC:wght@500;600&family=Libre+Caslon+Text&family=Montserrat:wght@400&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611121718">
+<link rel="stylesheet" href="/tw/sb.css?v=202611121735">
 </head>
 <body>
 <header class="hd">
@@ -39,7 +39,7 @@
     <a href="#me" data-nav="me"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span>我的</span></a>
 </nav>
 
-<script src="/tw/sb-common.js?v=202611121718"></script>
+<script src="/tw/sb-common.js?v=202611121735"></script>
 <script>
 /* ===== 화면 ===== */
 const HOME = {
@@ -261,21 +261,25 @@ function clinicCard(c, i){
   const langs = LANGS.filter(([, ch]) => (c.langs || "").includes(ch)).map(([n]) => n);
   const cats = tagsOf(c).slice(0, 3);
   const cur = c.curation || c.oneliner || "";
+  const fav = favs.has(c.id);
+  const facts = [langs.length ? `${icon("chat")}<span>${langs.slice(0, 2).join("・")}諮詢</span>` : "", (c.traits && c.traits[0]) ? `${icon("shield")}<span>${esc(c.traits[0])}</span>` : ""].filter(Boolean);
   return `<article class="cl">
-    <a class="cl-img${img ? "" : " none"}" href="#c-${c.id}" tabindex="-1" aria-hidden="true">${img
-      ? `<img src="${esc(img)}" alt="" loading="${i < 2 ? "eager" : "lazy"}">`
-      : c.logo ? `<img class="lg" src="${esc(c.logo)}" alt="" loading="lazy">` : `<span>${esc(c.name)}</span>`}</a>
+    <div class="cl-img${img ? "" : " none"}">
+      <a href="#c-${c.id}" tabindex="-1" aria-hidden="true">${img
+        ? `<img src="${esc(img)}" alt="" loading="${i < 3 ? "eager" : "lazy"}">`
+        : c.logo ? `<img class="lg" src="${esc(c.logo)}" alt="" loading="lazy">` : `<span>${esc(c.name)}</span>`}</a>
+      <button type="button" class="cl-fav" data-fav="${c.id}" aria-pressed="${fav}" aria-label="${fav ? "取消收藏" : "收藏這間診所"}">${HEART}</button>
+    </div>
     <div class="cl-bd">
-      <div class="cl-meta"><span class="cl-no">${String(i + 1).padStart(2, "0")}</span>
-        <span class="cl-loc">${REGION_EN[c.region] || esc(c.region)} · ${esc(c.area)}</span>
-        ${c.selected ? `<span class="cl-bdg sel">SKINBRIDGE SELECTED</span>` : ""}${k ? `<span class="cl-bdg">EXPERIENCE OPEN</span>` : ""}</div>
+      <div class="cl-meta"><span class="cl-no">${String(i + 1).padStart(2, "0")}</span><span class="cl-loc">${REGION_EN[c.region] || esc(c.region)} · ${esc(c.area)}</span></div>
       <h2 class="cl-n"><a href="#c-${c.id}">${esc(c.name)}</a>${exTag(c)}</h2>
       ${cur ? `<p class="cl-cur">${esc(cur)}</p>` : ""}
-      ${cats.length ? `<p class="cl-cats">${cats.map(esc).join(" / ")}</p>` : ""}
-      ${langs.length ? `<p class="cl-lg">${langs.join("・")}諮詢</p>` : ""}
+      ${cats.length ? `<div class="cl-tags">${cats.map(x => `<span>${esc(x)}</span>`).join("")}</div>` : ""}
+      ${facts.length ? `<div class="cl-facts">${facts.map(f => `<span>${f}</span>`).join("")}</div>` : ""}
+      ${c.selected || k ? `<div class="cl-bdgs">${c.selected ? `<span class="cl-bdg sel">SKINBRIDGE SELECTED</span>` : ""}${k ? `<span class="cl-bdg">EXPERIENCE OPEN</span>` : ""}</div>` : ""}
       <div class="cl-ft">
-        <div><span class="cl-pt">SKINBRIDGE PARTNER</span>${c.benefit ? `<span class="cl-ben">全療程 9折專屬禮遇</span>` : ""}</div>
-        <a class="cl-go" href="#c-${c.id}">查看診所 <span aria-hidden="true">→</span></a>
+        <div><span class="cl-pt">SKINBRIDGE PARTNER</span>${c.benefit ? `<span class="cl-ben">全療程 <i class="k9">9折</i> 專屬禮遇</span>` : ""}</div>
+        <a class="cl-go" href="#c-${c.id}" aria-label="查看 ${esc(c.name)}"><span aria-hidden="true">→</span></a>
       </div>
     </div></article>`;
 }
@@ -358,15 +362,16 @@ function viewClinic(c){
   /* 맨 위 사진 */
   const pics = [...(c.interior || []), ...(c.photos || [])];
   const fav = favs.has(c.id);
-  const top = `<div class="d2-top">
+  const top = `<div class="d2-top d2-bar">
       <a class="d2-ic" href="#clinics" aria-label="回到診所列表"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a>
       <span class="d2-logo">Skinbridge</span>
       <button type="button" class="d2-ic d2-fav" data-fav="${c.id}" aria-pressed="${fav}" aria-label="${fav ? "取消收藏" : "收藏這間診所"}">${HEART}</button>
     </div>`;
-  const hero = pics.length
-    ? `<div class="d2-hero">${top}<div class="d2-gal" id="gallery">${pics.map((u, i) => `<button type="button" class="d2-slide" data-lb="${i}" aria-label="放大第 ${i + 1} 張"><img src="${esc(u)}" alt="${esc(c.name)} ${i + 1}" ${i ? 'loading="lazy"' : 'fetchpriority="high"'}></button>`).join("")}</div>
-        ${pics.length > 1 ? `<span class="d2-cnt" id="galCnt">1 / ${pics.length}</span><div class="d2-dots" aria-hidden="true">${pics.slice(0, 10).map((_, i) => `<i${i ? "" : ' class="on"'}></i>`).join("")}</div>` : ""}</div>`
-    : `<div class="d2-hero none">${top}<div class="d2-ph"><span>${esc(c.name)}</span></div></div>`;
+  const hero = `${top}` + (pics.length
+    ? `<div class="d2-hero"><div class="d2-gal" id="gallery">${pics.map((u, i) => `<button type="button" class="d2-slide" data-lb="${i}" aria-label="放大第 ${i + 1} 張"><img src="${esc(u)}" alt="${esc(c.name)} ${i + 1}" ${i ? 'loading="lazy"' : 'fetchpriority="high"'}></button>`).join("")}</div>
+        ${pics.length > 1 ? `<span class="d2-cnt" id="galCnt">1 / ${pics.length}</span></div>
+        <div class="d2-thumbs" id="galThumbs" role="group" aria-label="診所照片">${pics.map((u, i) => `<button type="button" data-gthumb="${i}" aria-label="第 ${i + 1} 張"${i ? "" : ' aria-current="true"'}><img src="${esc(u)}" alt="" loading="lazy"></button>`).join("")}</div>` : "</div>"}`
+    : `<div class="d2-hero none"><div class="d2-ph"><span>${esc(c.name)}</span></div></div>`);
 
   /* 이름 */
   const cur = c.curation || c.oneliner || "";
@@ -378,7 +383,7 @@ function viewClinic(c){
       ${rating}
     </div>`;
   const feats = c.features && c.features.length
-    ? `<ul class="d2-feats">${c.features.map(f => `<li>${icon(f.icon)}<span>${esc(f.label)}</span></li>`).join("")}</ul>` : "";
+    ? `<ul class="d2-feats grid4">${c.features.map(f => `<li>${icon(f.icon)}<span>${esc(f.label)}</span></li>`).join("")}</ul>` : "";
   const cards = `<div class="d2-cards${k ? "" : " one"}">
       ${k ? `<button type="button" class="d2-card" data-jump="camp"><b>體驗團</b><span>招募中・截止 ${k.end.slice(5).replace("-", "/")}</span><i>查看方案 →</i></button>` : ""}
       <button type="button" class="d2-card" data-jump="review"><b>訪客心得 <span aria-hidden="true">🔒</span></b><span>登入 LINE 後查看</span><i>查看 →</i></button>
@@ -407,17 +412,21 @@ function viewClinic(c){
     <div class="addr"><span id="addrText">${esc(c.address)}</span><button type="button" class="copy" data-copy="addrText">複製</button></div>
     <a class="d2-map" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.address)}" target="_blank" rel="noopener">在 Google 地圖開啟 →</a>` : "";
 
-  /* 추천 시술 */
-  const progs = c.programs && c.programs.length ? c.programs.slice(0, 3) : null;
-  const reco = progs
-    ? `<div class="d2-progs">${progs.map(p => `<div class="d2-prog">${p.img ? `<img src="${esc(p.img)}" alt="${esc(p.title)}" loading="lazy">` : ""}<div><b>${esc(p.title)}</b>${p.desc ? `<p>${esc(p.desc).replace(/\n/g, "<br>")}</p>` : ""}</div></div>`).join("")}</div>`
-    : (c.treats && c.treats.length ? `<ul class="d2-treats">${c.treats.slice(0, 8).map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : "");
+  /* 추천 시술: 이 병원이 하는 분야를 사진 카드로 */
+  const catCards = HOME.curated.filter(x => x.key === "concern" ? (c.concerns || []).includes(x.v) : (c.treats || []).includes(x.v)).slice(0, 3);
+  const progs = c.programs && c.programs.length ? c.programs : null;
+  const reco = catCards.length
+    ? `<div class="d2-cats">${catCards.map(x => `<button type="button" class="d2-cat" data-jump="price"><span class="d2-cat-img"><img src="${x.img}" alt="" loading="lazy"></span><b>${x.zh}</b><small>${x.en}</small></button>`).join("")}</div>`
+      + (progs ? `<h3 class="sub-h">特色療程</h3><div class="d2-progs">${progs.slice(0, 3).map(p => `<div class="d2-prog">${p.img ? `<img src="${esc(p.img)}" alt="${esc(p.title)}" loading="lazy">` : ""}<div><b>${esc(p.title)}</b>${p.desc ? `<p>${esc(p.desc).replace(/\n/g, "<br>")}</p>` : ""}</div></div>`).join("")}</div>` : "")
+    : progs
+      ? `<div class="d2-progs">${progs.slice(0, 3).map(p => `<div class="d2-prog">${p.img ? `<img src="${esc(p.img)}" alt="${esc(p.title)}" loading="lazy">` : ""}<div><b>${esc(p.title)}</b>${p.desc ? `<p>${esc(p.desc).replace(/\n/g, "<br>")}</p>` : ""}</div></div>`).join("")}</div>`
+      : (c.treats && c.treats.length ? `<ul class="d2-treats">${c.treats.slice(0, 8).map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : "");
   const recoSec = reco ? `<section class="dsec" id="s-reco"><span class="en">TREATMENTS</span>
       <div class="d2-sh"><h2>推薦療程</h2><button type="button" class="d2-link" data-jump="price">查看更多療程 →</button></div>${reco}</section>` : "";
 
   /* 9折 */
-  const ben = c.benefit ? `<div class="d2-ben"><span class="en">SKINBRIDGE 專屬禮遇</span>
-      <p>透過 Skinbridge 預約，享 <b>全療程 9折</b></p>
+  const ben = c.benefit ? `<div class="d2-ben"><span class="en"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="8.5" width="17" height="4" rx=".5"/><path d="M5 12.5v8h14v-8M12 8.5v12M12 8.5c-1.5-3.5-5.5-4-5.5-1.5 0 1.5 2.5 1.5 5.5 1.5Zm0 0c1.5-3.5 5.5-4 5.5-1.5 0 1.5-2.5 1.5-5.5 1.5Z"/></svg>SKINBRIDGE 專屬禮遇</span>
+      <p class="d2-ben-big">全療程 <i class="k9">9折</i></p>
       <p class="note">${esc(c.benefitScope || "實際適用範圍以診所諮詢為準。")}</p></div>` : "";
 
   /* 활동(광고) */
@@ -615,14 +624,16 @@ function setupDetail(){
   loadReviews();
   const g = document.getElementById("gallery");
   if (g) g.addEventListener("click", e => { const s = e.target.closest("[data-lb]"); if (s) openLb([...g.querySelectorAll("img")].map(i => i.src), +s.dataset.lb); });
-  const cnt = document.getElementById("galCnt");
+  const cnt = document.getElementById("galCnt"), th = document.getElementById("galThumbs");
   if (g && cnt) {
-    const dots = [...document.querySelectorAll(".d2-dots i")], n = g.children.length;
+    const n = g.children.length, tb = th ? [...th.children] : [];
     g.addEventListener("scroll", () => {
       const i = Math.round(g.scrollLeft / g.clientWidth);
       cnt.textContent = `${i + 1} / ${n}`;
-      dots.forEach((d, k) => d.classList.toggle("on", k === Math.min(i, dots.length - 1)));
+      tb.forEach((b, k) => k === i ? b.setAttribute("aria-current", "true") : b.removeAttribute("aria-current"));
+      if (tb[i]) th.scrollTo({ left: tb[i].offsetLeft - th.clientWidth / 2 + tb[i].clientWidth / 2, behavior: "smooth" });
     }, { passive: true });
+    if (th) th.addEventListener("click", e => { const b = e.target.closest("[data-gthumb]"); if (b) g.scrollTo({ left: +b.dataset.gthumb * g.clientWidth, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }); });
   }
   const pim = document.getElementById("pimgs");
   if (pim) pim.addEventListener("click", e => { const b = e.target.closest("[data-pimg]"); if (b) openLb([...pim.querySelectorAll("img")].map(i => i.src), +b.dataset.pimg); });
@@ -652,8 +663,9 @@ function setupDetail(){
   }));
   const tabs = [...document.querySelectorAll(".dtabs [data-jump]")];
   if (!tabs.length) return;
-  const hd = document.querySelector(".hd");
-  if (hd) document.documentElement.style.setProperty("--hd-h", hd.offsetHeight + "px");
+  const hd = document.querySelector(".hd"), bar2 = document.querySelector(".d2-bar");
+  const topH = (hd && hd.offsetHeight) || (bar2 && getComputedStyle(bar2).position === "sticky" ? bar2.offsetHeight : 0);
+  document.documentElement.style.setProperty("--hd-h", topH + "px");
   const secs = tabs.map(b => document.getElementById("s-" + b.dataset.jump));
   const mark = id => tabs.forEach(b => b.classList.toggle("on", b.dataset.jump === id));
   const onScroll = () => {
@@ -668,8 +680,9 @@ function setupDetail(){
 function jump(id){
   const s = document.getElementById("s-" + id), bar = document.querySelector(".dtabs");
   if (!s) return;
-  const hd = document.querySelector(".hd");
-  const y = s.getBoundingClientRect().top + scrollY - (hd ? hd.offsetHeight : 0) - (bar ? bar.offsetHeight : 0) + 2;
+  const hd = document.querySelector(".hd"), bar2 = document.querySelector(".d2-bar");
+  const topH = (hd && hd.offsetHeight) || (bar2 && getComputedStyle(bar2).position === "sticky" ? bar2.offsetHeight : 0);
+  const y = s.getBoundingClientRect().top + scrollY - topH - (bar ? bar.offsetHeight : 0) + 2;
   scrollTo({ top: y, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
 }
 
@@ -690,8 +703,8 @@ function route(){
   else if (h === "clinics") { html = viewClinics(); nav = "clinics"; }
   else if (h.startsWith("c-") && clinicOf(h.slice(2))) {
     const c = clinicOf(h.slice(2)); html = viewClinic(c); nav = "clinics";
-    bar = `<a class="btn light d2-line" href="https://line.me/R/ti/p/${encodeURIComponent(LINE_ID)}" target="_blank" rel="noopener">LINE 諮詢</a>` +
-          `<button class="btn rose wide" data-apply="booking" data-clinic="${c.id}">${c.benefit ? "9折預約" : "預約"}</button>`;
+    bar = `<a class="btn light d2-line" href="https://line.me/R/ti/p/${encodeURIComponent(LINE_ID)}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M12 4C6.8 4 3 7.2 3 11.2c0 3.5 3 6.4 7.1 7l-.6 2.3 3.3-2.2c4.8-.3 8.2-3.4 8.2-7.1C21 7.2 17.2 4 12 4Z"/></svg> LINE 諮詢</a>` +
+          `<button class="btn rose wide" data-apply="booking" data-clinic="${c.id}"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg> ${c.benefit ? "9折預約" : "預約"}</button>`;
   }
   else { html = viewHome(); nav = "home"; }
   if (h !== "clinics") state.sheet = "";

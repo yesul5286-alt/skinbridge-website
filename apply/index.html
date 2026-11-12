@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+TC:wght@500;600&family=Libre+Caslon+Text&family=Montserrat:wght@400&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611121718">
+<link rel="stylesheet" href="/tw/sb.css?v=202611121735">
 </head>
 <body>
 <header class="hd">
@@ -32,7 +32,7 @@
 
 <div class="bar" id="bar" hidden><div class="bar-in" id="barIn"></div></div>
 
-<script src="/tw/sb-common.js?v=202611121718"></script>
+<script src="/tw/sb-common.js?v=202611121735"></script>
 <script>
 function viewApply(){
   const p = state.prefill || { type:"booking", clinic:"selena", item:"" };
@@ -197,7 +197,8 @@ function viewBooking(p){
       <div class="bk-cta two"><button type="button" class="btn light" data-bkgo="1">上一步</button><button type="button" class="btn rose" data-bkgo="3">下一步 →</button></div>`;
   } else {
     const yn = (o, k) => o[k] === "有" ? `有（${esc(o[k + "T"] || "")}）` : esc(o[k]);
-    const row = (l, v) => `<div class="bk-r"><dt>${l}</dt><dd>${v}</dd></div>`;
+    const RI = { "預約診所":"shield", "到診時間":"cal", "預約人數":"list", "改善需求":"tag", "想做的療程":"list", "姓名":"chat", "出生日期":"cal", "過往醫美療程":"list", "過敏史":"shield", "目前服用藥物":"tag", "其他備註":"chat" };
+    const row = (l, v) => `<div class="bk-r"><dt>${icon(RI[l] || "list")}<span>${l}</span></dt><dd>${v}</dd></div>`;
     const person = (o, t) => row("姓名", esc(o.name)) + row("出生日期", esc(o.birth.replace(/-/g, "/"))) + (t ? row("想做的療程", esc(t)) : "")
       + row("過往醫美療程", yn(o, "past")) + row("過敏史", yn(o, "allergy")) + row("目前服用藥物", yn(o, "meds"));
     body = `<dl class="bk-sum">
