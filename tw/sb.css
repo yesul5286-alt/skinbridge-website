@@ -1052,6 +1052,6 @@ details.pi[open] .pi-h::after{content:"−"}
 .bk .bk-h{margin-top:-6px}
 @media(min-width:620px){ .bk-h{width:auto;margin-left:0} }
 
-.pi-dev{flex:none;width:44px;height:52px;background:#fff;border:1px solid var(--rule);display:grid;place-items:center;overflow:hidden}
+.pi-dev{flex:none;width:46px;height:56px;display:grid;place-items:center}
 .pi-dev img{max-width:100%;max-height:100%;object-fit:contain;display:block}
 .pi-h b{flex:1;min-width:0}
