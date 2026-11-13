@@ -365,6 +365,12 @@ $("#editor").addEventListener("click", async e => {
   }
   else if (t.id === "jsonShow") { readForm(); $("#jsonBox").value = JSON.stringify(Object.assign({id: cur.id}, cur.data), null, 2); }
   else if (t.id === "jsonApply") {
+    /* 홈페이지에 올려 둔 JSON 주소(https://www.skinbridgekorea.com/…​.json)를 넣으면 그 내용을 불러와 채운다 */
+    const raw = $("#jsonBox").value.trim();
+    if (/^https:\/\/(www\.)?skinbridgekorea\.com\/[\w\-\/.]+\.json$/.test(raw)) {
+      try { const r = await fetch(raw + "?v=" + Date.now()); if (!r.ok) throw new Error("HTTP " + r.status); $("#jsonBox").value = await r.text(); }
+      catch (err) { msg("JSON 주소를 불러오지 못했어요: " + err.message, "err"); return; }
+    }
     try { const j = JSON.parse($("#jsonBox").value); if (cur.isNew && j.id) cur.id = j.id; delete j.id; if (j._merge) { delete j._merge; readForm(); cur.data = Object.assign(cur.data, j); } else cur.data = j; render(); if (cur.isNew) $("#i_id").value = cur.id; msg("JSON을 채웠어요. 확인하고 저장하세요.", "ok"); }
     catch (err) { msg("JSON 형식이 맞지 않아요: " + err.message, "err"); }
   }
