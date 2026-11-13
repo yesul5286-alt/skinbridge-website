@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+TC:wght@500;600&family=Libre+Caslon+Text&family=Montserrat:wght@400&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611130306">
+<link rel="stylesheet" href="/tw/sb.css?v=202611132007">
 </head>
 <body>
 <header class="hd">
@@ -31,7 +31,7 @@
 
 <div class="wrap"><footer>
   <p>Skinbridge 為連接台灣顧客與韓國合作醫療院所的服務，醫療行為皆由各院所醫師執行，是否適合施作須經醫師諮詢判斷。</p>
-  <p>價格以韓元為準，是否含 VAT 依各診所標示；台幣為參考價（1 NT$ ≈ 41.6 韓元，2026.11）。實際療程與價格以診所諮詢為準。</p>
+  <p>價格以韓元為準，是否含 VAT 依各診所標示；台幣為參考價（1 NT$ ≈ 41.6 韓元，2026.11）。實際療程與價格以診所諮詢為準。部分診所資料來源：健康保險審查評價院（HIRA）。</p>
   <p class="fl"><span class="logo-s">SKINBRIDGE</span><a class="link" href="https://line.me/R/ti/p/%40911xoyoc" target="_blank" rel="noopener">LINE 官方帳號</a></p>
 </footer></div>
 
@@ -44,7 +44,7 @@
     <a href="#me" data-nav="me"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span>我的</span></a>
 </nav>
 
-<script src="/tw/sb-common.js?v=202611130306"></script>
+<script src="/tw/sb-common.js?v=202611132007"></script>
 <script>
 /* ===== 화면 ===== */
 const HOME = {
@@ -345,6 +345,71 @@ function filterSheet(){
       </div>
     </div></div>`;
 }
+/* ===== 診所名錄(심평원 공공데이터) · 想去 버튼 ===== */
+let DIR = null, dirLoading = false;
+function loadDir(){
+  if (DIR || dirLoading) return;
+  dirLoading = true;
+  fetch("/tw/data/dir.json?v=1").then(r => r.json()).then(j => { DIR = j; dirLoading = false; if (cur === "clinics") reroute(); })
+    .catch(() => { dirLoading = false; });
+}
+function reroute(){
+  const a = document.activeElement, id = a && a.id, pos = a && a.selectionStart;
+  route();
+  if (id) { const q = document.getElementById(id); if (q) { q.focus(); try { q.setSelectionRange(pos, pos); } catch (_) {} } }
+}
+const dirLoose = s => String(s).toLowerCase().replace(/[^a-z0-9]/g, "").replace(/eo/g, "o").replace(/eu/g, "u").replace(/ae/g, "e").replace(/(.)\1+/g, "$1");
+const dirInArea = (r, key) => (DIR.areas[key] || []).some(([g, d]) => r[2] === g && r[3].startsWith(d));
+const wants = {
+  all(){ try { return JSON.parse(localStorage.getItem("sb-want")) || []; } catch (_) { return []; } },
+  has(id){ return this.all().includes(id); },
+  add(id){ const a = this.all(); if (!a.includes(id)) a.push(id); try { localStorage.setItem("sb-want", JSON.stringify(a)); } catch (_) {} }
+};
+function sendWant(o){
+  if (!SHEET_URL) return;
+  try { fetch(SHEET_URL, { method:"POST", mode:"no-cors", body:new URLSearchParams({ action:"want", ...o }) }).catch(() => {}); } catch (_) {}
+}
+/* 검색어·지역 버튼에 맞는 名錄 결과 */
+function dirHits(){
+  const q = state.cq.trim(), area = state.dirArea;
+  if (!DIR || (!q && !area)) return [];
+  const ql = q.toLowerCase(), qr = /[a-z]/i.test(q) && q.replace(/[^a-z0-9]/gi, "").length >= 3 ? dirLoose(q) : "";
+  const areaKeys = q ? Object.keys(DIR.areas).filter(k => k.split("・").some(p => p.includes(q) || q.includes(p))) : [];
+  return DIR.rows.filter(r => (!area || dirInArea(r, area)) && (!q ||
+    r[1].includes(q) || r[1].toLowerCase().includes(ql) || DIR.gu[r[2]].includes(q) || r[4].includes(q) || r[3].includes(q) ||
+    (qr && r[10].includes(qr)) || areaKeys.some(k => dirInArea(r, k))));
+}
+function dirAreas(){
+  const keys = ["新沙・狎鷗亭", "清潭", "江南站", "弘大", "明洞", "聖水", "蠶室"];
+  return `<div class="dir-areas" role="group" aria-label="依地區找診所">${keys.map(k =>
+    `<button type="button" class="dir-a" data-dirarea="${k}" aria-pressed="${state.dirArea === k}">${k}</button>`).join("")}</div>`;
+}
+function dirRow(r){
+  const [id, name, gi, , dongZh, , addr, , , partner] = r;
+  const map = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(name + " " + addr);
+  const on = wants.has(id);
+  return `<li class="dr"><div class="dr-tx"><b lang="ko">${esc(name)}</b><span>${esc(DIR.gu[gi])} · ${esc(dongZh)}</span>
+      <a class="dr-map" href="${map}" target="_blank" rel="noopener">地圖 ↗</a></div>
+    ${partner ? `<a class="dr-p" href="#c-${esc(partner)}">合作診所 →</a>`
+      : `<button type="button" class="dr-want" data-want="${id}" aria-pressed="${on}">${on ? "✓ 已收到" : "♡ 想去"}</button>`}</li>`;
+}
+function dirSection(){
+  const q = state.cq.trim(), area = state.dirArea;
+  if (!q && !area) return "";
+  if (!DIR) { loadDir(); return `<p class="dir-note" style="padding:16px 0">正在載入其他診所資料…</p>`; }
+  const hits = dirHits(), n = state.dirN || 20, rest = hits.length - n;
+  return `<section class="dir" aria-label="其他診所">
+    <h2 class="dir-h">其他診所 <small>尚未合作 · <span class="num">${hits.length}</span> 間</small></h2>
+    ${hits.length ? `<p class="dir-note">以下為公開資料，這些診所尚未與 Skinbridge 合作，暫時無法透過我們預約。按「想去」，想去的人多了，我們會優先邀請這間診所合作。</p>
+      <ul class="drs">${hits.slice(0, n).map(dirRow).join("")}</ul>
+      ${rest > 0 ? `<button type="button" class="dir-more" data-dirmore="1">載入更多（還有 <span class="num">${rest}</span> 間）</button>` : ""}` : ""}
+    <div class="dir-ask"><p>找不到你想去的診所？告訴我們名稱，我們會去詢問合作。</p>
+      <div><input id="dirAsk" maxlength="80" placeholder="診所名稱或 Instagram 帳號" aria-label="想去的診所名稱"><button type="button" data-wantask="1">告訴我們</button></div>
+      <p class="dir-done" id="dirDone" hidden>已收到，謝謝！</p></div>
+    <p class="dir-src">其他診所資料來源：健康保險審查評價院（HIRA）醫療機構公開資料</p>
+  </section>`;
+}
+
 function viewClinics(){
   const f = state.f, q = state.cq.trim().toLowerCase();
   const hay = c => [c.name, c.region, c.area, c.address, c.oneliner || "", c.curation || "", ...c.tags, ...tagsOf(c), ...(c.traits || []), ...(c.fields || []), ...c.menu.map(m => m.n)].join(" ").toLowerCase();
@@ -356,9 +421,10 @@ function viewClinics(){
     (!f.lang || (c.langs || "").includes((LANGS.find(l => l[0] === f.lang) || ["", "?"])[1])) &&
     (!f.trait || (c.traits || []).includes(f.trait)) &&
     (!f.camp || campOf(c.id)) &&
-    (!f.ben || c.benefit));
+    (!f.ben || c.benefit) &&
+    (!state.dirArea || !DIR || DIR.rows.some(r => r[9] === c.id && dirInArea(r, state.dirArea))));
   list = f.sort === "new" ? list.slice().reverse() : list.slice().sort((a, b) => (b.selected ? 1 : 0) - (a.selected ? 1 : 0));
-  const any = q || f.area || f.concern || f.treat || f.lang || f.trait || f.camp || f.ben;
+  const any = q || f.area || f.concern || f.treat || f.lang || f.trait || f.camp || f.ben || state.dirArea;
   const regions = [...new Set(list.map(c => c.region))];
   const where = f.area ? f.area : regions.length === 1 ? regions[0] : "";
   const at = Math.min(3, list.length);
@@ -370,7 +436,8 @@ function viewClinics(){
     <header class="cd-h"><h1>診所探索</h1><span class="cd-en">CLINIC DISCOVERY</span>
       <p>所有診所皆為 Skinbridge 合作夥伴，可用中文預約諮詢。</p><a class="cd-gl" href="#guide">不知道從哪開始？看療程指南 <span aria-hidden="true">→</span></a></header>
     </div>
-    <label class="cd-search">${'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>'}<input id="cq" type="search" placeholder="搜尋診所、療程或肌膚問題" value="${esc(state.cq)}" aria-label="搜尋診所、療程或肌膚問題"></label>
+    <label class="cd-search">${'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>'}<input id="cq" type="search" placeholder="搜尋診所、地區或療程" value="${esc(state.cq)}" aria-label="搜尋診所、地區或療程"></label>
+    ${dirAreas()}
     <div class="cd-fl" role="group" aria-label="篩選">
       ${FKEYS.map(([key, label]) => `<button type="button" class="cd-f${f[key] ? " on" : ""}" data-fsheet="${key}" aria-haspopup="dialog">${esc(f[key] || label)} <span aria-hidden="true">⌄</span></button>`).join("")}
       <button type="button" class="cd-f${f.camp ? " on" : ""}" data-fcamp="1" aria-pressed="${f.camp}">體驗團招募中</button>
@@ -382,7 +449,8 @@ function viewClinics(){
       <label class="cd-sort"><span class="sr-only">排序</span><select data-fsel="sort"><option value="rec" ${f.sort !== "new" ? "selected" : ""}>推薦順</option><option value="new" ${f.sort === "new" ? "selected" : ""}>最新合作</option></select></label>
     </div>
     ${list.length ? `<div class="cls">${rows.join("")}</div>`
-      : `<p class="empty">找不到符合條件的診所。可以減少篩選條件，或直接用 LINE 告訴我們你的需求，我們幫你推薦。</p>${lineReco()}`}
+      : (q || state.dirArea ? `<p class="empty">合作診所中沒有符合的結果。</p>` : `<p class="empty">找不到符合條件的診所。可以減少篩選條件，或直接用 LINE 告訴我們你的需求，我們幫你推薦。</p>${lineReco()}`)}
+    ${dirSection()}
     ${filterSheet()}
   </div>`;
 }
@@ -887,7 +955,11 @@ document.addEventListener("click", e => {
   if (t.dataset.gof) { state.f = { area:"", concern:"", treat:"", lang:"", trait:"", camp:false, ben:"", sort:state.f.sort }; state.cq = ""; state.f[t.dataset.gof] = t.dataset.v; go("clinics"); return; }
   if (t.dataset.f) { const k = t.dataset.f; state.f[k] = state.f[k] === t.dataset.v ? "" : t.dataset.v; route(); return; }
   if (t.dataset.fcamp) { state.f.camp = !state.f.camp; route(); return; }
-  if (t.dataset.fclear) { state.f = { area:"", concern:"", treat:"", lang:"", trait:"", camp:false, ben:"", sort:state.f.sort }; state.cq = ""; route(); return; }
+  if (t.dataset.fclear) { state.f = { area:"", concern:"", treat:"", lang:"", trait:"", camp:false, ben:"", sort:state.f.sort }; state.cq = ""; state.dirArea = ""; route(); return; }
+  if (t.dataset.dirarea) { state.dirArea = state.dirArea === t.dataset.dirarea ? "" : t.dataset.dirarea; state.dirN = 20; loadDir(); route(); return; }
+  if (t.dataset.dirmore) { state.dirN = (state.dirN || 20) + 20; reroute(); return; }
+  if (t.dataset.want) { const r = DIR && DIR.rows.find(x => x[0] === t.dataset.want); if (r && !wants.has(r[0])) { wants.add(r[0]); sendWant({ id:r[0], name:r[1], gu:DIR.gu[r[2]], dong:r[3], src:"list" }); } t.setAttribute("aria-pressed", "true"); t.textContent = "✓ 已收到"; return; }
+  if (t.dataset.wantask) { const i = $("#dirAsk"), v = i ? i.value.trim() : ""; if (!v) { if (i) i.focus(); return; } sendWant({ id:"typed", name:v, src:"typed" }); i.value = ""; const d = $("#dirDone"); if (d) d.hidden = false; return; }
   if (t.dataset.region) { state.region = t.dataset.region; route(); }
   else if (t.dataset.cat) { state.cat = t.dataset.cat; route(); }
   else if (t.dataset.gocat) { state.cat = t.dataset.gocat; }
@@ -915,10 +987,14 @@ document.addEventListener("click", e => {
 document.addEventListener("keydown", e => {
   if (e.key === "Escape" && state.sheet) { const k = state.sheet; state.sheet = ""; route(); const b = document.querySelector(`[data-fsheet="${k}"]`); if (b) b.focus(); }
 });
+document.addEventListener("compositionend", e => { if (e.target.id === "q" || e.target.id === "cq") e.target.dispatchEvent(new Event("input", { bubbles: true })); });
+document.addEventListener("focusin", e => { if (e.target.id === "cq") loadDir(); });
 document.addEventListener("input", e => {
   const id = e.target.id;
   if (id === "q" || id === "cq") {
+    if (e.isComposing) return;
     state[id] = e.target.value;
+    if (id === "cq") { state.dirN = 20; if (e.target.value.trim()) loadDir(); }
     const pos = e.target.selectionStart;
     route();
     const q = $("#" + id); q.focus(); q.setSelectionRange(pos, pos);

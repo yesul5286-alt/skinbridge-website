@@ -1085,6 +1085,33 @@ details.pi[open] .pi-h::after{content:"−"}
 .mm a:hover b{color:var(--rose)}
 @media(min-width:900px){ .gd-img{flex-basis:140px;height:150px} .mf{grid-template-columns:repeat(4,minmax(0,1fr))} .pg-cta{flex-direction:row} .pg-cta .btn{width:auto} }
 
+/* ===== 診所名錄 · 想去 ===== */
+.dir-areas{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin-top:-10px}
+.dir-areas::-webkit-scrollbar{display:none}
+.dir-a{flex:none;min-height:36px;padding:0 14px;border:1px solid #D9D3C9;border-radius:999px;background:transparent;font:inherit;font-size:.84rem;color:var(--ink);cursor:pointer}
+.dir-a[aria-pressed=true]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.dir{display:flex;flex-direction:column;gap:12px;margin-top:6px}
+.dir-h{margin:0;display:flex;align-items:baseline;justify-content:space-between;gap:10px;font:500 1.05rem var(--sans)}
+.dir-h small{font-size:.78rem;color:var(--muted);font-weight:400}
+.dir-note{margin:0;font-size:.8rem;line-height:1.65;color:var(--muted)}
+.drs{list-style:none;margin:0;padding:0;border-top:1px solid #D6D1C9}
+.dr{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--rule)}
+.dr-tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.dr-tx b{font-weight:500;font-size:.95rem;overflow-wrap:anywhere}
+.dr-tx span{font-size:.78rem;color:var(--muted)}
+.dr-map{align-self:flex-start;display:inline-flex;align-items:center;min-height:28px;font-size:.76rem;color:#725C3E;text-decoration:underline;text-underline-offset:2px}
+.dr-want{flex:none;min-height:40px;min-width:78px;padding:0 14px;border:1px solid var(--rose);border-radius:999px;background:transparent;color:var(--rose);font:inherit;font-size:.84rem;cursor:pointer}
+.dr-want[aria-pressed=true]{background:var(--rose);color:#fff}
+.dr-p{flex:none;display:inline-flex;align-items:center;min-height:40px;padding:0 14px;border-radius:999px;background:var(--rose-soft);color:var(--rose-deep);font-size:.84rem}
+.dir-more{align-self:center;min-height:44px;padding:0 22px;border:1px solid #D9D3C9;border-radius:999px;background:var(--white);font:inherit;font-size:.86rem;color:var(--ink);cursor:pointer}
+.dir-ask{display:flex;flex-direction:column;gap:8px;background:var(--white);border:1px solid #E6E1D8;border-radius:14px;padding:16px}
+.dir-ask p{margin:0;font-size:.88rem}
+.dir-ask div{display:flex;gap:8px}
+.dir-ask input{flex:1;min-width:0;min-height:44px;border:1px solid #D9D3C9;border-radius:10px;padding:0 12px;font:inherit;font-size:16px;background:#fff;color:var(--ink)}
+.dir-ask button{flex:none;min-height:44px;padding:0 16px;border:0;border-radius:10px;background:var(--ink);color:#fff;font:inherit;font-size:.86rem;cursor:pointer}
+.dir-done{color:var(--rose);font-size:.84rem}
+.dir-src{margin:0;font-size:.72rem;color:var(--muted)}
+
 /* ===== 은은한 공간 사진 ===== */
 .cd-hero{width:100vw;margin-left:calc(50% - 50vw);padding:0 calc(max(16px,env(safe-area-inset-left,0px)) + 8px) 6px;display:flex;flex-direction:column;gap:14px;
   background:linear-gradient(90deg,var(--paper) 0%,var(--paper) 40%,rgba(241,240,235,.6) 60%,rgba(241,240,235,.12) 100%),var(--hi,url(https://www.skinbridgekorea.com/tw/img/home/hero-3.webp)) right top/62% 100% no-repeat}
