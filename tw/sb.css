@@ -438,6 +438,10 @@ button.link{background:none;border:0;padding:0}
 .mlist b{font-weight:500}
 .mlist span{font-size:.84rem;color:var(--muted)}
 .fl{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.fl-ln{display:flex;gap:16px;flex-wrap:wrap}
+.privacy section{display:flex;flex-direction:column;gap:6px}
+.privacy ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:4px}
+.privacy p,.privacy li{margin:0;font-size:.9rem;line-height:1.75;color:var(--ink)}
 .logo-s{font:400 1rem var(--display);letter-spacing:.2em;color:var(--ink)}
 
 .disp{font:400 1.15rem var(--display);letter-spacing:.16em;color:var(--ink)}
@@ -966,6 +970,9 @@ details.pi[open] .pi-h::after{content:"−"}
 .d2-bar{position:sticky;top:0;left:auto;right:auto;z-index:6;width:100vw;margin-left:calc(50% - 50vw);background:var(--paper);display:flex;justify-content:space-between;align-items:center;padding:4px 8px;border-bottom:1px solid var(--rule)}
 .d2-bar .d2-ic{background:none;border-radius:0}
 .d2-bar .d2-logo{background:none;padding:0}
+.d2-acts{display:flex;gap:6px}
+.d2-top .d2-logo{position:absolute;left:50%;transform:translateX(-50%)}
+.d2-ic.on{color:var(--rose)}
 .d2-hero{margin-top:0}
 .d2-slide{aspect-ratio:3/2}
 .d2-cnt{top:12px;right:12px;bottom:auto;border-radius:999px;padding:2px 10px}

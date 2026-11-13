@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+TC:wght@500;600&family=Libre+Caslon+Text&family=Montserrat:wght@400&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611140051">
+<link rel="stylesheet" href="/tw/sb.css?v=202611140057">
 </head>
 <body>
 <header class="hd">
@@ -32,12 +32,12 @@
 <div class="wrap"><footer>
   <p>Skinbridge 為連接台灣顧客與韓國合作醫療院所的服務，醫療行為皆由各院所醫師執行，是否適合施作須經醫師諮詢判斷。</p>
   <p>價格以韓元為準，是否含 VAT 依各診所標示；台幣為參考價（1 NT$ ≈ 41.6 韓元，2026.11）。實際療程與價格以診所諮詢為準。部分診所資料來源：健康保險審查評價院（HIRA）。</p>
-  <p class="fl"><span class="logo-s">SKINBRIDGE</span><a class="link" href="https://line.me/R/ti/p/%40911xoyoc" target="_blank" rel="noopener">LINE 官方帳號</a></p>
+  <p class="fl"><span class="logo-s">SKINBRIDGE</span><span class="fl-ln"><a class="link" href="/tw/#privacy">隱私權政策</a><a class="link" href="https://line.me/R/ti/p/%40911xoyoc" target="_blank" rel="noopener">LINE 官方帳號</a></span></p>
 </footer></div>
 
 <div class="bar" id="bar" hidden><div class="bar-in" id="barIn"></div></div>
 
-<script src="/tw/sb-common.js?v=202611140051"></script>
+<script src="/tw/sb-common.js?v=202611140057"></script>
 <script>
 function viewApply(){
   const p = state.prefill || { type:"booking", clinic:"selena", item:"" };
@@ -83,7 +83,7 @@ function viewApply(){
       </div>
       <div class="f" id="igWrap"><label for="fIg">Instagram 帳號 <span id="igReq"></span></label><input id="fIg" placeholder="@xiaomei"></div>
       <div class="f"><label for="fConcern">目前的皮膚困擾</label><textarea id="fConcern" placeholder="例如：毛孔粗大、痘疤、下顎線不明顯"></textarea></div>
-      <label class="agree"><input type="checkbox" id="fAgree"><span>我同意 Skinbridge 為聯繫與安排之目的使用以上資料與 LINE 帳號，並了解實際施作與否須經醫師諮詢判斷。</span></label>
+      <label class="agree"><input type="checkbox" id="fAgree"><span>我同意 Skinbridge 為聯繫與安排之目的使用以上資料與 LINE 帳號（<a class="link" href="/tw/#privacy" target="_blank" rel="noopener">隱私權政策</a>），並了解實際施作與否須經醫師諮詢判斷。</span></label>
       <p class="err" id="err" aria-live="polite"></p>
       <button class="btn rose" type="submit" id="submitBtn">送出申請</button>
     </form>
