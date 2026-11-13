@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+TC:wght@500;600&family=Libre+Caslon+Text&family=Montserrat:wght@400&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611132316">
+<link rel="stylesheet" href="/tw/sb.css?v=202611140048">
 </head>
 <body>
 <header class="hd">
@@ -44,7 +44,7 @@
     <a href="#me" data-nav="me"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span>我的</span></a>
 </nav>
 
-<script src="/tw/sb-common.js?v=202611132316"></script>
+<script src="/tw/sb-common.js?v=202611140048"></script>
 <script>
 /* ===== 화면 ===== */
 const HOME = {
@@ -682,7 +682,7 @@ function viewClinic(c){
       <div class="tcards">${k.tiers.map((x, i) => `<div class="tcard ${i === 0 ? "top" : ""}">
         <div class="tph ${c.tone}"><b>${tierLabel(x)}</b>${x.influencer ? `<span class="inf">網紅限定</span>` : ""}</div>
         <div class="tbd">${tierScope(x, k)}
-          <div class="tm">招募 <span class="num">${x.quota}</span> 名</div>
+          <div class="tm">${quotaTxt(x.quota)}</div>
           ${x.notes ? `<details class="tdet"><summary>注意事項</summary><p>${esc(x.notes).replace(/\n/g, "<br>")}</p></details>` : ""}
           <button type="button" class="btn rose sm" data-apply="camp" data-clinic="${c.id}" data-tier="${tierKey(x)}">報名這個方案</button></div>
       </div>`).join("")}</div>

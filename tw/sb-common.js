@@ -111,15 +111,36 @@ const stars = n => "★★★★★".slice(0, n) + "☆☆☆☆☆".slice(0, 5 
 const tierLabel = t => t.type === "free" ? "免費體驗" : `${t.type}% OFF`;
 const tierKey = t => t.type === "free" ? "free" : String(t.type);
 
-/* 체험단 목록은 병원 데이터에서 만든다 */
+/* 체험단 목록은 병원 데이터에서 만든다
+   (2026-11-14) 모든 제휴 병원이 기본으로 '全療程 10% OFF·인원 제한 없음·매달 말일 마감' 체험단을 가진다.
+   병원이 따로 넣은 다른 단계(예: 셀레나 무료 1명)는 그 병원 마감일까지 함께 보인다.
+   quota 0 = 인원 제한 없음(名額不限). */
+const STD_RATE = 10;
+const STD_NOTES = "【合作發布要求】\n1. 到院當天發布 Instagram 限時動態 1 則\n2. 體驗後 1 週內發布 Reels 影片 1 支\n3. 發布時加入共同創作者：@skinbridge_kr\n4. 追蹤帳號：@skinbridge_kr";
+const ymd = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+const monthEnd = () => { const d = new Date(); return ymd(new Date(d.getFullYear(), d.getMonth() + 1, 0)); };
+const tierRank = t => t.type === "free" ? 1000 : Number(t.type) || 0;
 let CAMPS = [];
-function buildCamps(){ CAMPS = CLINICS.filter(c => c.camp && c.camp.tiers && c.camp.tiers.length && c.camp.end).map(c => ({
-  id: c.id, clinic: c.id, tone: c.tone, end: c.camp.end, cats: c.camp.cats, target: c.camp.target,
-  example: c.example || c.camp.example, tiers: c.camp.tiers,
+function campFor(c){
+  const own = c.camp && Array.isArray(c.camp.tiers) ? c.camp.tiers : [];
+  if (c.example) {   // 미리보기용 예시 병원은 예전 방식 그대로
+    return own.length && c.camp.end ? { end: c.camp.end, target: c.camp.target, cats: c.camp.cats, tiers: own, example: true } : null;
+  }
+  const ownOpen = c.camp && c.camp.end && daysLeft(c.camp.end) >= 0;
+  const std = own.find(t => tierKey(t) === String(STD_RATE));
+  const extras = ownOpen ? own.filter(t => tierKey(t) !== String(STD_RATE)) : [];
+  const tiers = [...extras, { type: STD_RATE, quota: 0, all: true, influencer: false, items: "", notes: (std && std.notes) || STD_NOTES }]
+    .sort((a, b) => tierRank(b) - tierRank(a));
+  return { end: monthEnd(), target: (c.camp && c.camp.target) || "全療程 10% OFF", cats: (c.camp && c.camp.cats) || [], tiers, example: false };
+}
+function buildCamps(){ CAMPS = CLINICS.map(c => [c, campFor(c)]).filter(([, k]) => k).map(([c, k]) => ({
+  id: c.id, clinic: c.id, tone: c.tone, end: k.end, cats: k.cats || [], target: k.target,
+  example: c.example || k.example, tiers: k.tiers,
   title: `${c.name} 體驗團`,
-  quota: c.camp.tiers.reduce((s, t) => s + t.quota, 0),
-  best: tierLabel(c.camp.tiers[0])
+  quota: k.tiers.some(t => !t.quota) ? 0 : k.tiers.reduce((s, t) => s + t.quota, 0),
+  best: tierLabel(k.tiers[0])
 })); }
+const quotaTxt = q => q ? `招募 <span class="num">${q}</span> 名` : "名額不限";
 buildCamps();
 
 /* 관리자 시트의 최신 병원 데이터를 읽는다. 실패하면 이 파일에 적힌 데이터를 그대로 쓴다. */
@@ -155,10 +176,10 @@ function campCard(k){
     ${c.photos && c.photos.length
       ? `<div class="cimg" style="--bg:url('${esc(c.photos[0]).replace(/'/g, "")}')"><img src="${esc(c.photos[0])}" alt="${esc(c.name)}" loading="lazy"></div>`
       : `<div class="cimg ph ${k.tone}"></div>`}
-    <div class="cchips"><span class="dd2 ${d <= 2 ? "hot" : ""}">${ddLabel(k)}</span><span class="best">最高 ${k.best}</span></div>
+    <div class="cchips"><span class="dd2 ${d <= 2 ? "hot" : ""}">${ddLabel(k)}</span>${k.tiers.map(t => `<span class="best">${tierLabel(t)}</span>`).join("")}</div>
     <span class="loc">${c.region} · ${esc(c.area)}</span>
     <div class="t">${esc(k.target)}${k.example ? '<span class="ex">範例</span>' : ""}</div>
-    <div class="m">${esc(c.name)} · ${k.tiers.length} 種方案 · 共 <span class="num">${k.quota}</span> 名${inf ? `（網紅 ${inf}）` : ""}</div>
+    <div class="m">${esc(c.name)} · ${k.tiers.length > 1 ? `${k.tiers.length} 種方案 · ` : ""}${k.quota ? `共 <span class="num">${k.quota}</span> 名` : "名額不限"}${inf ? `（網紅 ${inf}）` : ""}</div>
   </a>`;
 }
 function clinicCard(c){
@@ -171,13 +192,13 @@ function clinicCard(c){
       <div class="n">${esc(c.name)}${exTag(c)}</div>
       <div class="s">${sub}</div>
       ${c.perk ? `<div class="perk-s">預約即贈 ${esc(c.perk)}</div>` : ""}
-      <div class="go">${k ? `體驗團 最高 ${k.best} · ` : ""}預約諮詢 →</div></div>
+      <div class="go">${k ? `體驗團 ${k.tiers.map(tierLabel).join("・")} · ` : ""}預約諮詢 →</div></div>
   </a>`;
 }
 function ladder(k){
   return `<ol class="ladder">${k.tiers.map((t, i) => `<li class="lv lv${Math.min(i,2)}">
       <span class="tl">${tierLabel(t)}</span>
-      <span class="tq"><span class="num">${t.quota}</span> 名</span>
+      <span class="tq">${t.quota ? `<span class="num">${t.quota}</span> 名` : "名額不限"}</span>
       ${t.influencer ? `<span class="inf">網紅限定</span>` : ""}
       ${t.items ? `<span class="ti">${esc(t.items)}</span>` : ""}
     </li>`).join("")}</ol>`;
