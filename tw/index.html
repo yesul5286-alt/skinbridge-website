@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+TC:wght@500;600&family=Libre+Caslon+Text&family=Montserrat:wght@400&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611140057">
+<link rel="stylesheet" href="/tw/sb.css?v=202611140146">
 </head>
 <body>
 <header class="hd">
@@ -44,7 +44,7 @@
     <a href="#me" data-nav="me"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span>我的</span></a>
 </nav>
 
-<script src="/tw/sb-common.js?v=202611140057"></script>
+<script src="/tw/sb-common.js?v=202611140146"></script>
 <script>
 /* ===== 화면 ===== */
 const HOME = {
@@ -644,7 +644,16 @@ function viewClinic(c){
   const posterBox = posters ? `<div class="posters">${posters.map((p, i) => `<a class="poster" href="${esc(p.img)}" target="_blank" rel="noopener">
       <img src="${esc(p.img)}" alt="${esc(p.title || (m.month + "活動 " + (i + 1)))}" loading="lazy"></a>`).join("")}</div>
     <div class="poster-acts">${book((m.month || "") + "活動", "預約活動療程")}</div>` : "";
-  const monthBox = m ? `<h3 class="sub-h">${esc(m.month)}活動</h3>` + posterBox + (m.items && m.items.length ? `<div class="evs">${m.items.map(evCard).join("")}</div>` : "")
+  const evRow = r => {
+    const off = r.orig && r.krw && r.orig > r.krw ? Math.round((1 - r.krw / r.orig) * 100) : 0;
+    return `<li class="evr"><div class="evr-t">${esc(r.n)}${r.s ? `<small>${esc(r.s)}</small>` : ""}</div>
+      <div class="evr-p">${r.krw ? `${off ? `<s>${won(r.orig)}</s><em>${off}%</em>` : ""}<b>${won(r.krw)}</b><small>${twd(r.krw)}</small>` : `<span class="ask">LINE 詢價</span>`}</div></li>`; };
+  const evList = items => {
+    const gs = []; items.forEach(r => { const g = r.g || ""; let x = gs.find(y => y.g === g); if (!x) gs.push(x = { g, rows: [] }); x.rows.push(r); });
+    return `<div class="evl">${gs.map((x, i) => `<details class="evg"${i < 2 ? " open" : ""}><summary>${esc(x.g || (m.month + "活動"))}<span>${x.rows.length}</span></summary><ul>${x.rows.map(evRow).join("")}</ul></details>`).join("")}
+      <div class="poster-acts">${book((m.month || "") + "活動", "預約活動療程")}</div></div>`; };
+  const evWithImg = (m && m.items || []).filter(r => r.img), evNoImg = (m && m.items || []).filter(r => !r.img);
+  const monthBox = m ? `<h3 class="sub-h">${esc(m.month)}活動</h3>` + posterBox + (evWithImg.length ? `<div class="evs">${evWithImg.map(evCard).join("")}</div>` : "") + (evNoImg.length ? evList(evNoImg) : "")
     + `<p class="note">${esc(m.month)}活動${m.note ? "・" + esc(m.note) : ""}。</p>` : "";
   /* 가격표 이미지: 맨 아래 작은 사진 줄 */
   const pimgs = c.priceImgs && c.priceImgs.length ? `<div class="pthumbs-h"><b>完整價目表</b><span>${c.priceImgs.length} 張・點擊放大</span></div>
