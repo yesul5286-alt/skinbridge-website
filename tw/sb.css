@@ -1095,7 +1095,13 @@ details.pi[open] .pi-h::after{content:"−"}
 .dir-h small{font-size:.78rem;color:var(--muted);font-weight:400}
 .dir-note{margin:0;font-size:.8rem;line-height:1.65;color:var(--muted)}
 .drs{list-style:none;margin:0;padding:0;border-top:1px solid #D6D1C9}
-.dr{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--rule)}
+.dr{display:flex;flex-wrap:wrap;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--rule)}
+.dr-gbox{flex:0 0 100%;display:flex;flex-direction:column;gap:6px;background:var(--white);border:1px solid #E6E1D8;border-radius:12px;padding:12px}
+.dr-gph{margin:0}.dr-gph img{width:100%;max-height:220px;object-fit:cover;border-radius:8px;display:block}
+.dr-gph figcaption{font-size:.7rem;color:var(--muted);margin-top:4px}.dr-gph figcaption a{color:inherit;text-decoration:underline}
+.dr-grt{margin:0;font-size:.86rem}
+.dr-ghr{list-style:none;margin:0;padding:0;font-size:.8rem;line-height:1.6;color:var(--ink)}
+.dr-gsrc{margin:0;font-size:.7rem;color:var(--muted)}
 .dr-tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
 .dr-tx b{font-weight:500;font-size:.95rem;overflow-wrap:anywhere}
 .dr-tx span{font-size:.78rem;color:var(--muted)}
