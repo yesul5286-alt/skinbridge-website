@@ -74,6 +74,8 @@ button{font:inherit;cursor:pointer}
 /* camp card */
 .camp{width:172px;display:flex;flex-direction:column;gap:6px}
 .grid .camp{width:auto}
+.grid:has(> .camp){grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 10px}
+@media(min-width:900px){.grid:has(> .camp){grid-template-columns:repeat(4,minmax(0,1fr));gap:24px 16px}}
 .camp .ph{aspect-ratio:4/5;max-width:100%;padding:12px;display:flex;flex-direction:column;justify-content:space-between}
 .camp .dd{align-self:flex-start;font:700 .7rem var(--latin);letter-spacing:.12em;border:1px solid rgba(255,255,255,.85);padding:2px 7px}
 .camp .dd.hot{background:var(--white);color:var(--rose-deep);border-color:var(--white)}
