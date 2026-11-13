@@ -116,7 +116,7 @@ const tierKey = t => t.type === "free" ? "free" : String(t.type);
    병원이 따로 넣은 다른 단계(예: 셀레나 무료 1명)는 그 병원 마감일까지 함께 보인다.
    quota 0 = 인원 제한 없음(名額不限). */
 const STD_RATE = 10;
-const STD_NOTES = "【合作發布要求】\n1. 到院當天發布 Instagram 限時動態 1 則\n2. 體驗後 1 週內發布 Reels 影片 1 支\n3. 發布時加入共同創作者：@skinbridge_kr\n4. 追蹤帳號：@skinbridge_kr";
+const STD_NOTES = "【合作發布要求】\n1. 到院當天發布 Instagram 限時動態 1 則，並標註 @skinbridge_kr\n2. 體驗後 1 週內發布 Instagram 貼文 1 則：照片 5 張以上、內文 200 字以上\n3. 貼文加入共同創作者：@skinbridge_kr\n4. 追蹤帳號：@skinbridge_kr";
 const ymd = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
 const monthEnd = () => { const d = new Date(); return ymd(new Date(d.getFullYear(), d.getMonth() + 1, 0)); };
 const tierRank = t => t.type === "free" ? 1000 : Number(t.type) || 0;
