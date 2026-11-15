@@ -1,7 +1,43 @@
 {
  "_merge": true,
  "id": "selena",
- "intro": "SELENA 位於弘大入口站 8 號出口，Kakao Friends 所在大樓 9 樓，是離弘大入口站 8 號出口最近的醫美診所，旅途中也方便到訪，週日與國定假日照常看診。\n代表院長李相炅臨床經歷 10 年以上，為 Potenza・Juvelook・Volnewmer Key Doctor，Potenza 療程突破 5,000 例。\n療程前由院長親自諮詢並進行雙重設計確認，依每位顧客的臉型與需求一對一規劃，不套用制式套餐。\n院內為 Ultherapy PRIME 原廠正品醫院、Thermage FLX 官方認證診所，並引進 Titanium、Volnewmer、Shurink Universe、InMode、Potenza、ONDA 等設備。\n只使用經驗證的原廠正品與標準劑量，所有價格事先公開，外國顧客與韓國顧客同價。\n堅持 3 無原則：不提供睡眠麻醉、鼻部填充與線雕等高風險療程。\n可用韓・簡中・繁中・日・英 5 國語言諮詢。",
+ "about": "SELENA 位於弘大入口站 8 號出口 Kakao Friends 大樓 9 樓，全年 365 天看診、中午不休息，施打前親眼確認原廠正品，約 300 項價格全部公開。",
+ "intro": "閃耀的你，從 Selena 開始。\nSELENA 位於弘大入口站 8 號出口，Kakao Friends 所在大樓 9 樓，是離弘大入口站 8 號出口最近的醫美診所。全年 365 天看診（僅春節、中秋節當天休診），中午不休息，旅程哪一天來都可以。\n代表院長李相炅臨床經歷 10 年以上，為 Potenza・Juvelook・Volnewmer Key Doctor，Potenza 療程突破 5,000 例；3 位院長實名公開學經歷，並持續參與學會與學術交流。\n療程前由院長親自諮詢並進行雙重設計確認，先看膚況，只推薦您真正需要的療程，不需要的不會硬推。\n施打前讓您親眼確認原廠正品；哪些產品可以現場開封、哪些不能，價目表上先寫清楚。院內為 Ultherapy PRIME 原廠正品醫院、Thermage FLX 官方認證診所，並引進 Titanium、Volnewmer、Shurink Universe、InMode、Potenza、ONDA 等設備。\n約 300 項價格全部事先公開，Potenza 價格已含探頭費，外國顧客與韓國顧客同價。\n來韓旅遊也能安排：建議在行程前段預約，留時間給泛紅消退（恢復情況因人而異）；術後可當天上妝的療程，諮詢時一起幫您挑。\n附密碼鎖個人置物櫃與化妝間，做完直接逛弘大。\n韓國演員、模特兒也實際到訪。Google 評分 4.9★（345 則）・韓國部落格評論 1,100+ 篇。\n堅持 3 無原則：不提供睡眠麻醉、鼻部填充與線雕等高風險療程。\n可用韓・簡中・繁中・日・英 5 國語言諮詢。",
+ "tags": [
+  "全年 365 天看診",
+  "中文諮詢",
+  "外國顧客同價"
+ ],
+ "features": [
+  {
+   "icon": "train",
+   "label": "弘大入口站 8 號出口步行 1 分鐘"
+  },
+  {
+   "icon": "cal",
+   "label": "全年 365 天看診・中午不休息"
+  },
+  {
+   "icon": "shield",
+   "label": "施打前親眼確認原廠正品"
+  },
+  {
+   "icon": "tag",
+   "label": "約 300 項價格全公開・外國顧客同價"
+  },
+  {
+   "icon": "chat",
+   "label": "韓・簡中・繁中・日・英 5 國語言"
+  },
+  {
+   "icon": "list",
+   "label": "密碼置物櫃・化妝間，做完直接逛弘大"
+  },
+  {
+   "icon": "list",
+   "label": "3 無原則：不做高風險療程"
+  }
+ ],
  "equipment": [
   "Ultherapy PRIME",
   "Thermage FLX",
@@ -15,18 +51,94 @@
  "programs": [
   {
    "title": "Potenza 黃金微針",
-   "desc": "院長為 Potenza Key Doctor，療程突破 5,000 例；依痘疤、毛孔、彈力等不同需求調整模式。",
+   "desc": "院長為 Potenza Key Doctor，療程突破 5,000 例；價格已含探頭費，依痘疤、毛孔、彈力調整模式。",
    "img": "https://www.skinbridgekorea.com/tw/img/selena/prog-1.webp"
   },
   {
    "title": "美版音波 × 鳳凰電波",
-   "desc": "Ultherapy PRIME 原廠正品醫院、Thermage FLX 官方認證診所，依臉型分層規劃拉提。",
-   "img": "https://www.skinbridgekorea.com/tw/img/selena/prog-2.webp"
+   "desc": "Ultherapy PRIME 原廠正品醫院、Thermage FLX 官方認證診所，施打前親眼確認正品，依臉型分層拉提。",
+   "img": "https://www.skinbridgekorea.com/tw/img/selena/prog-lifting.webp"
+  },
+  {
+   "title": "依年齡推薦組合",
+   "desc": "20 代到 60 代以上，分「無恢復期」與「有恢復期」兩種組合，院長依膚況與旅程幫您挑。",
+   "img": "https://www.skinbridgekorea.com/tw/img/selena/r-consult.webp"
   },
   {
    "title": "水光・膠原 Skin Booster",
    "desc": "Juvelook Key Doctor 院長依膚況挑選麗珠蘭、Juvelook 等水光療程。",
    "img": "https://www.skinbridgekorea.com/tw/img/selena/prog-3.webp"
   }
+ ],
+ "doctors": [
+  {
+   "photo": "https://www.skinbridgekorea.com/selena-tw/assets/doctors/dr-sang-kyung-lee-face.webp",
+   "name": "李相炅",
+   "tags": [
+    "3D 臉型設計療程",
+    "臨床經歷 10 年以上",
+    "Potenza・Juvelook・Volnewmer Key Doctor",
+    "順天鄉大學 畢業",
+    "前 Dr. Petit 醫院 弘大入口店・明洞店 院長",
+    "大韓肥胖美容學會 肥胖專業認證醫師 第 1 期",
+    "順天鄉大學附屬首爾醫院 修練",
+    "大韓填充醫學會 正會員",
+    "大韓抗老化學會 正會員",
+    "大韓美容雷射整形醫學會 正會員"
+   ],
+   "role": "代表院長"
+  },
+  {
+   "photo": "https://www.skinbridgekorea.com/selena-tw/assets/doctors/dr-woo-yong-nam-face.webp",
+   "tags": [
+    "拉提・皺紋改善",
+    "順天鄉大學醫學系 畢業",
+    "前 光教 Tones 醫院 副院長",
+    "美國醫師資格證（USMLE ECFMG）",
+    "前 Glow 醫院・Sweet 醫院 副院長"
+   ],
+   "role": "院長",
+   "name": "南佑龍"
+  },
+  {
+   "name": "吳賢鐘",
+   "role": "院長",
+   "tags": [
+    "微整形・抗老化",
+    "臉部玻尿酸・肉毒",
+    "梨花女子大學醫學系 畢業",
+    "前 Doctor Petit 醫院 弘大店 院長",
+    "天主教中央醫療院 內科專科醫師",
+    "天主教大學 研究所",
+    "大韓拉提研究會 會員"
+   ],
+   "photo": "https://www.skinbridgekorea.com/selena-tw/assets/doctors/dr-hyeon-jong-oh-face.webp"
+  }
+ ],
+ "photos": [
+  "https://www.skinbridgekorea.com/tw/img/selena/r-lobby.webp",
+  "https://www.skinbridgekorea.com/tw/img/selena/intro-1.webp",
+  "https://www.skinbridgekorea.com/tw/img/selena/intro-2.webp",
+  "https://www.skinbridgekorea.com/tw/img/selena/intro-3.webp",
+  "https://www.skinbridgekorea.com/tw/img/selena/intro-4.webp",
+  "https://www.skinbridgekorea.com/tw/img/selena/intro-5.webp",
+  "https://www.skinbridgekorea.com/tw/img/selena/r-reception.webp",
+  "https://www.skinbridgekorea.com/tw/img/selena/r-consult.webp"
+ ],
+ "interior": [
+  "https://www.skinbridgekorea.com/tw/img/selena/r-lobby.webp",
+  "https://www.skinbridgekorea.com/tw/img/selena/r-reception.webp",
+  "https://www.skinbridgekorea.com/tw/img/selena/r-hall.webp",
+  "https://www.skinbridgekorea.com/tw/img/selena/r-consult.webp",
+  "https://www.skinbridgekorea.com/tw/img/selena/r-laser-room.webp",
+  "https://www.skinbridgekorea.com/tw/img/selena/r-sofa.webp",
+  "https://www.skinbridgekorea.com/tw/img/selena/r-powder.webp",
+  "https://www.skinbridgekorea.com/tw/img/selena/r-lockers.webp",
+  "https://www.skinbridgekorea.com/tw/img/selena/interior-1.webp",
+  "https://www.skinbridgekorea.com/tw/img/selena/interior-2.webp",
+  "https://www.skinbridgekorea.com/tw/img/selena/interior-3.webp",
+  "https://www.skinbridgekorea.com/tw/img/selena/interior-4.webp",
+  "https://www.skinbridgekorea.com/tw/img/selena/interior-5.webp",
+  "https://www.skinbridgekorea.com/tw/img/selena/interior-6.webp"
  ]
 }

@@ -1,0 +1,178 @@
+{
+ "_merge": true,
+ "id": "dadosan",
+ "tags": [
+  "Layered Lifting 分層拉提",
+  "100% 預約制",
+  "先進再生醫療實施機構"
+ ],
+ "features": [
+  {
+   "icon": "train",
+   "label": "狎鷗亭羅德奧站 5 號出口 200 公尺・免費代客泊車"
+  },
+  {
+   "icon": "shield",
+   "label": "保健福祉部指定 先進再生醫療實施機構（2026.9）"
+  },
+  {
+   "icon": "list",
+   "label": "皮膚科・整形外科・家庭醫學科 專科醫師協診"
+  },
+  {
+   "icon": "cal",
+   "label": "100% 預約制・全獨立 1 人診療室"
+  }
+ ],
+ "programs": [
+  {
+   "title": "Ulthera Layered Lifting 超聲刀分層拉提",
+   "desc": "依症狀・皮膚層・部位設計，疊加 Ultherapy PRIME、Thermage FLX、Sofwave、Tune、BBL、Revinas 等原廠設備的 DA 招牌拉提。",
+   "img": "https://www.skinbridgekorea.com/tw/img/dadosan/r-prog-layered-lifting-devices.webp"
+  },
+  {
+   "title": "Layered Revi-Tune 分層 Revi-Tune",
+   "desc": "射頻能量結合體外震波，同時照顧彈力、循環與線條，臉部到身體多部位皆可施作。",
+   "img": ""
+  },
+  {
+   "title": "Layered Body Lifting 分層身體拉提",
+   "desc": "以 Tune Body・Uni Body、BBL、Sofwave、Thermage FLX、Ultherapy PRIME 分層提升身體彈力；1 人療程室內附獨立淋浴間。",
+   "img": "https://www.skinbridgekorea.com/tw/img/dadosan/r-prog-layered-body-lifting-private-suite.webp"
+  },
+  {
+   "title": "DA LifeCell 幹細胞",
+   "desc": "自體血液幹細胞或 SVF 脂肪幹細胞，搭配 Metacell MCT 的再生療程；本院於 2026 年 9 月獲指定為先進再生醫療實施機構。",
+   "img": ""
+  }
+ ],
+ "doctors": [
+  {
+   "name": "尹浩俊",
+   "role": "代表院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/dadosan/doctor-1.webp",
+   "tags": [
+    "皮膚科專科醫師",
+    "首爾大學 醫學學士",
+    "首爾大學研究所 醫學碩士",
+    "前 首爾大學醫院 皮膚科 諮詢醫師",
+    "國際美容外科學會（IACS）正會員",
+    "國際皮膚外科學會（ISDC）正會員",
+    "大韓皮膚外科學會 正會員"
+   ]
+  },
+  {
+   "name": "金敏宰",
+   "role": "總括院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/dadosan/r-doctor-kim-minjae.webp",
+   "tags": [
+    "皮膚科專科醫師",
+    "首爾大學醫科大學 優等畢業",
+    "首爾大學研究所 醫學科 碩博士整合課程（皮膚科學）",
+    "首爾大學 皮膚科學教室 最優秀住院醫師",
+    "大韓皮膚科學會 正會員"
+   ]
+  },
+  {
+   "name": "安馬立",
+   "role": "首席院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/dadosan/r-doctor-an-marip.webp",
+   "tags": [
+    "整形外科專科醫師",
+    "天主教大學 醫學專門研究所 畢業",
+    "前 NANA 整形外科 診療院長",
+    "前 富川聖母醫院 整形外科 臨床教授",
+    "大韓整形外科學會 正會員",
+    "大韓美容整形外科學會 正會員",
+    "國際美容整形外科學會（ISAPS）正會員",
+    "大韓整形學會 眼整形研究會 正會員",
+    "大韓整形學會 抗老化研究會 正會員"
+   ]
+  },
+  {
+   "name": "林京淑",
+   "role": "院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/dadosan/r-doctor-lim-kyungsook.webp",
+   "tags": [
+    "家庭醫學科專科醫師",
+    "高麗大學 安岩醫院 受訓",
+    "前 狎鷗亭 S Clinic 代表院長",
+    "前 Jiwoo 診所 副院長",
+    "大韓美容整形雷射醫學會 正會員",
+    "大韓肥胖研究醫師會 正會員",
+    "大韓臨床皮膚治療研究會 正會員",
+    "大韓皮膚抗老化學會 正會員"
+   ]
+  },
+  {
+   "name": "李佳彦",
+   "role": "院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/dadosan/r-doctor-lee-gaeon.webp",
+   "tags": [
+    "仁濟大學醫科大學 畢業",
+    "前 Lienjang 整形外科皮膚科 診療院長",
+    "大韓美容整形雷射醫學會 正會員",
+    "大韓雷射皮膚毛髮學會 正會員",
+    "大韓提升研究會 正會員",
+    "大韓肥胖研究醫師會 正會員"
+   ]
+  }
+ ],
+ "equipment": [
+  "Ultherapy PRIME",
+  "Thermage FLX",
+  "Sofwave",
+  "BBL (Mjoule)",
+  "TuneFace",
+  "Tune Body",
+  "Uni Body",
+  "Revinas",
+  "XERF",
+  "PicoPlus",
+  "Clarity",
+  "Fotona StarWalker QX",
+  "Potenza",
+  "EVE-MUSE 3D Skin Analyzer",
+  "Hyperbaric Oxygen Chamber"
+ ],
+ "hours": [
+  "10:00-19:00",
+  "10:00-19:00",
+  "10:00-19:00",
+  "10:00-19:00",
+  "10:00-21:00",
+  "10:00-16:00",
+  ""
+ ],
+ "lunch": "",
+ "hoursNote": "週五夜間看診至 21:00・週六不休午連續看診・週日與國定假日休診・100% 預約制・免費代客泊車",
+ "langs": "",
+ "more": "",
+ "photos": [
+  "https://www.skinbridgekorea.com/tw/img/dadosan/interior-1.webp",
+  "https://www.skinbridgekorea.com/tw/img/dadosan/interior-5.webp",
+  "https://www.skinbridgekorea.com/tw/img/dadosan/interior-6.webp",
+  "https://www.skinbridgekorea.com/tw/img/dadosan/r-photo-reception-lobby.webp",
+  "https://www.skinbridgekorea.com/tw/img/dadosan/r-photo-lounge.webp",
+  "https://www.skinbridgekorea.com/tw/img/dadosan/r-photo-facade.webp"
+ ],
+ "interior": [
+  "https://www.skinbridgekorea.com/tw/img/dadosan/interior-1.webp",
+  "https://www.skinbridgekorea.com/tw/img/dadosan/interior-2.webp",
+  "https://www.skinbridgekorea.com/tw/img/dadosan/interior-3.webp",
+  "https://www.skinbridgekorea.com/tw/img/dadosan/interior-4.webp",
+  "https://www.skinbridgekorea.com/tw/img/dadosan/interior-5.webp",
+  "https://www.skinbridgekorea.com/tw/img/dadosan/interior-6.webp",
+  "https://www.skinbridgekorea.com/tw/img/dadosan/interior-7.webp",
+  "https://www.skinbridgekorea.com/tw/img/dadosan/interior-8.webp",
+  "https://www.skinbridgekorea.com/tw/img/dadosan/interior-9.webp",
+  "https://www.skinbridgekorea.com/tw/img/dadosan/interior-10.webp",
+  "https://www.skinbridgekorea.com/tw/img/dadosan/interior-11.webp",
+  "https://www.skinbridgekorea.com/tw/img/dadosan/r-interior-waiting-lounge.webp",
+  "https://www.skinbridgekorea.com/tw/img/dadosan/r-interior-corridor.webp",
+  "https://www.skinbridgekorea.com/tw/img/dadosan/r-interior-consult-room.webp",
+  "https://www.skinbridgekorea.com/tw/img/dadosan/r-interior-treatment-suite-hall.webp",
+  "https://www.skinbridgekorea.com/tw/img/dadosan/r-interior-body-suite-shower.webp",
+  "https://www.skinbridgekorea.com/tw/img/dadosan/r-interior-facade-portrait.webp"
+ ]
+}

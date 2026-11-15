@@ -1,0 +1,165 @@
+{
+ "_merge": true,
+ "id": "drtunes",
+ "oneliner": "清潭全預約制私人空間・慢齡美學與分層拉提",
+ "about": "Salon de Dr.Tune's Clinic 位於首爾清潭洞，以細膩手技與「慢齡（Slow Aging）」理念，在私人空間中陪伴顧客慢慢地、美麗地變老。",
+ "intro": "Salon de Dr.Tune's Clinic 位於首爾江南區清潭洞，使用獨立的 1–2 樓空間。診所以細膩手技與「慢齡（Slow Aging）」理念，希望陪伴每位顧客慢慢地、美麗地變老。\n採事先預約制的私人護理系統，在不受他人視線打擾的專屬空間中進行一對一客製化診療；院內設有 VIP 室、療程・護理室、身體護理室與專用休息室。\n三大招牌療程：\n・Salon de All-Layer：從表皮層到肌肉層，依層次進行拉提與緊緻。\n・Salon de Juvénile：VVIP 幹細胞中心，以幹細胞為基礎的私人再生療程。\n・Salon de Sportif：涵蓋運動前後調理、產後恢復與身體雕塑的全身管理。\n代表院長羅智慧為 Ultra Clear、BTL（EMFACE・EMSCULPT NEO）、Sofwave、BBL、Accent Prime（Tune Face）、Soprano Titanium、Opus、Mirajet 等設備的 Key Doctor，並擔任 SINCLAIR 講師與 LPG Endermologie 臨床顧問。醫療團隊另有 4 位院長，包含麻醉疼痛醫學科專科醫師。",
+ "tags": [
+  "慢齡美學",
+  "全預約制私人空間",
+  "代表院長 Key Doctor"
+ ],
+ "features": [
+  {
+   "icon": "cal",
+   "label": "全預約制・一對一私人診療"
+  },
+  {
+   "icon": "shield",
+   "label": "代表院長為多項設備 Key Doctor"
+  },
+  {
+   "icon": "list",
+   "label": "VIP 室・身體護理室・專用休息室"
+  }
+ ],
+ "programs": [
+  {
+   "title": "Salon de All-Layer 分層拉提",
+   "desc": "多層次拉提與緊緻中心。分析皮膚結構，從表皮層到肌肉層逐層進行拉提，兼顧臉部的立體感、彈力與膚質。",
+   "img": ""
+  },
+  {
+   "title": "Salon de Juvénile 幹細胞療程",
+   "desc": "Salon de Dr.Tune's 的 VVIP 幹細胞中心。以幹細胞為基礎的私人再生療程，照顧肌膚與整體狀態。",
+   "img": ""
+  },
+  {
+   "title": "Salon de Sportif 運動・產後調理",
+   "desc": "為運動前後調理、減重與產後恢復設計的全身管理，可搭配 Fascella、EMSCULPT NEO、Endermologie、點滴等組合。",
+   "img": ""
+  },
+  {
+   "title": "Body Contouring 身體雕塑",
+   "desc": "Sportif 的身體雕塑方案，組合瘦身注射、EMSCULPT NEO、身體 Sofwave・Ultherapy・BBL、Tune Body、Endermologie、Fascella。",
+   "img": ""
+  }
+ ],
+ "doctors": [
+  {
+   "name": "羅智慧",
+   "role": "代表院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/drtunes/r-doctor-na-3.webp",
+   "tags": [
+    "Ultra Clear Key Doctor",
+    "BTL Key Doctor（EMFACE・EMSCULPT NEO）",
+    "Sofwave Key Doctor",
+    "BBL Key Doctor",
+    "以色列 ALMA Elite",
+    "Accent Prime（Tune Face）Key Doctor",
+    "Soprano Titanium Key Doctor",
+    "Opus Key Doctor",
+    "Mirajet Key Doctor",
+    "SINCLAIR Blue Label Premium Collagen Center 講師（Silhouette Soft・Ellansé）",
+    "LPG Endermologie 臨床顧問",
+    "多次於國內外學會及企業內部授課"
+   ]
+  },
+  {
+   "name": "韓希知",
+   "role": "院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/drtunes/r-doctor-han-1.webp",
+   "tags": [
+    "延世大學 醫學研究所 碩士",
+    "梨花女子大學 醫學系 畢業",
+    "延世大學 Severance 醫院 實習・住院醫師・Fellow 結業",
+    "前 Mods Clinic 院長",
+    "前 NAVER 企業內診所 代表院長",
+    "前 江北三星醫院 健檢中心"
+   ]
+  },
+  {
+   "name": "金到姬",
+   "role": "院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/drtunes/r-doctor-kimdohee-1.webp",
+   "tags": [
+    "天主教大學 醫學院 畢業",
+    "天主教中央醫療院 實習醫師",
+    "前 Pagelab Clinic 院長",
+    "前 Y-Lab 整形外科 院長"
+   ]
+  },
+  {
+   "name": "鄭用和",
+   "role": "院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/drtunes/r-doctor-jung-1.webp",
+   "tags": [
+    "高麗大學 安岩醫院 專科醫師",
+    "前 Joy 皮膚科 院長",
+    "前 U&I 皮膚科 院長",
+    "前 Sangsang Clinic 院長",
+    "前 365mc 醫院 院長"
+   ]
+  },
+  {
+   "name": "李珠媛",
+   "role": "院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/drtunes/r-doctor-lee-1.webp",
+   "tags": [
+    "翰林大學 醫學系 畢業",
+    "麻醉疼痛醫學科 專科醫師",
+    "首爾峨山醫院 實習・麻醉疼痛醫學科 住院醫師",
+    "前 首爾脊塔醫院 麻醉科長",
+    "前 延世根本麻醉疼痛醫學科 院長",
+    "前 HwaJang Eutteum 麻醉疼痛醫學科 院長"
+   ]
+  }
+ ],
+ "equipment": [
+  "Ultherapy",
+  "Sofwave",
+  "BBL",
+  "EMFACE",
+  "EMSCULPT NEO",
+  "Ultra Clear",
+  "Tune Face (Accent Prime)",
+  "Tune Body",
+  "Soprano Titanium",
+  "Opus",
+  "Mirajet",
+  "LPG Endermologie",
+  "Fascella",
+  "ESWT（體外震波）"
+ ],
+ "hours": [
+  "10:00-19:00",
+  "10:00-19:00",
+  "10:00-19:00",
+  "10:00-19:00",
+  "10:00-19:00",
+  "10:00-16:00",
+  ""
+ ],
+ "lunch": "",
+ "hoursNote": "週日固定休診・全預約制，請先透過 LINE 預約。",
+ "langs": "",
+ "more": "",
+ "photos": [
+  "https://www.skinbridgekorea.com/tw/img/drtunes/cover-3.webp",
+  "https://www.skinbridgekorea.com/tw/img/drtunes/cover-2.webp",
+  "https://www.skinbridgekorea.com/tw/img/drtunes/interior-3.webp",
+  "https://www.skinbridgekorea.com/tw/img/drtunes/interior-2.webp",
+  "https://www.skinbridgekorea.com/tw/img/drtunes/interior-1.webp",
+  "https://www.skinbridgekorea.com/tw/img/drtunes/r-exterior-building.webp"
+ ],
+ "interior": [
+  "https://www.skinbridgekorea.com/tw/img/drtunes/interior-1.webp",
+  "https://www.skinbridgekorea.com/tw/img/drtunes/interior-2.webp",
+  "https://www.skinbridgekorea.com/tw/img/drtunes/interior-3.webp",
+  "https://www.skinbridgekorea.com/tw/img/drtunes/interior-4.webp",
+  "https://www.skinbridgekorea.com/tw/img/drtunes/interior-6.webp",
+  "https://www.skinbridgekorea.com/tw/img/drtunes/interior-7.webp",
+  "https://www.skinbridgekorea.com/tw/img/drtunes/interior-8.webp",
+  "https://www.skinbridgekorea.com/tw/img/drtunes/interior-11.webp"
+ ]
+}

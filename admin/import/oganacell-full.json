@@ -1,0 +1,281 @@
+{
+ "_merge": true,
+ "id": "oganacell",
+ "oneliner": "1:1 個人客製皮膚矯正・清潭本店 皮膚科專科醫師 8 位",
+ "about": "OGANACELL 歐佳娜賽爾皮膚科以「1:1 個人客製皮膚矯正」為理念，由皮膚科專科醫師診斷後，依需要「該加的加、該減的減」規劃設備組合、順序與間隔；清潭本店位於江南島山大路清潭 Square。",
+ "intro": "OGANACELL 歐佳娜賽爾皮膚科以「1:1 個人客製皮膚矯正」為理念，不只做一時的美容，而是追求讓皮膚從根本自然變健康的「皮膚矯正」。清潭本店位於江南島山大路清潭 Square A 棟 2 樓。\n「A + B − C」矯正公式：皮膚科專科醫師當面診斷後，決定設備組合、順序與間隔，該加的加、該減的減。院內備有彈力、色素、血管、除毛等多種設備，依診斷處方。\n五項承諾：堅持正品・正量施作／不使用再生探頭與改造設備／只使用韓國食藥處核准的設備與產品／同時診療皮膚疾病／事先說明效果、限制與可能的副作用。\n清潭本店有 8 位皮膚科專科醫師與 1 位麻醉科專科醫師。官方中文網站標示有中文協調師，從諮詢、施術當天到回國後的護理都可用中文溝通。\n除清潭本店外，於首爾東大門、蠶室、麻谷、聖水、明洞及日本東京銀座設有分院，並設有幹細胞中心（自體幹細胞、抗老化 Booster、生髮注射、靜脈注射）。\n院方介紹醫療團隊為「韓國前 1.5% 皮膚科專門醫」。",
+ "tags": [
+  "皮膚科專科醫師團隊",
+  "正品・正量",
+  "中文協調師"
+ ],
+ "features": [
+  {
+   "icon": "train",
+   "label": "狎鷗亭羅德奧站步行約 7 分鐘"
+  },
+  {
+   "icon": "shield",
+   "label": "清潭本店 皮膚科專科醫師 8 位＋麻醉科專科醫師"
+  },
+  {
+   "icon": "tag",
+   "label": "正品・正量・不用再生探頭與改造設備"
+  },
+  {
+   "icon": "list",
+   "label": "Thermage FLX・Ultherapy PRIME・Alltite・UltraClear 等設備"
+  }
+ ],
+ "programs": [
+  {
+   "title": "1:1 皮膚矯正 A+B−C",
+   "desc": "皮膚科專科醫師診斷後，決定設備組合、順序與間隔，例如 Thermage（表層彈力）＋Ultherapy（筋膜拉提）−過多發數。",
+   "img": "https://www.skinbridgekorea.com/tw/img/oganacell/r-prog-personal-skin-revision.webp"
+  },
+  {
+   "title": "Alltite 雙層射頻拉提",
+   "desc": "以介電加熱方式的射頻，同時把熱傳到真皮中下層與筋膜層（SMAS）；不需麻醉，術後可直接回到日常。",
+   "img": "https://www.skinbridgekorea.com/tw/img/oganacell/r-prog-alltite-device.webp"
+  },
+  {
+   "title": "UltraClear 2910nm 光纖雷射",
+   "desc": "一台設備依煩惱調整深度，處理色素、膚質、痘疤與細紋；建議間隔 4–8 週、3 次以上。",
+   "img": "https://www.skinbridgekorea.com/tw/img/oganacell/r-prog-ultraclear-device.webp"
+  },
+  {
+   "title": "GOURI 液態膠原增生針",
+   "desc": "院方介紹為世界首創液態 PCL 膠原增生針。液態型 Skin Booster，可均勻擴散到大範圍，自然增加彈力；術後可直接回到日常。",
+   "img": "https://www.skinbridgekorea.com/tw/img/oganacell/r-prog-gouri-skinbooster.webp"
+  }
+ ],
+ "doctors": [
+  {
+   "name": "Oh Ga-na（오가나）",
+   "role": "代表院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/oganacell/doctor-4.webp",
+   "tags": [
+    "皮膚科專科醫師",
+    "高麗大學醫科大學 畢業",
+    "高麗大學 住院醫師 結業",
+    "高麗大學 醫學碩士",
+    "曾出演 JTBC、SBS、Channel A、O tvN、KBS Drama、MBN、TV Chosun 等電視節目",
+    "看診 週一 10–18・週二 14–20・週四 10–18・週五 14–20・週六 9–16（週三休診）"
+   ]
+  },
+  {
+   "name": "Seo Ji-yoon（서지윤）",
+   "role": "院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/oganacell/doctor-1.webp",
+   "tags": [
+    "皮膚科專科醫師",
+    "高麗大學醫科大學 畢業",
+    "高麗大學醫療院 實習醫師 結業",
+    "高麗大學醫療院 皮膚科 住院醫師 結業",
+    "高麗大學醫療院 住院醫師 結業",
+    "高麗大學醫科大學 碩士 結業",
+    "大韓皮膚科學會 正會員",
+    "大韓皮膚科醫師會 正會員",
+    "大韓臨床皮膚治療研究會 正會員",
+    "大韓美容皮膚外科學會 會員",
+    "大韓痤瘡注射學會 會員",
+    "大韓抗老化學會 學術幹事",
+    "大韓皮膚抗老化學會 會員",
+    "前 Mimodern 皮膚科 江南店 院長"
+   ]
+  },
+  {
+   "name": "Kang Seok-young（강석영）",
+   "role": "院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/oganacell/doctor-2.webp",
+   "tags": [
+    "皮膚科專科醫師",
+    "翰林大學 江南聖心醫院 皮膚科 住院醫師 結業",
+    "翰林大學 江南聖心醫院 皮膚科 外來教授",
+    "大韓皮膚科學會 正會員",
+    "大韓皮膚科醫師會 正會員",
+    "大韓臨床皮膚治療研究會 正會員",
+    "大韓皮膚雷射學會 正會員",
+    "大韓皮膚抗老化學會 正會員",
+    "大韓痤瘡注射學會 正會員",
+    "大韓皮膚屏障學會 正會員",
+    "前 國軍抱川醫院 皮膚科長",
+    "大韓皮膚屏障學會 松和獎學金 優秀獎",
+    "大韓皮膚科學會 最優秀海報獎",
+    "大韓接觸性皮膚炎及皮膚過敏學會 優秀演講獎",
+    "首爾市醫師會 青年醫學者獎",
+    "國會常任委員會 文化體育觀光委員長 表揚",
+    "看診 週一 11–20・週二 10–19・週四 10–19・週五 10–19・週六 9–16（週三休診）"
+   ]
+  },
+  {
+   "name": "Park Geun-hwi（박근휘）",
+   "role": "院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/oganacell/doctor-3.webp",
+   "tags": [
+    "皮膚科專科醫師",
+    "啟明大學醫科大學 畢業",
+    "釜山大學 實習醫師 結業",
+    "釜山大學 皮膚科 住院醫師 結業",
+    "大韓皮膚科學會 正會員",
+    "大韓皮膚科醫師會 正會員",
+    "大韓臨床皮膚治療研究會 正會員",
+    "前 Renewme 皮膚科 院長",
+    "看診 週一 10–19・週二 11–20・週三 10–19・週五 10–19・週六 9–16（週四休診）"
+   ]
+  },
+  {
+   "name": "Kim Tae-hyung（김태형）",
+   "role": "院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/oganacell/doctor-5.webp",
+   "tags": [
+    "皮膚科專科醫師",
+    "亞洲大學醫科大學 醫學碩士",
+    "首爾峨山醫院 實習醫師 結業",
+    "亞洲大學醫院 皮膚科 住院醫師 結業",
+    "大韓皮膚科學會 正會員",
+    "大韓皮膚科醫師會 正會員",
+    "大韓臨床皮膚治療研究會 正會員",
+    "大韓皮膚抗老化學會 正會員",
+    "大韓皮膚雷射學會 正會員",
+    "大韓痤瘡注射學會 正會員",
+    "大韓毛髮學會 正會員",
+    "大韓皮膚科學會 最優秀海報獎（色素研究）",
+    "大韓皮膚研究學會 最優秀海報獎（皮膚老化研究）",
+    "大韓白斑症色素學會 優秀研究獎（抗老化研究）",
+    "亞洲大學醫院 皮膚科 最優秀住院醫師 表揚",
+    "看診 週一 11–20・週二 10–19・週四 11–20・週五 11–20・週六 9–16（週三休診）"
+   ]
+  },
+  {
+   "name": "Lee Dong-won（이동원）",
+   "role": "院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/oganacell/doctor-6.webp",
+   "tags": [
+    "皮膚科專科醫師",
+    "東國大學醫科大學 畢業",
+    "東國大學醫療院 實習醫師 結業",
+    "東國大學醫療院 皮膚科 住院醫師 結業",
+    "大韓皮膚科學會 正會員",
+    "大韓皮膚科醫師會 正會員",
+    "大韓臨床皮膚治療研究會 正會員",
+    "大韓皮膚雷射學會 正會員",
+    "大韓皮膚抗老化學會 正會員",
+    "大韓痤瘡注射學會 正會員",
+    "大韓異位性皮膚炎學會 正會員",
+    "前 J.Jun 皮膚科 院長",
+    "看診 週二 11–20・週三 10–19・週四 10–19・週五 11–20・週六 10–17（週一休診）"
+   ]
+  },
+  {
+   "name": "Kim Taek-un（김택운）",
+   "role": "院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/oganacell/doctor-7.webp",
+   "tags": [
+    "皮膚科專科醫師",
+    "大邱天主教大學醫科大學 畢業",
+    "大邱天主教大學醫院 實習醫師 結業",
+    "大邱天主教大學醫院 皮膚科 住院醫師 結業",
+    "大韓皮膚科學會 正會員",
+    "大韓皮膚科醫師會 正會員",
+    "大韓臨床皮膚治療研究會 正會員",
+    "大韓皮膚雷射學會 正會員",
+    "大韓皮膚抗老化學會 正會員",
+    "大韓皮膚雷射學會 Master 認證（Certificate of Master in Dermatologic Laser Surgery）",
+    "前 Bright 皮膚科 院長",
+    "看診 週一 10–19・週二 11–20・週四 10–19・週五 11–20・週六 9–16（週三休診）"
+   ]
+  },
+  {
+   "name": "Shin Hee-young（신희영）",
+   "role": "院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/oganacell/doctor-8.webp",
+   "tags": [
+    "皮膚科專科醫師",
+    "東國大學醫療院 實習醫師 結業",
+    "東國大學醫療院 皮膚科 住院醫師 結業",
+    "東國大學醫療院 碩士 結業",
+    "大韓皮膚科學會 正會員",
+    "大韓皮膚科醫師會 正會員",
+    "大韓臨床皮膚治療研究會 正會員",
+    "大韓皮膚抗老化學會 正會員",
+    "大韓皮膚雷射學會 正會員",
+    "大韓痤瘡注射學會 正會員",
+    "前 Director 皮膚科 院長",
+    "前 Delight 皮膚科 院長",
+    "看診 週一 10–19・週三 10–19・週五 10–19（週二・週四・週六休診）"
+   ]
+  },
+  {
+   "name": "Jung Woo-young（정우영）",
+   "role": "院長",
+   "photo": "",
+   "tags": [
+    "麻醉科專科醫師",
+    "高麗大學醫科大學 畢業",
+    "高麗大學醫科大學 麻醉科 專科醫師 結業",
+    "大韓麻醉科學會 正會員",
+    "大韓靜脈麻醉學會 正會員",
+    "大韓小兒麻醉學會 會員",
+    "大韓疼痛學會 會員",
+    "亞洲大洋洲靜脈麻醉學會 會員"
+   ]
+  }
+ ],
+ "equipment": [
+  "Thermage FLX",
+  "Ultherapy PRIME",
+  "Alltite",
+  "UltraClear",
+  "ONDA",
+  "Revinas",
+  "Jovena",
+  "EMFACE",
+  "InMode",
+  "Linear Z",
+  "GentleMax Pro",
+  "Vbeam Perfecta",
+  "StarWalker QX-MAX",
+  "PiQo4",
+  "PicoSure",
+  "Smoothbeam",
+  "CO2 Laser",
+  "LPL",
+  "Ulfit",
+  "CORAGE",
+  "Cryocell",
+  "Ionzyme",
+  "AquaPeel",
+  "Plasmage",
+  "DermaShine Pro"
+ ],
+ "hours": [
+  "10:00-20:00",
+  "10:00-20:00",
+  "10:00-19:00",
+  "10:00-20:00",
+  "10:00-20:00",
+  "09:00-16:00",
+  ""
+ ],
+ "lunch": "",
+ "hoursNote": "週日與國定假日休診・11 月無休診日・12/25（五）聖誕節休診。各院長看診日不同，想指定院長請先透過 LINE 確認。",
+ "langs": "中英日",
+ "more": "",
+ "photos": [
+  "https://www.skinbridgekorea.com/tw/img/oganacell/fac-rooms.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/fac-team.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/fac-tray.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/fac-equip.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/team.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/room.webp"
+ ],
+ "interior": [
+  "https://www.skinbridgekorea.com/tw/img/oganacell/fac-rooms.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/fac-team.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/fac-tray.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/fac-equip.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/team.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/room.webp"
+ ]
+}

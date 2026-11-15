@@ -1,0 +1,152 @@
+{
+ "_merge": true,
+ "id": "ajour",
+ "oneliner": "江南站地下直達・線雕抽脂・中午不休診",
+ "about": "AJOUR CLINIC 位於江南站 2 號出口地下通道直達的江南中心大樓 11 樓及地下 2 樓，以自然協調的改善為目標，提供抽脂、自體脂肪移植、埋線拉提、雷射拉提與幹細胞等療程。",
+ "intro": "AJOUR CLINIC 位於首爾江南大路 388 號江南中心大樓 11 樓及地下 2 樓，從江南站 2 號出口經地下通道即可直達。\nAJOUR 追求的不只是「變美的療程」，而是歷經時間依然不變的滿意與信賴；以自然協調的改善為目標，依個人特色與生活型態提出專屬方案。\n診療範圍涵蓋抽脂、自體脂肪移植、身體填充、埋線拉提、無切口胸部及腹部拉提、雷射拉提、皮膚注射與幹細胞療程。\n代表院長韓承燁畢業於延世大學、為世福蘭斯醫院專科醫師，曾任 Muse Clinic 江南店院長，並為大韓填充劑學會、大韓美容外科學會等學會會員；院內另有首爾大學醫院麻醉疼痛醫學科專科醫師趙志勳院長。\n官網標示線雕拉提施術經驗 7,000 例以上（依 2021 年～2026 年 7 月院內數據統計），並曾為海外醫療專家舉辦線雕拉提研討會。\n填充劑與肉毒只使用全新未拆封的正品。平日 10:00–21:00、週末及國定假日 10:00–18:00 看診，中午不休診。\n院方表示：2023 消費者票選 韓國品牌滿意度指數第一、MINT EASY 全國使用量第一名醫院；自體脂肪移植存活率可達 90% 以上（院方資料，因人而異）；埋線拉提效果約可維持 1–2 年（因人而異）。",
+ "tags": [
+  "江南站地下直達",
+  "中午不休診",
+  "線雕 7,000+ 例"
+ ],
+ "features": [
+  {
+   "icon": "train",
+   "label": "江南站 2 號出口地下通道直達"
+  },
+  {
+   "icon": "cal",
+   "label": "平日至 21:00・週末國定假日至 18:00・中午不休診"
+  },
+  {
+   "icon": "list",
+   "label": "線雕拉提 7,000+ 例（院內統計）"
+  },
+  {
+   "icon": "shield",
+   "label": "麻醉疼痛醫學科專科醫師駐院"
+  },
+  {
+   "icon": "tag",
+   "label": "填充・肉毒使用全新未拆封正品"
+  }
+ ],
+ "programs": [
+  {
+   "title": "招牌埋線拉提",
+   "desc": "將醫療用線材植入肌膚層提拉鬆弛部位，並隨時間促進膠原蛋白生成；療程約 10–15 分鐘，表面麻醉，隔日起可恢復日常（因人而異）。",
+   "img": "https://www.skinbridgekorea.com/tw/img/ajour/r-prog-thread-global-seminar.webp"
+  },
+  {
+   "title": "AJOUR 超音波抽脂",
+   "desc": "結合超音波與吸引儀器，先選擇性液化脂肪層再吸出，切口 1–4 處，睡眠麻醉或局部麻醉，無需住院。",
+   "img": ""
+  },
+  {
+   "title": "自體脂肪移植",
+   "desc": "採集自身脂肪、去除雜質後分層均勻注入胸部、肩部、骨盆、臀部等部位；手術約 40 分鐘，睡眠麻醉。",
+   "img": ""
+  },
+  {
+   "title": "SVF 幹細胞",
+   "desc": "從自體脂肪萃取基質血管成分（SVF）後注射，針對彈力下降、細紋、毛孔、痘疤與暗沉膚色；療程約 10–15 分鐘（效果因人而異）。",
+   "img": ""
+  }
+ ],
+ "doctors": [
+  {
+   "name": "韓承燁",
+   "role": "代表院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/ajour/r-doctor-han-seungyeop.webp",
+   "tags": [
+    "延世大學 畢業",
+    "世福蘭斯醫院 專科醫師",
+    "前 Muse Clinic 江南店 院長",
+    "前 Petit Party 醫院（原 江南三星 Lamar）院長",
+    "大韓美容整形雷射醫學會 會員",
+    "大韓填充劑學會 會員",
+    "大韓雷射皮膚毛髮學會 會員",
+    "大韓美容外科學會 會員",
+    "大韓肥胖美容治療學會 會員",
+    "韓國皮膚肥胖整形學會 會員"
+   ]
+  },
+  {
+   "name": "金甫錫",
+   "role": "院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/ajour/r-doctor-kim-boseok.webp",
+   "tags": [
+    "基督醫院 專科醫師",
+    "前 清潭 LEEDS CLINIC 代表院長",
+    "前 Barog 診所 院長",
+    "前 清潭 Zen 診所 院長",
+    "大韓美容整形雷射醫學會 會員",
+    "大韓填充劑學會 會員",
+    "大韓美容外科學會 會員"
+   ]
+  },
+  {
+   "name": "趙志勳",
+   "role": "麻醉疼痛醫學科 院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/ajour/r-doctor-cho-jihoon.webp",
+   "tags": [
+    "首爾大學醫院 麻醉疼痛醫學科 專科醫師",
+    "首爾大學醫院 疼痛中心 專任醫師・臨床講師",
+    "疼痛醫學 高級課程 結業",
+    "美國維吉尼亞大學醫院（UVA Health）進修",
+    "大韓麻醉疼痛醫學會 會員",
+    "大韓疼痛學會 會員"
+   ]
+  }
+ ],
+ "equipment": [
+  "Ultherapy Prime",
+  "Thermage FLX",
+  "ONDA",
+  "Soprano Titanium",
+  "InMode",
+  "Shurink Universe",
+  "OLIGIO X",
+  "Potenza",
+  "Ulfit"
+ ],
+ "hours": [
+  "10:00-21:00",
+  "10:00-21:00",
+  "10:00-21:00",
+  "10:00-21:00",
+  "10:00-21:00",
+  "10:00-18:00",
+  "10:00-18:00"
+ ],
+ "lunch": "",
+ "hoursNote": "國定假日 10:00–18:00，中午不休診。",
+ "more": "",
+ "photos": [
+  "https://www.skinbridgekorea.com/tw/img/ajour/cover-1.webp",
+  "https://www.skinbridgekorea.com/tw/img/ajour/cover-2.webp",
+  "https://www.skinbridgekorea.com/tw/img/ajour/cover-3.webp",
+  "https://www.skinbridgekorea.com/tw/img/ajour/cover-4.webp",
+  "https://www.skinbridgekorea.com/tw/img/ajour/r-interior-lounge-reception.webp",
+  "https://www.skinbridgekorea.com/tw/img/ajour/r-interior-consult-room.webp",
+  "https://www.skinbridgekorea.com/tw/img/ajour/r-interior-treatment-chair-room.webp"
+ ],
+ "interior": [
+  "https://www.skinbridgekorea.com/tw/img/ajour/interior-1.webp",
+  "https://www.skinbridgekorea.com/tw/img/ajour/interior-2.webp",
+  "https://www.skinbridgekorea.com/tw/img/ajour/interior-3.webp",
+  "https://www.skinbridgekorea.com/tw/img/ajour/interior-4.webp",
+  "https://www.skinbridgekorea.com/tw/img/ajour/interior-5.webp",
+  "https://www.skinbridgekorea.com/tw/img/ajour/interior-6.webp",
+  "https://www.skinbridgekorea.com/tw/img/ajour/interior-7.webp",
+  "https://www.skinbridgekorea.com/tw/img/ajour/interior-8.webp",
+  "https://www.skinbridgekorea.com/tw/img/ajour/interior-9.webp",
+  "https://www.skinbridgekorea.com/tw/img/ajour/r-interior-lounge-reception.webp",
+  "https://www.skinbridgekorea.com/tw/img/ajour/r-interior-lobby-desk.webp",
+  "https://www.skinbridgekorea.com/tw/img/ajour/r-interior-consult-room.webp",
+  "https://www.skinbridgekorea.com/tw/img/ajour/r-interior-treatment-chair-room.webp",
+  "https://www.skinbridgekorea.com/tw/img/ajour/r-interior-care-bed-room.webp",
+  "https://www.skinbridgekorea.com/tw/img/ajour/r-interior-powder-room.webp",
+  "https://www.skinbridgekorea.com/tw/img/ajour/r-interior-washroom.webp"
+ ]
+}

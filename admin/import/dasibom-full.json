@@ -1,0 +1,148 @@
+{
+ "_merge": true,
+ "id": "dasibom",
+ "oneliner": "誠實・正品・適量｜新村站 B1 直連",
+ "about": "Springday Clinic 新村店（다시봄날의원 신촌점）位於首爾新村・弘大地區，2 號線新村站 B1 地下通道直連大樓，提供皮膚診療與醫療美容，重視充分說明、透明的治療規劃、正規產品與適當劑量。",
+ "intro": "Springday Clinic 新村店（다시봄날의원 신촌점）位於首爾西大門區新村路 99 號 Elite Building 7・9 樓，2 號線新村站 3 號出口約 16 公尺，新村站 B1 與大樓 B1 地下通道直連，雨天也不必走到室外。到院請先至 7 樓櫃檯報到。\n院方堅持「3正」三項原則：\n・正直：區分真正需要與不需要的項目，不過度推薦。\n・正品：使用正規產品，並說明所用產品與治療內容。\n・正量：尊重既定劑量與治療參數，避免不必要的稀釋或過度治療。\n診療以「先問 → 傾聽 → 理解 → 再治療」的順序進行，並公開目前實際在院執業的所有醫師；需要醫師直接實施的醫療行為由醫師本人完成。\n代表院長 Bo Won Lee（이보원）為 KAIST 學士提早畢業、嘉泉大學醫學院碩士，曾任 Springday Clinic 烏山・平澤・紙杻院代表院長，擔任 Restylane・Perfectha 填充劑與 Silhouette Soft 線雕醫務人員培訓醫師，並為 SCIE 期刊 Scientific Reports 填充劑臨床研究論文共同作者（2026）。\n院內有 Ultherapy PRIME、Thermage FLX、ONDA、Shurink Universe、InMode、PicoSure、Potenza 等設備。\n提供英文・日文・簡體中文・繁體中文價目表，價格與韓國患者相同。語言支援（EN・日本語・中文）依日期與人員安排而定。",
+ "tags": [
+  "新村站 B1 直連",
+  "誠實・正品・適量",
+  "中・英・日 語言支援"
+ ],
+ "features": [
+  {
+   "icon": "train",
+   "label": "新村站 3 號出口約 16m・B1 地下直連"
+  },
+  {
+   "icon": "shield",
+   "label": "公開所有在院醫師・醫師親自施術"
+  },
+  {
+   "icon": "list",
+   "label": "院長 Scientific Reports（SCIE）論文共同作者"
+  },
+  {
+   "icon": "tag",
+   "label": "繁中價目表・價格與韓國患者相同"
+  },
+  {
+   "icon": "chat",
+   "label": "EN・日本語・中文 支援（依日期而定）"
+  }
+ ],
+ "programs": [
+  {
+   "title": "注射與填充",
+   "desc": "依面部比例、結構與容量需求進行諮詢與治療規劃，涵蓋玻尿酸、Belotero、Radiesse、Ellansé、Sculptra 等。",
+   "img": ""
+  },
+  {
+   "title": "拉提與緊緻",
+   "desc": "依解剖結構與目標選擇 Ultherapy PRIME、Thermage FLX、ONDA 等能量型或其他拉提方案。",
+   "img": ""
+  },
+  {
+   "title": "皮膚診療",
+   "desc": "針對色素、膚質、痘痘相關問題等進行皮膚診療與雷射・膚質管理。",
+   "img": ""
+  },
+  {
+   "title": "體重與身體管理",
+   "desc": "在醫學評估基礎上進行體重與身體管理，並提供點滴營養與疫苗接種。",
+   "img": ""
+  }
+ ],
+ "doctors": [
+  {
+   "name": "Bo Won Lee（이보원）",
+   "role": "代表院長",
+   "photo": "",
+   "tags": [
+    "現 Springday Beauty Medical Group 醫務理事",
+    "KAIST 學士提早畢業",
+    "嘉泉大學醫學院 碩士",
+    "前 Springday Clinic 烏山院・平澤院・紙杻院 代表院長",
+    "前 Abijou Clinic・Toxnfill Clinic 醫師",
+    "Restylane・Perfectha 填充劑 醫務人員培訓醫師",
+    "Merz Belotero Revive 醫師教育講課",
+    "Silhouette Soft 線雕 醫務人員培訓醫師",
+    "Rejuran 治療 Expert 醫師選定",
+    "ONDA Lifting Premium 認證診所操作醫師",
+    "AestheFill 2026 APAC Expert — Humedix",
+    "Scientific Reports（SCIE）填充劑臨床研究論文 共同作者",
+    "韓國美容整形雷射醫學會・韓國肥胖美容治療學會（KAOT）・韓國雷射皮膚毛髮學會 會員"
+   ]
+  },
+  {
+   "name": "Oh Jun Seok（오준석）",
+   "role": "首席院長",
+   "photo": "",
+   "tags": [
+    "現 Springday Clinic 新村院 首席院長",
+    "前 Springday Clinic 始興院 院長",
+    "前 Springday Clinic 紙杻院・高陽香洞院 代表院長",
+    "韓國皮膚美容雷射學會・韓國填充醫學會 會員",
+    "韓國雷射皮膚毛髮學會・韓國肥胖美容治療學會（KAOT）會員",
+    "Sinclair Ultracol Hands-on Workshop 結業",
+    "ONDA Lifting Premium 認證診所操作醫師"
+   ]
+  }
+ ],
+ "equipment": [
+  "Ultherapy PRIME",
+  "Thermage FLX",
+  "ONDA",
+  "Shurink Universe",
+  "InMode",
+  "Volnewmer",
+  "Density",
+  "Liftera 2",
+  "Linear Z",
+  "ALLTITE",
+  "COOLSONIQ",
+  "Reepot",
+  "PicoSure",
+  "Picore",
+  "Revlite SI",
+  "Cellec IPL",
+  "Potenza",
+  "Legato 2",
+  "CoreSculpt",
+  "LDM"
+ ],
+ "hours": [
+  "10:00-20:00",
+  "10:00-20:00",
+  "10:00-20:00",
+  "10:00-20:00",
+  "10:00-20:00",
+  "10:00-16:00",
+  ""
+ ],
+ "lunch": "14:00-15:00",
+ "hoursNote": "平日午休 14:00–15:00（週六無午休）・週日休診・國定假日另行公告。",
+ "langs": "中英日",
+ "more": "",
+ "photos": [
+  "https://www.skinbridgekorea.com/tw/img/dasibom/r-interior-reception-1.webp",
+  "https://www.skinbridgekorea.com/tw/img/dasibom/r-interior-lounge-1.webp",
+  "https://www.skinbridgekorea.com/tw/img/dasibom/r-interior-treatment-room-1.webp",
+  "https://www.skinbridgekorea.com/tw/img/dasibom/r-interior-reception-2.webp",
+  "https://www.skinbridgekorea.com/tw/img/dasibom/r-interior-lounge-3.webp",
+  "https://www.skinbridgekorea.com/tw/img/dasibom/r-interior-treatment-room-2.webp"
+ ],
+ "interior": [
+  "https://www.skinbridgekorea.com/tw/img/dasibom/r-interior-reception-1.webp",
+  "https://www.skinbridgekorea.com/tw/img/dasibom/r-interior-reception-2.webp",
+  "https://www.skinbridgekorea.com/tw/img/dasibom/r-interior-lounge-1.webp",
+  "https://www.skinbridgekorea.com/tw/img/dasibom/r-interior-lounge-2.webp",
+  "https://www.skinbridgekorea.com/tw/img/dasibom/r-interior-lounge-3.webp",
+  "https://www.skinbridgekorea.com/tw/img/dasibom/r-interior-treatment-room-1.webp",
+  "https://www.skinbridgekorea.com/tw/img/dasibom/r-interior-treatment-room-2.webp",
+  "https://www.skinbridgekorea.com/tw/img/dasibom/r-interior-treatment-room-3.webp",
+  "https://www.skinbridgekorea.com/tw/img/dasibom/r-interior-corridor.webp",
+  "https://www.skinbridgekorea.com/tw/img/dasibom/r-interior-powder-room.webp"
+ ],
+ "name": "Springday Clinic 新村店"
+}

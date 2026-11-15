@@ -1,0 +1,146 @@
+{
+ "_merge": true,
+ "id": "arden",
+ "tags": [
+  "狎鷗亭羅德奧站步行 5 分鐘",
+  "代表院長 Classys KOL",
+  "正品認證設備與探頭"
+ ],
+ "features": [
+  {
+   "icon": "train",
+   "label": "狎鷗亭羅德奧站 4 號出口步行約 5 分鐘（371 公尺）"
+  },
+  {
+   "icon": "shield",
+   "label": "代表院長 Classys Volnewmer・Ultraformer MPT KOL"
+  },
+  {
+   "icon": "list",
+   "label": "使用正品認證設備及探頭"
+  },
+  {
+   "icon": "cal",
+   "label": "100% 事先預約制・可代客泊車"
+  }
+ ],
+ "programs": [
+  {
+   "title": "Custom Ulthermage 客製超聲刀＋熱瑪吉",
+   "desc": "ARDEN 招牌療程。精細調配 Ultherapy PRIME（HIFU）與 Thermage（RF）能量的雙重拉提，依年齡與膚況客製設計，療程約 90–120 分鐘。",
+   "img": "https://www.skinbridgekorea.com/tw/img/arden/r-prog-custom-ulthermage-banner.webp"
+  },
+  {
+   "title": "Signature 全臉填充",
+   "desc": "以 3D 臉部分析評估後，依五官與臉部比例設計全臉填充；提供只用 Juvederm 的 Signature Juvederm 方案，以及併用 Restylane・Belotero 的 Filler Master 方案。",
+   "img": "https://www.skinbridgekorea.com/tw/img/arden/r-prog-fullface-filler-banner.webp"
+  },
+  {
+   "title": "Design 線雕拉提",
+   "desc": "使用 Sinclair Silhouette Soft 線材，依臉型、皮膚厚度與需求設計拉提線條；另備有 Mint 線、I-Thread 等線材。院方表示效果約可維持 1–2 年（因人而異）。",
+   "img": "https://www.skinbridgekorea.com/tw/img/arden/r-prog-thread-lifting-banner.webp"
+  },
+  {
+   "title": "Arden Forest Stem Cell",
+   "desc": "抽取本人血液，經高速離心濃縮血液幹細胞與生長因子後注射於真皮層的再生療程，也可延伸應用於水光與點滴療程。",
+   "img": "https://www.skinbridgekorea.com/tw/img/arden/r-prog-stem-cell-banner.webp"
+  }
+ ],
+ "doctors": [
+  {
+   "name": "韓宇喆",
+   "role": "代表院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/arden/r-doctor-han-portrait.webp",
+   "tags": [
+    "CHA 醫科大學 醫學研究所 M.D.",
+    "成均館大學 生物科學 學士",
+    "美國科羅拉多州 Otero College 理科副學士",
+    "2018 首爾峨山醫院 Subinternship",
+    "2019 美國洛杉磯 CHA Hollywood Medical Center Subinternship",
+    "清潭 ARDEN Clinic 創院代表院長（2025–）",
+    "前 Pixelab 整形外科 副院長兼首席醫師",
+    "前 V&S Clinic 三星 COEX 店 醫療院長",
+    "前 YOUR Clinic 弘大店 醫療院長",
+    "前 平澤公共保健醫療中心 醫療院長",
+    "大韓臉部拉提與輪廓整形學會（KAFC）理事",
+    "Classys Volnewmer・Ultraformer MPT・Quadessy KOL Doctor",
+    "The SC Olidia・Celexo 官方醫學顧問・KOL Doctor",
+    "Healux I-thread・HealfusionPro KOL Doctor",
+    "Venesys Olla Wave・Ulfacial KOL Doctor",
+    "2026 AMWC 官方講者",
+    "2026 KACS 官方講者",
+    "2025 KAFC 官方講者",
+    "2025 KALDAT 官方講者",
+    "2025 Classys Excellence Award（APAC Symposium 曼谷）",
+    "2021 大韓民國 National Commendation Medal"
+   ]
+  },
+  {
+   "name": "姜玟守",
+   "role": "副院長・拉提中心長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/arden/r-doctor-kang-portrait.webp",
+   "tags": [
+    "圓光大學 醫學研究所 M.D.",
+    "嘉泉大學 吉醫院 實習醫師",
+    "現 清潭 ARDEN Clinic Medical Director",
+    "前 Pixelab 整形外科 Medical Director",
+    "前 Maypure Clinic 舍堂店 Medical Director",
+    "大韓臉部拉提與輪廓整形學會 會員",
+    "肥胖研究醫師會 會員"
+   ]
+  }
+ ],
+ "equipment": [
+  "Ultherapy PRIME",
+  "Thermage",
+  "ONDA",
+  "Volnewmer",
+  "Shurink Universe",
+  "Clarity 2",
+  "Quadessy",
+  "Titanium"
+ ],
+ "hours": [
+  "10:00-20:00",
+  "10:00-20:00",
+  "",
+  "10:00-20:00",
+  "10:00-20:00",
+  "10:00-17:00",
+  ""
+ ],
+ "lunch": "",
+ "hoursNote": "每週三、週日休診・100% 事先預約制，來訪前請先透過 LINE 確認時段。",
+ "langs": "",
+ "more": "",
+ "photos": [
+  "https://www.skinbridgekorea.com/tw/img/arden/interior-2.webp",
+  "https://www.skinbridgekorea.com/tw/img/arden/interior-1.webp",
+  "https://www.skinbridgekorea.com/tw/img/arden/interior-4.webp",
+  "https://www.skinbridgekorea.com/tw/img/arden/r-doctor-han-award-classys.webp",
+  "https://www.skinbridgekorea.com/tw/img/arden/r-doctor-han-seminar-bw.webp",
+  "https://www.skinbridgekorea.com/tw/img/arden/r-doctor-han-live-demo-bw.webp",
+  "https://www.skinbridgekorea.com/tw/img/arden/r-doctor-han-live-demo-1.webp",
+  "https://www.skinbridgekorea.com/tw/img/arden/r-doctor-han-lecture.webp"
+ ],
+ "interior": [
+  "https://www.skinbridgekorea.com/tw/img/arden/interior-1.webp",
+  "https://www.skinbridgekorea.com/tw/img/arden/interior-2.webp",
+  "https://www.skinbridgekorea.com/tw/img/arden/interior-3.webp",
+  "https://www.skinbridgekorea.com/tw/img/arden/interior-4.webp",
+  "https://www.skinbridgekorea.com/tw/img/arden/interior-5.webp",
+  "https://www.skinbridgekorea.com/tw/img/arden/interior-6.webp",
+  "https://www.skinbridgekorea.com/tw/img/arden/interior-7.webp",
+  "https://www.skinbridgekorea.com/tw/img/arden/interior-8.webp",
+  "https://www.skinbridgekorea.com/tw/img/arden/r-interior-04.webp",
+  "https://www.skinbridgekorea.com/tw/img/arden/r-interior-01.webp",
+  "https://www.skinbridgekorea.com/tw/img/arden/r-interior-02.webp",
+  "https://www.skinbridgekorea.com/tw/img/arden/r-interior-05.webp",
+  "https://www.skinbridgekorea.com/tw/img/arden/r-interior-09.webp",
+  "https://www.skinbridgekorea.com/tw/img/arden/r-interior-06.webp",
+  "https://www.skinbridgekorea.com/tw/img/arden/r-interior-10.webp",
+  "https://www.skinbridgekorea.com/tw/img/arden/r-interior-03.webp",
+  "https://www.skinbridgekorea.com/tw/img/arden/r-interior-07.webp",
+  "https://www.skinbridgekorea.com/tw/img/arden/r-interior-08.webp"
+ ]
+}

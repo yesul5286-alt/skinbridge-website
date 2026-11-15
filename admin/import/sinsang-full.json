@@ -1,0 +1,274 @@
+{
+ "_merge": true,
+ "id": "sinsang",
+ "tags": [
+  "Re2O Key Doctor 院所",
+  "週五夜診至 21:00",
+  "手術室 CCTV 全程運作"
+ ],
+ "features": [
+  {
+   "icon": "train",
+   "label": "新沙站 1 號出口步行約 5 分鐘"
+  },
+  {
+   "icon": "cal",
+   "label": "週一至四 10:00–19:00・週五夜診至 21:00・週六至 17:00"
+  },
+  {
+   "icon": "shield",
+   "label": "麻醉科專科醫師駐院・手術室 CCTV 全程運作"
+  },
+  {
+   "icon": "list",
+   "label": "Ultherapy PRIME・Thermage FLX・ONDA・Ultra Clear 等設備"
+  },
+  {
+   "icon": "tag",
+   "label": "停車前 2 小時免費"
+  }
+ ],
+ "programs": [
+  {
+   "title": "Elravie Re2O 細胞外基質水光",
+   "desc": "以無細胞人體真皮基質（hADM）直接補充 ECM 成分的肌膚促進劑；官網標示為 Re2O Key Doctor 院所，由李榮宰代表院長的經驗為全體醫療團隊建立相同標準。",
+   "img": "https://www.skinbridgekorea.com/tw/img/sinsang/r-prog-re2o.webp"
+  },
+  {
+   "title": "Ultherapy PRIME 二代美版超聲刀",
+   "desc": "以高強度聚焦超音波（HIFU）作用至筋膜層（SMAS），搭配 19 吋高解析度影像畫面，可看到最深 8mm 的超音波影像。",
+   "img": ""
+  },
+  {
+   "title": "Rejuran 麗珠蘭 3 種類型",
+   "desc": "含鮭魚來源 PN 成分的肌膚促進劑，依膚質與部位分為 Rejuran Healer、Rejuran HB+、Rejuran i 三種。",
+   "img": "https://www.skinbridgekorea.com/tw/img/sinsang/r-prog-rejuran.webp"
+  },
+  {
+   "title": "SINSANG 雙下巴・火雞脖手術",
+   "desc": "新尚整形外科的招牌手術，「Double Chin」與「Toad Neck Surgery」名稱已在韓國註冊商標。",
+   "img": ""
+  }
+ ],
+ "doctors": [
+  {
+   "name": "李榮宰",
+   "tags": [
+    "三星首爾醫院 整形外科 專科醫師",
+    "成均館大學醫學院 外來教授",
+    "前 臉部線條整形外科 院長",
+    "大韓整形外科學會 正會員",
+    "大韓美容整形外科學會 正會員",
+    "大韓整形外科學會 脂肪整形・脂肪幹細胞研究會 正會員",
+    "大韓整形外科學會 抗老化研究會 正會員",
+    "大韓整形外科學會 微創整形研究會 正會員・學術委員"
+   ],
+   "role": "代表院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/sinsang/doctor-1.webp"
+  },
+  {
+   "role": "院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/sinsang/doctor-2.webp",
+   "name": "金在熙",
+   "tags": [
+    "乙支大學醫院 整形外科 專科醫師",
+    "大韓整形外科學會 正會員",
+    "大韓美容整形外科學會 正會員",
+    "大韓頭面部整形外科學會 正會員"
+   ]
+  },
+  {
+   "photo": "https://www.skinbridgekorea.com/tw/img/sinsang/doctor-3.webp",
+   "role": "院長",
+   "name": "御筆仙",
+   "tags": [
+    "慶北大學醫院 整形外科 專科醫師",
+    "前 瑜鹵整形外科 院長",
+    "大韓整形外科學會 正會員",
+    "大韓美容整形外科學會 正會員",
+    "大韓頭面部整形外科學會 正會員"
+   ]
+  },
+  {
+   "name": "崔瑞吉",
+   "photo": "https://www.skinbridgekorea.com/tw/img/sinsang/doctor-4.webp",
+   "tags": [
+    "三星醫療院 整形外科 專科醫師",
+    "成均館大學 江北三星醫院 門診教授",
+    "前 Ruho 整形外科 院長",
+    "前 Jewelry 整形外科 院長",
+    "前 上海韓京醫療美容醫院 輪廓中心 院長",
+    "大韓整形外科學會 正會員",
+    "大韓美容整形外科學會 正會員",
+    "大韓頭面部整形外科學會 正會員"
+   ],
+   "role": "院長"
+  },
+  {
+   "role": "院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/sinsang/doctor-5.webp",
+   "tags": [
+    "延世大學醫科大學 畢業",
+    "原州 Severance 醫院 整形外科 專科醫師・門診教授",
+    "前 漢奈夫整形外科 院長",
+    "大韓整形外科學會 正會員",
+    "大韓美容整形外科學會 正會員",
+    "大韓頭面部整形外科學會 正會員"
+   ],
+   "name": "尹亨宇"
+  },
+  {
+   "photo": "https://www.skinbridgekorea.com/tw/img/sinsang/doctor-6.webp",
+   "role": "院長",
+   "tags": [
+    "延世大學醫科大學 畢業",
+    "東國大學一山醫院 整形外科 專科醫師",
+    "盆唐首爾大學醫院 專科醫師",
+    "前 AB 整形外科 院長",
+    "前 DA 整形外科 院長",
+    "眼部整形研究會 學術研究委員",
+    "脂肪整形幹細胞研究會 營運委員",
+    "鼻部整形研究會 正會員"
+   ],
+   "name": "都慶鉉"
+  },
+  {
+   "name": "尹炫植",
+   "tags": [
+    "圓光大學醫院 整形外科 專科醫師",
+    "成均館大學 整形外科學 博士課程結業",
+    "三星首爾醫院 整形外科 專科醫師・門診教授",
+    "前 DA 整形外科 院長",
+    "大韓美容整形外科學會 編纂委員"
+   ],
+   "photo": "https://www.skinbridgekorea.com/tw/img/sinsang/doctor-7.webp",
+   "role": "院長"
+  },
+  {
+   "name": "Ye-ji Oh",
+   "role": "院長（皮膚・美容）",
+   "photo": "https://www.skinbridgekorea.com/tw/img/sinsang/r-doctor-oh-yeji.webp",
+   "tags": [
+    "現任 SINSANG 整形外科 院長",
+    "前 U&I Clinic 明洞店 院長",
+    "慶熙大學醫學院 畢業",
+    "天主教中央醫療院 實習",
+    "大韓美容整形雷射醫學會 會員",
+    "大韓肥胖美容學會 會員"
+   ]
+  },
+  {
+   "name": "Seung-beom Kim",
+   "role": "院長（皮膚・美容）",
+   "photo": "https://www.skinbridgekorea.com/tw/img/sinsang/r-doctor-kim-seungbeom.webp",
+   "tags": [
+    "現任 SINSANG 整形外科 院長",
+    "前 Yan Clinic 院長",
+    "前 L'Atelier du Medecin Clinic 代表院長",
+    "前 iSTAR Plastic Surgery and Dermatology Clinic 院長",
+    "前 General Doctor Clinic 代表院長",
+    "延世大學醫學院 畢業"
+   ]
+  },
+  {
+   "name": "Young-min Choi",
+   "role": "院長（皮膚・美容）",
+   "photo": "https://www.skinbridgekorea.com/tw/img/sinsang/r-doctor-choi-youngmin.webp",
+   "tags": [
+    "現任 SINSANG 整形外科 院長",
+    "前 Ppeum Global Clinic 弘大店 院長",
+    "前 Opus Clinic 代表院長",
+    "慶北大學醫學院 畢業",
+    "加拿大多倫多大學 人體生物學・動物生理學 畢業",
+    "大韓雷射皮膚毛髮學會 正會員",
+    "韓國填充劑教育研究會 正會員"
+   ]
+  },
+  {
+   "name": "Min-su Cha",
+   "role": "院長（皮膚・美容）",
+   "photo": "https://www.skinbridgekorea.com/tw/img/sinsang/r-doctor-cha-minsu.webp",
+   "tags": [
+    "現任 SINSANG 整形外科 院長",
+    "前 Celeble 153 Clinic 院長",
+    "前 iSTAR Clinic 院長",
+    "前 U&I Clinic 水原店 代表院長",
+    "前 Lamar Clinic 狎鷗亭店 院長",
+    "CHA 醫科大學 醫學院 畢業",
+    "大韓雷射皮膚毛髮學會 會員"
+   ]
+  },
+  {
+   "name": "Jee-hoon Kim",
+   "role": "院長（整形外科專科醫師）",
+   "photo": "https://www.skinbridgekorea.com/tw/img/sinsang/r-doctor-kim-jeehoon.webp",
+   "tags": [
+    "現任 SINSANG 整形外科 院長",
+    "前 Reborn 整形外科皮膚科 院長",
+    "前 ID Hospital 江南 院長",
+    "前 ES 清潭整形外科皮膚科 院長",
+    "韓國天主教大學醫學院 畢業",
+    "首爾聖母醫院 整形外科 住院醫師結業",
+    "大韓整形外科學會 正會員",
+    "大韓雷射皮膚毛髮學會 正會員"
+   ]
+  }
+ ],
+ "equipment": [
+  "Ultherapy PRIME",
+  "Thermage FLX",
+  "ONDA",
+  "XERF",
+  "V-RO Lifting",
+  "Ultra Clear",
+  "Potenza",
+  "Virtue",
+  "PicoSure",
+  "PicoPlus",
+  "Excel V",
+  "ADVATx",
+  "PlaDuo",
+  "Clarity II",
+  "NeoBeam",
+  "U-Pulse"
+ ],
+ "hours": [
+  "10:00-19:00",
+  "10:00-19:00",
+  "10:00-19:00",
+  "10:00-19:00",
+  "10:00-21:00",
+  "10:00-17:00",
+  ""
+ ],
+ "lunch": "",
+ "hoursNote": "最後報到：週一至四 18:00、週五 20:00、週六 16:00。週日及國定假日休診。",
+ "langs": "中英日",
+ "more": "",
+ "photos": [
+  "https://www.skinbridgekorea.com/tw/img/sinsang/r-interior-skin-b1-info-desk.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/r-interior-skin-b1-entrance-lobby.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/r-interior-5f-lobby-reception.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/r-interior-skin-vip-room.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/r-interior-5f-lounge.webp"
+ ],
+ "interior": [
+  "https://www.skinbridgekorea.com/tw/img/sinsang/r-interior-skin-1f-entrance.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/r-interior-skin-b1-entrance-lobby.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/r-interior-skin-b1-info-desk.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/r-interior-skin-b1-main-lobby.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/r-interior-skin-b1-lobby.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/r-interior-skin-corridor.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/r-interior-skin-b1-consult-room.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/r-interior-skin-vip-room.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/r-interior-skin-recliner.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/r-interior-skin-shampoo-room.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/r-interior-skin-b1-powder-room.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/r-interior-5f-lobby-reception.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/r-interior-5f-corridor-lounge.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/r-interior-5f-waiting.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/r-interior-5f-lounge.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/r-interior-5f-consult-room.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/r-interior-5f-powder-room.webp"
+ ]
+}

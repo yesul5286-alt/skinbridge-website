@@ -1,0 +1,162 @@
+{
+ "_merge": true,
+ "id": "violacell",
+ "oneliner": "整形外科專科醫師主導｜專注拉提與抗老",
+ "about": "VIOLACELL 整形外科（비올라셀성형외과）位於新沙站 1 號出口約 260 公尺的島山大路 138 號 3 樓，由整形外科專科醫師金英俊代表院長帶領 3 人醫療團隊，專注拉提與抗老療程。",
+ "intro": "VIOLACELL 整形外科位於首爾江南區島山大路 138 號 3 樓，3 號線・新盆唐線新沙站 1 號出口步行約 4 分鐘（約 260 公尺，不必過馬路）。\n院方表示專注「拉提」與「抗老」兩大領域，不向所有人推薦相同項目，而是先分析面部結構、皮膚狀態與希望的變化，再規劃所需治療。\n・AI 皮膚分析：無論是否接受治療，到院者皆可進行 1:1 精細皮膚分析，以數據確認膚況後再制定方案。\n・正品・正量：僅使用韓國食藥處核准的正品，治療前可親自確認產品包裝與開封過程；療程後發放 VIOLACELL 正品・用量證明書。\n・私密動線：諮詢與治療皆在單人室進行，等候與恢復動線分開。\n醫療團隊共 3 位醫師（含整形外科專科醫師），由諮詢的醫師負責施術與術後追蹤。代表院長金英俊畢業於全南大學醫學院，完成全南大學整形外科住院醫師訓練並任全南大學整形外科臨床教授，為大韓整形外科學會、大韓美容整形外科學會、國際美容整形外科學會正會員。\n院內有 Ultherapy PRIME、Thermage FLX、XERF、ONDA、Shurink Universe、Virtue RF、PICO PLUS 等 17 種拉提・雷射與保養設備。\n大樓停車場可免費停車 2 小時。\n院方介紹為「韓國前 1% 的拉提與水光專家」，累積療程 10,000+ 例。",
+ "tags": [
+  "新沙站步行 4 分鐘",
+  "整形外科專科醫師",
+  "AI 皮膚分析"
+ ],
+ "features": [
+  {
+   "icon": "train",
+   "label": "新沙站 1 號出口約 260m・步行 4 分鐘"
+  },
+  {
+   "icon": "shield",
+   "label": "3 位醫師團隊・含整形外科專科醫師"
+  },
+  {
+   "icon": "list",
+   "label": "Ultherapy PRIME・Thermage FLX 等 17 種設備"
+  },
+  {
+   "icon": "tag",
+   "label": "療程後發放正品・用量證明書"
+  },
+  {
+   "icon": "chat",
+   "label": "到院者皆可做 1:1 AI 皮膚分析"
+  },
+  {
+   "icon": "cal",
+   "label": "週五看診至 21:00"
+  }
+ ],
+ "programs": [
+  {
+   "title": "定制埋線提升",
+   "desc": "依每個鬆弛部位選擇不同線材與植入層次，連提拉方向也一併設計。",
+   "img": ""
+  },
+  {
+   "title": "設計填充",
+   "desc": "不只填充單一部位，先觀察整體面部比例，再決定需要填充的位置。",
+   "img": ""
+  },
+  {
+   "title": "VIOLACELL 水光",
+   "desc": "依肌膚狀態調配成分組合，並兼顧最終的膚色效果。",
+   "img": ""
+  },
+  {
+   "title": "AI 皮膚分析",
+   "desc": "以 EVELAB AI 拍攝分析臉部與皮膚狀態並數值化，作為療程規劃參考。",
+   "img": "https://www.skinbridgekorea.com/tw/img/violacell/r-prog-ai-skin-analysis.webp"
+  }
+ ],
+ "doctors": [
+  {
+   "name": "金英俊（김영준）",
+   "role": "代表院長・整形外科專科醫師",
+   "photo": "https://www.skinbridgekorea.com/tw/img/violacell/r-doctor-kim-youngjun.webp",
+   "tags": [
+    "前 Brown 整形外科 院長",
+    "前 Liting 整形外科 院長",
+    "全南大學醫學院 畢業",
+    "全南大學 整形外科 住院醫師結業",
+    "全南大學 整形外科 臨床教授",
+    "大韓整形外科學會 正會員",
+    "大韓美容整形外科學會 正會員",
+    "大韓顱顏整形外科學會 正會員",
+    "大韓整形外科醫師會 正會員",
+    "國際美容整形外科學會 正會員",
+    "大韓抗老化研究會 正會員",
+    "大韓整形外科學會 微創研究會 正會員"
+   ]
+  },
+  {
+   "name": "Lee Wang Seok（이왕석）",
+   "role": "院長・整形外科專科醫師",
+   "photo": "",
+   "tags": [
+    "前 Liting 整形外科 院長",
+    "前 Lollipop 整形外科 院長",
+    "順天鄉大學醫學院 畢業",
+    "順天鄉大學醫學院研究所 碩士",
+    "順天鄉大學首爾醫院 整形外科專科醫師",
+    "順天鄉大學首爾醫院 臨床講師",
+    "大韓整形外科學會・大韓美容整形外科學會・大韓顱顏整形外科學會 正會員"
+   ]
+  },
+  {
+   "name": "Choi Sang Seok（최상석）",
+   "role": "院長",
+   "photo": "",
+   "tags": [
+    "前 Dayview Clinic Beomgye 店 院長",
+    "前 Abijou Clinic Beomgye 店 院長",
+    "翰林大學醫學院 結業",
+    "翰林大學聖心醫院 骨科 訓練",
+    "大韓美容整形雷射醫學會 正會員",
+    "大韓雷射皮膚毛髮學會 正會員",
+    "大韓肥胖美容學會・韓國皮膚肥胖整形學會 正會員"
+   ]
+  }
+ ],
+ "equipment": [
+  "Ultherapy PRIME",
+  "Thermage FLX",
+  "XERF",
+  "Shurink Universe",
+  "ONDA",
+  "X-INJECTOR",
+  "PICO PLUS",
+  "V Laser",
+  "Virtue RF",
+  "CO2 Laser",
+  "Derma Shine Pro",
+  "CRYOCELL",
+  "HI-FULL DM",
+  "TRIDERM",
+  "OMEGA LIGHT",
+  "Hyperbaric Oxygen Chamber"
+ ],
+ "hours": [
+  "10:00-19:00",
+  "10:00-19:00",
+  "10:00-19:00",
+  "10:00-19:00",
+  "10:00-21:00",
+  "09:00-19:00",
+  ""
+ ],
+ "lunch": "",
+ "hoursNote": "週五看診至 21:00・週日與國定假日休診。",
+ "more": "",
+ "photos": [
+  "https://www.skinbridgekorea.com/tw/img/violacell/cover-1.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/cover-2.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/cover-3.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/r-interior-lobby.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/r-doctors-group.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/r-interior-reception.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/r-interior-private-room.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/r-interior-lounge.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/r-interior-procedure-room.webp"
+ ],
+ "interior": [
+  "https://www.skinbridgekorea.com/tw/img/violacell/r-interior-reception.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/r-interior-lobby.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/r-interior-lounge.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/r-interior-waiting.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/r-interior-private-room.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/r-interior-recovery-room.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/r-interior-procedure-room.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/r-interior-corridor.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/r-interior-powder-room.webp"
+ ],
+ "name": "VIOLACELL 唯奧拉"
+}
