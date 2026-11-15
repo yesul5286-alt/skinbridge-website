@@ -621,8 +621,9 @@ function viewClinic(c){
     : progs
       ? `<div class="d2-progs">${progs.slice(0, 3).map(progCard).join("")}</div>`
       : (c.treats && c.treats.length ? `<ul class="d2-treats">${c.treats.slice(0, 8).map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : "");
-  const recoSec = false ? `<section class="dsec" id="s-reco"><span class="en">TREATMENTS</span>
-      <div class="d2-sh"><h2>推薦療程</h2><button type="button" class="d2-link" data-jump="price">查看更多療程 →</button></div>${reco}</section>` : "";
+  /* 2026-11-15: 일반 사진 카드(推薦療程)는 빼고, 병원별 特色療程만 병원 소개 바로 아래에 */
+  const recoSec = progs ? `<section class="dsec" id="s-reco"><span class="en">SIGNATURE</span>
+      <div class="d2-sh"><h2>特色療程</h2></div><div class="d2-progs">${progs.slice(0, 3).map(progCard).join("")}</div></section>` : "";
 
   /* 9折 */
   const ben = c.benefit ? `<div class="d2-ben"><span class="en"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="8.5" width="17" height="4" rx=".5"/><path d="M5 12.5v8h14v-8M12 8.5v12M12 8.5c-1.5-3.5-5.5-4-5.5-1.5 0 1.5 2.5 1.5 5.5 1.5Zm0 0c1.5-3.5 5.5-4 5.5-1.5 0 1.5-2.5 1.5-5.5 1.5Z"/></svg>SKINBRIDGE 專屬禮遇</span>
@@ -737,7 +738,7 @@ function viewClinic(c){
       </div>`).join("")}</div>
       <p class="note">可選第一、第二志願，最終方案由診所依審核結果安排並以 LINE 通知。網紅限定方案需填寫 Instagram。</p>` : "";
 
-  const tabs = [["info", "診所介紹"], ...(false ? [["reco", "代表療程"]] : []), ...(hasPrice ? [["price", "價格參考"]] : []), ...(env ? [["env", "診所環境"]] : [])];
+  const tabs = [["info", "診所介紹"], ...(progs ? [["reco", "特色療程"]] : []), ...(hasPrice ? [["price", "價格參考"]] : []), ...(env ? [["env", "診所環境"]] : [])];
   return `<div class="view detail d2">
     ${hero}
     ${head}
