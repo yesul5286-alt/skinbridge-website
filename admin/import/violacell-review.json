@@ -1,0 +1,32 @@
+{
+ "_merge": true,
+ "id": "violacell",
+ "name": "VIOLACELL 維奧拉",
+ "oneliner": "整形外科專科醫師親自設計｜到院即享 1:1 AI 膚況分析",
+ "about": "院方介紹為韓國前 1% 拉提與水光專家，累積療程 10,000+ 例。整形外科專科醫師親自設計療程，到院即享 1:1 AI 皮膚分析。",
+ "intro": "院方介紹為「韓國前 1% 的拉提與水光專家」，累積療程 10,000+ 例。由整形外科專科醫師親自分析面部結構與膚況，不向所有人推薦相同項目，只規劃真正需要的治療。\n・到院即享 1:1 AI 皮膚分析：無論是否接受治療皆可進行，以數據確認膚況後再制定方案。\n・正品・正量：僅使用韓國食藥處核准的正品，治療前可親自確認產品包裝與開封過程；療程後發放 VIOLACELL 正品・用量證明書。\n・當天施術：諮詢後狀況與行程允許，可當天進行療程，短天數旅程也排得進去。\n・私密動線：諮詢與治療皆在單人室進行，等候與恢復動線分開。\n・術後恢復管理：營養點滴、高壓氧艙、冷鎮靜等，可依恢復時程搭配。\n醫療團隊共 3 位醫師（含整形外科專科醫師），由諮詢的醫師負責施術與術後追蹤。代表院長金英俊畢業於全南大學醫學院，完成全南大學整形外科住院醫師訓練並任全南大學整形外科臨床教授，為大韓整形外科學會、大韓美容整形外科學會、國際美容整形外科學會正會員。\n院內有 Ultherapy PRIME、Thermage FLX、XERF、ONDA、Shurink Universe、Virtue RF、PICO PLUS 等 17 種拉提・雷射與保養設備。\n交通：3 號線・新盆唐線新沙站 1 號出口步行約 4 分鐘（約 260 公尺，不必過馬路），首爾江南區島山大路 138 號 3 樓。",
+ "rating": "4.9",
+ "reviews": 349,
+ "programs": [
+  {
+   "img": "https://www.skinbridgekorea.com/tw/img/violacell/prog-thread-lift.webp",
+   "title": "定制埋線提升",
+   "desc": "依每個鬆弛部位選擇不同線材與植入層次，連提拉方向也一併設計。約 20–30 分鐘・表面麻醉・院方表示術後可立即恢復日常。"
+  },
+  {
+   "img": "https://www.skinbridgekorea.com/tw/img/violacell/r-prog-ai-skin-analysis.webp",
+   "desc": "以 EVELAB AI 拍攝分析臉部與皮膚狀態並數值化，作為療程規劃參考。",
+   "title": "AI 皮膚分析"
+  },
+  {
+   "desc": "依肌膚狀態調配成分組合，並兼顧最終的膚色效果。約 15–30 分鐘・表面麻醉・院方表示術後可立即恢復日常。",
+   "img": "https://www.skinbridgekorea.com/tw/img/violacell/prog-skin-booster.webp",
+   "title": "VIOLACELL 水光"
+  },
+  {
+   "desc": "不只填充單一部位，先觀察整體面部比例，再決定需要填充的位置。約 10–20 分鐘・表面麻醉・院方表示術後可立即恢復日常。",
+   "img": "https://www.skinbridgekorea.com/tw/img/violacell/prog-design-filler.webp",
+   "title": "設計填充"
+  }
+ ]
+}
