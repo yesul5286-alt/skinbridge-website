@@ -614,7 +614,7 @@ function viewClinic(c){
     : progs
       ? `<div class="d2-progs">${progs.slice(0, 3).map(progCard).join("")}</div>`
       : (c.treats && c.treats.length ? `<ul class="d2-treats">${c.treats.slice(0, 8).map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : "");
-  const recoSec = reco ? `<section class="dsec" id="s-reco"><span class="en">TREATMENTS</span>
+  const recoSec = false ? `<section class="dsec" id="s-reco"><span class="en">TREATMENTS</span>
       <div class="d2-sh"><h2>推薦療程</h2><button type="button" class="d2-link" data-jump="price">查看更多療程 →</button></div>${reco}</section>` : "";
 
   /* 9折 */
@@ -730,7 +730,7 @@ function viewClinic(c){
       </div>`).join("")}</div>
       <p class="note">可選第一、第二志願，最終方案由診所依審核結果安排並以 LINE 通知。網紅限定方案需填寫 Instagram。</p>` : "";
 
-  const tabs = [["info", "診所介紹"], ...(reco ? [["reco", "代表療程"]] : []), ...(hasPrice ? [["price", "價格參考"]] : []), ...(env ? [["env", "診所環境"]] : [])];
+  const tabs = [["info", "診所介紹"], ...(false ? [["reco", "代表療程"]] : []), ...(hasPrice ? [["price", "價格參考"]] : []), ...(env ? [["env", "診所環境"]] : [])];
   return `<div class="view detail d2">
     ${hero}
     ${head}
