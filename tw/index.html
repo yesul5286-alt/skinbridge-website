@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+TC:wght@500;600&family=Libre+Caslon+Text&family=Montserrat:wght@400&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611151301">
+<link rel="stylesheet" href="/tw/sb.css?v=202611151308">
 </head>
 <body>
 <header class="hd">
@@ -961,7 +961,7 @@ function route(){
 }
 
 /* ===== 가로로 긴 줄: 스크롤바 대신 좌우 화살표 ===== */
-const HS_SEL = ".row, .tcards, .posters, .pthumbs, .ptabs, .d2-thumbs, .pcats, .cd-fl, .chips";
+const HS_SEL = ".row, .tcards, .posters, .pthumbs, .d2-thumbs, .pcats, .cd-fl, .chips";
 function hscroll(root){
   (root || document).querySelectorAll(HS_SEL).forEach(el => {
     if (el.dataset.hs || el.closest(".fsheet")) return;

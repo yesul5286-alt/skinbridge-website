@@ -1060,7 +1060,7 @@ details.pi[open] .pi-h::after{content:"−"}
 .pthumbs::-webkit-scrollbar{display:none}
 .pthumbs button{flex:0 0 76px;height:104px;padding:0;border:1px solid var(--rule);background:#fff;cursor:zoom-in}
 .pthumbs img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
-.ptabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:8px 0 10px;padding-bottom:2px}
+.ptabs{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px}
 .ptabs::-webkit-scrollbar{display:none}
 .ptabs button{flex:0 0 auto;padding:6px 12px;border:1px solid var(--rule);background:#fff;font:inherit;font-size:.82rem;color:var(--ink);cursor:pointer;white-space:nowrap}
 .ptabs button[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
