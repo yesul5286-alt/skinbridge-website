@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+TC:wght@500;600&family=Libre+Caslon+Text&family=Montserrat:wght@400&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611152000">
+<link rel="stylesheet" href="/tw/sb.css?v=202611152130">
 </head>
 <body>
 <header class="hd">
@@ -747,7 +747,8 @@ function viewClinic(c){
     <p class="note">${esc(c.priceNote || "VAT 另計")}。台幣價格僅供參考，實際以韓元結帳為準。實際療程內容與價格以診所諮詢為準。</p>${perkBox(c)}`;
 
   /* 환경 */
-  const env = c.interior && c.interior.length ? `<div class="d2-env">${c.interior.map((u, i) => `<button type="button" data-envlb="${i}" aria-label="放大第 ${i + 1} 張"><img src="${esc(u)}" alt="${esc(c.name)} 診所環境 ${i + 1}" loading="lazy"></button>`).join("")}</div>` : "";
+  const envN = (c.interior || []).length;
+  const env = envN ? `<div class="d2-envg"><div class="d2-egal" id="envGal">${c.interior.map((u, i) => `<button type="button" data-envlb="${i}" aria-label="放大第 ${i + 1} 張"><img src="${esc(u)}" alt="${esc(c.name)} 診所環境 ${i + 1}" loading="lazy"></button>`).join("")}</div>${envN > 1 ? `<span class="d2-ecnt" id="envCnt">1 / ${envN}</span>` : ""}</div>${envN > 1 ? `<div class="d2-ethumbs" id="envThumbs" role="group" aria-label="診所環境照片">${c.interior.map((u, i) => `<button type="button" data-ethumb="${i}" aria-label="第 ${i + 1} 張"${i ? "" : ' aria-current="true"'}><img src="${esc(u)}" alt="" loading="lazy"></button>`).join("")}</div>` : ""}` : "";
 
   /* 체험단 */
   const campCards = k ? `<div class="dd-line">${esc(k.target)}・截止 ${k.end.slice(5).replace("-", "/")}（${ddLabel(k)}）${k.example ? '<span class="ex">範例</span>' : ""}</div>
@@ -893,8 +894,18 @@ function setupDetail(){
   if (ptabs && pim) ptabs.addEventListener("click", e => { const t = e.target.closest("[data-ptab]"); if (!t) return;
     ptabs.querySelectorAll("[data-ptab]").forEach(x => x.setAttribute("aria-pressed", x === t ? "true" : "false"));
     pim.querySelectorAll("[data-pg]").forEach(x => { x.hidden = x.dataset.pg !== t.dataset.ptab; }); pim.scrollLeft = 0; });
-  const env = document.querySelector(".d2-env");
-  if (env) env.addEventListener("click", e => { const b = e.target.closest("[data-envlb]"); if (b) openLb([...env.querySelectorAll("img")].map(i => i.src), +b.dataset.envlb); });
+  const env = document.getElementById("envGal");
+  if (env) {
+    env.addEventListener("click", e => { const b = e.target.closest("[data-envlb]"); if (b) openLb([...env.querySelectorAll("img")].map(i => i.src), +b.dataset.envlb); });
+    const ec = document.getElementById("envCnt"), et = document.getElementById("envThumbs"), etb = et ? [...et.children] : [];
+    if (ec) env.addEventListener("scroll", () => {
+      const i = Math.round(env.scrollLeft / env.clientWidth);
+      ec.textContent = `${i + 1} / ${env.children.length}`;
+      etb.forEach((b, k) => k === i ? b.setAttribute("aria-current", "true") : b.removeAttribute("aria-current"));
+      if (etb[i]) et.scrollTo({ left: etb[i].offsetLeft - et.clientWidth / 2 + etb[i].clientWidth / 2, behavior: "smooth" });
+    }, { passive: true });
+    if (et) et.addEventListener("click", e => { const b = e.target.closest("[data-ethumb]"); if (b) env.scrollTo({ left: +b.dataset.ethumb * env.clientWidth, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }); });
+  }
   const pq = document.getElementById("pq"), pcl = document.getElementById("pcl"), plist = document.getElementById("plist");
   const pview = (cat, q) => {
     q = (q || "").trim().toLowerCase();
@@ -997,7 +1008,7 @@ function route(){
 }
 
 /* ===== 가로로 긴 줄: 스크롤바 대신 좌우 화살표 ===== */
-const HS_SEL = ".row, .tcards, .posters, .pthumbs, .d2-thumbs, .pcats, .cd-fl, .chips";
+const HS_SEL = ".row, .tcards, .posters, .pthumbs, .d2-thumbs, .d2-ethumbs, .pcats, .cd-fl, .chips";
 function hscroll(root){
   (root || document).querySelectorAll(HS_SEL).forEach(el => {
     if (el.dataset.hs || el.closest(".fsheet")) return;
