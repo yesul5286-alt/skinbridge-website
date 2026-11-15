@@ -1,0 +1,105 @@
+{
+ "_merge": true,
+ "id": "oganacell",
+ "hoursNote": "週日與國定假日休診・11 月無休診日・12/25（五）聖誕節休診。各院長看診日不同，想指定院長請先透過 LINE 確認。",
+ "doctors": [
+  {
+   "name": "Oh Ga-na（오가나）",
+   "role": "代表院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/oganacell/doctor-4.webp",
+   "tags": [
+    "皮膚科專科醫師",
+    "看診 週一 10–18・週二 14–20・週四 10–18・週五 14–20・週六 9–16（週三休診）"
+   ]
+  },
+  {
+   "name": "Seo Ji-yoon（서지윤）",
+   "role": "院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/oganacell/doctor-1.webp",
+   "tags": [
+    "皮膚科專科醫師"
+   ]
+  },
+  {
+   "name": "Kang Seok-young（강석영）",
+   "role": "院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/oganacell/doctor-2.webp",
+   "tags": [
+    "皮膚科專科醫師",
+    "看診 週一 11–20・週二 10–19・週四 10–19・週五 10–19・週六 9–16（週三休診）"
+   ]
+  },
+  {
+   "name": "Park Geun-hwi（박근휘）",
+   "role": "院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/oganacell/doctor-3.webp",
+   "tags": [
+    "皮膚科專科醫師",
+    "看診 週一 10–19・週二 11–20・週三 10–19・週五 10–19・週六 9–16（週四休診）"
+   ]
+  },
+  {
+   "name": "Kim Tae-hyung（김태형）",
+   "role": "院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/oganacell/doctor-5.webp",
+   "tags": [
+    "皮膚科專科醫師",
+    "看診 週一 11–20・週二 10–19・週四 11–20・週五 11–20・週六 9–16（週三休診）"
+   ]
+  },
+  {
+   "name": "Lee Dong-won（이동원）",
+   "role": "院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/oganacell/doctor-6.webp",
+   "tags": [
+    "皮膚科專科醫師",
+    "看診 週二 11–20・週三 10–19・週四 10–19・週五 11–20・週六 10–17（週一休診）"
+   ]
+  },
+  {
+   "name": "Kim Taek-un（김택운）",
+   "role": "院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/oganacell/doctor-7.webp",
+   "tags": [
+    "皮膚科專科醫師",
+    "看診 週一 10–19・週二 11–20・週四 10–19・週五 11–20・週六 9–16（週三休診）"
+   ]
+  },
+  {
+   "name": "Shin Hee-young（신희영）",
+   "role": "院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/oganacell/doctor-8.webp",
+   "tags": [
+    "皮膚科專科醫師",
+    "看診 週一 10–19・週三 10–19・週五 10–19（週二・週四・週六休診）"
+   ]
+  },
+  {
+   "name": "Jung Woo-young（정우영）",
+   "role": "院長",
+   "photo": "",
+   "tags": [
+    "麻醉科專科醫師"
+   ]
+  }
+ ],
+ "monthly": {
+  "month": "11–12 月",
+  "note": "活動期間 2026.11.1–12.31・活動價以現金／支付寶付款為免稅價，刷卡另加 10%",
+  "items": [],
+  "posters": [
+   {
+    "img": "https://www.skinbridgekorea.com/tw/img/oganacell/2026-11-12-event.webp",
+    "title": "OGANACELL 清潭 11–12 月冬季活動"
+   },
+   {
+    "img": "https://www.skinbridgekorea.com/tw/img/oganacell/schedule-2026-11-12.webp",
+    "title": "11–12 月休診日（12/25 聖誕節休診）"
+   },
+   {
+    "img": "https://www.skinbridgekorea.com/tw/img/oganacell/schedule-doctors.webp",
+    "title": "各院長看診時間"
+   }
+  ]
+ }
+}
