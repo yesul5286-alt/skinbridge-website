@@ -931,13 +931,13 @@ function jump(id){
 
 /* ===== 라우팅 ===== */
 /* 화면 이동은 부드럽게 굴리지 않고 바로(어지러움 방지, 2026-11-15). 뒤로 가기면 보던 위치로 돌아감 */
-const SCROLL_POS = {};
+const SCROLL_POS = {}; let PREV_PAGE = "";   // 직전 화면으로 돌아가는 링크(상세 → 목록)면 보던 위치 복원
 const jumpTo = y => { try { scrollTo({ top: y, left: 0, behavior: "instant" }); } catch (_) { scrollTo(0, y); } };
 let cur = location.hash.slice(1);
 function go(h){
-  SCROLL_POS[cur] = scrollY; cur = h;
+  SCROLL_POS[cur] = scrollY; const back = h === PREV_PAGE; PREV_PAGE = cur; cur = h;
   try { if (location.hash.slice(1) !== h) location.hash = h; } catch (_) {}
-  route(); jumpTo(0);
+  route(); const y = back ? (SCROLL_POS[h] || 0) : 0; jumpTo(y); requestAnimationFrame(() => jumpTo(y));
 }
 function route(){
   const h = cur;
@@ -1127,7 +1127,7 @@ document.addEventListener("change", e => {
 });
 addEventListener("hashchange", () => {
   const h = location.hash.slice(1);
-  if (h !== cur) { SCROLL_POS[cur] = scrollY; cur = h; route(); const y = SCROLL_POS[h] || 0; jumpTo(y); requestAnimationFrame(() => jumpTo(y)); }
+  if (h !== cur) { SCROLL_POS[cur] = scrollY; PREV_PAGE = cur; cur = h; route(); const y = SCROLL_POS[h] || 0; jumpTo(y); requestAnimationFrame(() => jumpTo(y)); }
 });
 
 try { const pend = sessionStorage.getItem("sb-rev"); if (pend) { sessionStorage.removeItem("sb-rev"); cur = pend; state.jump = "review"; } } catch (_) {}
