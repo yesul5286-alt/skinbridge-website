@@ -599,17 +599,20 @@ function viewClinic(c){
     + (c.hours && c.hoursNote ? `<p class="note">${esc(c.hoursNote)}</p>` : "");
   const addr = c.address ? `<h3 class="sub-h">位置與交通</h3>
     ${c.station ? `<p class="d2-st">${icon("train")}<span>${esc(c.station)}</span></p>` : ""}
-    <div class="addr"><span id="addrText">${esc(c.address)}</span><button type="button" class="copy" data-copy="addrText">複製</button></div>
-    <a class="d2-map" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.address)}" target="_blank" rel="noopener">在 Google 地圖開啟 →</a>` : "";
+    <div class="addr"><span id="addrText">${esc(c.address)}</span><button type="button" class="copy" data-copy="addrText">複製</button></div>` : "";
 
   /* 추천 시술: 이 병원이 하는 분야를 사진 카드로 */
   const catCards = HOME.curated.filter(x => x.key === "concern" ? (c.concerns || []).includes(x.v) : (c.treats || []).includes(x.v)).slice(0, 3);
   const progs = c.programs && c.programs.length ? c.programs : null;
+  /* 특색 시술 사진이 없으면 병원 사진(내부·대표)을 대신 넣는다 — 글만 있는 카드 방지 */
+  const progPool = [...(c.interior || []), ...(c.photos || [])].filter((u, i, a) => u && a.indexOf(u) === i && !(c.programs || []).some(p => p.img === u));
+  let progN = 0;
+  const progCard = p => { const im = p.img || (progPool.length ? progPool[(progN++) % progPool.length] : ""); return `<div class="d2-prog">${im ? `<img src="${esc(im)}" alt="${esc(p.title)}" loading="lazy">` : ""}<div><b>${esc(p.title)}</b>${p.desc ? `<p>${esc(p.desc).replace(/\n/g, "<br>")}</p>` : ""}</div></div>`; };
   const reco = catCards.length
     ? `<div class="d2-cats">${catCards.map(x => `<button type="button" class="d2-cat" data-jump="price"><span class="d2-cat-img"><img src="${x.img}" alt="" loading="lazy"></span><b>${x.zh}</b><small>${x.en}</small></button>`).join("")}</div>`
-      + (progs ? `<h3 class="sub-h">特色療程</h3><div class="d2-progs">${progs.slice(0, 3).map(p => `<div class="d2-prog">${p.img ? `<img src="${esc(p.img)}" alt="${esc(p.title)}" loading="lazy">` : ""}<div><b>${esc(p.title)}</b>${p.desc ? `<p>${esc(p.desc).replace(/\n/g, "<br>")}</p>` : ""}</div></div>`).join("")}</div>` : "")
+      + (progs ? `<h3 class="sub-h">特色療程</h3><div class="d2-progs">${progs.slice(0, 3).map(progCard).join("")}</div>` : "")
     : progs
-      ? `<div class="d2-progs">${progs.slice(0, 3).map(p => `<div class="d2-prog">${p.img ? `<img src="${esc(p.img)}" alt="${esc(p.title)}" loading="lazy">` : ""}<div><b>${esc(p.title)}</b>${p.desc ? `<p>${esc(p.desc).replace(/\n/g, "<br>")}</p>` : ""}</div></div>`).join("")}</div>`
+      ? `<div class="d2-progs">${progs.slice(0, 3).map(progCard).join("")}</div>`
       : (c.treats && c.treats.length ? `<ul class="d2-treats">${c.treats.slice(0, 8).map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : "");
   const recoSec = reco ? `<section class="dsec" id="s-reco"><span class="en">TREATMENTS</span>
       <div class="d2-sh"><h2>推薦療程</h2><button type="button" class="d2-link" data-jump="price">查看更多療程 →</button></div>${reco}</section>` : "";
