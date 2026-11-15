@@ -556,11 +556,10 @@ function viewClinic(c){
      photos 가 없으면 지금처럼 내부 사진으로 채움 */
   const envSet = new Set(c.interior || []);
   let pics = (c.photos || []).filter((u, i, a) => u && a.indexOf(u) === i);
-  const leadEnv = pics.find(u => envSet.has(u));
-  pics = pics.filter(u => !envSet.has(u) || u === leadEnv);
+  /* 2026-11-15 사용자 지시: 맨 위 사진에는 내부 사진을 넣지 않음(내부는 아래 診所環境에만). 마케팅 사진이 하나도 없을 때만 내부 사진으로 대신 */
+  pics = pics.filter(u => !envSet.has(u));
   const envOnly = !pics.length;
   if (envOnly) pics = [...(c.interior || [])];
-  else if (pics.length < 3) for (const u of envSet) { if (pics.length >= 4) break; if (!pics.includes(u)) pics.push(u); }   // 마케팅 사진이 적은 병원은 내부 사진으로 4장까지 채움
   const envChip = !envOnly && envSet.size ? `<button type="button" class="d2-envchip" data-jump="env">診所環境 ${envSet.size} 張 <span aria-hidden="true">↓</span></button>` : "";
   const fav = favs.has(c.id);
   const top = `<div class="d2-top d2-bar">
