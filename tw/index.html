@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+TC:wght@500;600&family=Libre+Caslon+Text&family=Montserrat:wght@400&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611152345">
+<link rel="stylesheet" href="/tw/sb.css?v=202611160010">
 </head>
 <body>
 <header class="hd">
@@ -616,13 +616,21 @@ function viewClinic(c){
   const eqMore = eqList.length - 5;
   const equip = eqList.length ? `<h3 class="sub-h">主要設備</h3><div class="fields equip">${eqList.map((f, i) => `<span${i >= 5 ? " hidden" : ""}>${esc(f)}</span>`).join("")}${eqMore > 0 ? `<button type="button" class="eq-more" onclick="this.parentNode.querySelectorAll('span[hidden]').forEach(x=>x.hidden=false);this.remove()">+${eqMore} 項</button>` : ""}</div>` : "";
   const nd = c.doctors ? c.doctors.length : 0;
-  const docs = nd ? `<h3 class="sub-h">醫療團隊</h3><div class="d2-docs" style="--cols:${nd === 4 ? 2 : Math.min(nd, 3)}">${c.doctors.map(d => `
+  /* 2026-11-15: 원장 5명 이상이면 대표 1명 + 나머지는 옆으로 넘기는 작은 카드(누르면 경력 펼침) */
+  const docCard = d => `
       <div class="d2-doc">
         <div class="d2-doc-ph">${d.photo ? `<img src="${esc(d.photo)}" alt="${esc(d.name)}" loading="lazy">` : `<span aria-hidden="true">${esc((d.name || "?").slice(0, 1))}</span>`}</div>
         <b>${esc(d.name)}</b><span class="role">${esc(d.role)}</span>
         ${(d.tags || []).length ? `<ul class="d2-doc-t">${d.tags.slice(0, 2).map(x => `<li>${esc(x)}</li>`).join("")}</ul>
           ${d.tags.length > 2 ? `<details class="d2-doc-more"><summary>經歷 ${d.tags.length} 項</summary><ul>${d.tags.slice(2).map(x => `<li>${esc(x)}</li>`).join("")}</ul></details>` : ""}` : ""}
-      </div>`).join("")}</div>` : "";
+      </div>`;
+  const dxName = d => esc((d.name || "").replace(/（.*?）|\(.*?\)/g, "").trim() || d.name || "");
+  const docs = !nd ? "" : nd < 5
+    ? `<h3 class="sub-h">醫療團隊</h3><div class="d2-docs" style="--cols:${nd === 4 ? 2 : Math.min(nd, 3)}">${c.doctors.map(docCard).join("")}</div>`
+    : `<h3 class="sub-h">醫療團隊</h3><div class="d2-docs" style="--cols:1">${docCard(c.doctors[0])}</div>
+      <p class="dx-h">其他醫師 ${nd - 1} 位<span aria-hidden="true"> · 左右滑動</span></p>
+      <div class="dx-row" role="group" aria-label="其他醫師">${c.doctors.slice(1).map((d, i) => `<button type="button" class="dx-c" data-dx="${i}" aria-expanded="false"><span class="ph">${d.photo ? `<img src="${esc(d.photo)}" alt="" loading="lazy">` : `<i aria-hidden="true">${esc((d.name || "?").slice(0, 1))}</i>`}</span><b>${dxName(d)}</b><small>${esc((d.tags || [])[0] || d.role || "")}</small></button>`).join("")}</div>
+      <div class="dx-full d2-docs" style="--cols:1">${c.doctors.slice(1).map((d, i) => `<div data-dxp="${i}" hidden>${docCard(d)}</div>`).join("")}</div>`;
   const hours = `<h3 class="sub-h">診療時間</h3>` + (c.hours
     ? `<table class="hours"><tr>${DAYS.map(d => `<th>${d}</th>`).join("")}</tr><tr>${c.hours.map(h => `<td>${h ? esc(h).replace("-", "<br>~<br>") : "休診"}</td>`).join("")}</tr></table>${c.lunch ? `<p class="note">午休 ${esc(c.lunch)}</p>` : ""}`
     : `<p class="note">診療時間請透過 LINE 確認。</p>`)
@@ -895,6 +903,14 @@ function setupDetail(){
   if (ptabs && pim) ptabs.addEventListener("click", e => { const t = e.target.closest("[data-ptab]"); if (!t) return;
     ptabs.querySelectorAll("[data-ptab]").forEach(x => x.setAttribute("aria-pressed", x === t ? "true" : "false"));
     pim.querySelectorAll("[data-pg]").forEach(x => { x.hidden = x.dataset.pg !== t.dataset.ptab; }); pim.scrollLeft = 0; });
+  const dxr = document.querySelector(".dx-row");
+  if (dxr) dxr.addEventListener("click", e => {
+    const b = e.target.closest("[data-dx]"); if (!b) return;
+    const open = b.getAttribute("aria-expanded") !== "true";
+    dxr.querySelectorAll("[data-dx]").forEach(x => x.setAttribute("aria-expanded", "false"));
+    document.querySelectorAll("[data-dxp]").forEach(p => { p.hidden = !(open && p.dataset.dxp === b.dataset.dx); if (!p.hidden) { const dm = p.querySelector("details"); if (dm) dm.open = true; } });
+    if (open) b.setAttribute("aria-expanded", "true");
+  });
   const env = document.getElementById("envGal");
   if (env) {
     env.addEventListener("click", e => { const b = e.target.closest("[data-envlb]"); if (b) openLb([...env.querySelectorAll("img")].map(i => i.src), +b.dataset.envlb); });
