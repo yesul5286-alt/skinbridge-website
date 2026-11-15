@@ -1,0 +1,26 @@
+{
+ "_merge": true,
+ "id": "arden",
+ "programs": [
+  {
+   "desc": "超聲刀＋熱瑪吉能量客製雙重拉提",
+   "img": "https://www.skinbridgekorea.com/tw/img/arden/r-prog-custom-ulthermage-banner.webp",
+   "title": "Custom Ulthermage 客製超聲刀＋熱瑪吉"
+  },
+  {
+   "img": "https://www.skinbridgekorea.com/tw/img/arden/r-prog-fullface-filler-banner.webp",
+   "title": "Signature 全臉填充",
+   "desc": "3D 臉部分析後設計全臉填充"
+  },
+  {
+   "desc": "Silhouette Soft 依臉型設計線條",
+   "img": "https://www.skinbridgekorea.com/tw/img/arden/r-prog-thread-lifting-banner.webp",
+   "title": "Design 線雕拉提"
+  },
+  {
+   "title": "Arden Forest Stem Cell",
+   "desc": "抽取本人血液，經高速離心濃縮血液幹細胞與生長因子後注射於真皮層的再生療程，也可延伸應用於水光與點滴療程。",
+   "img": "https://www.skinbridgekorea.com/tw/img/arden/r-prog-stem-cell-banner.webp"
+  }
+ ]
+}

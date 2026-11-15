@@ -1,0 +1,26 @@
+{
+ "_merge": true,
+ "id": "violacell",
+ "programs": [
+  {
+   "desc": "依部位選線材與方向・約 20–30 分鐘",
+   "img": "https://www.skinbridgekorea.com/tw/img/violacell/prog-thread-lift.webp",
+   "title": "定制埋線提升"
+  },
+  {
+   "title": "AI 皮膚分析",
+   "desc": "EVELAB AI 數值化膚況，規劃療程",
+   "img": "https://www.skinbridgekorea.com/tw/img/violacell/r-prog-ai-skin-analysis.webp"
+  },
+  {
+   "img": "https://www.skinbridgekorea.com/tw/img/violacell/prog-skin-booster.webp",
+   "title": "VIOLACELL 水光",
+   "desc": "依膚況調配成分・約 15–30 分鐘"
+  },
+  {
+   "title": "設計填充",
+   "desc": "不只填充單一部位，先觀察整體面部比例，再決定需要填充的位置。約 10–20 分鐘・表面麻醉・院方表示術後可立即恢復日常。",
+   "img": "https://www.skinbridgekorea.com/tw/img/violacell/prog-design-filler.webp"
+  }
+ ]
+}

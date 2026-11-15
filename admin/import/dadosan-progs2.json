@@ -1,0 +1,26 @@
+{
+ "_merge": true,
+ "id": "dadosan",
+ "programs": [
+  {
+   "title": "Ulthera Layered Lifting 超聲刀分層拉提",
+   "desc": "多種原廠設備疊加的 DA 招牌拉提",
+   "img": "https://www.skinbridgekorea.com/tw/img/dadosan/r-prog-layered-lifting-devices.webp"
+  },
+  {
+   "desc": "射頻＋震波，彈力・循環・線條一起",
+   "img": "",
+   "title": "Layered Revi-Tune 分層 Revi-Tune"
+  },
+  {
+   "title": "Layered Body Lifting 分層身體拉提",
+   "desc": "分層提升身體彈力，1 人室附淋浴間",
+   "img": "https://www.skinbridgekorea.com/tw/img/dadosan/r-prog-layered-body-lifting-private-suite.webp"
+  },
+  {
+   "desc": "自體血液幹細胞或 SVF 脂肪幹細胞，搭配 Metacell MCT 的再生療程；本院於 2026 年 9 月獲指定為先進再生醫療實施機構。",
+   "img": "",
+   "title": "DA LifeCell 幹細胞"
+  }
+ ]
+}

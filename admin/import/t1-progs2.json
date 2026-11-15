@@ -1,0 +1,25 @@
+{
+ "_merge": true,
+ "id": "t1",
+ "programs": [
+  {
+   "title": "皮膚肉毒 Derma Toxin",
+   "desc": "T1 人氣第一，微滴注射自然拉提",
+   "img": "https://www.skinbridgekorea.com/tw/img/t1/prog-1.webp"
+  },
+  {
+   "img": "https://www.skinbridgekorea.com/tw/img/t1/prog-2.webp",
+   "desc": "依靜態・動態區域設計，韌帶支撐",
+   "title": "提拉填充 Lifting Filler"
+  },
+  {
+   "desc": "分層拉提＋膠原再生，T1 代表組合",
+   "img": "https://www.skinbridgekorea.com/tw/img/t1/prog-3.webp",
+   "title": "超聲刀二代＋熱瑪吉五代"
+  },
+  {
+   "desc": "一次全臉注射，同時幫助膠原生成與深層保濕。",
+   "title": "T1 Hybrid 雙效膠原"
+  }
+ ]
+}

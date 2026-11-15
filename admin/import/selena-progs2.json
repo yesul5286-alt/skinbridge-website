@@ -1,0 +1,26 @@
+{
+ "_merge": true,
+ "id": "selena",
+ "programs": [
+  {
+   "img": "https://www.skinbridgekorea.com/tw/img/selena/prog-1.webp",
+   "title": "Potenza 黃金微針",
+   "desc": "院長 Key Doctor・5,000+ 例，價格含探頭費"
+  },
+  {
+   "desc": "原廠正品認證，施打前親眼確認",
+   "title": "美版音波 × 鳳凰電波",
+   "img": "https://www.skinbridgekorea.com/tw/img/selena/prog-lifting.webp"
+  },
+  {
+   "img": "https://www.skinbridgekorea.com/tw/img/selena/r-consult.webp",
+   "title": "依年齡推薦套餐",
+   "desc": "20 代～60 代以上，各分「無恢復期」與「有恢復期」兩款套餐"
+  },
+  {
+   "img": "https://www.skinbridgekorea.com/tw/img/selena/prog-3.webp",
+   "title": "水光・膠原 Skin Booster",
+   "desc": "Juvelook Key Doctor 院長依膚況挑選麗珠蘭、Juvelook 等水光療程。"
+  }
+ ]
+}

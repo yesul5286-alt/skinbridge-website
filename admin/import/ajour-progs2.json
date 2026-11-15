@@ -1,0 +1,26 @@
+{
+ "_merge": true,
+ "id": "ajour",
+ "programs": [
+  {
+   "title": "招牌埋線拉提",
+   "img": "https://www.skinbridgekorea.com/tw/img/ajour/r-prog-thread-global-seminar.webp",
+   "desc": "約 10–15 分鐘・表面麻醉・隔日可恢復"
+  },
+  {
+   "img": "",
+   "title": "AJOUR 超音波抽脂",
+   "desc": "先液化脂肪再吸出，免住院"
+  },
+  {
+   "desc": "自身脂肪分層注入，約 40 分鐘",
+   "title": "自體脂肪移植",
+   "img": ""
+  },
+  {
+   "img": "",
+   "title": "SVF 幹細胞",
+   "desc": "從自體脂肪萃取基質血管成分（SVF）後注射，針對彈力下降、細紋、毛孔、痘疤與暗沉膚色；療程約 10–15 分鐘（效果因人而異）。"
+  }
+ ]
+}

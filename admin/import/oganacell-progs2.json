@@ -1,0 +1,26 @@
+{
+ "_merge": true,
+ "id": "oganacell",
+ "programs": [
+  {
+   "desc": "專科醫師診斷後決定設備組合與順序",
+   "title": "1:1 皮膚矯正 A+B−C",
+   "img": "https://www.skinbridgekorea.com/tw/img/oganacell/r-prog-personal-skin-revision.webp"
+  },
+  {
+   "img": "https://www.skinbridgekorea.com/tw/img/oganacell/r-prog-alltite-device.webp",
+   "desc": "真皮與 SMAS 同時加熱・不需麻醉",
+   "title": "Alltite 雙層射頻拉提"
+  },
+  {
+   "desc": "一台處理色素・膚質・痘疤・細紋",
+   "title": "UltraClear 2910nm 光纖雷射",
+   "img": "https://www.skinbridgekorea.com/tw/img/oganacell/r-prog-ultraclear-device.webp"
+  },
+  {
+   "desc": "院方介紹為世界首創液態 PCL 膠原增生針。液態型 Skin Booster，可均勻擴散到大範圍，自然增加彈力；術後可直接回到日常。",
+   "img": "https://www.skinbridgekorea.com/tw/img/oganacell/r-prog-gouri-skinbooster.webp",
+   "title": "GOURI 液態膠原增生針"
+  }
+ ]
+}
