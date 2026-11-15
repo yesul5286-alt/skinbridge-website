@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+TC:wght@500;600&family=Libre+Caslon+Text&family=Montserrat:wght@400&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611151915">
+<link rel="stylesheet" href="/tw/sb.css?v=202611151945">
 </head>
 <body>
 <header class="hd">
@@ -594,10 +594,20 @@ function viewClinic(c){
   /* 소개 */
   const introTx = c.intro || c.about || "";
   const side = (c.photos && c.photos[1]) || (c.interior && c.interior[1]) || "";
-  const intro = `<div class="d2-about${side ? "" : " solo"}">
+  /* 2026-11-15 핵심 요약(brief): 병원마다 맞는 모양으로 — list(이유 리스트)·stats(숫자 카드)·quote(한 줄 강조+체크).
+     있으면 요약을 보여 주고, 긴 소개글은 '查看完整介紹'로 접음 */
+  const bf = c.brief && Array.isArray(c.brief.items) && c.brief.items.length ? c.brief : null;
+  const briefHtml = !bf ? "" : bf.s === "stats"
+    ? `<div class="bf-stats">${bf.items.map(x => `<div class="bf-c"><div class="bf-n">${esc(x[0])}</div><div class="bf-t">${esc(x[1] || "")}</div>${x[2] ? `<div class="bf-s">${esc(x[2])}</div>` : ""}</div>`).join("")}</div>`
+    : bf.s === "quote"
+    ? `<div class="bf-q"><div class="bf-qt">${esc(bf.q || "").replace(/\n/g, "<br>")}</div>${bf.src ? `<div class="bf-src">— ${esc(bf.src)}</div>` : ""}</div><ul class="bf-chk">${bf.items.map(x => `<li>${esc(Array.isArray(x) ? x[0] : x)}</li>`).join("")}</ul>`
+    : `<ol class="bf-list">${bf.items.map((x, i) => `<li><i>${i + 1}</i><div><b>${esc(Array.isArray(x) ? x[0] : x)}</b>${Array.isArray(x) && x[1] ? `<span>${esc(x[1])}</span>` : ""}</div></li>`).join("")}</ol>`;
+  const intro = bf ? `<div class="d2-about solo"><div>${briefHtml}
+        <p class="d2-intro bf-full" id="introTx">${esc(introTx).replace(/\n/g, "<br>")}</p>
+        <button type="button" class="d2-more" data-more="introTx" aria-expanded="false" data-less="收起" data-open-tx="查看完整介紹">查看完整介紹</button></div>` : `<div class="d2-about${side ? "" : " solo"}">
       <div><p class="d2-intro" id="introTx">${esc(introTx).replace(/\n/g, "<br>")}</p>
         ${introTx.length > 90 ? `<button type="button" class="d2-more" data-more="introTx" aria-expanded="false">更多</button>` : ""}</div>
-      ${side ? `<img src="${esc(side)}" alt="${esc(c.name)} 診所" loading="lazy">` : ""}
+      ${side && !bf ? `<img src="${esc(side)}" alt="${esc(c.name)} 診所" loading="lazy">` : ""}
     </div>`;
   const fields = c.fields && c.fields.length ? `<div class="fields">${c.fields.map(f => `<span>${esc(f)}</span>`).join("")}</div>` : "";
   /* 2026-11-15 주요 장비: 대만 고객이 잘 아는 장비를 앞에 5개만, 나머지는 '+N 項'으로 펼치기 */
@@ -1066,7 +1076,7 @@ document.addEventListener("click", e => {
   if (!t) return;
   if (t.dataset.mmenu) { mSheet(true); return; }
   if (t.dataset.fav) { const on = favs.toggle(t.dataset.fav); t.setAttribute("aria-pressed", on); t.setAttribute("aria-label", on ? "取消收藏" : "收藏這間診所"); return; }
-  if (t.dataset.more) { const el = document.getElementById(t.dataset.more); const open = el.classList.toggle("open"); t.textContent = open ? "收起" : "更多"; t.setAttribute("aria-expanded", open); return; }
+  if (t.dataset.more) { const el = document.getElementById(t.dataset.more); const open = el.classList.toggle("open"); t.textContent = open ? "收起" : (t.dataset.openTx || "更多"); t.setAttribute("aria-expanded", open); return; }
   if (t.dataset.fsheet) { state.sheet = t.dataset.fsheet; route(); const b = document.querySelector(".fsheet-l [aria-pressed=true]"); if (b) b.focus(); return; }
   if (t.dataset.fpick) { state.f[t.dataset.fpick] = t.dataset.v; state.sheet = ""; route(); return; }
   if (t.dataset.fsheetx) { const k = state.sheet; state.sheet = ""; route(); const b = document.querySelector(`[data-fsheet="${k}"]`); if (b) b.focus(); return; }
