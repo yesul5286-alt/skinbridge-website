@@ -1,0 +1,40 @@
+{
+ "_merge": true,
+ "id": "violacell",
+ "programs": [
+  {
+   "desc": "依每個鬆弛部位選擇不同線材與植入層次，連提拉方向也一併設計。",
+   "img": "https://www.skinbridgekorea.com/tw/img/violacell/prog-thread-lift.webp",
+   "title": "定制埋線提升"
+  },
+  {
+   "desc": "不只填充單一部位，先觀察整體面部比例，再決定需要填充的位置。",
+   "title": "設計填充",
+   "img": "https://www.skinbridgekorea.com/tw/img/violacell/prog-design-filler.webp"
+  },
+  {
+   "desc": "依肌膚狀態調配成分組合，並兼顧最終的膚色效果。",
+   "title": "VIOLACELL 水光",
+   "img": "https://www.skinbridgekorea.com/tw/img/violacell/prog-skin-booster.webp"
+  },
+  {
+   "img": "https://www.skinbridgekorea.com/tw/img/violacell/r-prog-ai-skin-analysis.webp",
+   "title": "AI 皮膚分析",
+   "desc": "以 EVELAB AI 拍攝分析臉部與皮膚狀態並數值化，作為療程規劃參考。"
+  }
+ ],
+ "photos": [
+  "https://www.skinbridgekorea.com/tw/img/violacell/r-interior-lobby.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/r-genuine-certificate.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/r-genuine-juvelook.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/r-consultant.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/r-doctors-group.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/r-interior-reception.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/r-interior-private-room.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/r-interior-lounge.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/r-interior-procedure-room.webp"
+ ],
+ "priceImgs": [
+  "https://www.skinbridgekorea.com/tw/img/violacell/price-1.webp"
+ ]
+}
