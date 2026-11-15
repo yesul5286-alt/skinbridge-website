@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+TC:wght@500;600&family=Libre+Caslon+Text&family=Montserrat:wght@400&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611160040">
+<link rel="stylesheet" href="/tw/sb.css?v=202611160050">
 </head>
 <body>
 <header class="hd">
@@ -763,7 +763,7 @@ function viewClinic(c){
   const ddl = k ? `<small class="ddl">截止 ${k.end.slice(5).replace("-", "/")}<br>${ddLabel(k)}</small>` : "";
   const campCards = k ? `<div class="dd-line">${esc(k.target)}・截止 ${k.end.slice(5).replace("-", "/")}（${ddLabel(k)}）${k.example ? '<span class="ex">範例</span>' : ""}</div>
       <div class="tcards">${k.tiers.map((x, i) => `<div class="tcard ${i === 0 ? "top" : ""}">
-        <div class="tph ${c.tone}"><b>${tierLabel(x).replace(" OFF", "<br>OFF")}</b>${ddl}${x.influencer ? `<span class="inf">網紅限定</span>` : ""}</div>
+        <div class="tph ${c.tone}"><b>${tierLabel(x).replace(" OFF", "<br>OFF").replace(/^免費體驗$/, "免費<br>體驗")}</b>${ddl}${x.influencer ? `<span class="inf">網紅限定</span>` : ""}</div>
         <div class="tbd">${tierScope(x, k)}
           <div class="tm">${quotaTxt(x.quota)}</div>
           ${x.notes ? `<details class="tdet"><summary>注意事項</summary><p>${esc(x.notes).replace(/\n/g, "<br>")}</p></details>` : ""}
