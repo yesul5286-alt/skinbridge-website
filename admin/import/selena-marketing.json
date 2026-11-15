@@ -1,0 +1,32 @@
+{
+ "_merge": true,
+ "id": "selena",
+ "intro": "SELENA 位於弘大入口站 8 號出口，Kakao Friends 所在大樓 9 樓，是離弘大入口站 8 號出口最近的醫美診所，旅途中也方便到訪，週日與國定假日照常看診。\n代表院長李相炅臨床經歷 10 年以上，為 Potenza・Juvelook・Volnewmer Key Doctor，Potenza 療程突破 5,000 例。\n療程前由院長親自諮詢並進行雙重設計確認，依每位顧客的臉型與需求一對一規劃，不套用制式套餐。\n院內為 Ultherapy PRIME 原廠正品醫院、Thermage FLX 官方認證診所，並引進 Titanium、Volnewmer、Shurink Universe、InMode、Potenza、ONDA 等設備。\n只使用經驗證的原廠正品與標準劑量，所有價格事先公開，外國顧客與韓國顧客同價。\n堅持 3 無原則：不提供睡眠麻醉、鼻部填充與線雕等高風險療程。\n可用韓・簡中・繁中・日・英 5 國語言諮詢。",
+ "equipment": [
+  "Ultherapy PRIME",
+  "Thermage FLX",
+  "Titanium",
+  "Volnewmer",
+  "Shurink Universe",
+  "InMode",
+  "Potenza",
+  "ONDA"
+ ],
+ "programs": [
+  {
+   "title": "Potenza 黃金微針",
+   "desc": "院長為 Potenza Key Doctor，療程突破 5,000 例；依痘疤、毛孔、彈力等不同需求調整模式。",
+   "img": "https://www.skinbridgekorea.com/tw/img/selena/prog-1.webp"
+  },
+  {
+   "title": "美版音波 × 鳳凰電波",
+   "desc": "Ultherapy PRIME 原廠正品醫院、Thermage FLX 官方認證診所，依臉型分層規劃拉提。",
+   "img": "https://www.skinbridgekorea.com/tw/img/selena/prog-2.webp"
+  },
+  {
+   "title": "水光・膠原 Skin Booster",
+   "desc": "Juvelook Key Doctor 院長依膚況挑選麗珠蘭、Juvelook 等水光療程。",
+   "img": "https://www.skinbridgekorea.com/tw/img/selena/prog-3.webp"
+  }
+ ]
+}
