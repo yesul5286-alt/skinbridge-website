@@ -1,0 +1,75 @@
+{
+ "_merge": true,
+ "id": "sinsang",
+ "priceImgs": [
+  "https://www.skinbridgekorea.com/tw/img/sinsang/price-s1.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/price-s2.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/price-s3.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/price-s4.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/price-s5.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/price-s6.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/price-s7.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/price-s8.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/price-s9.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/price-s10.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/price-s11.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/price-s12.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/price-s13.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/price-1.webp",
+  "https://www.skinbridgekorea.com/tw/img/sinsang/price-2.webp"
+ ],
+ "pgroups": [
+  {
+   "t": "套餐・贈送",
+   "n": 2
+  },
+  {
+   "t": "提拉雷射",
+   "n": 1
+  },
+  {
+   "t": "肉毒",
+   "n": 1
+  },
+  {
+   "t": "水光",
+   "n": 1
+  },
+  {
+   "t": "玻尿酸",
+   "n": 1
+  },
+  {
+   "t": "線雕",
+   "n": 1
+  },
+  {
+   "t": "毛孔・疤痕",
+   "n": 1
+  },
+  {
+   "t": "色素・泛紅",
+   "n": 1
+  },
+  {
+   "t": "溶脂針",
+   "n": 1
+  },
+  {
+   "t": "點滴・皮膚管理",
+   "n": 1
+  },
+  {
+   "t": "溶解玻尿酸",
+   "n": 1
+  },
+  {
+   "t": "高壓氧・幹細胞",
+   "n": 1
+  },
+  {
+   "t": "完整價目表",
+   "n": 2
+  }
+ ]
+}
