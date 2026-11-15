@@ -1,0 +1,125 @@
+{
+ "_merge": true,
+ "id": "violacell",
+ "doctors": [
+  {
+   "photo": "https://www.skinbridgekorea.com/tw/img/violacell/doctor-kim.webp",
+   "role": "代表院長・整形外科專科醫師",
+   "name": "金英俊（김영준）",
+   "tags": [
+    "前 Brown 整形外科 院長",
+    "前 Liting 整形外科 院長",
+    "全南大學醫學院 畢業",
+    "全南大學 整形外科 住院醫師結業",
+    "全南大學 整形外科 臨床教授",
+    "大韓整形外科學會 正會員",
+    "大韓美容整形外科學會 正會員",
+    "大韓顱顏整形外科學會 正會員",
+    "大韓整形外科醫師會 正會員",
+    "國際美容整形外科學會 正會員",
+    "大韓抗老化研究會 正會員",
+    "大韓整形外科學會 微創研究會 正會員"
+   ]
+  },
+  {
+   "photo": "https://www.skinbridgekorea.com/tw/img/violacell/doctor-lee.webp",
+   "role": "院長・整形外科專科醫師",
+   "name": "Lee Wang Seok（이왕석）",
+   "tags": [
+    "前 Liting 整形外科 院長",
+    "前 Lollipop 整形外科 院長",
+    "順天鄉大學醫學院 畢業",
+    "順天鄉大學醫學院研究所 碩士",
+    "順天鄉大學首爾醫院 整形外科專科醫師",
+    "順天鄉大學首爾醫院 臨床講師",
+    "大韓整形外科學會・大韓美容整形外科學會・大韓顱顏整形外科學會 正會員"
+   ]
+  },
+  {
+   "photo": "https://www.skinbridgekorea.com/tw/img/violacell/doctor-choi.webp",
+   "role": "院長",
+   "name": "Choi Sang Seok（최상석）",
+   "tags": [
+    "前 Dayview Clinic Beomgye 店 院長",
+    "前 Abijou Clinic Beomgye 店 院長",
+    "翰林大學醫學院 結業",
+    "翰林大學聖心醫院 骨科 訓練",
+    "大韓美容整形雷射醫學會 正會員",
+    "大韓雷射皮膚毛髮學會 正會員",
+    "大韓肥胖美容學會・韓國皮膚肥胖整形學會 正會員"
+   ]
+  }
+ ],
+ "programs": [
+  {
+   "title": "定制埋線提升",
+   "desc": "依每個鬆弛部位選擇不同線材與植入層次，連提拉方向也一併設計。約 20–30 分鐘・表面麻醉・院方表示術後可立即恢復日常。",
+   "img": "https://www.skinbridgekorea.com/tw/img/violacell/prog-thread-lift.webp"
+  },
+  {
+   "desc": "不只填充單一部位，先觀察整體面部比例，再決定需要填充的位置。約 10–20 分鐘・表面麻醉・院方表示術後可立即恢復日常。",
+   "img": "https://www.skinbridgekorea.com/tw/img/violacell/prog-design-filler.webp",
+   "title": "設計填充"
+  },
+  {
+   "desc": "依肌膚狀態調配成分組合，並兼顧最終的膚色效果。約 15–30 分鐘・表面麻醉・院方表示術後可立即恢復日常。",
+   "img": "https://www.skinbridgekorea.com/tw/img/violacell/prog-skin-booster.webp",
+   "title": "VIOLACELL 水光"
+  },
+  {
+   "title": "AI 皮膚分析",
+   "img": "https://www.skinbridgekorea.com/tw/img/violacell/r-prog-ai-skin-analysis.webp",
+   "desc": "以 EVELAB AI 拍攝分析臉部與皮膚狀態並數值化，作為療程規劃參考。"
+  }
+ ],
+ "features": [
+  {
+   "icon": "train",
+   "label": "新沙站 1 號出口約 260m・步行 4 分鐘"
+  },
+  {
+   "label": "3 位醫師團隊・含整形外科專科醫師",
+   "icon": "shield"
+  },
+  {
+   "icon": "list",
+   "label": "Ultherapy PRIME・Thermage FLX 等 17 種設備"
+  },
+  {
+   "icon": "tag",
+   "label": "療程後發放正品・用量證明書"
+  },
+  {
+   "label": "到院者皆可做 1:1 AI 皮膚分析",
+   "icon": "chat"
+  },
+  {
+   "label": "週五看診至 21:00",
+   "icon": "cal"
+  },
+  {
+   "icon": "cal",
+   "label": "諮詢後狀況與行程允許，可當天施術"
+  },
+  {
+   "icon": "shield",
+   "label": "術後恢復管理：營養點滴・高壓氧艙"
+  }
+ ],
+ "gated": [
+  "https://www.skinbridgekorea.com/tw/img/violacell/ba-1.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/ba-2.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/ba-3.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/ba-4.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/ba-5.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/ba-6.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/ba-7.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/ba-8.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/ba-9.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/ba-10.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/ba-11.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/ba-12.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/ba-13.webp",
+  "https://www.skinbridgekorea.com/tw/img/violacell/ba-14.webp"
+ ]
+}
