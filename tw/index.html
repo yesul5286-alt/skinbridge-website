@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+TC:wght@500;600&family=Libre+Caslon+Text&family=Montserrat:wght@400&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611140244">
+<link rel="stylesheet" href="/tw/sb.css?v=202611151301">
 </head>
 <body>
 <header class="hd">
@@ -656,8 +656,13 @@ function viewClinic(c){
   const monthBox = m ? `<h3 class="sub-h">${esc(m.month)}活動</h3>` + posterBox + (evWithImg.length ? `<div class="evs">${evWithImg.map(evCard).join("")}</div>` : "") + (evNoImg.length ? evList(evNoImg) : "")
     + `<p class="note">${esc(m.month)}活動${m.note ? "・" + esc(m.note) : ""}。</p>` : "";
   /* 가격표 이미지: 맨 아래 작은 사진 줄 */
-  const pimgs = c.priceImgs && c.priceImgs.length ? `<div class="pthumbs-h"><b>完整價目表</b><span>${c.priceImgs.length} 張・點擊放大</span></div>
-    <div class="pthumbs" id="pimgs">${c.priceImgs.map((u, i) => `<button type="button" data-pimg="${i}" aria-label="放大價目表第 ${i + 1} 張"><img src="${esc(u)}" alt="${esc(c.name)} 價目表 ${i + 1}" loading="lazy"></button>`).join("")}</div>` : "";
+  /* pgroups: 가격표 사진을 분류별로 묶음 [{t:"水光",n:2}] → 한 줄 분류 버튼, 누른 분류 사진만 보임 */
+  const pgOf = [];
+  (c.pgroups || []).forEach((g, k) => { for (let j = 0; j < (+g.n || 0); j++) pgOf.push(k); });
+  const pgOn = c.pgroups && c.pgroups.length && pgOf.length === (c.priceImgs || []).length;
+  const pimgs = c.priceImgs && c.priceImgs.length ? `<div class="pthumbs-h"><b>完整價目表</b><span>${pgOn ? "選擇分類・點圖放大" : c.priceImgs.length + " 張・點擊放大"}</span></div>
+    ${pgOn ? `<div class="ptabs" id="ptabs" role="group" aria-label="價目表分類">${c.pgroups.map((g, k) => `<button type="button" data-ptab="${k}" aria-pressed="${k ? "false" : "true"}">${esc(g.t)}</button>`).join("")}</div>` : ""}
+    <div class="pthumbs${pgOn ? " pg" : ""}" id="pimgs">${c.priceImgs.map((u, i) => `<button type="button" data-pimg="${i}"${pgOn ? ` data-pg="${pgOf[i]}"${pgOf[i] ? " hidden" : ""}` : ""} aria-label="放大價目表第 ${i + 1} 張"><img src="${esc(u)}" alt="${esc(c.name)} 價目表 ${i + 1}" loading="lazy"></button>`).join("")}</div>` : "";
   // 시술 묶기: 분류(g) → 같은 이름(n) → 옵션(s)
   const cats = [];
   (c.menu || []).forEach(r => {
@@ -850,7 +855,11 @@ function setupDetail(){
     if (th) th.addEventListener("click", e => { const b = e.target.closest("[data-gthumb]"); if (b) g.scrollTo({ left: +b.dataset.gthumb * g.clientWidth, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" }); });
   }
   const pim = document.getElementById("pimgs");
-  if (pim) pim.addEventListener("click", e => { const b = e.target.closest("[data-pimg]"); if (b) openLb([...pim.querySelectorAll("img")].map(i => i.src), +b.dataset.pimg); });
+  if (pim) pim.addEventListener("click", e => { const b = e.target.closest("[data-pimg]"); if (!b) return; const vis = [...pim.querySelectorAll("[data-pimg]:not([hidden])")]; openLb(vis.map(x => x.querySelector("img").src), Math.max(0, vis.indexOf(b))); });
+  const ptabs = document.getElementById("ptabs");
+  if (ptabs && pim) ptabs.addEventListener("click", e => { const t = e.target.closest("[data-ptab]"); if (!t) return;
+    ptabs.querySelectorAll("[data-ptab]").forEach(x => x.setAttribute("aria-pressed", x === t ? "true" : "false"));
+    pim.querySelectorAll("[data-pg]").forEach(x => { x.hidden = x.dataset.pg !== t.dataset.ptab; }); pim.scrollLeft = 0; });
   const env = document.querySelector(".d2-env");
   if (env) env.addEventListener("click", e => { const b = e.target.closest("[data-envlb]"); if (b) openLb([...env.querySelectorAll("img")].map(i => i.src), +b.dataset.envlb); });
   const pq = document.getElementById("pq"), pcl = document.getElementById("pcl"), plist = document.getElementById("plist");
@@ -952,7 +961,7 @@ function route(){
 }
 
 /* ===== 가로로 긴 줄: 스크롤바 대신 좌우 화살표 ===== */
-const HS_SEL = ".row, .tcards, .posters, .pthumbs, .d2-thumbs, .pcats, .cd-fl, .chips";
+const HS_SEL = ".row, .tcards, .posters, .pthumbs, .ptabs, .d2-thumbs, .pcats, .cd-fl, .chips";
 function hscroll(root){
   (root || document).querySelectorAll(HS_SEL).forEach(el => {
     if (el.dataset.hs || el.closest(".fsheet")) return;

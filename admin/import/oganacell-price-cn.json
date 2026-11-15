@@ -1,0 +1,71 @@
+{
+ "_merge": true,
+ "id": "oganacell",
+ "priceImgs": [
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-cn-01.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-cn-02.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-cn-03.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-cn-04.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-cn-05.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-cn-06.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-cn-07.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-cn-08.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-cn-09.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-cn-10.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-cn-11.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-cn-12.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-cn-13.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-cn-14.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-cn-15.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-cn-16.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-cn-17.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-cn-18.webp"
+ ],
+ "pgroups": [
+  {
+   "t": "皮膚矯正",
+   "n": 4
+  },
+  {
+   "t": "水光",
+   "n": 2
+  },
+  {
+   "t": "拉提",
+   "n": 2
+  },
+  {
+   "t": "眼部",
+   "n": 1
+  },
+  {
+   "t": "填充塑顏",
+   "n": 1
+  },
+  {
+   "t": "除皺・溶脂",
+   "n": 1
+  },
+  {
+   "t": "肉毒",
+   "n": 1
+  },
+  {
+   "t": "身體",
+   "n": 1
+  },
+  {
+   "t": "頭皮・生髮",
+   "n": 1
+  },
+  {
+   "t": "營養點滴",
+   "n": 1
+  },
+  {
+   "t": "皮膚管理",
+   "n": 3
+  }
+ ],
+ "priceNote": "VAT 另計・價目表為診所提供之原始資料"
+}
