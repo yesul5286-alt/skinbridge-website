@@ -1,0 +1,26 @@
+{
+ "_merge": true,
+ "id": "dasibom",
+ "programs": [
+  {
+   "desc": "依面部比例、結構與容量需求進行諮詢與治療規劃，涵蓋玻尿酸、Belotero、Radiesse、Ellansé、Sculptra 等。",
+   "img": "https://www.skinbridgekorea.com/tw/img/dasibom/prog-18.webp",
+   "title": "注射與填充"
+  },
+  {
+   "title": "拉提與緊緻",
+   "img": "https://www.skinbridgekorea.com/tw/img/dasibom/prog-19.webp",
+   "desc": "依解剖結構與目標選擇 Ultherapy PRIME、Thermage FLX、ONDA 等能量型或其他拉提方案。"
+  },
+  {
+   "img": "https://www.skinbridgekorea.com/tw/img/dasibom/prog-16.webp",
+   "desc": "針對色素、膚質、痘痘相關問題等進行皮膚診療與雷射・膚質管理。",
+   "title": "皮膚診療"
+  },
+  {
+   "desc": "在醫學評估基礎上進行體重與身體管理，並提供點滴營養與疫苗接種。",
+   "title": "體重與身體管理",
+   "img": "https://www.skinbridgekorea.com/tw/img/dasibom/prog-17.webp"
+  }
+ ]
+}
