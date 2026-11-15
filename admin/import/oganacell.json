@@ -1,0 +1,284 @@
+{
+ "id": "oganacell",
+ "name": "OGANACELL 清潭本店",
+ "region": "首爾",
+ "area": "清潭",
+ "station": "狎鷗亭羅德奧站 步行約 7 分鐘（約 500 公尺）",
+ "address": "首爾特別市 江南區 島山大路 420，清潭 Square A 棟 2 樓",
+ "langs": "韓・中・英・日",
+ "rating": "",
+ "reviews": null,
+ "tags": [
+  "皮膚科專科醫師團隊",
+  "正品・正量",
+  "首爾 6 間分院"
+ ],
+ "traits": [],
+ "oneliner": "1:1 個人客製皮膚矯正・皮膚科專科醫師 8 位",
+ "about": "以「1:1 個人客製皮膚矯正」為理念的皮膚科，清潭本店位於江南島山大路。",
+ "intro": "OGANACELL 歐佳娜賽爾皮膚科以「1:1 個人客製皮膚矯正」為理念，由皮膚科專科醫師團隊依每位顧客的膚況診斷後規劃療程；清潭本店位於江南島山大路清潭 Square。\n五項承諾：堅持正品・正量施作／不使用再生探頭與改造設備／只使用韓國食藥處核准的設備與產品／同時診療皮膚疾病／事先說明效果、限制與可能的副作用。\n除清潭本店外，於首爾東大門、蠶室、麻谷、聖水、明洞及日本銀座設有分院，並設有幹細胞中心（自體幹細胞、抗老化 Booster、生髮注射、靜脈注射）。",
+ "fields": [
+  "1:1 客製皮膚矯正",
+  "痘疤・毛孔",
+  "拉提",
+  "皮膚 Booster",
+  "幹細胞",
+  "色素・美白",
+  "身體塑形",
+  "頭皮・生髮"
+ ],
+ "concerns": [
+  "拉提",
+  "毛孔",
+  "痘痘",
+  "痘疤",
+  "色素",
+  "皺紋",
+  "彈力",
+  "身體雕塑"
+ ],
+ "treats": [
+  "Ultherapy",
+  "Thermage",
+  "ONDA",
+  "InMode",
+  "Rejuran",
+  "肉毒",
+  "玻尿酸",
+  "水光"
+ ],
+ "policy": "",
+ "more": "https://oganaskin.com/",
+ "features": [
+  {
+   "icon": "train",
+   "label": "狎鷗亭羅德奧站步行約 7 分鐘"
+  },
+  {
+   "icon": "shield",
+   "label": "皮膚科專科醫師 8 位"
+  },
+  {
+   "icon": "tag",
+   "label": "正品・正量・不用改造設備"
+  },
+  {
+   "icon": "chat",
+   "label": "中・英・日 線上諮詢"
+  }
+ ],
+ "doctors": [
+  {
+   "name": "Oh Ga-na（오가나）",
+   "role": "代表院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/oganacell/doctor-4.webp",
+   "tags": [
+    "皮膚科專科醫師"
+   ]
+  },
+  {
+   "name": "Seo Ji-yoon（서지윤）",
+   "role": "院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/oganacell/doctor-1.webp",
+   "tags": [
+    "皮膚科專科醫師"
+   ]
+  },
+  {
+   "name": "Kang Seok-young（강석영）",
+   "role": "院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/oganacell/doctor-2.webp",
+   "tags": [
+    "皮膚科專科醫師"
+   ]
+  },
+  {
+   "name": "Park Geun-hwi（박근휘）",
+   "role": "院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/oganacell/doctor-3.webp",
+   "tags": [
+    "皮膚科專科醫師"
+   ]
+  },
+  {
+   "name": "Kim Tae-hyung（김태형）",
+   "role": "院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/oganacell/doctor-5.webp",
+   "tags": [
+    "皮膚科專科醫師"
+   ]
+  },
+  {
+   "name": "Lee Dong-won（이동원）",
+   "role": "院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/oganacell/doctor-6.webp",
+   "tags": [
+    "皮膚科專科醫師"
+   ]
+  },
+  {
+   "name": "Kim Taek-un（김택운）",
+   "role": "院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/oganacell/doctor-7.webp",
+   "tags": [
+    "皮膚科專科醫師"
+   ]
+  },
+  {
+   "name": "Shin Hee-young（신희영）",
+   "role": "院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/oganacell/doctor-8.webp",
+   "tags": [
+    "皮膚科專科醫師"
+   ]
+  },
+  {
+   "name": "Jung Woo-young（정우영）",
+   "role": "院長",
+   "photo": "",
+   "tags": [
+    "麻醉科專科醫師"
+   ]
+  }
+ ],
+ "hours": [
+  "10:00-20:00",
+  "10:00-20:00",
+  "10:00-19:00",
+  "10:00-20:00",
+  "10:00-20:00",
+  "09:00-16:00",
+  ""
+ ],
+ "hoursNote": "週日與國定假日休診。",
+ "lunch": "",
+ "priceNote": "VAT 另計・價目表為診所提供之原始資料（韓文）",
+ "priceImgs": [
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-01.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-02.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-03.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-04.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-05.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-06.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-07.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-08.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-09.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-10.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-11.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-12.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-13.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-14.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-15.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-16.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-17.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/price-18.webp"
+ ],
+ "menuHide": true,
+ "menu": [
+  {
+   "g": "拉提",
+   "n": "Thermage FLX 熱瑪吉",
+   "s": "600 發",
+   "krw": 2574000
+  },
+  {
+   "g": "拉提",
+   "n": "Thermage FLX 熱瑪吉",
+   "s": "900 發",
+   "krw": 3432000
+  },
+  {
+   "g": "拉提",
+   "n": "Ultherapy PRIME 美版超聲刀",
+   "s": "100 發",
+   "krw": 715000
+  },
+  {
+   "g": "拉提",
+   "n": "Ultherapy PRIME 美版超聲刀",
+   "s": "400 發",
+   "krw": 2640000
+  },
+  {
+   "g": "拉提",
+   "n": "Ultherapy PRIME 美版超聲刀",
+   "s": "600 發",
+   "krw": 3630000
+  },
+  {
+   "g": "拉提",
+   "n": "ONDA",
+   "s": "3 萬 J",
+   "krw": 715000
+  },
+  {
+   "g": "拉提",
+   "n": "眼部 Thermage FLX",
+   "s": "225 發",
+   "krw": 1716000
+  },
+  {
+   "g": "拉提",
+   "n": "眼部 Thermage FLX",
+   "s": "450 發",
+   "krw": 2431000
+  },
+  {
+   "g": "水光",
+   "n": "Rejuran Healer 麗珠蘭",
+   "s": "2cc",
+   "krw": 660000
+  },
+  {
+   "g": "水光",
+   "n": "Juvelook 水光",
+   "s": "2.5cc",
+   "krw": 429000
+  },
+  {
+   "g": "肉毒",
+   "n": "咬肌肉毒",
+   "s": "1 部位・韓國產",
+   "krw": 143000
+  }
+ ],
+ "monthly": {
+  "month": "11–12 月",
+  "note": "活動期間 2026.11.1–12.31・活動價以現金／支付寶付款為免稅價，刷卡另加 10%",
+  "items": [],
+  "posters": [
+   {
+    "img": "https://www.skinbridgekorea.com/tw/img/oganacell/2026-11-12-event.webp",
+    "title": "OGANACELL 清潭 11–12 月冬季活動"
+   }
+  ]
+ },
+ "perk": "",
+ "camp": null,
+ "logo": "",
+ "photos": [
+  "https://www.skinbridgekorea.com/tw/img/oganacell/team.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/room.webp"
+ ],
+ "interior": [
+  "https://www.skinbridgekorea.com/tw/img/oganacell/team.webp",
+  "https://www.skinbridgekorea.com/tw/img/oganacell/room.webp"
+ ],
+ "equipment": [
+  "Ultherapy PRIME",
+  "Thermage FLX",
+  "ONDA",
+  "InMode",
+  "Revinas",
+  "Ultra Clear",
+  "Alltite",
+  "EMFACE",
+  "Linear Z"
+ ],
+ "programs": [],
+ "gated": [],
+ "ads": [],
+ "selected": false,
+ "tone": "t2",
+ "example": false
+}
