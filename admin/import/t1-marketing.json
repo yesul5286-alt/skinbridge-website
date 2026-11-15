@@ -1,0 +1,75 @@
+{
+ "_merge": true,
+ "id": "t1",
+ "oneliner": "設計・層次・技術 三大堅持｜三成站 K Tower 15 樓",
+ "about": "三成站 K Tower 15 樓。以「設計・層次・技術」三大堅持，提供皮膚肉毒、提拉填充、超聲刀・熱瑪吉等 1:1 定制療程。",
+ "intro": "T1 CLINIC 位於首爾三成站 5 號出口步行約 300 公尺的 K Tower 15 樓，緊鄰現代百貨貿易中心店，提供 1:1 量身定制的醫美療程。\nT1 堅持「三大真心」：\n・設計：專業的設計，決定技術的差異。\n・層次：仔細判斷注射在哪一層，效果最能發揮。\n・技術：即使是一次皮膚肉毒，也運用多種精細技法。\n代表院長金泰英曾任 Toxnfill 清潭店・三成店代表院長，並擔任 Thermage MTL、Allergan Learn & Inspire 指導委員與 Belotero 專家委員會委員。曾出席 Ultherapy PRIME 上市研討會分享臨床應用，參與《HA 玻尿酸注射高級技術》專業書籍與示範影片製作，並在 Medical Aesthetic 主辦的玻尿酸注射實操研討會授課。\n院內備有 Ultherapy PRIME、Thermage FLX、InMode、ONDA、Virtue RF、PicoSure 等 20 多種設備，器械以高溫高壓滅菌器管理。\n可使用現金、信用卡、微信、支付寶結帳，並可辦理機場退稅。",
+ "tags": [
+  "三成站",
+  "院長 Thermage・Allergan 指導委員",
+  "可辦機場退稅"
+ ],
+ "features": [
+  {
+   "icon": "train",
+   "label": "三成站 5 號出口步行約 4–5 分鐘"
+  },
+  {
+   "icon": "shield",
+   "label": "代表院長 Thermage・Allergan 指導委員"
+  },
+  {
+   "icon": "list",
+   "label": "Ultherapy PRIME・Thermage FLX 等 20 多種設備"
+  },
+  {
+   "icon": "tag",
+   "label": "可辦機場退稅"
+  },
+  {
+   "icon": "chat",
+   "label": "現金・信用卡・微信・支付寶"
+  }
+ ],
+ "langs": "中英",
+ "programs": [
+  {
+   "title": "皮膚肉毒 Derma Toxin",
+   "desc": "T1 人氣第一的招牌療程。由專業團隊以精細手法微滴注射，追求自然的拉提感與膚質改善。",
+   "img": "https://www.skinbridgekorea.com/tw/img/t1/prog-1.webp"
+  },
+  {
+   "title": "提拉填充 Lifting Filler",
+   "desc": "依臉部靜態與動態區域專屬設計，以韌帶支撐方式進行的 T1 定制提拉填充。",
+   "img": "https://www.skinbridgekorea.com/tw/img/t1/prog-2.webp"
+  },
+  {
+   "title": "超聲刀二代＋熱瑪吉五代",
+   "desc": "Ultherapy PRIME 與 Thermage FLX 分層拉提，兼顧緊緻感與膠原再生，是 T1 代表性的拉提組合。",
+   "img": "https://www.skinbridgekorea.com/tw/img/t1/prog-3.webp"
+  },
+  {
+   "title": "T1 Hybrid 雙效膠原",
+   "desc": "一次全臉注射，同時幫助膠原生成與深層保濕。"
+  }
+ ],
+ "photos": [
+  "https://www.skinbridgekorea.com/tw/img/t1/interior-1.webp",
+  "https://www.skinbridgekorea.com/tw/img/t1/interior-2.webp",
+  "https://www.skinbridgekorea.com/tw/img/t1/interior-3.webp",
+  "https://www.skinbridgekorea.com/tw/img/t1/interior-4.webp",
+  "https://www.skinbridgekorea.com/tw/img/t1/interior-5.webp",
+  "https://www.skinbridgekorea.com/tw/img/t1/interior-6.webp",
+  "https://www.skinbridgekorea.com/tw/img/t1/interior-7.webp",
+  "https://www.skinbridgekorea.com/tw/img/t1/cover-1.webp"
+ ],
+ "interior": [
+  "https://www.skinbridgekorea.com/tw/img/t1/interior-1.webp",
+  "https://www.skinbridgekorea.com/tw/img/t1/interior-2.webp",
+  "https://www.skinbridgekorea.com/tw/img/t1/interior-3.webp",
+  "https://www.skinbridgekorea.com/tw/img/t1/interior-4.webp",
+  "https://www.skinbridgekorea.com/tw/img/t1/interior-5.webp",
+  "https://www.skinbridgekorea.com/tw/img/t1/interior-6.webp",
+  "https://www.skinbridgekorea.com/tw/img/t1/interior-7.webp"
+ ]
+}
