@@ -1,0 +1,109 @@
+{
+ "_merge": true,
+ "id": "t1",
+ "photos": [
+  "https://www.skinbridgekorea.com/tw/img/t1/interior-1.webp",
+  "https://www.skinbridgekorea.com/tw/img/t1/interior-2.webp",
+  "https://www.skinbridgekorea.com/tw/img/t1/interior-3.webp",
+  "https://www.skinbridgekorea.com/tw/img/t1/interior-4.webp",
+  "https://www.skinbridgekorea.com/tw/img/t1/interior-5.webp",
+  "https://www.skinbridgekorea.com/tw/img/t1/interior-6.webp",
+  "https://www.skinbridgekorea.com/tw/img/t1/cover-1.webp"
+ ],
+ "interior": [
+  "https://www.skinbridgekorea.com/tw/img/t1/interior-1.webp",
+  "https://www.skinbridgekorea.com/tw/img/t1/interior-2.webp",
+  "https://www.skinbridgekorea.com/tw/img/t1/interior-3.webp",
+  "https://www.skinbridgekorea.com/tw/img/t1/interior-4.webp",
+  "https://www.skinbridgekorea.com/tw/img/t1/interior-5.webp",
+  "https://www.skinbridgekorea.com/tw/img/t1/interior-6.webp"
+ ],
+ "doctors": [
+  {
+   "name": "金泰英",
+   "role": "代表院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/t1/doctor-1.webp",
+   "tags": [
+    "延世大學原州醫學院 畢業",
+    "新村 Severance 醫院 實習結業",
+    "新村 Severance 醫院 家庭醫學科 結業",
+    "前 Toxnfill 清潭店 代表院長",
+    "前 Toxnfill 三成店 代表院長",
+    "Thermage MTL Faculty Member",
+    "Allergan Learn & Inspire Faculty Member",
+    "Belotero Expert Committee Member"
+   ]
+  },
+  {
+   "name": "禹智恩",
+   "role": "院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/t1/doctor-2.webp",
+   "tags": [
+    "順天鄉大學醫學院 畢業",
+    "翰林大學 漢江聖心醫院 實習結業",
+    "翰林大學 漢江聖心醫院 家庭醫學科 住院醫師結業",
+    "前 The Clean Clinic 副院長",
+    "前 Woori Clinic 副院長",
+    "前 ENDiet Clinic 副院長",
+    "前 TONEs Clinic（盆唐）副院長"
+   ]
+  },
+  {
+   "name": "權珉嬉",
+   "role": "院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/t1/doctor-3.webp",
+   "tags": [
+    "蔚山大學醫學院 畢業",
+    "首爾峨山醫院 實習",
+    "三育首爾醫院 住院醫師",
+    "前 Toxnfill 建大店 院長",
+    "前 ILOVESKIN 皮膚科 院長",
+    "前 Lydian 醫院 院長",
+    "大韓美容整形雷射醫學會 正會員",
+    "大韓提升學會 正會員",
+    "大韓填充醫學會 正會員",
+    "大韓美容功能醫學會 正會員",
+    "大韓肥胖美容學會 正會員"
+   ]
+  },
+  {
+   "name": "金大植",
+   "role": "院長",
+   "photo": "https://www.skinbridgekorea.com/tw/img/t1/doctor-4.webp",
+   "tags": [
+    "江原大學醫學院 畢業",
+    "天主教中央醫療院 外科住院醫師結業"
+   ]
+  }
+ ],
+ "hours": [
+  "10:30-20:00",
+  "10:30-20:00",
+  "10:30-20:00",
+  "10:30-20:00",
+  "10:30-20:00",
+  "10:00-16:00",
+  ""
+ ],
+ "lunch": "14:00-15:00",
+ "hoursNote": "午休 14:00–15:00（週六無午休）・週日與國定假日休診。",
+ "more": "https://t1clinic.com/zh/",
+ "equipment": [
+  "Ultherapy PRIME",
+  "Thermage FLX",
+  "InMode",
+  "Shurink Universe",
+  "ONDA",
+  "Virtue RF",
+  "PicoSure",
+  "CORAGE",
+  "Laferra",
+  "LIPOCEL",
+  "CO2 Laser",
+  "IPL",
+  "Apogee Plus",
+  "NEO BEAM",
+  "NEURJET",
+  "Vital Injector"
+ ]
+}
