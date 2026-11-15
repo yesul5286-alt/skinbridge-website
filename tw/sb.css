@@ -1201,3 +1201,12 @@ details.pi[open] .pi-h::after{content:"−"}
 .hs-btn:hover{border-color:var(--rose);color:var(--rose)}
 .pi-h{align-items:center}
 .pi-h .pi-dev+b{margin-left:0}
+/* 想去 말풍선(아직 아무것도 안 눌렀을 때 첫 병원에만) + 누른 뒤 안내 */
+.drs.hint>li:first-child .dr-want{position:relative}
+.drs.hint>li:first-child .dr-want[aria-pressed=false]::after{content:"按一下，邀請這間成為合作診所 ❤";position:absolute;right:0;bottom:calc(100% + 9px);white-space:nowrap;background:var(--rose);color:#fff;font-size:.74rem;line-height:1;padding:8px 11px;border-radius:10px;box-shadow:0 4px 12px rgba(60,30,30,.18);animation:wbob 1.6s ease-in-out infinite;pointer-events:none;z-index:2}
+.drs.hint>li:first-child .dr-want[aria-pressed=false]::before{content:"";position:absolute;right:26px;bottom:calc(100% + 3px);border:6px solid transparent;border-top-color:var(--rose);border-bottom:0;animation:wbob 1.6s ease-in-out infinite;z-index:2}
+@keyframes wbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@media(prefers-reduced-motion:reduce){.drs.hint>li:first-child .dr-want::after,.drs.hint>li:first-child .dr-want::before{animation:none}}
+.want-toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);width:min(92vw,420px);background:#2E2422;color:#fff;font-size:.82rem;line-height:1.6;padding:12px 16px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.25);z-index:60;transition:opacity .5s}
+.want-toast b{margin-right:4px}
+.want-toast.out{opacity:0}

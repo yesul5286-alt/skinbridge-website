@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+TC:wght@500;600&family=Libre+Caslon+Text&family=Montserrat:wght@400&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611151308">
+<link rel="stylesheet" href="/tw/sb.css?v=202611151511">
 </head>
 <body>
 <header class="hd">
@@ -372,6 +372,13 @@ function filterSheet(){
       </div>
     </div></div>`;
 }
+/* 想去 누른 뒤 아래에 잠깐 뜨는 안내 (2026-11-15: 제휴 수요 파악용, 누르도록 유도) */
+function wantToast(){
+  document.querySelectorAll(".want-toast").forEach(x => x.remove());
+  const d = document.createElement("div"); d.className = "want-toast"; d.setAttribute("role", "status");
+  d.innerHTML = "<b>✓ 已收到！</b>想去的人越多，我們越優先邀請這間診所合作。<br>成為合作診所後，就能透過 Skinbridge 預約並享 10% 禮遇。";
+  document.body.appendChild(d); setTimeout(() => d.classList.add("out"), 4200); setTimeout(() => d.remove(), 4800);
+}
 /* ===== 診所名錄(심평원 공공데이터) · 想去 버튼 ===== */
 let DIR = null, dirLoading = false;
 function loadDir(){
@@ -475,7 +482,7 @@ function dirSection(){
   return `<section class="dir" aria-label="其他診所">
     <h2 class="dir-h">其他診所 <small>尚未合作 · <span class="num">${hits.length}</span> 間</small></h2>
     ${hits.length ? `<p class="dir-note">以下為公開資料，這些診所尚未與 Skinbridge 合作，暫時無法透過我們預約。按「想去」，想去的人多了，我們會優先邀請這間診所合作。英文與中文名稱為參考譯名，到診時請以韓文名稱為準；營業時間可能變動，出發前請再確認。</p>
-      <ul class="drs">${hits.slice(0, n).map(dirRow).join("")}</ul>
+      <ul class="drs${wants.size ? "" : " hint"}">${hits.slice(0, n).map(dirRow).join("")}</ul>
       ${rest > 0 ? `<button type="button" class="dir-more" data-dirmore="1">載入更多（還有 <span class="num">${rest}</span> 間）</button>` : ""}` : ""}
     <div class="dir-ask"><p>找不到你想去的診所？告訴我們名稱，我們會去詢問合作。</p>
       <div><input id="dirAsk" maxlength="80" placeholder="診所名稱或 Instagram 帳號" aria-label="想去的診所名稱"><button type="button" data-wantask="1">告訴我們</button></div>
@@ -1062,7 +1069,7 @@ document.addEventListener("click", e => {
   }
   if (t.dataset.copy) { const v = t.dataset.copy; const done = () => { t.textContent = "已複製"; setTimeout(() => { t.textContent = "複製韓文地址"; }, 1800); }; try { navigator.clipboard.writeText(v).then(done, done); } catch (_) { done(); } return; }
   if (t.dataset.dirmore) { state.dirN = (state.dirN || 20) + 20; reroute(); return; }
-  if (t.dataset.want) { const r = DIR && DIR.rows.find(x => x[0] === t.dataset.want); if (r && !wants.has(r[0])) { wants.add(r[0]); sendWant({ id:r[0], name:r[1], gu:DIR.gu[r[2]], dong:r[3], src:"list" }); } t.setAttribute("aria-pressed", "true"); t.textContent = "✓ 已收到"; return; }
+  if (t.dataset.want) { const r = DIR && DIR.rows.find(x => x[0] === t.dataset.want); if (r && !wants.has(r[0])) { wants.add(r[0]); sendWant({ id:r[0], name:r[1], gu:DIR.gu[r[2]], dong:r[3], src:"list" }); } t.setAttribute("aria-pressed", "true"); t.textContent = "✓ 已收到"; document.querySelectorAll(".drs.hint").forEach(x => x.classList.remove("hint")); wantToast(); return; }
   if (t.dataset.wantask) { const i = $("#dirAsk"), v = i ? i.value.trim() : ""; if (!v) { if (i) i.focus(); return; } sendWant({ id:"typed", name:v, src:"typed" }); i.value = ""; const d = $("#dirDone"); if (d) d.hidden = false; return; }
   if (t.dataset.region) { state.region = t.dataset.region; route(); }
   else if (t.dataset.cat) { state.cat = t.dataset.cat; route(); }
