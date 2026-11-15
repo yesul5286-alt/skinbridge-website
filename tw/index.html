@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+TC:wght@500;600&family=Libre+Caslon+Text&family=Montserrat:wght@400&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611151945">
+<link rel="stylesheet" href="/tw/sb.css?v=202611152000">
 </head>
 <body>
 <header class="hd">
@@ -602,9 +602,7 @@ function viewClinic(c){
     : bf.s === "quote"
     ? `<div class="bf-q"><div class="bf-qt">${esc(bf.q || "").replace(/\n/g, "<br>")}</div>${bf.src ? `<div class="bf-src">— ${esc(bf.src)}</div>` : ""}</div><ul class="bf-chk">${bf.items.map(x => `<li>${esc(Array.isArray(x) ? x[0] : x)}</li>`).join("")}</ul>`
     : `<ol class="bf-list">${bf.items.map((x, i) => `<li><i>${i + 1}</i><div><b>${esc(Array.isArray(x) ? x[0] : x)}</b>${Array.isArray(x) && x[1] ? `<span>${esc(x[1])}</span>` : ""}</div></li>`).join("")}</ol>`;
-  const intro = bf ? `<div class="d2-about solo"><div>${briefHtml}
-        <p class="d2-intro bf-full" id="introTx">${esc(introTx).replace(/\n/g, "<br>")}</p>
-        <button type="button" class="d2-more" data-more="introTx" aria-expanded="false" data-less="收起" data-open-tx="查看完整介紹">查看完整介紹</button></div>` : `<div class="d2-about${side ? "" : " solo"}">
+  const intro = bf ? `<div class="d2-about solo"><div>${briefHtml}</div>` : `<div class="d2-about${side ? "" : " solo"}">
       <div><p class="d2-intro" id="introTx">${esc(introTx).replace(/\n/g, "<br>")}</p>
         ${introTx.length > 90 ? `<button type="button" class="d2-more" data-more="introTx" aria-expanded="false">更多</button>` : ""}</div>
       ${side && !bf ? `<img src="${esc(side)}" alt="${esc(c.name)} 診所" loading="lazy">` : ""}
