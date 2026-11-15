@@ -1214,3 +1214,5 @@ details.pi[open] .pi-h::after{content:"−"}
 .d2-envchip{position:absolute;left:14px;bottom:28px;z-index:2;font-size:.76rem;line-height:1;background:rgba(255,255,255,.92);color:var(--ink);border:0;border-radius:999px;padding:8px 12px;box-shadow:0 2px 8px rgba(0,0,0,.15);cursor:pointer}
 .d2-envchip span{margin-left:2px}
 @media(min-width:900px){.d2-envchip{bottom:14px}}
+/* 2026-11-15 분류별 가격표 썸네일: 자르지 않고 전체가 보이게 */
+.pthumbs.pg img{object-fit:contain;object-position:center;background:#fff}
