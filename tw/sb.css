@@ -1267,3 +1267,5 @@ details.pi[open] .pi-h::after{content:"−"}
 .d2-cards.one .d2-cr{flex:1}
 
 .d2-about .d2-doc-ph img{aspect-ratio:auto;width:100%;height:100%}
+
+@media(max-width:899px){.d2-prog{grid-template-columns:120px 1fr}.d2-prog img{width:120px;aspect-ratio:3/2}}
