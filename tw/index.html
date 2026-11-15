@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+TC:wght@500;600&family=Libre+Caslon+Text&family=Montserrat:wght@400&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611152130">
+<link rel="stylesheet" href="/tw/sb.css?v=202611152230">
 </head>
 <body>
 <header class="hd">
@@ -586,9 +586,10 @@ function viewClinic(c){
     </div>`;
   const feats = c.features && c.features.length
     ? `<ul class="d2-feats grid4">${c.features.slice(0, 4).map(f => `<li>${icon(f.icon)}<span>${esc(f.label)}</span></li>`).join("")}</ul>` : "";
+  const kRate = k ? Math.max(0, ...(k.tiers || []).map(t => +t.type || 0)) : 0;
   const cards = `<div class="d2-cards${k ? "" : " one"}">
-      ${k ? `<button type="button" class="d2-card" data-jump="camp"><b>體驗團</b><span>招募中・截止 ${k.end.slice(5).replace("-", "/")}</span><i>查看方案 →</i></button>` : ""}
-      <button type="button" class="d2-card" data-jump="review"><b>訪客心得 <span aria-hidden="true">🔒</span></b><span>登入 LINE 後查看</span><i>查看 →</i></button>
+      ${k ? `<button type="button" class="d2-ct" data-jump="camp"><big>${kRate ? kRate + "%" : "FREE"}</big><span>體驗團招募中 ›<small>截止 ${k.end.slice(5).replace("-", "/")}</small></span></button>` : ""}
+      <button type="button" class="d2-cr" data-jump="review"><span aria-hidden="true">🔒</span> 訪客心得</button>
     </div>`;
 
   /* 소개 */
