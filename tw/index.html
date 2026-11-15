@@ -930,11 +930,14 @@ function jump(id){
 }
 
 /* ===== 라우팅 ===== */
+/* 화면 이동은 부드럽게 굴리지 않고 바로(어지러움 방지, 2026-11-15). 뒤로 가기면 보던 위치로 돌아감 */
+const SCROLL_POS = {};
+const jumpTo = y => { try { scrollTo({ top: y, left: 0, behavior: "instant" }); } catch (_) { scrollTo(0, y); } };
 let cur = location.hash.slice(1);
 function go(h){
-  cur = h;
+  SCROLL_POS[cur] = scrollY; cur = h;
   try { if (location.hash.slice(1) !== h) location.hash = h; } catch (_) {}
-  route(); scrollTo(0, 0);
+  route(); jumpTo(0);
 }
 function route(){
   const h = cur;
@@ -1124,7 +1127,7 @@ document.addEventListener("change", e => {
 });
 addEventListener("hashchange", () => {
   const h = location.hash.slice(1);
-  if (h !== cur) { cur = h; route(); scrollTo(0, 0); }
+  if (h !== cur) { SCROLL_POS[cur] = scrollY; cur = h; route(); const y = SCROLL_POS[h] || 0; jumpTo(y); requestAnimationFrame(() => jumpTo(y)); }
 });
 
 try { const pend = sessionStorage.getItem("sb-rev"); if (pend) { sessionStorage.removeItem("sb-rev"); cur = pend; state.jump = "review"; } } catch (_) {}
