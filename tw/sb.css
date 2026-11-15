@@ -1216,3 +1216,10 @@ details.pi[open] .pi-h::after{content:"−"}
 @media(min-width:900px){.d2-envchip{bottom:14px}}
 /* 2026-11-15 신상만: 분류별로 자른 가격표는 잘리지 않게 화면 폭으로 (다른 병원은 원래대로) */
 .pthumbs.pg:has(img[src*="/sinsang/price-s"]){align-items:flex-start}.pthumbs.pg:has(img[src*="/sinsang/price-s"]) button{aspect-ratio:auto;height:auto;flex:0 0 100%;max-width:560px}.pthumbs.pg:has(img[src*="/sinsang/price-s"]) img{height:auto;object-fit:contain;background:#fff}
+/* 2026-11-15 휴대폰: 의료진 카드를 한 사람씩 가로 줄(사진 왼쪽, 이름·경력 오른쪽)로 */
+@media(max-width:600px){
+  .d2-docs{grid-template-columns:1fr;gap:16px}
+  .d2-docs .d2-doc{display:grid;grid-template-columns:64px 1fr;column-gap:14px;align-items:start;padding-bottom:14px;border-bottom:1px solid var(--rule)}
+  .d2-docs .d2-doc:last-child{border-bottom:0;padding-bottom:0}
+  .d2-docs .d2-doc-ph{grid-row:span 5;margin:0}
+}
