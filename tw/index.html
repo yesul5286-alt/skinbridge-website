@@ -877,6 +877,8 @@ function openLb(urls, start){
 /* 체험단 단계의 대상 시술: 전체 / 목록(길면 접기) */
 function tierScope(x, k){
   if (x.all) return `<div class="tt">全療程適用</div>`;
+  /* 무료 체험은 시술 항목을 페이지에 나열하지 않음(전부 주는 게 아니라서, 2026-11-15) */
+  if (x.type === "free") return `<div class="tt">指定療程 免費體驗</div><div class="tm">可選項目於報名後透過 LINE 個別說明</div>`;
   const list = String(x.items || "").split(/\n|、|,|，/).map(s => s.trim()).filter(Boolean);
   if (!list.length) return `<div class="tt">${esc(k.target)}</div>`;
   if (list.length <= 3) return `<div class="tt">${list.map(esc).join("・")}</div>`;
