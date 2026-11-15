@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+TC:wght@500;600&family=Libre+Caslon+Text&family=Montserrat:wght@400&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611160010">
+<link rel="stylesheet" href="/tw/sb.css?v=202611160040">
 </head>
 <body>
 <header class="hd">
@@ -632,7 +632,7 @@ function viewClinic(c){
       <div class="dx-row" role="group" aria-label="其他醫師">${c.doctors.slice(1).map((d, i) => `<button type="button" class="dx-c" data-dx="${i}" aria-expanded="false"><span class="ph">${d.photo ? `<img src="${esc(d.photo)}" alt="" loading="lazy">` : `<i aria-hidden="true">${esc((d.name || "?").slice(0, 1))}</i>`}</span><b>${dxName(d)}</b><small>${esc((d.tags || [])[0] || d.role || "")}</small></button>`).join("")}</div>
       <div class="dx-full d2-docs" style="--cols:1">${c.doctors.slice(1).map((d, i) => `<div data-dxp="${i}" hidden>${docCard(d)}</div>`).join("")}</div>`;
   const hours = `<h3 class="sub-h">診療時間</h3>` + (c.hours
-    ? `<table class="hours"><tr>${DAYS.map(d => `<th>${d}</th>`).join("")}</tr><tr>${c.hours.map(h => `<td>${h ? esc(h).replace("-", "<br>~<br>") : "休診"}</td>`).join("")}</tr></table>${c.lunch ? `<p class="note">午休 ${esc(c.lunch)}</p>` : ""}`
+    ? hrsList(c.hours) + `${c.lunch ? `<p class="note">午休 ${esc(c.lunch)}</p>` : ""}`
     : `<p class="note">診療時間請透過 LINE 確認。</p>`)
     + (c.hours && c.hoursNote ? `<p class="note">${esc(c.hoursNote)}</p>` : "");
   const addr = c.address ? `<h3 class="sub-h">位置與交通</h3>
@@ -759,10 +759,11 @@ function viewClinic(c){
   const envN = (c.interior || []).length;
   const env = envN ? `<div class="d2-envg"><div class="d2-egal" id="envGal">${c.interior.map((u, i) => `<button type="button" data-envlb="${i}" aria-label="放大第 ${i + 1} 張"><img src="${esc(u)}" alt="${esc(c.name)} 診所環境 ${i + 1}" loading="lazy"></button>`).join("")}</div>${envN > 1 ? `<span class="d2-ecnt" id="envCnt">1 / ${envN}</span>` : ""}</div>${envN > 1 ? `<div class="d2-ethumbs" id="envThumbs" role="group" aria-label="診所環境照片">${c.interior.map((u, i) => `<button type="button" data-ethumb="${i}" aria-label="第 ${i + 1} 張"${i ? "" : ' aria-current="true"'}><img src="${esc(u)}" alt="" loading="lazy"></button>`).join("")}</div>` : ""}` : "";
 
-  /* 체험단 */
+  /* 체험단(쿠폰형, 2026-11-15) */
+  const ddl = k ? `<small class="ddl">截止 ${k.end.slice(5).replace("-", "/")}<br>${ddLabel(k)}</small>` : "";
   const campCards = k ? `<div class="dd-line">${esc(k.target)}・截止 ${k.end.slice(5).replace("-", "/")}（${ddLabel(k)}）${k.example ? '<span class="ex">範例</span>' : ""}</div>
       <div class="tcards">${k.tiers.map((x, i) => `<div class="tcard ${i === 0 ? "top" : ""}">
-        <div class="tph ${c.tone}"><b>${tierLabel(x)}</b>${x.influencer ? `<span class="inf">網紅限定</span>` : ""}</div>
+        <div class="tph ${c.tone}"><b>${tierLabel(x).replace(" OFF", "<br>OFF")}</b>${ddl}${x.influencer ? `<span class="inf">網紅限定</span>` : ""}</div>
         <div class="tbd">${tierScope(x, k)}
           <div class="tm">${quotaTxt(x.quota)}</div>
           ${x.notes ? `<details class="tdet"><summary>注意事項</summary><p>${esc(x.notes).replace(/\n/g, "<br>")}</p></details>` : ""}
@@ -970,13 +971,19 @@ function setupDetail(){
   window.onscroll = onScroll;
   if (state.jump) { const id = state.jump; state.jump = null; requestAnimationFrame(() => jump(id)); }
 }
+/* 진료 시간: 같은 시간인 요일끼리 묶은 목록, 오늘 표시(2026-11-15) */
+function hrsList(hs){
+  const g = []; hs.forEach((x, i) => { const v = x ? x.replace("-", "–") : "休診"; const l = g[g.length - 1]; if (l && l.v === v && l.e === i - 1) l.e = i; else g.push({ s: i, e: i, v }); });
+  const today = (new Date().getDay() + 6) % 7;
+  return `<ul class="hrs">${g.map(x => `<li class="${x.v === "休診" ? "off" : ""}${today >= x.s && today <= x.e ? " now" : ""}"><span>${DAYS[x.s]}${x.e > x.s ? "–" + DAYS[x.e] : ""}</span><b>${esc(x.v)}</b></li>`).join("")}</ul>`;
+}
 function jump(id){
   const s = document.getElementById("s-" + id), bar = document.querySelector(".dtabs");
   if (!s) return;
   const hd = document.querySelector(".hd"), bar2 = document.querySelector(".d2-bar");
   const topH = (hd && hd.offsetHeight) || (bar2 && getComputedStyle(bar2).position === "sticky" ? bar2.offsetHeight : 0);
   const y = s.getBoundingClientRect().top + scrollY - topH - (bar ? bar.offsetHeight : 0) + 2;
-  scrollTo({ top: y, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  jumpTo(y);   /* 탭 이동은 바로(휘리릭 굴러가면 어지러움, 2026-11-15) */
 }
 
 /* ===== 라우팅 ===== */
