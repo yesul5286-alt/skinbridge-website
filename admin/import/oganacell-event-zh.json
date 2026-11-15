@@ -1,0 +1,78 @@
+{
+ "_merge": true,
+ "id": "oganacell",
+ "monthly": {
+  "items": [
+   {
+    "g": "由內而外的拉提",
+    "n": "Alltite 600 發 + Revinas 2000 發 + ONDA 3 萬焦",
+    "s": "",
+    "krw": 2200000
+   },
+   {
+    "g": "由內而外的拉提",
+    "n": "Thermage 熱瑪吉 900 發 + Skin B（製劑）+ OGANACELL Booster 3cc",
+    "s": "",
+    "krw": 3982000
+   },
+   {
+    "g": "由內而外的拉提",
+    "n": "Ultherapy 美版音波 600 發 + ONDA 10 萬焦 + Rejuran 麗珠蘭 4cc",
+    "s": "",
+    "krw": 5610000
+   },
+   {
+    "g": "由內而外的拉提",
+    "n": "Ultherapy 400 發 + 眼周 Ultherapy 100 發 + Thermage 600 發 + Rejuran 2cc",
+    "s": "",
+    "krw": 5700000
+   },
+   {
+    "g": "眼下凹陷・細紋・彈力改善",
+    "n": "眼周 Thermage 225 發 + GOURI 拉提 1 支",
+    "s": "",
+    "krw": 2500000
+   },
+   {
+    "g": "眼下凹陷・細紋・彈力改善",
+    "n": "Belotero 1cc + 眼周 Rejuran 2cc + Juvelook Sine 4cc",
+    "s": "",
+    "krw": 1880000
+   },
+   {
+    "g": "毛孔・痘疤改善（院方表示效果約可維持 1 年）",
+    "n": "UltraClear（Ultra 模式）+ Revive 1cc + Skinvive 1cc + Aqua Peel",
+    "s": "",
+    "krw": 3960000
+   },
+   {
+    "g": "毛孔・痘疤改善（院方表示效果約可維持 1 年）",
+    "n": "Twin-Pixel Multi（全臉）+ 洛麗昂 Booster + 鎮靜管理",
+    "s": "",
+    "krw": 990000
+   },
+   {
+    "g": "OGANACELL 招牌 Skin Booster",
+    "n": "GOURI Booster 2.5cc（光澤・彈力・細紋）+ OGANACELL Booster 3cc（保濕・膚質）",
+    "s": "",
+    "krw": 1320000
+   }
+  ],
+  "month": "11–12 月",
+  "posters": [
+   {
+    "title": "OGANACELL 清潭 11–12 月冬季活動",
+    "img": "https://www.skinbridgekorea.com/tw/img/oganacell/2026-11-12-event.webp"
+   },
+   {
+    "title": "11–12 月休診日（12/25 聖誕節休診）",
+    "img": "https://www.skinbridgekorea.com/tw/img/oganacell/schedule-2026-11-12.webp"
+   },
+   {
+    "title": "各院長看診時間",
+    "img": "https://www.skinbridgekorea.com/tw/img/oganacell/schedule-doctors.webp"
+   }
+  ],
+  "note": "活動期間 2026.11.1–12.31・活動價以現金／支付寶付款為免稅價，刷卡另加 10%"
+ }
+}
