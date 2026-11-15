@@ -1223,3 +1223,5 @@ details.pi[open] .pi-h::after{content:"−"}
   .d2-docs .d2-doc:last-child{border-bottom:0;padding-bottom:0}
   .d2-docs .d2-doc-ph{grid-row:span 5;margin:0}
 }
+/* 주요 장비 펼치기 버튼 */
+.fields .eq-more{border:1px dashed var(--rule);border-radius:999px;padding:3px 12px;font-size:.82rem;background:none;color:var(--ink);cursor:pointer}

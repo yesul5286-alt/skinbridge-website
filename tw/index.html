@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+TC:wght@500;600&family=Libre+Caslon+Text&family=Montserrat:wght@400&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611151900">
+<link rel="stylesheet" href="/tw/sb.css?v=202611151915">
 </head>
 <body>
 <header class="hd">
@@ -600,7 +600,12 @@ function viewClinic(c){
       ${side ? `<img src="${esc(side)}" alt="${esc(c.name)} 診所" loading="lazy">` : ""}
     </div>`;
   const fields = c.fields && c.fields.length ? `<div class="fields">${c.fields.map(f => `<span>${esc(f)}</span>`).join("")}</div>` : "";
-  const equip = c.equipment && c.equipment.length ? `<h3 class="sub-h">主要設備</h3><div class="fields equip">${c.equipment.map(f => `<span>${esc(f)}</span>`).join("")}</div>` : "";
+  /* 2026-11-15 주요 장비: 대만 고객이 잘 아는 장비를 앞에 5개만, 나머지는 '+N 項'으로 펼치기 */
+  const EQ_TOP = [/ulthera|울쎄라/i, /thermage|써마지/i, /onda|온다/i, /shurink|슈링크/i, /inmode|인모드/i, /potenza|포텐자/i, /sofwave|소프웨이브/i, /titanium|티타늄/i, /oligio|올리지오/i, /volnewmer|볼뉴머/i, /xerf|세르프/i, /pico/i];
+  const eqRank = f => { const i = EQ_TOP.findIndex(r => r.test(f)); return i < 0 ? 99 : i; };
+  const eqList = (c.equipment || []).map((f, i) => [f, i]).sort((x, y) => eqRank(x[0]) - eqRank(y[0]) || x[1] - y[1]).map(x => x[0]);
+  const eqMore = eqList.length - 5;
+  const equip = eqList.length ? `<h3 class="sub-h">主要設備</h3><div class="fields equip">${eqList.map((f, i) => `<span${i >= 5 ? " hidden" : ""}>${esc(f)}</span>`).join("")}${eqMore > 0 ? `<button type="button" class="eq-more" onclick="this.parentNode.querySelectorAll('span[hidden]').forEach(x=>x.hidden=false);this.remove()">+${eqMore} 項</button>` : ""}</div>` : "";
   const nd = c.doctors ? c.doctors.length : 0;
   const docs = nd ? `<h3 class="sub-h">醫療團隊</h3><div class="d2-docs" style="--cols:${nd === 4 ? 2 : Math.min(nd, 3)}">${c.doctors.map(d => `
       <div class="d2-doc">
