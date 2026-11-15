@@ -1210,3 +1210,7 @@ details.pi[open] .pi-h::after{content:"−"}
 .want-toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);width:min(92vw,420px);background:#2E2422;color:#fff;font-size:.82rem;line-height:1.6;padding:12px 16px;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.25);z-index:60;transition:opacity .5s}
 .want-toast b{margin-right:4px}
 .want-toast.out{opacity:0}
+/* 맨 위 사진 → 아래 診所環境 이동 버튼 */
+.d2-envchip{position:absolute;left:14px;bottom:28px;z-index:2;font-size:.76rem;line-height:1;background:rgba(255,255,255,.92);color:var(--ink);border:0;border-radius:999px;padding:8px 12px;box-shadow:0 2px 8px rgba(0,0,0,.15);cursor:pointer}
+.d2-envchip span{margin-left:2px}
+@media(min-width:900px){.d2-envchip{bottom:14px}}

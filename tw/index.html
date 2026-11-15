@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600&family=Inter:wght@400;500;600&family=Cormorant+Garamond:wght@300;400;500&family=Noto+Serif+TC:wght@500;600&family=Libre+Caslon+Text&family=Montserrat:wght@400&display=swap">
-<link rel="stylesheet" href="/tw/sb.css?v=202611151511">
+<link rel="stylesheet" href="/tw/sb.css?v=202611151700">
 </head>
 <body>
 <header class="hd">
@@ -552,7 +552,16 @@ function viewClinic(c){
   const book = (item, label, cls) => `<button type="button" class="${cls || "btn dark sm"}" data-apply="booking" data-clinic="${c.id}" data-item="${esc(item)}">${label}</button>`;
 
   /* 맨 위 사진 */
-  const pics = [...new Set([...(c.interior || []), ...(c.photos || [])])];
+  /* 2026-11-15 B안: 맨 위는 마케팅 사진(photos)만 + 내부 사진은 대표 1장만. 나머지 내부 사진은 아래 '診所環境' 칸에서 보고, 사진 위 버튼으로 이동.
+     photos 가 없으면 지금처럼 내부 사진으로 채움 */
+  const envSet = new Set(c.interior || []);
+  let pics = (c.photos || []).filter((u, i, a) => u && a.indexOf(u) === i);
+  const leadEnv = pics.find(u => envSet.has(u));
+  pics = pics.filter(u => !envSet.has(u) || u === leadEnv);
+  const envOnly = !pics.length;
+  if (envOnly) pics = [...(c.interior || [])];
+  else if (pics.length < 3) for (const u of envSet) { if (pics.length >= 4) break; if (!pics.includes(u)) pics.push(u); }   // 마케팅 사진이 적은 병원은 내부 사진으로 4장까지 채움
+  const envChip = !envOnly && envSet.size ? `<button type="button" class="d2-envchip" data-jump="env">診所環境 ${envSet.size} 張 <span aria-hidden="true">↓</span></button>` : "";
   const fav = favs.has(c.id);
   const top = `<div class="d2-top d2-bar">
       <a class="d2-ic" href="#clinics" aria-label="回到診所列表"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></a>
@@ -562,7 +571,7 @@ function viewClinic(c){
     </div>`;
   const hero = `${top}` + (pics.length
     ? `<div class="d2-hero"><div class="d2-gal" id="gallery">${pics.map((u, i) => `<button type="button" class="d2-slide" data-lb="${i}" aria-label="放大第 ${i + 1} 張"><img src="${esc(u)}" alt="${esc(c.name)} ${i + 1}" ${i ? 'loading="lazy"' : 'fetchpriority="high"'}></button>`).join("")}</div>
-        ${pics.length > 1 ? `<span class="d2-cnt" id="galCnt">1 / ${pics.length}</span></div>
+        ${envChip}${pics.length > 1 ? `<span class="d2-cnt" id="galCnt">1 / ${pics.length}</span></div>
         <div class="d2-thumbs" id="galThumbs" role="group" aria-label="診所照片">${pics.map((u, i) => `<button type="button" data-gthumb="${i}" aria-label="第 ${i + 1} 張"${i ? "" : ' aria-current="true"'}><img src="${esc(u)}" alt="" ${i < 6 ? "" : 'loading="lazy"'}></button>`).join("")}</div>` : "</div>"}`
     : `<div class="d2-hero none"><div class="d2-ph"><span>${esc(c.name)}</span></div></div>`);
 
