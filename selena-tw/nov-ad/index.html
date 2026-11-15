@@ -127,7 +127,7 @@ header.top p{font-size:13px;color:var(--muted);margin-top:4px}
 </div></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-<script src="../line-routing.js?v=20261108-session"></script>
+<script src="../line-routing.js?v=20261115-tag"></script>
 <script>
 (function(){
   var IDS=["4662163010727947","1668583751442846"];
@@ -148,6 +148,8 @@ header.top p{font-size:13px;color:var(--muted);margin-top:4px}
     if(typeof window.fbq==='function'){IDS.forEach(function(id){window.fbq('trackSingle',id,'Contact')})}
     var list=picked();
     var text='您好，我看到 SELENA 11月廣告，想詢問：\n'+(list.length?list.map(function(s){return '・'+s}).join('\n'):'・（想了解的療程）')+'\n預計來韓日期：\n（我會附上廣告截圖）';
+    // 2026-11-15: 고른 시술 + 유입 꼬리표를 LINE 대화창에 미리 입력해서 연다 (line-routing.js)
+    if(window.selenaLine){this.href=window.selenaLine.withTag(text);show('LINE 開啟後，直接傳送訊息即可');return;}
     try{
       navigator.clipboard.writeText(text).then(function(){show('已複製詢問內容，請在 LINE 貼上，並附上廣告截圖')},function(){show('請在 LINE 告訴我們想了解的療程，並附上廣告截圖')});
     }catch(e){show('請在 LINE 告訴我們想了解的療程，並附上廣告截圖')}
